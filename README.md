@@ -2,6 +2,10 @@
 
 Welcome to the official frontend codebase for **Ice Master Technologies**, a premium manufacturer of high-performance liquid coolers, air coolers, PC gaming cabinets, and gaming gear.
 
+> 🚀 **Live Production URL (Vercel)**: [https://icemaster-technologies.vercel.app](https://icemaster-technologies.vercel.app)  
+> 📦 **GitHub Repository**: [https://github.com/Encoreraiank/icemaster-technologies](https://github.com/Encoreraiank/icemaster-technologies)  
+> 🌐 **GitHub Pages Mirror**: [https://encoreraiank.github.io/icemaster-technologies/](https://encoreraiank.github.io/icemaster-technologies/)
+
 ---
 
 ## 🌐 Live Pages
