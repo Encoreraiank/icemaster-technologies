@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initHomepagePillNavbar();
+  initMobileMenuDrawer();
   initStatsCounter();
   initSlideshowControls();
   initWWCScrollController();
@@ -67,6 +68,56 @@ function initHomepagePillNavbar() {
       }
     });
   }
+}
+
+/* ==========================================================================
+   00-B. MOBILE NAVIGATION DRAWER CONTROLLER
+   ========================================================================== */
+function initMobileMenuDrawer() {
+  const toggleBtn = document.getElementById('im-mobile-menu-toggle');
+  const drawer = document.getElementById('im-mobile-nav-drawer');
+  if (!toggleBtn || !drawer) return;
+
+  const toggleMenu = (forceState) => {
+    const shouldOpen = forceState !== undefined ? forceState : !drawer.classList.contains('open');
+    if (shouldOpen) {
+      drawer.classList.add('open');
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('im-menu-open');
+    } else {
+      drawer.classList.remove('open');
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('im-menu-open');
+    }
+  };
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Close drawer on clicking any navigation link
+  drawer.querySelectorAll('.im-mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
+  // Close when clicking outside of drawer and toggle
+  document.addEventListener('click', (e) => {
+    if (drawer.classList.contains('open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+      toggleMenu(false);
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) {
+      toggleMenu(false);
+    }
+  });
 }
 
 /* ==========================================================================

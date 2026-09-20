@@ -10,3 +10,6 @@ Thumbs.db
 # Vercel
 .vercel
 node_modules/
+
+.vercel
+.env*
