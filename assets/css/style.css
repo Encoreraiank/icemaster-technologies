@@ -3627,13 +3627,13 @@ a.contact-info-value:hover {
 
   /* Show hamburger button */
   .im-mobile-menu-toggle {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     width: 34px;
     height: 34px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.4);
     border-radius: 8px;
     cursor: pointer;
     flex-direction: column;
@@ -3889,7 +3889,22 @@ a.contact-info-value:hover {
     border-color: rgba(228, 47, 56, 0.5);
   }
 
+  /* Product image fills the card as a background */
+  .im-mob-cat-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 0;
+    opacity: 0.75;
+  }
+
+  /* Ensure card body text sits above image */
   .im-mob-cat-card-body {
+    position: relative;
+    z-index: 1;
     padding: 10px 10px;
     background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 70%, transparent 100%);
   }
@@ -4225,13 +4240,10 @@ a.contact-info-value:hover {
 }
 
 /* ── mobile-only elements hidden on desktop ── */
-.im-mobile-menu-toggle { display: none; }
-.im-mob-cat-section { display: none; }
-.im-mob-steps-section { display: none; }
-.im-mobile-nav-drawer { display: none; }
-
-@media (max-width: 768px) {
-  .im-mob-cat-section { display: block; }
-  .im-mob-steps-section { display: block; }
-  .im-mobile-nav-drawer { display: flex; }
+/* ── Mobile-only elements: hidden on desktop ── */
+@media (min-width: 769px) {
+  .im-mobile-menu-toggle { display: none !important; }
+  .im-mob-cat-section { display: none !important; }
+  .im-mob-steps-section { display: none !important; }
+  .im-mobile-nav-drawer { display: none !important; }
 }
