@@ -58,6 +58,24 @@
           <input type="text" id="im-quick-search-input" placeholder="Search cabinets, coolers, PSU..." aria-label="Search Ice Master products">
         </div>
       </div>
+
+      <!-- Hamburger menu (mobile only) -->
+      <button class="im-mobile-menu-toggle" id="im-hamburger-btn" aria-label="Open Navigation">
+        <span class="im-hamburger-bar"></span>
+        <span class="im-hamburger-bar"></span>
+        <span class="im-hamburger-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Nav Drawer (visible only on mobile via CSS) -->
+    <div class="im-mobile-nav-drawer" id="im-mobile-nav-drawer">
+      <button class="im-mobile-drawer-close" id="im-drawer-close" aria-label="Close Menu">✕</button>
+      <nav class="im-mobile-nav-links">
+        <a href="index.html" class="im-mobile-nav-link active">HOME</a>
+        <a href="all-products.html" class="im-mobile-nav-link">ALL PRODUCTS</a>
+        <a href="download.html" class="im-mobile-nav-link">DOWNLOAD</a>
+        <a href="contact.html" class="im-mobile-nav-link">CONTACT</a>
+      </nav>
     </div>
   </header>
 
@@ -282,7 +300,41 @@
 
     </div>
   </section>
-
+  <!-- ===== MOBILE ONLY: PRODUCT CATEGORIES (hidden on desktop) ===== -->
+  <section class="im-mob-cat-section">
+    <div class="im-mob-section-eyebrow">PRODUCT CATEGORIES</div>
+    <h2 class="im-mob-section-title">Built for <span>Every Setup</span></h2>
+    <div class="im-mob-cat-grid">
+      <a href="all-products.html?category=coolers" class="im-mob-cat-card" style="background: linear-gradient(135deg, #0d1117 0%, #1a2a40 100%);">
+        <div class="im-mob-cat-card-body">
+          <div class="im-mob-cat-num">01 ——</div>
+          <div class="im-mob-cat-name">Liquid<br>Coolers</div>
+          <span class="im-mob-cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="all-products.html?category=cases" class="im-mob-cat-card" style="background: linear-gradient(135deg, #0d0d0d 0%, #1a1010 100%);">
+        <div class="im-mob-cat-card-body">
+          <div class="im-mob-cat-num">02 ——</div>
+          <div class="im-mob-cat-name">Gaming<br>Cabinets</div>
+          <span class="im-mob-cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="all-products.html?category=psu" class="im-mob-cat-card" style="background: linear-gradient(135deg, #0a1020 0%, #111820 100%);">
+        <div class="im-mob-cat-card-body">
+          <div class="im-mob-cat-num">03 ——</div>
+          <div class="im-mob-cat-name">Power Supply Units</div>
+          <span class="im-mob-cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="all-products.html?category=accessories" class="im-mob-cat-card" style="background: linear-gradient(135deg, #0d1010 0%, #1a2018 100%);">
+        <div class="im-mob-cat-card-body">
+          <div class="im-mob-cat-num">04 ——</div>
+          <div class="im-mob-cat-name">Gaming Accessories</div>
+          <span class="im-mob-cat-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </section>
 
   <!-- ==========================================================================
        SECTION 3: GAMING GEAR SPOTLIGHT — GH-01 (2046 × 769 px)
@@ -448,7 +500,37 @@
 
     </div>
   </section>
-
+  <!-- ===== MOBILE ONLY: 3 SIMPLE STEPS (hidden on desktop) ===== -->
+  <section class="im-mob-steps-section">
+    <div class="im-mob-section-eyebrow">GET STARTED</div>
+    <h2 class="im-mob-section-title">3 Simple <span>Steps</span></h2>
+    <div class="im-mob-steps-grid">
+      <div class="im-mob-step-card">
+        <div class="im-mob-step-num-col">01</div>
+        <div class="im-mob-step-body">
+          <h3 class="im-mob-step-name">VISIT US</h3>
+          <p class="im-mob-step-desc">Explore our products at our store.</p>
+          <a href="https://maps.google.com/?q=Nehru+Place+New+Delhi" target="_blank" rel="noopener noreferrer" class="im-mob-step-btn">FIND A STORE →</a>
+        </div>
+      </div>
+      <div class="im-mob-step-card">
+        <div class="im-mob-step-num-col">02</div>
+        <div class="im-mob-step-body">
+          <h3 class="im-mob-step-name">ENQUIRE ABOUT A PRODUCT</h3>
+          <p class="im-mob-step-desc">Use the enquiry button on any product page.</p>
+          <a href="all-products.html" class="im-mob-step-btn">ENQUIRE NOW →</a>
+        </div>
+      </div>
+      <div class="im-mob-step-card">
+        <div class="im-mob-step-num-col">03</div>
+        <div class="im-mob-step-body">
+          <h3 class="im-mob-step-name">TELL US WHAT YOU NEED</h3>
+          <p class="im-mob-step-desc">Share your requirements and we'll help you.</p>
+          <a href="https://wa.me/919311145247?text=Hi%20IceMaster,%20I%20need%20help%20with%20a%20product" target="_blank" rel="noopener noreferrer" class="im-mob-step-btn">CHAT WITH US →</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ==========================================================================
        SECTION 5: MINIMAL CINEMATIC FOOTER (Matching header_footer.png.png)

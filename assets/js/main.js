@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initHomepagePillNavbar();
+  initMobileHamburger();
   initStatsCounter();
   initSlideshowControls();
   initWWCScrollController();
@@ -14,6 +15,44 @@ document.addEventListener('DOMContentLoaded', () => {
   initDownloadsPageController();
   initContactPageController();
 });
+
+/* ==========================================================================
+   00b. MOBILE HAMBURGER NAVIGATION DRAWER
+   ========================================================================== */
+function initMobileHamburger() {
+  const hamburger = document.getElementById('im-hamburger-btn');
+  const drawer = document.getElementById('im-mobile-nav-drawer');
+  const closeBtn = document.getElementById('im-drawer-close');
+
+  if (!hamburger || !drawer) return;
+
+  const openDrawer = () => {
+    drawer.classList.add('open');
+    document.body.classList.add('im-menu-open');
+  };
+
+  const closeDrawer = () => {
+    drawer.classList.remove('open');
+    document.body.classList.remove('im-menu-open');
+  };
+
+  hamburger.addEventListener('click', openDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+  drawer.addEventListener('click', (e) => {
+    if (e.target === drawer) closeDrawer();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Close when a nav link is clicked
+  drawer.querySelectorAll('.im-mobile-nav-link').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+}
+
 
 /* ==========================================================================
    00. HOMEPAGE FLOATING PILL NAVBAR CONTROLLER (Sticky on Scroll & Search)

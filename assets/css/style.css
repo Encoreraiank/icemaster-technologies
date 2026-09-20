@@ -3587,380 +3587,651 @@ a.contact-info-value:hover {
     bottom: 24px;
     right: 24px;
   }
-@media (max-width: 800px) {
-  /* 01. FLOATING PILL NAVBAR - COMPACT SINGLE-LINE DESKTOP CAPSULE */
+}
+
+
+/* ==========================================================================
+   MOBILE RESPONSIVE — max-width: 768px
+   Strategy: Hide broken desktop image-overlay sections, show clean mobile HTML
+   Desktop layout is UNTOUCHED above this block.
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* ── 1. NAVBAR ── */
   .im-floating-header {
-    top: 8px !important;
-    left: 0 !important;
-    right: 0 !important;
-    padding: 0 8px !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
+    top: 10px;
+    padding: 0 14px;
   }
 
   .im-pill-navbar {
-    padding: 4px 8px 4px 10px !important;
-    gap: 5px !important;
-    max-width: 98vw !important;
-    box-sizing: border-box !important;
+    width: 100%;
+    padding: 7px 12px;
+    gap: 0;
+    justify-content: space-between;
   }
 
-  .im-pill-brand {
-    gap: 4px !important;
-  }
-
-  .im-pill-logo-icon {
-    height: 17px !important;
-  }
-
+  /* Hide brand name text, keep logo icon */
   .im-pill-brand-name {
-    display: none !important; /* Preserves space so all 4 links fit on one clean row */
+    display: none;
   }
 
+  /* Hide dividers */
   .im-pill-divider {
-    height: 14px !important;
-    margin: 0 1px !important;
+    display: none;
   }
 
+  /* Hide desktop nav links */
   .im-pill-nav {
-    gap: 2px !important;
+    display: none;
   }
 
-  .im-nav-item {
-    font-size: 9.5px !important;
-    padding: 4px 6px !important;
-    letter-spacing: 0.03em !important;
-    white-space: nowrap !important;
+  /* Show hamburger button */
+  .im-mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+    flex-shrink: 0;
   }
 
-  .im-pill-search-btn {
-    width: 26px !important;
-    height: 26px !important;
-    padding: 0 !important;
+  .im-hamburger-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.25s ease;
   }
 
-  .im-pill-search-btn svg {
-    width: 13px !important;
-    height: 13px !important;
+  /* Mobile drawer */
+  .im-mobile-nav-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(7, 8, 10, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
   }
 
-  .im-pill-search-dropdown {
-    top: 48px !important;
-    width: 240px !important;
-    right: -10px !important;
+  .im-mobile-nav-drawer.open {
+    opacity: 1;
+    pointer-events: auto;
   }
 
-  /* 02. HERO SLIDER - PRESERVES DESKTOP LAYOUT WITHOUT DOT COLLISION */
+  .im-mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0 24px;
+  }
+
+  .im-mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    text-decoration: none;
+    font-family: var(--im-font);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fff;
+    transition: all 0.2s ease;
+  }
+
+  .im-mobile-nav-link.active,
+  .im-mobile-nav-link:hover {
+    background: rgba(228, 47, 56, 0.12);
+    border-color: rgba(228, 47, 56, 0.4);
+    color: #ff4754;
+  }
+
+  .im-mobile-drawer-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  body.im-menu-open {
+    overflow: hidden;
+  }
+
+  /* Prevent extra space below footer */
+  body {
+    min-height: unset;
+  }
+
+  /* ── 2. HERO SECTION ── */
+  /* Keep hero but fix its height and text layout */
   .im-hero-section {
-    aspect-ratio: 1933 / 813 !important;
-    min-height: auto !important;
+    aspect-ratio: unset !important;
+    height: 65vw !important;
+    min-height: 220px !important;
+    max-height: 320px !important;
   }
 
   .im-hero-content {
-    left: 4.5% !important;
-    top: 48% !important;
-    max-width: 53% !important;
+    left: 5% !important;
+    width: 58% !important;
+    top: 50% !important;
     transform: translateY(-50%) !important;
   }
 
   .im-hero-eyebrow {
-    gap: 6px !important;
-    margin-bottom: 2px !important;
+    gap: 6px;
+    margin-bottom: 4px;
   }
 
   .im-hero-dash {
-    width: 16px !important;
-    height: 2px !important;
+    width: 20px;
+    height: 2px;
   }
 
-  .im-hero-eyebrow-text {
-    font-size: clamp(6px, 1.8vw, 9px) !important;
-    letter-spacing: 0.15em !important;
+  .im-hero-content-x7 .im-hero-eyebrow-text,
+  .im-hero-content-cool .im-hero-eyebrow-text {
+    font-size: 9px;
+    letter-spacing: 0.15em;
   }
 
   .im-hero-title {
-    font-size: clamp(14px, 4.3vw, 24px) !important;
-    line-height: 1.05 !important;
-    margin: 0 0 3px 0 !important;
+    font-size: clamp(18px, 5.5vw, 28px) !important;
+    margin: 0 0 4px 0;
+    line-height: 1.05;
   }
 
   .im-hero-tagline {
-    font-size: clamp(6px, 1.8vw, 8.5px) !important;
-    letter-spacing: 0.16em !important;
-    margin-bottom: 4px !important;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
   }
 
   .im-hero-desc {
-    font-size: clamp(6.5px, 1.9vw, 9px) !important;
-    line-height: 1.3 !important;
-    margin: 0 0 7px 0 !important;
+    display: none; /* Too much text for small hero */
   }
 
   .im-btn-pill {
-    gap: 6px !important;
-    padding: 4px 10px !important;
-    font-size: clamp(7px, 2vw, 10px) !important;
+    padding: 8px 14px;
+    font-size: 10px;
+    gap: 6px;
   }
 
-  .im-btn-arrow, .im-btn-chevron {
-    width: 10px !important;
-    height: 10px !important;
+  .im-btn-arrow,
+  .im-btn-chevron {
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .im-hero-controls {
-    bottom: 5px !important;
-    gap: 8px !important;
+    bottom: 8px;
+    gap: 10px;
   }
 
   .im-hero-nav-arrow {
-    width: 20px !important;
-    height: 20px !important;
+    width: 24px;
+    height: 24px;
   }
 
   .im-hero-nav-arrow svg {
-    width: 11px !important;
-    height: 11px !important;
-  }
-
-  .im-hero-dots {
-    gap: 6px !important;
+    width: 12px;
+    height: 12px;
   }
 
   .im-hero-dot {
-    width: 6px !important;
-    height: 6px !important;
+    width: 7px;
+    height: 7px;
   }
 
   .im-hero-dot.active {
-    width: 16px !important;
-    border-radius: 3px !important;
+    width: 20px;
+    border-radius: 4px;
   }
 
-  /* 03. CATEGORIES SECTION - PRESERVES EXACT 4-CARD DESKTOP COMPOSITION */
+  /* ── 3. CATEGORIES SECTION — hide desktop, show mobile version ── */
   .im-cat-section {
-    aspect-ratio: 1994 / 789 !important;
+    display: none;
   }
 
-  .im-cat-header-row {
-    top: 1.8% !important;
-    left: 2.5% !important;
-    width: 95% !important;
+  /* Mobile Categories — inserted via HTML below desktop section */
+  .im-mob-cat-section {
+    display: block;
+    background: #0d0e11;
+    padding: 28px 12px 32px;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
   }
 
-  .im-cat-eyebrow {
-    font-size: clamp(4.5px, 1.3vw, 6.5px) !important;
-    margin-bottom: 0px !important;
-    letter-spacing: 0.15em !important;
+  .im-mob-section-eyebrow {
+    font-family: var(--im-font);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    color: #8A8F97;
+    text-transform: uppercase;
+    margin-bottom: 6px;
   }
 
-  .im-cat-title {
-    font-size: clamp(7.5px, 2.1vw, 11px) !important;
-    line-height: 1 !important;
+  .im-mob-section-title {
+    font-family: var(--im-font);
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
   }
 
-  .im-cat-center-motto {
-    display: none !important; /* Eliminates collision with card tops on mobile */
+  .im-mob-section-title span {
+    color: #E42F38;
   }
 
-  .im-cat-explore-link {
-    display: none !important; /* Preserves clean header area on compact screens */
+  .im-mob-cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .im-cat-card-overlay {
-    padding: 4px 6px !important;
-    border-radius: 6px !important;
+  .im-mob-cat-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #1a1c21;
+    border: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 130px;
+    box-sizing: border-box;
+    transition: transform 0.25s ease, border-color 0.25s ease;
   }
 
-  .im-card-text-block {
-    gap: 2px !important;
+  .im-mob-cat-card:active {
+    transform: scale(0.97);
+    border-color: rgba(228, 47, 56, 0.5);
   }
 
-  .im-card-num {
-    font-size: clamp(4.5px, 1.3vw, 7px) !important;
-    letter-spacing: 0.1em !important;
+  .im-mob-cat-card-body {
+    padding: 10px 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 70%, transparent 100%);
   }
 
-  .im-card-name {
-    font-size: clamp(5.8px, 1.7vw, 9.5px) !important;
-    line-height: 1.1 !important;
+  .im-mob-cat-num {
+    font-family: var(--im-font);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #E42F38;
+    margin-bottom: 3px;
   }
 
-  .im-card-action {
-    display: none !important; /* Clean minimal card overlay without button collision */
+  .im-mob-cat-name {
+    font-family: var(--im-font);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
-  .im-cat-bottom-row {
-    display: none !important; /* Prevents colliding with card bottoms */
+  .im-mob-cat-arrow {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    display: block;
   }
 
-  /* 04. GH-01 GAMING HEADSET - PRESERVES LEFT TEXT + RIGHT HEADSET SPLIT */
+  /* ── 4. HEADSET SECTION — keep but fix ── */
   .im-headset-section {
-    aspect-ratio: 2046 / 769 !important;
+    aspect-ratio: unset !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .im-headset-stage {
+    height: auto !important;
+  }
+
+  .im-headset-bg-img {
+    position: relative !important;
+    height: 220px !important;
+    width: 100% !important;
+    object-position: center 20% !important;
   }
 
   .im-headset-content {
-    left: 4.5% !important;
-    top: 50% !important;
-    width: 48% !important;
-    transform: translateY(-50%) !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    padding: 20px 20px 24px !important;
+    box-sizing: border-box !important;
+    background: #07080A;
   }
 
   .im-headset-eyebrow {
-    gap: 6px !important;
-    margin-bottom: 2px !important;
+    gap: 8px;
+    margin-bottom: 8px;
   }
 
   .im-headset-dash {
-    width: 16px !important;
-    height: 2px !important;
+    width: 24px;
+    height: 2px;
   }
 
   .im-headset-eyebrow-text {
-    font-size: clamp(5.5px, 1.6vw, 8px) !important;
-    letter-spacing: 0.15em !important;
+    font-size: 10px;
   }
 
   .im-headset-title {
-    font-size: clamp(13px, 4vw, 24px) !important;
-    line-height: 1.05 !important;
-    margin: 0 0 2px 0 !important;
-  }
-
-  .im-headset-subhead-wrap {
-    gap: 2px !important;
-    margin-bottom: 4px !important;
-  }
-
-  .im-headset-subhead-text {
-    font-size: clamp(6.5px, 2vw, 11px) !important;
-  }
-
-  .im-headset-subhead-line {
-    width: 24px !important;
-    height: 1.5px !important;
-  }
-
-  .im-headset-desc {
-    font-size: clamp(6px, 1.8vw, 9px) !important;
-    line-height: 1.25 !important;
+    font-size: 38px !important;
     margin: 0 0 6px 0 !important;
   }
 
-  .im-headset-features {
-    gap: 4px !important;
-    margin-bottom: 6px !important;
+  .im-headset-subhead {
+    font-size: 16px;
+    letter-spacing: 0.2em;
   }
 
-  .im-feat-chip {
-    padding: 2px 6px !important;
-    font-size: clamp(5px, 1.4vw, 7.5px) !important;
+  .im-headset-subhead-wrap {
+    margin-bottom: 12px;
   }
 
-  .im-feat-chip svg {
-    width: 8px !important;
-    height: 8px !important;
+  .im-headset-desc {
+    font-size: 13px;
+    line-height: 1.6;
   }
 
-  .im-btn-headset {
-    padding: 4px 10px !important;
-    font-size: clamp(6.5px, 1.8vw, 9px) !important;
+  .im-headset-top-badge {
+    display: none;
   }
 
-  /* 05. 3 SIMPLE STEPS - PRESERVES EXACT 3-STEP DESKTOP ROW */
+  /* ── 5. STEPS SECTION — hide desktop, show mobile ── */
   .im-steps-section {
-    aspect-ratio: 1994 / 789 !important;
+    display: none;
   }
 
-  .im-steps-content {
-    left: 4.5% !important;
-    top: 45% !important;
-    width: 66% !important;
-    transform: translateY(-50%) !important;
+  .im-mob-steps-section {
+    display: block;
+    background: #fff;
+    padding: 32px 16px;
   }
 
-  .im-steps-eyebrow {
-    display: none !important;
+  .im-mob-steps-section .im-mob-section-eyebrow {
+    color: #6A7078;
   }
 
-  .im-steps-title {
-    font-size: clamp(8.5px, 2.4vw, 13px) !important;
-    line-height: 1.1 !important;
-    margin: 0 0 2px 0 !important;
+  .im-mob-steps-section .im-mob-section-title {
+    color: #050505;
   }
 
-  .im-steps-subtitle {
-    font-size: clamp(5px, 1.4vw, 7px) !important;
-    margin-bottom: 5px !important;
+  .im-mob-steps-section .im-mob-section-title span {
+    color: #B20A13;
   }
 
-  .im-steps-row {
-    gap: 6px !important;
+  .im-mob-steps-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
-  .im-step-head {
-    gap: 4px !important;
-    height: 18px !important;
-    margin-bottom: 2px !important;
+  .im-mob-step-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px;
+    background: #F8F9FB;
+    border-radius: 14px;
+    border: 1px solid #E8EAF0;
+    text-decoration: none;
   }
 
-  .im-step-num {
-    font-size: clamp(7.5px, 2vw, 11px) !important;
+  .im-mob-step-num-col {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1.5px solid #E0E3E7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--im-font);
+    font-size: 16px;
+    font-weight: 800;
+    color: #B9BEC4;
   }
 
-  .im-step-icon-tile {
-    width: 16px !important;
-    height: 16px !important;
-    border-radius: 4px !important;
-    padding: 2px !important;
+  .im-mob-step-body {
+    flex: 1;
   }
 
-  .im-step-icon-tile svg {
-    width: 9px !important;
-    height: 9px !important;
+  .im-mob-step-name {
+    font-family: var(--im-font);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #17181A;
+    text-transform: uppercase;
+    margin: 0 0 6px 0;
+    line-height: 1.3;
   }
 
-  .im-step-card-title {
-    font-size: clamp(5px, 1.4vw, 7.5px) !important;
-    line-height: 1.1 !important;
-    margin-bottom: 1px !important;
+  .im-mob-step-desc {
+    font-family: var(--im-font);
+    font-size: 12px;
+    font-weight: 400;
+    color: #68707A;
+    line-height: 1.55;
+    margin: 0 0 12px 0;
   }
 
-  .im-step-card-desc {
-    font-size: clamp(4.2px, 1.15vw, 6px) !important;
-    line-height: 1.15 !important;
-    margin-bottom: 2px !important;
+  .im-mob-step-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--im-font);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #17181A;
+    text-transform: uppercase;
+    border: 1.5px solid #17181A;
+    border-radius: 9999px;
+    padding: 6px 14px;
+    text-decoration: none;
   }
 
-  .im-step-btn {
-    display: none !important;
+  /* ── 6. FOOTER ── */
+  .im-footer-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
   }
 
-  /* 06. DOWNLOAD PAGE OVERLAP FIX */
+  .im-footer-divider {
+    width: 40px;
+    height: 1px;
+  }
+
+  .im-footer-brand {
+    justify-content: center;
+  }
+
+  /* ── 7. ALL PRODUCTS PAGE ── */
+  .ap-hero-section {
+    aspect-ratio: unset !important;
+    padding-top: 80px !important;
+    min-height: 140px !important;
+    max-height: none !important;
+    display: flex !important;
+    align-items: flex-end !important;
+  }
+
+  .ap-hero-bg-img {
+    position: absolute !important;
+    inset: 0 !important;
+    height: 100% !important;
+  }
+
+  .ap-hero-content {
+    position: relative !important;
+    z-index: 10 !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    max-width: 100% !important;
+    padding: 0 20px 20px !important;
+  }
+
+  .ap-hero-title {
+    font-size: 28px !important;
+  }
+
+  .ap-hero-subtitle {
+    font-size: 12px !important;
+  }
+
+  .ap-cat-tiles-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .ap-cat-tiles-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ap-cat-tile {
+    flex-shrink: 0;
+    width: 88px;
+    min-height: 88px;
+  }
+
+  .ap-product-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── 8. PRODUCT DETAIL PAGE ── */
+  .pd-hero-section {
+    aspect-ratio: unset !important;
+    height: auto !important;
+  }
+
+  .pd-main-layout {
+    flex-direction: column !important;
+  }
+
+  /* ── 9. DOWNLOAD PAGE ── */
+  .dl-stage-container {
+    aspect-ratio: unset !important;
+    min-height: 480px !important;
+    padding: 90px 20px 40px !important;
+  }
+
+  .dl-center-lockup {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+  }
+
   .dl-corner-branding-left,
   .dl-corner-branding-right {
     display: none !important;
   }
 
-  /* 06. FOOTER */
-  .im-footer {
-    padding: 24px 16px !important;
+  .dl-hero-title {
+    font-size: 28px !important;
   }
-  .im-footer-logo-img {
-    height: 24px !important;
+
+  .dl-hero-desc,
+  .dl-hero-subdesc {
+    font-size: 13px !important;
   }
-  .im-footer-socials {
-    gap: 12px !important;
+
+  .dl-download-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
   }
-  .im-footer-address {
-    font-size: 9px !important;
+
+  /* ── 10. CONTACT PAGE ── */
+  .ct-page-wrapper {
+    padding-top: 80px !important;
   }
-  .im-footer-copyright {
-    font-size: 8px !important;
+
+  .ct-two-col {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  .ct-form-input,
+  .ct-form-textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+
+  .ct-submit-btn {
+    width: 100% !important;
   }
 }
 
+/* ── mobile-only elements hidden on desktop ── */
+.im-mobile-menu-toggle { display: none; }
+.im-mob-cat-section { display: none; }
+.im-mob-steps-section { display: none; }
+.im-mobile-nav-drawer { display: none; }
 
-
-
+@media (max-width: 768px) {
+  .im-mob-cat-section { display: block; }
+  .im-mob-steps-section { display: block; }
+  .im-mobile-nav-drawer { display: flex; }
+}
