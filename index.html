@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE MASTER | Built for a Cooler Tomorrow</title>
+  <meta name="description" content="Ice Master Technologies — Built for a Cooler Tomorrow. High-performance PC Cabinets, Liquid Coolers, Power Supply Units, and Gaming Accessories.">
+
+  <!-- Google Fonts: Montserrat (All Weights 300-900) & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="home-page-body">
+
+  <!-- ==========================================================================
+       FLOATING GLASS PILL NAVBAR (Matching header_footer.png.png)
+       Fixed sticky position with official Ice Master logo
+       ========================================================================== -->
+  <header class="im-floating-header" id="main-floating-header">
+    <div class="im-pill-navbar">
+      <!-- Left: Logo & Brand -->
+      <a href="index.html" class="im-pill-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-pill-logo-icon">
+        <span class="im-pill-brand-name">ICE MASTER</span>
+      </a>
+
+      <!-- Vertical Divider 1 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Center Navigation Links -->
+      <nav class="im-pill-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="im-nav-item active" aria-current="page">
+          <span>HOME</span>
+          <span class="im-nav-indicator"></span>
+        </a>
+        <a href="all-products.html" class="im-nav-item">ALL PRODUCTS</a>
+        <a href="download.html" class="im-nav-item">DOWNLOAD</a>
+        <a href="contact.html" class="im-nav-item">CONTACT</a>
+      </nav>
+
+      <!-- Vertical Divider 2 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Right Search Icon -->
+      <div class="im-pill-search-wrap">
+        <button type="button" class="im-pill-search-btn" id="im-search-toggle" aria-label="Search Products">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <!-- Expandable Quick Search Input -->
+        <div class="im-pill-search-dropdown" id="im-search-dropdown">
+          <input type="text" id="im-quick-search-input" placeholder="Search cabinets, coolers, PSU..." aria-label="Search Ice Master products">
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==========================================================================
+       SECTION 1: HERO SLIDER (1933 × 813 px)
+       Slide 1: Dynamite X7 | Slide 2: Cool Digital
+       ========================================================================== -->
+  <section class="im-hero-section" id="hero-slider">
+    <div class="im-hero-stage">
+
+      <!-- SLIDE 1: DYNAMITE X7 -->
+      <div class="im-hero-slide active" data-slide="1">
+        <img src="assets/images/homepage/hero_bg_slide_1.png" alt="Dynamite X7 Background" class="im-hero-bg-img">
+        
+        <!-- Live Typography Overlay -->
+        <div class="im-hero-content im-hero-content-x7">
+          <!-- Eyebrow -->
+          <div class="im-hero-eyebrow">
+            <span class="im-hero-dash im-dash-red"></span>
+            <span class="im-hero-eyebrow-text">PREMIUM PC CABINET</span>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="im-hero-title">
+            DYNAMITE <span class="im-text-red-x7">X7</span>
+          </h1>
+
+          <!-- Tagline -->
+          <div class="im-hero-tagline">
+            BUILT FOR A COOLER TOMORROW
+          </div>
+
+          <!-- Description -->
+          <p class="im-hero-desc">
+            Premium design. Superior airflow. Engineered for<br>
+            performance. The perfect balance of style and cooling<br>
+            for next-generation builds.
+          </p>
+
+          <!-- CTA Pill Button -->
+          <div class="im-hero-cta-wrap">
+            <a href="all-products.html?category=cases" class="im-btn-pill im-btn-x7">
+              <span>Explore More</span>
+              <svg class="im-btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: COOL DIGITAL -->
+      <div class="im-hero-slide" data-slide="2">
+        <img src="assets/images/homepage/hero_bg_slide_2.png" alt="Cool Digital Liquid Cooler Series Background" class="im-hero-bg-img">
+        
+        <!-- Live Typography Overlay -->
+        <div class="im-hero-content im-hero-content-cool">
+          <!-- Eyebrow -->
+          <div class="im-hero-eyebrow">
+            <span class="im-hero-dash im-dash-red"></span>
+            <span class="im-hero-eyebrow-text">LIQUID COOLER SERIES</span>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="im-hero-title">
+            COOL <span class="im-text-blue-digital">DIGITAL</span>
+          </h1>
+
+          <!-- Tagline -->
+          <div class="im-hero-tagline im-tagline-cool">
+            PRECISION COOLING. REAL-TIME CONTROL
+          </div>
+
+          <!-- Description -->
+          <p class="im-hero-desc im-desc-cool">
+            Advanced liquid cooling with real-time digital monitoring.<br>
+            Lower temperatures. Higher stability. A cleaner, quieter build.
+          </p>
+
+          <!-- CTA Pill Button -->
+          <div class="im-hero-cta-wrap">
+            <a href="all-products.html?category=coolers" class="im-btn-pill im-btn-cool">
+              <span>Explore Cool Series</span>
+              <svg class="im-btn-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Slide Controls & Indicators -->
+      <div class="im-hero-controls">
+        <button type="button" id="im-hero-prev" class="im-hero-nav-arrow" aria-label="Previous Slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="im-hero-dots">
+          <span class="im-hero-dot active" data-slide="1" role="button" tabindex="0" aria-label="Slide 1: Dynamite X7"></span>
+          <span class="im-hero-dot" data-slide="2" role="button" tabindex="0" aria-label="Slide 2: Cool Digital"></span>
+        </div>
+
+        <button type="button" id="im-hero-next" class="im-hero-nav-arrow" aria-label="Next Slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       SECTION 2: PRODUCT CATEGORIES / BUILT FOR EVERY SETUP (1994 × 789 px)
+       Matching categories_section.reference.png with dynamic gaming hover
+       ========================================================================== -->
+  <section class="im-cat-section" id="product-categories">
+    <div class="im-cat-stage">
+      <!-- Clean High-Resolution Background Render -->
+      <img src="assets/images/homepage/categories_bg.png" alt="Product Categories Stage" class="im-cat-bg-img">
+
+      <!-- TOP HEADER ROW -->
+      <div class="im-cat-header-row">
+        <!-- Left: Category Eyebrow & Title -->
+        <div class="im-cat-heading-wrap">
+          <div class="im-cat-eyebrow">PRODUCT CATEGORIES</div>
+          <h2 class="im-cat-title">
+            Built for <span class="im-cat-title-red">Every Setup</span>
+          </h2>
+        </div>
+
+        <!-- Center Divider & Motto -->
+        <div class="im-cat-center-motto">
+          <div class="im-cat-motto-line" aria-hidden="true"></div>
+          <span class="im-cat-motto-text">COOLER&nbsp;&nbsp;&nbsp;BETTER&nbsp;&nbsp;&nbsp;FURTHER</span>
+        </div>
+
+        <!-- Right: Explore Our Products Link -->
+        <a href="all-products.html" class="im-cat-explore-link" aria-label="Explore All Products">
+          <span class="im-cat-explore-text">EXPLORE<br>OUR<br>PRODUCTS</span>
+          <span class="im-cat-explore-dash"></span>
+        </a>
+      </div>
+
+      <!-- 4 DYNAMIC INTERACTIVE CARDS -->
+      <div class="im-cat-grid-overlay">
+        <!-- Card 01: Liquid Coolers -->
+        <a href="all-products.html?category=coolers" class="im-cat-card-overlay im-card-coolers" aria-label="Explore Liquid Coolers">
+          <div class="im-card-text-block">
+            <span class="im-card-num">01 ——</span>
+            <span class="im-card-name">Liquid<br>Coolers</span>
+          </div>
+          <div class="im-card-action">
+            <span>EXPLORE</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Card 02: Gaming Cabinets -->
+        <a href="all-products.html?category=cases" class="im-cat-card-overlay im-card-cabinets" aria-label="Explore Gaming Cabinets">
+          <div class="im-card-text-block">
+            <span class="im-card-num">02 ——</span>
+            <span class="im-card-name">Gaming<br>Cabinets</span>
+          </div>
+          <div class="im-card-action">
+            <span>EXPLORE</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Card 03: Power Supply Units -->
+        <a href="all-products.html?category=psu" class="im-cat-card-overlay im-card-psu" aria-label="Explore Power Supply Units">
+          <div class="im-card-text-block">
+            <span class="im-card-num">03 ——</span>
+            <span class="im-card-name">Power Supply Units</span>
+          </div>
+          <div class="im-card-action">
+            <span>EXPLORE</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Card 04: Gaming Accessories -->
+        <a href="all-products.html?category=accessories" class="im-cat-card-overlay im-card-accessories" aria-label="Explore Gaming Accessories">
+          <div class="im-card-text-block">
+            <span class="im-card-num">04 ——</span>
+            <span class="im-card-name">Gaming Accessories</span>
+          </div>
+          <div class="im-card-action">
+            <span>EXPLORE</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- BOTTOM STRIP ROW -->
+      <div class="im-cat-bottom-row">
+        <span class="im-cat-bottom-brand">ICE MASTER</span>
+        <div class="im-cat-bottom-line" aria-hidden="true"></div>
+        <div class="im-cat-bottom-tech">
+          <span class="im-cat-bottom-dash"></span>
+          <span class="im-cat-bottom-tech-text">TECHNOLOGY FOR A COOLER TOMORROW</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       SECTION 3: GAMING GEAR SPOTLIGHT — GH-01 (2046 × 769 px)
+       Matching headset_section.reference.png
+       ========================================================================== -->
+  <section class="im-headset-section" id="headset-spotlight">
+    <div class="im-headset-stage">
+      <!-- Clean High-Resolution Background Render -->
+      <img src="assets/images/homepage/headset_bg.png" alt="GH-01 Gaming Headset" class="im-headset-bg-img">
+
+      <!-- Left Live Typography Block -->
+      <div class="im-headset-content">
+        <!-- Eyebrow -->
+        <div class="im-headset-eyebrow">
+          <span class="im-headset-dash"></span>
+          <span class="im-headset-eyebrow-text">GAMING GEAR</span>
+        </div>
+
+        <!-- Headline -->
+        <h2 class="im-headset-title">
+          <span class="im-headset-title-white">GH-</span><span class="im-headset-title-red">01</span>
+        </h2>
+
+        <!-- Subheadline & Underline -->
+        <div class="im-headset-subhead-wrap">
+          <span class="im-headset-subhead">GAMING HEADSET</span>
+          <div class="im-headset-subhead-line"></div>
+        </div>
+
+        <!-- Description -->
+        <p class="im-headset-desc">
+          Immersive sound. All-day comfort.<br>
+          Built for every match.
+        </p>
+      </div>
+
+      <!-- Top Right Label -->
+      <div class="im-headset-top-badge">
+        <span class="im-headset-badge-text">
+          BUILT<br>FOR A<br>COOLER<br>TOMORROW
+        </span>
+        <span class="im-headset-badge-dash"></span>
+      </div>
+
+      <!-- Entire Section Link to Accessories -->
+      <a href="all-products.html?category=accessories" class="im-headset-stage-link" aria-label="Explore GH-01 Gaming Headset and Accessories"></a>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       SECTION 4: GET STARTED — 3 SIMPLE STEPS (1994 × 789 px)
+       Matching get_build_section.reference.png with uniform strict alignment
+       ========================================================================== -->
+  <section class="im-steps-section" id="get-started">
+    <div class="im-steps-stage">
+      <!-- Clean High-Resolution Background Render -->
+      <img src="assets/images/homepage/get_build_bg.png" alt="Get Started Background" class="im-steps-bg-img">
+
+      <!-- Left Live Content & 3 Steps -->
+      <div class="im-steps-content">
+        
+        <!-- Eyebrow -->
+        <div class="im-steps-eyebrow">
+          <span class="im-steps-dash"></span>
+          <span class="im-steps-eyebrow-text">GET STARTED</span>
+        </div>
+
+        <!-- Headline -->
+        <h2 class="im-steps-title">
+          3 Simple <span class="im-steps-title-red">Steps</span>
+        </h2>
+
+        <!-- Subtitle -->
+        <div class="im-steps-subtitle">
+          To get the right Ice Master product.
+        </div>
+
+        <!-- 3 Interactive Step Cards strictly aligned horizontally -->
+        <div class="im-steps-row">
+
+          <!-- STEP 01: VISIT US -->
+          <div class="im-step-card">
+            <div class="im-step-head">
+              <span class="im-step-num">01</span>
+              <div class="im-step-icon-tile">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#17181A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l1-5h16l1 5"></path>
+                  <path d="M4 10a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 4 0" stroke="#B20A13" stroke-width="1.8"></path>
+                  <path d="M5 13v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"></path>
+                  <path d="M10 21v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"></path>
+                </svg>
+              </div>
+              <div class="im-step-connector-line"></div>
+            </div>
+            <div class="im-step-info">
+              <h3 class="im-step-name">VISIT US</h3>
+              <p class="im-step-desc">Explore our products<br>at our store.</p>
+              <a href="https://maps.google.com/?q=Nehru+Place+New+Delhi" target="_blank" rel="noopener noreferrer" class="im-step-btn">
+                <span>FIND A STORE</span>
+                <span class="im-step-arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- STEP 02: ENQUIRE ABOUT A PRODUCT -->
+          <div class="im-step-card">
+            <div class="im-step-head">
+              <span class="im-step-num">02</span>
+              <div class="im-step-icon-tile">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#17181A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                  <line x1="16" y1="16" x2="21.5" y2="21.5" stroke="#B20A13" stroke-width="2.5"></line>
+                </svg>
+              </div>
+              <div class="im-step-connector-line"></div>
+            </div>
+            <div class="im-step-info">
+              <h3 class="im-step-name">ENQUIRE ABOUT<br>A PRODUCT</h3>
+              <p class="im-step-desc">Use the enquiry button<br>on any product page.</p>
+              <a href="all-products.html" class="im-step-btn">
+                <span>ENQUIRE NOW</span>
+                <span class="im-step-arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- STEP 03: TELL US WHAT YOU NEED -->
+          <div class="im-step-card">
+            <div class="im-step-head">
+              <span class="im-step-num">03</span>
+              <div class="im-step-icon-tile">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#17181A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  <line x1="8" y1="8" x2="14" y2="8" stroke="#B20A13" stroke-width="2"></line>
+                  <line x1="8" y1="12" x2="16" y2="12" stroke="#17181A" stroke-width="2"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="im-step-info">
+              <h3 class="im-step-name">TELL US<br>WHAT YOU NEED</h3>
+              <p class="im-step-desc">Share your requirements<br>and we’ll help you.</p>
+              <a href="https://wa.me/919999999999?text=Hi%20IceMaster,%20I%20would%20like%20to%20consult%20about%20a%20PC%20build" target="_blank" rel="noopener noreferrer" class="im-step-btn">
+                <span>CHAT WITH US</span>
+                <span class="im-step-arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bottom Strip Row -->
+      <div class="im-steps-bottom-row">
+        <span class="im-steps-bottom-motto">COOLER BETTER FURTHER</span>
+        <div class="im-steps-bottom-line" aria-hidden="true"></div>
+        <div class="im-steps-bottom-brand-wrap">
+          <span class="im-steps-bottom-dash"></span>
+          <span class="im-steps-bottom-brand">ICE MASTER</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       SECTION 5: MINIMAL CINEMATIC FOOTER (Matching header_footer.png.png)
+       With official Ice Master logo
+       ========================================================================== -->
+  <footer class="im-site-footer" id="site-footer">
+    <div class="im-footer-inner">
+      
+      <!-- Left: Logo & Brand Lockup -->
+      <a href="index.html" class="im-footer-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-footer-logo-img">
+        <div class="im-footer-brand-text">
+          <span class="im-footer-brand-title">ICE MASTER</span>
+          <span class="im-footer-brand-sub">COOLER BETTER FURTHER</span>
+        </div>
+      </a>
+
+      <!-- Center Divider 1 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Center: Social Links -->
+      <div class="im-footer-social-links" aria-label="Social Media Links">
+        <!-- Instagram -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Center Divider 2 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Right: Location Lockup -->
+      <div class="im-footer-location-wrap">
+        <svg class="im-footer-loc-pin" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+        </svg>
+        <span class="im-footer-loc-text">NEW DELHI, NEHRU PLACE</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JavaScript Animation & Slider Controller -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

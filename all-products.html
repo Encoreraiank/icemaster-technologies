@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products | Ice Master Technologies</title>
+  <meta name="description" content="Explore our complete range of high-performance PC cabinets, liquid coolers, air coolers, power supply units, and gaming accessories.">
+
+  <!-- Google Fonts: Montserrat (Weights 400-900) & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="ap-page-body">
+
+  <!-- ==========================================================================
+       FLOATING GLASS PILL NAVBAR (Matching Homepage 1:1)
+       ========================================================================== -->
+  <header class="im-floating-header" id="main-floating-header">
+    <div class="im-pill-navbar">
+      <!-- Left: Logo & Brand -->
+      <a href="index.html" class="im-pill-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-pill-logo-icon">
+        <span class="im-pill-brand-name">ICE MASTER</span>
+      </a>
+
+      <!-- Vertical Divider 1 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Center Navigation Links -->
+      <nav class="im-pill-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="im-nav-item">HOME</a>
+        <a href="all-products.html" class="im-nav-item active" aria-current="page">
+          <span>ALL PRODUCTS</span>
+          <span class="im-nav-indicator"></span>
+        </a>
+        <a href="download.html" class="im-nav-item">DOWNLOAD</a>
+        <a href="contact.html" class="im-nav-item">CONTACT</a>
+      </nav>
+
+      <!-- Vertical Divider 2 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Right Search Icon -->
+      <div class="im-pill-search-wrap">
+        <button type="button" class="im-pill-search-btn" id="im-search-toggle" aria-label="Search Products">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <!-- Expandable Quick Search Input -->
+        <div class="im-pill-search-dropdown" id="im-search-dropdown">
+          <input type="text" id="im-quick-search-input" placeholder="Search coolers, cabinets, PSU..." aria-label="Search Ice Master products">
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==========================================================================
+       SECTION 1: HERO BANNER (2172 × 724 px)
+       Matching 1 main banner.reference.png & 1 main banner.png.png
+       ========================================================================== -->
+  <section class="ap-hero-section" id="all-products-banner">
+    <div class="ap-hero-stage">
+      <img src="assets/images/all-products/all_products_hero_bg.png" alt="Ice Master All Products" class="ap-hero-bg-img">
+      
+      <div class="ap-hero-content">
+        <!-- Eyebrow -->
+        <div class="ap-hero-eyebrow">
+          <span class="ap-hero-dash"></span>
+          <span class="ap-hero-eyebrow-text">PRODUCTS</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="ap-hero-title">
+          All Categories
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="ap-hero-subtitle">
+          Explore our complete range of high-performance PC components.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       SECTION 2: CATEGORY SELECTION BAR & DYNAMIC HEADER (1983 × 793 px)
+       Matching 2 catagory selection.png_reference.png
+       ========================================================================== -->
+  <section class="ap-category-nav-section" id="category-selection">
+    <div class="ap-container">
+      
+      <!-- Top Row of Category Cards / Selection Tiles -->
+      <div class="ap-cat-tiles-row" role="tablist" aria-label="Product Categories">
+        
+        <!-- Tile 01: Air Coolers (Active by Default) -->
+        <button type="button" class="ap-cat-tile active" role="tab" aria-selected="true" data-cat-key="air-coolers" aria-controls="ap-products-grid">
+          <div class="ap-tile-icon-wrap">
+            <svg class="ap-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Heatsink Tower Fins -->
+              <rect x="5" y="4" width="14" height="13" rx="1.5"></rect>
+              <line x1="5" y1="7" x2="19" y2="7"></line>
+              <line x1="5" y1="10" x2="19" y2="10"></line>
+              <line x1="5" y1="13" x2="19" y2="13"></line>
+              <!-- Center Cooling Fan -->
+              <circle cx="12" cy="10.5" r="4.2"></circle>
+              <circle cx="12" cy="10.5" r="1.2" fill="currentColor"></circle>
+              <path d="M12 6.5C13 8 13.5 9 12 10.5"></path>
+              <path d="M12 14.5C11 13 10.5 12 12 10.5"></path>
+              <path d="M16 10.5C14.5 11.5 13.5 12 12 10.5"></path>
+              <path d="M8 10.5C9.5 9.5 10.5 9 12 10.5"></path>
+              <!-- Base & Heatpipes -->
+              <path d="M7 17v3h10v-3"></path>
+              <rect x="8" y="20" width="8" height="2" rx="0.5"></rect>
+            </svg>
+          </div>
+          <span class="ap-tile-label">Air Coolers</span>
+          <span class="ap-tile-dot" aria-hidden="true"></span>
+        </button>
+
+        <!-- Tile 02: Liquid Coolers -->
+        <button type="button" class="ap-cat-tile" role="tab" aria-selected="false" data-cat-key="liquid-coolers" aria-controls="ap-products-grid">
+          <div class="ap-tile-icon-wrap">
+            <svg class="ap-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Radiator -->
+              <rect x="2.5" y="5" width="7" height="14" rx="1.5"></rect>
+              <line x1="4.5" y1="8" x2="7" y2="8"></line>
+              <line x1="4.5" y1="12" x2="7" y2="12"></line>
+              <line x1="4.5" y1="16" x2="7" y2="16"></line>
+              <!-- Coolant Hoses -->
+              <path d="M9.5 8c3 0 4.5 1.5 6 3.5"></path>
+              <path d="M9.5 16c3.5 0 4.5-1.5 6-3.5"></path>
+              <!-- CPU Pump Block -->
+              <rect x="15" y="9" width="6.5" height="6.5" rx="1.8"></rect>
+              <circle cx="18.25" cy="12.25" r="1.8"></circle>
+            </svg>
+          </div>
+          <span class="ap-tile-label">Liquid Coolers</span>
+          <span class="ap-tile-dot" aria-hidden="true"></span>
+        </button>
+
+        <!-- Tile 03: Gaming Cabinets -->
+        <button type="button" class="ap-cat-tile" role="tab" aria-selected="false" data-cat-key="gaming-cabinets" aria-controls="ap-products-grid">
+          <div class="ap-tile-icon-wrap">
+            <svg class="ap-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Tower Chassis -->
+              <rect x="5" y="2.5" width="14" height="19" rx="2"></rect>
+              <!-- Front Panel / Tempered Glass Divider -->
+              <line x1="12" y1="2.5" x2="12" y2="21.5"></line>
+              <!-- Power Button -->
+              <circle cx="8.5" cy="5" r="0.75" fill="currentColor"></circle>
+              <!-- Dual Front ARGB Intake Fans -->
+              <circle cx="8.5" cy="9.5" r="2"></circle>
+              <circle cx="8.5" cy="15.5" r="2"></circle>
+              <!-- Glass Internal Components -->
+              <line x1="14.5" y1="10" x2="17.5" y2="10"></line>
+              <line x1="14.5" y1="13" x2="17.5" y2="13"></line>
+              <!-- Chassis Feet -->
+              <line x1="7" y1="21.5" x2="7" y2="22.5"></line>
+              <line x1="17" y1="21.5" x2="17" y2="22.5"></line>
+            </svg>
+          </div>
+          <span class="ap-tile-label">Gaming Cabinets</span>
+          <span class="ap-tile-dot" aria-hidden="true"></span>
+        </button>
+
+        <!-- Tile 04: Gaming Headphones -->
+        <button type="button" class="ap-cat-tile" role="tab" aria-selected="false" data-cat-key="gaming-headphones" aria-controls="ap-products-grid">
+          <div class="ap-tile-icon-wrap">
+            <svg class="ap-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Cushioned Headband -->
+              <path d="M4.5 13.5V11a7.5 7.5 0 0 1 15 0v2.5"></path>
+              <path d="M7.5 6.2a5.5 5.5 0 0 1 9 0" stroke-width="1.2" opacity="0.6"></path>
+              <!-- Earcups -->
+              <rect x="3" y="12" width="4" height="7" rx="2"></rect>
+              <rect x="17" y="12" width="4" height="7" rx="2"></rect>
+              <!-- Mic Boom -->
+              <path d="M19 17v1.5a3 3 0 0 1-3 3h-2"></path>
+              <circle cx="13" cy="21.5" r="1" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <span class="ap-tile-label">Gaming Headphones</span>
+          <span class="ap-tile-dot" aria-hidden="true"></span>
+        </button>
+
+        <!-- Tile 05: Power Supply Units -->
+        <button type="button" class="ap-cat-tile" role="tab" aria-selected="false" data-cat-key="power-supply-units" aria-controls="ap-products-grid">
+          <div class="ap-tile-icon-wrap">
+            <svg class="ap-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <!-- PSU Housing -->
+              <rect x="3" y="4.5" width="18" height="15" rx="2"></rect>
+              <!-- Cooling Fan Grille -->
+              <circle cx="9.5" cy="12" r="4.2"></circle>
+              <circle cx="9.5" cy="12" r="1.3" fill="currentColor"></circle>
+              <line x1="9.5" y1="8.5" x2="9.5" y2="15.5" stroke-width="1.1"></line>
+              <line x1="6" y1="12" x2="13" y2="12" stroke-width="1.1"></line>
+              <!-- Rocker Switch & AC Port -->
+              <rect x="15.8" y="7.5" width="3.2" height="4" rx="0.5"></rect>
+              <rect x="15.8" y="13.5" width="3.2" height="3" rx="0.5"></rect>
+            </svg>
+          </div>
+          <span class="ap-tile-label">Power Supply Units</span>
+          <span class="ap-tile-dot" aria-hidden="true"></span>
+        </button>
+
+      </div>
+
+      <!-- Dynamic Category Headline Strip -->
+      <div class="ap-cat-header-strip">
+        <div class="ap-cat-header-left">
+          <!-- Eyebrow -->
+          <div class="ap-strip-eyebrow">
+            <span class="ap-strip-dash"></span>
+            <span class="ap-strip-eyebrow-text">PRODUCTS</span>
+          </div>
+          
+          <!-- Dynamic Headline -->
+          <h2 class="ap-strip-title" id="ap-active-cat-title">Air Coolers</h2>
+          
+          <!-- Dynamic Tagline -->
+          <p class="ap-strip-tagline" id="ap-active-cat-tagline">Efficient Cooling. Reliable Performance.</p>
+        </div>
+
+        <!-- Watermark Fan Graphic on Right -->
+        <div class="ap-cat-watermark" aria-hidden="true">
+          <svg viewBox="0 0 200 200" fill="none" stroke="#E3E6EB" stroke-width="2.5">
+            <circle cx="100" cy="100" r="90"></circle>
+            <circle cx="100" cy="100" r="28"></circle>
+            <path d="M100 10 C125 45 145 65 125 85 C115 95 105 98 100 100"></path>
+            <path d="M190 100 C155 125 135 145 115 125 C105 115 102 105 100 100"></path>
+            <path d="M100 190 C75 155 55 135 75 115 C85 105 95 102 100 100"></path>
+            <path d="M10 100 C45 75 65 55 85 75 C95 85 98 95 100 100"></path>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       SECTION 3: PRODUCT PREVIEW CARDS GRID
+       Matching 3 product preview card.reference.png & 3 product preview card.png.png
+       ========================================================================== -->
+  <section class="ap-products-grid-section" id="products-catalog">
+    <div class="ap-container">
+      <div class="ap-cards-grid products-grid" id="ap-products-grid">
+        <!-- Card: Fusion CPU Air Cooler -->
+        <article class="im-prod-card product-card" data-category="air-coolers">
+          <a href="product-detail.html?product=fusion" class="im-prod-card-link" aria-label="View Fusion CPU Air Cooler Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png" alt="Fusion CPU Air Cooler" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Fusion CPU Air Cooler</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Cool 240 ARGB -->
+        <article class="im-prod-card product-card" data-category="liquid-coolers">
+          <a href="product-detail.html?product=cool-240-argb" class="im-prod-card-link" aria-label="View Cool 240 ARGB Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png" alt="Cool 240 ARGB" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Cool 240 ARGB</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Cool 360 ARGB -->
+        <article class="im-prod-card product-card" data-category="liquid-coolers">
+          <a href="product-detail.html?product=cool-360-argb" class="im-prod-card-link" aria-label="View Cool 360 ARGB Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png" alt="Cool 360 ARGB" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Cool 360 ARGB</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Cool 240 Digital ARGB -->
+        <article class="im-prod-card product-card" data-category="liquid-coolers">
+          <a href="product-detail.html?product=cool-240-digital-argb" class="im-prod-card-link" aria-label="View Cool 240 Digital ARGB Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/liquid-coolers/cool-240-digital-argb/Black/cool_240_digital_argb_black.png" alt="Cool 240 Digital ARGB" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Cool 240 Digital ARGB</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Cool 360 Digital ARGB -->
+        <article class="im-prod-card product-card" data-category="liquid-coolers">
+          <a href="product-detail.html?product=cool-360-digital-argb" class="im-prod-card-link" aria-label="View Cool 360 Digital ARGB Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/liquid-coolers/cool-360-digital-argb/Black/cool_360_digital_argb_black.png" alt="Cool 360 Digital ARGB" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Cool 360 Digital ARGB</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Dynamite XL Pro -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=dynamite-xl-pro" class="im-prod-card-link" aria-label="View Dynamite XL Pro Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png" alt="Dynamite XL Pro" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Dynamite XL Pro</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Frosty -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=frosty" class="im-prod-card-link" aria-label="View Frosty Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/frosty/Black/02_frosty_view_1.png" alt="Frosty" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Frosty</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Spark -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=spark" class="im-prod-card-link" aria-label="View Spark Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/spark/Black/8001-B-1.png" alt="Spark" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Spark</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Star -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=star" class="im-prod-card-link" aria-label="View Star Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/star/Black/T34-1.png" alt="Star" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Star</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Torrent -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=torrent" class="im-prod-card-link" aria-label="View Torrent Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/torrent/Black/05_torrent_black_view_1.png" alt="Torrent" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Torrent</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Dynamite X7 -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=dynamite-x7" class="im-prod-card-link" aria-label="View Dynamite X7 Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png" alt="Dynamite X7" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Dynamite X7</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Trendy -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=trendy" class="im-prod-card-link" aria-label="View Trendy Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/trendy/Black/L10-B-01.png" alt="Trendy" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Trendy</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Roar -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=roar" class="im-prod-card-link" aria-label="View Roar Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/roar/Black/roar_black_1.png" alt="Roar" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Roar</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Card: Thunder -->
+        <article class="im-prod-card product-card" data-category="gaming-cabinets">
+          <a href="product-detail.html?product=thunder" class="im-prod-card-link" aria-label="View Thunder Details">
+            <div class="im-prod-media">
+              <img src="assets/images/products/cases/thunder/Black/i50-1.png" alt="Thunder" class="im-prod-img" loading="lazy">
+            </div>
+            <h3 class="im-prod-title">Thunder</h3>
+            <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+          </a>
+        </article>
+
+        <!-- Empty State: Gaming Headphones -->
+        <div class="ap-empty-category-card hidden" data-category="gaming-headphones">
+          <svg class="ap-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+          <h3 class="ap-empty-title">Gaming Headphones Lineup Coming Soon</h3>
+          <p class="ap-empty-desc">We are finalizing new gaming audio gear. Official models and specifications will be unveiled shortly.</p>
+        </div>
+
+        <!-- Empty State: Power Supply Units -->
+        <div class="ap-empty-category-card hidden" data-category="power-supply-units">
+          <svg class="ap-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M6 12h.01M18 12h.01"></path>
+          </svg>
+          <h3 class="ap-empty-title">Power Supply Units Lineup Coming Soon</h3>
+          <p class="ap-empty-desc">High-efficiency 80 Plus power supplies are currently being prepared for production. Detailed specs releasing soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       SECTION 4: MINIMAL CINEMATIC FOOTER (Matching Homepage 1:1)
+       ========================================================================== -->
+  <footer class="im-site-footer" id="site-footer">
+    <div class="im-footer-inner">
+      
+      <!-- Left: Logo & Brand Lockup -->
+      <a href="index.html" class="im-footer-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-footer-logo-img">
+        <div class="im-footer-brand-text">
+          <span class="im-footer-brand-title">ICE MASTER</span>
+          <span class="im-footer-brand-sub">COOLER BETTER FURTHER</span>
+        </div>
+      </a>
+
+      <!-- Center Divider 1 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Center: Social Links -->
+      <div class="im-footer-social-links" aria-label="Social Media Links">
+        <!-- Instagram -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Center Divider 2 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Right: Location Lockup -->
+      <div class="im-footer-location-wrap">
+        <svg class="im-footer-loc-pin" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+        </svg>
+        <span class="im-footer-loc-text">NEW DELHI, NEHRU PLACE</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JavaScript Interaction Controller -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

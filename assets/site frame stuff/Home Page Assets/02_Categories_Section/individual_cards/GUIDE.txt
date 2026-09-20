@@ -1,0 +1,9 @@
+=====================================================
+INDIVIDUAL CATEGORY CARDS (OPTIONAL)
+=====================================================
+
+If you want individual transparent card cutouts:
+- 01_liquid_coolers.png
+- 02_gaming_cabinets.png
+- 03_power_supply.png
+- 04_gaming_accessories.png

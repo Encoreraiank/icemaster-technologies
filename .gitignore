@@ -1,0 +1,12 @@
+# Quarantined & Raw Assets (Not needed in production)
+_backup_unused_assets/
+raw-assets/
+
+# Build & OS Artifacts
+.DS_Store
+Thumbs.db
+*.log
+
+# Vercel
+.vercel
+node_modules/

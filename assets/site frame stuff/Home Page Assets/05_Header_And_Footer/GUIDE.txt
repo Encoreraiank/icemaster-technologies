@@ -1,0 +1,9 @@
+=====================================================
+05. BRAND LOGOS & COMMON ASSETS
+=====================================================
+
+Format: Transparent PNG / SVG
+
+FILES TO SAVE HERE:
+1. header_logo.png -> Official Ice Master Logo (for Floating Glass Navbar)
+2. footer_logo.png -> White/Official Logo (for Footer)

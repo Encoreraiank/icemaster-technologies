@@ -1,0 +1,11 @@
+=====================================================
+01. HERO SECTION ASSETS (SLIDESHOW)
+=====================================================
+
+Recommended Resolution: 1920 x 808 px (or 2x: 3840 x 1616 px)
+Format: High-Quality PNG / WebP
+
+FILES TO SAVE HERE:
+1. hero_slide_1.png  -> Slide 1 (Dynamite X7 Banner)
+2. hero_slide_2.png  -> Slide 2 (Cool Digital Liquid Cooler Banner)
+3. (Optional) hero_slide_3.png -> Slide 3 (If any additional slide)
