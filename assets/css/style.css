@@ -3587,35 +3587,377 @@ a.contact-info-value:hover {
     bottom: 24px;
     right: 24px;
   }
-}
-
-@media (max-width: 768px) {
-  .dl-hero-stage-section {
-    padding-top: 90px;
-    padding-bottom: 40px;
+@media (max-width: 800px) {
+  /* 01. FLOATING PILL NAVBAR - COMPACT SINGLE-LINE DESKTOP CAPSULE */
+  .im-floating-header {
+    top: 8px !important;
+    left: 0 !important;
+    right: 0 !important;
+    padding: 0 8px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 
-  .dl-stage-container {
-    aspect-ratio: auto;
-    min-height: 540px;
-    padding: 60px 16px;
+  .im-pill-navbar {
+    padding: 4px 8px 4px 10px !important;
+    gap: 5px !important;
+    max-width: 98vw !important;
+    box-sizing: border-box !important;
   }
 
-  .dl-center-lockup {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 0 auto;
+  .im-pill-brand {
+    gap: 4px !important;
   }
 
+  .im-pill-logo-icon {
+    height: 17px !important;
+  }
+
+  .im-pill-brand-name {
+    display: none !important; /* Preserves space so all 4 links fit on one clean row */
+  }
+
+  .im-pill-divider {
+    height: 14px !important;
+    margin: 0 1px !important;
+  }
+
+  .im-pill-nav {
+    gap: 2px !important;
+  }
+
+  .im-nav-item {
+    font-size: 9.5px !important;
+    padding: 4px 6px !important;
+    letter-spacing: 0.03em !important;
+    white-space: nowrap !important;
+  }
+
+  .im-pill-search-btn {
+    width: 26px !important;
+    height: 26px !important;
+    padding: 0 !important;
+  }
+
+  .im-pill-search-btn svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  .im-pill-search-dropdown {
+    top: 48px !important;
+    width: 240px !important;
+    right: -10px !important;
+  }
+
+  /* 02. HERO SLIDER - PRESERVES DESKTOP LAYOUT WITHOUT DOT COLLISION */
+  .im-hero-section {
+    aspect-ratio: 1933 / 813 !important;
+    min-height: auto !important;
+  }
+
+  .im-hero-content {
+    left: 4.5% !important;
+    top: 48% !important;
+    max-width: 53% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .im-hero-eyebrow {
+    gap: 6px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .im-hero-dash {
+    width: 16px !important;
+    height: 2px !important;
+  }
+
+  .im-hero-eyebrow-text {
+    font-size: clamp(6px, 1.8vw, 9px) !important;
+    letter-spacing: 0.15em !important;
+  }
+
+  .im-hero-title {
+    font-size: clamp(14px, 4.3vw, 24px) !important;
+    line-height: 1.05 !important;
+    margin: 0 0 3px 0 !important;
+  }
+
+  .im-hero-tagline {
+    font-size: clamp(6px, 1.8vw, 8.5px) !important;
+    letter-spacing: 0.16em !important;
+    margin-bottom: 4px !important;
+  }
+
+  .im-hero-desc {
+    font-size: clamp(6.5px, 1.9vw, 9px) !important;
+    line-height: 1.3 !important;
+    margin: 0 0 7px 0 !important;
+  }
+
+  .im-btn-pill {
+    gap: 6px !important;
+    padding: 4px 10px !important;
+    font-size: clamp(7px, 2vw, 10px) !important;
+  }
+
+  .im-btn-arrow, .im-btn-chevron {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  .im-hero-controls {
+    bottom: 5px !important;
+    gap: 8px !important;
+  }
+
+  .im-hero-nav-arrow {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .im-hero-nav-arrow svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .im-hero-dots {
+    gap: 6px !important;
+  }
+
+  .im-hero-dot {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .im-hero-dot.active {
+    width: 16px !important;
+    border-radius: 3px !important;
+  }
+
+  /* 03. CATEGORIES SECTION - PRESERVES EXACT 4-CARD DESKTOP COMPOSITION */
+  .im-cat-section {
+    aspect-ratio: 1994 / 789 !important;
+  }
+
+  .im-cat-header-row {
+    top: 1.8% !important;
+    left: 2.5% !important;
+    width: 95% !important;
+  }
+
+  .im-cat-eyebrow {
+    font-size: clamp(4.5px, 1.3vw, 6.5px) !important;
+    margin-bottom: 0px !important;
+    letter-spacing: 0.15em !important;
+  }
+
+  .im-cat-title {
+    font-size: clamp(7.5px, 2.1vw, 11px) !important;
+    line-height: 1 !important;
+  }
+
+  .im-cat-center-motto {
+    display: none !important; /* Eliminates collision with card tops on mobile */
+  }
+
+  .im-cat-explore-link {
+    display: none !important; /* Preserves clean header area on compact screens */
+  }
+
+  .im-cat-card-overlay {
+    padding: 4px 6px !important;
+    border-radius: 6px !important;
+  }
+
+  .im-card-text-block {
+    gap: 2px !important;
+  }
+
+  .im-card-num {
+    font-size: clamp(4.5px, 1.3vw, 7px) !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .im-card-name {
+    font-size: clamp(5.8px, 1.7vw, 9.5px) !important;
+    line-height: 1.1 !important;
+  }
+
+  .im-card-action {
+    display: none !important; /* Clean minimal card overlay without button collision */
+  }
+
+  .im-cat-bottom-row {
+    display: none !important; /* Prevents colliding with card bottoms */
+  }
+
+  /* 04. GH-01 GAMING HEADSET - PRESERVES LEFT TEXT + RIGHT HEADSET SPLIT */
+  .im-headset-section {
+    aspect-ratio: 2046 / 769 !important;
+  }
+
+  .im-headset-content {
+    left: 4.5% !important;
+    top: 50% !important;
+    width: 48% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .im-headset-eyebrow {
+    gap: 6px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .im-headset-dash {
+    width: 16px !important;
+    height: 2px !important;
+  }
+
+  .im-headset-eyebrow-text {
+    font-size: clamp(5.5px, 1.6vw, 8px) !important;
+    letter-spacing: 0.15em !important;
+  }
+
+  .im-headset-title {
+    font-size: clamp(13px, 4vw, 24px) !important;
+    line-height: 1.05 !important;
+    margin: 0 0 2px 0 !important;
+  }
+
+  .im-headset-subhead-wrap {
+    gap: 2px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .im-headset-subhead-text {
+    font-size: clamp(6.5px, 2vw, 11px) !important;
+  }
+
+  .im-headset-subhead-line {
+    width: 24px !important;
+    height: 1.5px !important;
+  }
+
+  .im-headset-desc {
+    font-size: clamp(6px, 1.8vw, 9px) !important;
+    line-height: 1.25 !important;
+    margin: 0 0 6px 0 !important;
+  }
+
+  .im-headset-features {
+    gap: 4px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .im-feat-chip {
+    padding: 2px 6px !important;
+    font-size: clamp(5px, 1.4vw, 7.5px) !important;
+  }
+
+  .im-feat-chip svg {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .im-btn-headset {
+    padding: 4px 10px !important;
+    font-size: clamp(6.5px, 1.8vw, 9px) !important;
+  }
+
+  /* 05. 3 SIMPLE STEPS - PRESERVES EXACT 3-STEP DESKTOP ROW */
+  .im-steps-section {
+    aspect-ratio: 1994 / 789 !important;
+  }
+
+  .im-steps-content {
+    left: 4.5% !important;
+    top: 45% !important;
+    width: 66% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .im-steps-eyebrow {
+    display: none !important;
+  }
+
+  .im-steps-title {
+    font-size: clamp(8.5px, 2.4vw, 13px) !important;
+    line-height: 1.1 !important;
+    margin: 0 0 2px 0 !important;
+  }
+
+  .im-steps-subtitle {
+    font-size: clamp(5px, 1.4vw, 7px) !important;
+    margin-bottom: 5px !important;
+  }
+
+  .im-steps-row {
+    gap: 6px !important;
+  }
+
+  .im-step-head {
+    gap: 4px !important;
+    height: 18px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .im-step-num {
+    font-size: clamp(7.5px, 2vw, 11px) !important;
+  }
+
+  .im-step-icon-tile {
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 4px !important;
+    padding: 2px !important;
+  }
+
+  .im-step-icon-tile svg {
+    width: 9px !important;
+    height: 9px !important;
+  }
+
+  .im-step-card-title {
+    font-size: clamp(5px, 1.4vw, 7.5px) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1px !important;
+  }
+
+  .im-step-card-desc {
+    font-size: clamp(4.2px, 1.15vw, 6px) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .im-step-btn {
+    display: none !important;
+  }
+
+  /* 06. DOWNLOAD PAGE OVERLAP FIX */
   .dl-corner-branding-left,
   .dl-corner-branding-right {
-    display: none;
+    display: none !important;
   }
 
-  .dl-hero-title {
-    font-size: 2.5rem;
+  /* 06. FOOTER */
+  .im-footer {
+    padding: 24px 16px !important;
+  }
+  .im-footer-logo-img {
+    height: 24px !important;
+  }
+  .im-footer-socials {
+    gap: 12px !important;
+  }
+  .im-footer-address {
+    font-size: 9px !important;
+  }
+  .im-footer-copyright {
+    font-size: 8px !important;
   }
 }
 
