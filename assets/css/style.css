@@ -4247,3 +4247,347 @@ a.contact-info-value:hover {
   .im-mob-steps-section { display: none !important; }
   .im-mobile-nav-drawer { display: none !important; }
 }
+
+
+/* ==========================================================================
+   THEME TOGGLE BUTTON — in pill navbar (desktop + mobile)
+   ========================================================================== */
+.im-theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  outline: none;
+}
+.im-theme-toggle-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.4);
+  transform: scale(1.08);
+}
+.im-theme-toggle-btn svg {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+
+/* ==========================================================================
+   LIGHT MODE OVERRIDES — html.light-mode
+   Dark is default; light-mode class flips the palette.
+   ========================================================================== */
+
+/* ── Global body / html ── */
+html.light-mode,
+html.light-mode body {
+  background-color: #F0F2F5 !important;
+  color: #1A1C21 !important;
+}
+
+/* ── Navbar pill ── */
+html.light-mode .im-pill-navbar {
+  background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(240,242,245,0.95) 100%) !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  border-top-color: rgba(255,255,255,0.9) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+}
+html.light-mode .im-pill-brand-name {
+  color: #17181A !important;
+}
+html.light-mode .im-pill-divider {
+  background: rgba(0,0,0,0.15) !important;
+}
+html.light-mode .im-nav-item {
+  color: #3A3D44 !important;
+}
+html.light-mode .im-nav-item:hover,
+html.light-mode .im-nav-item.active {
+  color: #E42F38 !important;
+}
+html.light-mode .im-nav-indicator {
+  background: #E42F38 !important;
+}
+html.light-mode .im-pill-search-btn {
+  color: #3A3D44 !important;
+}
+html.light-mode .im-pill-search-dropdown {
+  background: #fff !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+}
+html.light-mode .im-pill-search-dropdown input {
+  color: #17181A !important;
+  background: transparent !important;
+}
+html.light-mode .im-theme-toggle-btn {
+  border-color: rgba(0,0,0,0.18) !important;
+  background: rgba(0,0,0,0.06) !important;
+  color: #17181A !important;
+}
+html.light-mode .im-theme-toggle-btn:hover {
+  background: rgba(0,0,0,0.1) !important;
+}
+
+/* ── Mobile nav drawer ── */
+html.light-mode .im-mobile-nav-drawer {
+  background: rgba(240,242,245,0.97) !important;
+  backdrop-filter: blur(20px) !important;
+}
+html.light-mode .im-mobile-nav-link {
+  background: rgba(0,0,0,0.04) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+  color: #17181A !important;
+}
+html.light-mode .im-mobile-nav-link.active,
+html.light-mode .im-mobile-nav-link:hover {
+  background: rgba(228,47,56,0.08) !important;
+  border-color: rgba(228,47,56,0.35) !important;
+  color: #E42F38 !important;
+}
+html.light-mode .im-mobile-drawer-close {
+  color: #17181A !important;
+  border-color: rgba(0,0,0,0.15) !important;
+  background: rgba(0,0,0,0.05) !important;
+}
+html.light-mode .im-mobile-menu-toggle {
+  background: rgba(0,0,0,0.06) !important;
+  border-color: rgba(0,0,0,0.2) !important;
+}
+html.light-mode .im-hamburger-bar {
+  background: #17181A !important;
+}
+
+/* ── Hero section ── stays dark (background images handle it) */
+
+/* ── Mobile categories section ── */
+html.light-mode .im-mob-cat-section {
+  background: #E8EAEF !important;
+}
+html.light-mode .im-mob-section-title {
+  color: #17181A !important;
+}
+html.light-mode .im-mob-section-eyebrow {
+  color: #5A6070 !important;
+}
+html.light-mode .im-mob-cat-card {
+  border-color: rgba(0,0,0,0.1) !important;
+  background: #2a2c30 !important;
+}
+
+/* ── Headset section ── */
+html.light-mode .im-headset-content {
+  background: #F0F2F5 !important;
+}
+html.light-mode .im-headset-eyebrow-text {
+  color: #6A7078 !important;
+}
+html.light-mode .im-headset-title .im-headset-title-white {
+  color: #17181A !important;
+}
+html.light-mode .im-headset-subhead {
+  color: #3A3D44 !important;
+  letter-spacing: 0.2em;
+}
+html.light-mode .im-headset-desc {
+  color: #5A6070 !important;
+}
+
+/* ── Steps section (desktop) ── already white bg, needs minor tweaks ── */
+html.light-mode .im-steps-section {
+  background: #FFFFFF !important;
+}
+
+/* ── Mobile steps section ── */
+html.light-mode .im-mob-steps-section {
+  background: #F0F2F5 !important;
+}
+html.light-mode .im-mob-step-card {
+  background: #FFFFFF !important;
+  border-color: #D8DAE0 !important;
+}
+html.light-mode .im-mob-step-name {
+  color: #17181A !important;
+}
+html.light-mode .im-mob-step-desc {
+  color: #68707A !important;
+}
+html.light-mode .im-mob-step-btn {
+  color: #17181A !important;
+  border-color: #17181A !important;
+}
+
+/* ── Footer ── */
+html.light-mode .im-site-footer {
+  background: #E2E4E9 !important;
+  border-top-color: rgba(0,0,0,0.1) !important;
+}
+html.light-mode .im-footer-brand-title {
+  color: #17181A !important;
+}
+html.light-mode .im-footer-brand-sub {
+  color: #68707A !important;
+}
+html.light-mode .im-footer-divider {
+  background: rgba(0,0,0,0.15) !important;
+}
+html.light-mode .im-footer-social-btn {
+  color: #3A3D44 !important;
+}
+html.light-mode .im-footer-social-btn:hover {
+  color: #E42F38 !important;
+}
+html.light-mode .im-footer-loc-text,
+html.light-mode .im-footer-loc-pin {
+  color: #3A3D44 !important;
+}
+
+/* ── ALL PRODUCTS page ── */
+html.light-mode .ap-page-body {
+  background: #F0F2F5 !important;
+}
+html.light-mode .ap-section-bg {
+  background: #F0F2F5 !important;
+}
+html.light-mode .ap-cat-tiles-section {
+  background: #E8EAEF !important;
+  border-color: rgba(0,0,0,0.06) !important;
+}
+html.light-mode .ap-cat-tile {
+  background: #FFFFFF !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+html.light-mode .ap-cat-tile:hover,
+html.light-mode .ap-cat-tile.active {
+  border-color: #E42F38 !important;
+  background: rgba(228,47,56,0.05) !important;
+}
+html.light-mode .ap-cat-tile-label {
+  color: #3A3D44 !important;
+}
+html.light-mode .ap-product-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+}
+html.light-mode .ap-product-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+}
+html.light-mode .ap-product-name {
+  color: #17181A !important;
+}
+html.light-mode .ap-product-category {
+  color: #68707A !important;
+}
+html.light-mode .ap-product-badge {
+  background: #E8EAEF !important;
+  color: #3A3D44 !important;
+}
+html.light-mode .ap-section-title {
+  color: #17181A !important;
+}
+html.light-mode .ap-section-subtitle {
+  color: #68707A !important;
+}
+html.light-mode .ap-empty-state {
+  color: #68707A !important;
+}
+
+/* ── PRODUCT DETAIL page ── */
+html.light-mode .pd-page-body {
+  background: #F0F2F5 !important;
+}
+html.light-mode .pd-detail-section {
+  background: #F0F2F5 !important;
+}
+html.light-mode .pd-product-name {
+  color: #17181A !important;
+}
+html.light-mode .pd-product-subtitle {
+  color: #68707A !important;
+}
+html.light-mode .pd-spec-label {
+  color: #68707A !important;
+}
+html.light-mode .pd-spec-value {
+  color: #17181A !important;
+}
+html.light-mode .pd-features-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+
+/* ── DOWNLOAD page ── */
+html.light-mode .dl-page-body {
+  background: #F0F2F5 !important;
+}
+html.light-mode .dl-hero-title {
+  color: #17181A !important;
+}
+html.light-mode .dl-hero-desc {
+  color: #5A6070 !important;
+}
+
+/* ── CONTACT page ── */
+html.light-mode .ct-page-body {
+  background: #F0F2F5 !important;
+}
+html.light-mode .ct-page-wrapper {
+  background: #F0F2F5 !important;
+}
+html.light-mode .ct-section-title {
+  color: #17181A !important;
+}
+html.light-mode .ct-section-subtitle {
+  color: #68707A !important;
+}
+html.light-mode .ct-form-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+html.light-mode .ct-form-label {
+  color: #3A3D44 !important;
+}
+html.light-mode .ct-form-input,
+html.light-mode .ct-form-textarea {
+  background: #F8F9FB !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  color: #17181A !important;
+}
+html.light-mode .ct-form-input:focus,
+html.light-mode .ct-form-textarea:focus {
+  border-color: #E42F38 !important;
+  background: #FFFFFF !important;
+}
+html.light-mode .ct-info-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+html.light-mode .ct-info-label {
+  color: #68707A !important;
+}
+html.light-mode .ct-info-value {
+  color: #17181A !important;
+}
+
+/* ── Smooth transition for theme switch ── */
+html, body,
+.im-pill-navbar,
+.im-site-footer,
+.im-headset-content,
+.im-mob-cat-section,
+.im-mob-steps-section,
+.im-mob-step-card,
+.ap-product-card,
+.ap-cat-tile,
+.ct-form-card,
+.ct-info-card,
+.ct-form-input,
+.ct-form-textarea {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
