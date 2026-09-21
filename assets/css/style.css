@@ -4384,26 +4384,30 @@ html.light-mode .im-mob-cat-card {
 }
 
 /* ── Headset section ── */
+/* Headset section has a permanent black studio image background, so text must remain bright/white in light-mode */
 html.light-mode .im-headset-content {
   background: transparent !important;
 }
 html.light-mode .im-headset-eyebrow-text {
-  color: #6A7078 !important;
+  color: #D9D9D9 !important;
 }
 html.light-mode .im-headset-title .im-headset-title-white {
-  color: #17181A !important;
+  color: #FFFFFF !important;
 }
 html.light-mode .im-headset-subhead {
-  color: #3A3D44 !important;
+  color: #FFFFFF !important;
   letter-spacing: 0.2em;
 }
 html.light-mode .im-headset-desc {
-  color: #5A6070 !important;
+  color: #B0B7C3 !important;
 }
 
 /* ── Steps section (desktop) ── */
 html.light-mode .im-steps-section {
   background: #FFFFFF !important;
+}
+html.light-mode .im-step-num {
+  color: #6B7280 !important; /* Crisp high-contrast slate grey so 01, 02, 03 are fully legible */
 }
 html.light-mode .im-steps-bg-img {
   content: url('../images/homepage/get_build_bg.png') !important;
@@ -4558,26 +4562,68 @@ html.light-mode .ap-empty-state {
 
 /* ── PRODUCT DETAIL page ── */
 html.light-mode .pd-page-body {
-  background: #F0F2F5 !important;
+  background-color: #DCEAF7 !important;
+  background-image: linear-gradient(180deg, #DCEAF7 0%, #D5E4F2 100%) !important;
+  color: #20364C !important;
 }
-html.light-mode .pd-detail-section {
-  background: #F0F2F5 !important;
+html.light-mode .pd-bc-link {
+  color: #536F8F !important;
 }
-html.light-mode .pd-product-name {
-  color: #17181A !important;
+html.light-mode .pd-bc-current {
+  color: #20364C !important;
 }
-html.light-mode .pd-product-subtitle {
-  color: #68707A !important;
+html.light-mode .pd-thumb-item {
+  background: #D4E4F4 !important;
+  border-color: transparent !important;
 }
-html.light-mode .pd-spec-label {
-  color: #68707A !important;
+html.light-mode .pd-thumb-item.active {
+  border: 2.5px solid #18212B !important;
+  box-shadow: 0 8px 24px rgba(24, 33, 43, 0.15) !important;
+}
+html.light-mode .pd-stage-card {
+  background: #D1E1F1 !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+}
+html.light-mode .pd-eyebrow-accent-bar {
+  background: #050608 !important;
+}
+html.light-mode .pd-eyebrow-label {
+  color: #6685A6 !important;
+}
+html.light-mode .pd-heading-title {
+  color: #050608 !important; /* Deep dark black text so product title SPARK / FUSION is 100% visible */
+}
+html.light-mode .pd-heading-subtitle {
+  color: #101820 !important;
+}
+html.light-mode .pd-details-box {
+  background: #D2E2F2 !important;
+  border-color: transparent !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03) !important;
+}
+html.light-mode .pd-details-heading {
+  color: #101820 !important;
+}
+html.light-mode .pd-spec-name {
+  color: #36516E !important;
 }
 html.light-mode .pd-spec-value {
-  color: #17181A !important;
+  color: #20364C !important;
 }
-html.light-mode .pd-features-card {
-  background: #FFFFFF !important;
-  border-color: rgba(0,0,0,0.08) !important;
+html.light-mode .pd-specs-pending-box {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1.5px dashed #A8BDCE !important;
+}
+html.light-mode .pd-specs-pending-text strong {
+  color: #12161C !important;
+}
+html.light-mode .pd-specs-pending-text p {
+  color: #4A5664 !important;
+}
+html.light-mode .pd-cta-enquire-btn {
+  background: #17212C !important;
+  border-color: transparent !important;
 }
 
 /* ── DOWNLOAD page ── */
