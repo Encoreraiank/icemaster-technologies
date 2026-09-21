@@ -594,7 +594,7 @@ body {
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  background: #F4F5F7;
+  background: #07080A;
   aspect-ratio: 1994 / 789;
 }
 
@@ -628,7 +628,7 @@ body {
   font-size: clamp(0.7rem, 0.85vw, 0.95rem);
   font-weight: 500;
   letter-spacing: 0.24em;
-  color: #6A7078;
+  color: #8A8F97;
   text-transform: uppercase;
   margin-bottom: 4px;
 }
@@ -637,13 +637,13 @@ body {
   font-family: var(--im-font);
   font-size: clamp(1.8rem, 2.9vw, 3.3rem);
   font-weight: 700;
-  color: #090A0C;
+  color: #FFFFFF;
   line-height: 1.1;
   margin: 0;
 }
 
 .im-cat-title-red {
-  color: #A52A30;
+  color: #E42F38;
   font-weight: 700;
 }
 
@@ -658,7 +658,7 @@ body {
 .im-cat-motto-line {
   flex: 1;
   height: 1px;
-  background: #B9BEC4;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .im-cat-motto-text {
@@ -684,7 +684,7 @@ body {
   font-size: clamp(0.66rem, 0.72vw, 0.82rem);
   font-weight: 500;
   letter-spacing: 0.18em;
-  color: #1C1D20;
+  color: #FFFFFF;
   text-align: right;
   line-height: 1.35;
 }
@@ -1779,7 +1779,7 @@ body {
   width: 100%;
   min-height: 349px;
   border-radius: 12px;
-  background-image: url('../images/all-products/product_card_template_dark.png');
+  background-image: url('../images/all-products/product_card_template.png');
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1789,14 +1789,14 @@ body {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
 
 .im-prod-card:hover,
 .product-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
 }
 
 .im-prod-card.hidden,
@@ -1832,21 +1832,21 @@ body {
   max-height: 185px;
   max-width: 82%;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18));
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .im-prod-card:hover .im-prod-img,
 .product-card:hover .im-prod-img {
   transform: scale(1.06);
-  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.28));
 }
 
 .im-prod-title {
   font-family: var(--im-font);
   font-size: 1.15rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #171B20;
   text-align: center;
   line-height: 1.3;
   margin: 0;
@@ -1920,8 +1920,8 @@ body {
 
 /* Product Detail Pending Specs */
 .pd-specs-pending-box {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1.5px dashed #A8BDCE;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px dashed rgba(255, 255, 255, 0.15);
   border-radius: 14px;
   padding: 24px 22px;
   display: flex;
@@ -1945,14 +1945,14 @@ body {
   display: block;
   font-size: 1.05rem;
   font-weight: 700;
-  color: #12161C;
+  color: #FFFFFF;
   margin-bottom: 6px;
 }
 
 .pd-specs-pending-text p {
   font-size: 0.92rem;
   line-height: 1.5;
-  color: #4A5664;
+  color: #8A8F97;
   margin: 0;
 }
 
@@ -1967,11 +1967,11 @@ body {
 
 .pd-page-body {
 
-  background-color: #DCEAF7;
+  background-color: #07080A;
 
-  background-image: linear-gradient(180deg, #DCEAF7 0%, #D5E4F2 100%);
+  background-image: none;
 
-  color: #20364C;
+  color: #FFFFFF;
 
   min-height: 100vh;
 
@@ -2039,7 +2039,7 @@ body {
 
   font-weight: 500;
 
-  color: #536F8F;
+  color: #8A8F97;
 
   margin-bottom: 28px;
 
@@ -2049,7 +2049,7 @@ body {
 
 .pd-bc-link {
 
-  color: #536F8F;
+  color: #8A8F97;
 
   text-decoration: none;
 
@@ -2061,7 +2061,7 @@ body {
 
 .pd-bc-link:hover {
 
-  color: #101820;
+  color: #FFFFFF;
 
 }
 
@@ -2069,7 +2069,7 @@ body {
 
 .pd-bc-sep {
 
-  color: #7F9BB7;
+  color: #5A6070;
 
   font-size: 16px;
 
@@ -2081,7 +2081,7 @@ body {
 
 .pd-bc-current {
 
-  color: #536F8F;
+  color: #8A8F97;
 
   font-weight: 600;
 
@@ -2151,9 +2151,9 @@ body {
 
   border-radius: 16px;
 
-  background: #D4E4F4;
+  background: rgba(255, 255, 255, 0.05);
 
-  border: 1.5px solid transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
 
   padding: 8px;
 
@@ -2191,9 +2191,9 @@ body {
 
 .pd-thumb-item.active {
 
-  border: 2.5px solid #18212B;
+  border: 2.5px solid #E42F38;
 
-  box-shadow: 0 8px 24px rgba(24, 33, 43, 0.15);
+  box-shadow: 0 8px 24px rgba(228, 47, 56, 0.35);
 
 }
 
@@ -2229,7 +2229,8 @@ body {
 
   height: 670px;
 
-  background: #D1E1F1;
+  background: #0E1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   border-radius: 28px;
 
@@ -2305,7 +2306,7 @@ body {
 
   height: 3.5px;
 
-  background: #050608;
+  background: #E42F38;
 
   border-radius: 2px;
 
@@ -2325,7 +2326,7 @@ body {
 
   text-transform: uppercase;
 
-  color: #6685A6;
+  color: #8A8F97;
 
 }
 
@@ -2341,7 +2342,7 @@ body {
 
   font-weight: 900;
 
-  color: #050608;
+  color: #FFFFFF;
 
   line-height: 1.02;
 
@@ -2361,7 +2362,7 @@ body {
 
   font-weight: 700;
 
-  color: #101820;
+  color: #8A8F97;
 
   line-height: 1.15;
 
@@ -2377,7 +2378,8 @@ body {
 
 .pd-details-box {
 
-  background: #D2E2F2;
+  background: #0E1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   border-radius: 22px;
 
@@ -2401,7 +2403,7 @@ body {
 
   font-weight: 800;
 
-  color: #101820;
+  color: #FFFFFF;
 
   margin: 0 0 20px 0;
 
@@ -2431,7 +2433,7 @@ body {
 
   padding: 13.5px 0;
 
-  border-bottom: 1px solid #B8CCDF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
 }
 
@@ -2465,7 +2467,7 @@ body {
 
   font-weight: 500;
 
-  color: #36516E;
+  color: #8A8F97;
 
   flex-shrink: 0;
 
@@ -2481,7 +2483,7 @@ body {
 
   font-weight: 600;
 
-  color: #20364C;
+  color: #FFFFFF;
 
   text-align: right;
 
@@ -2505,7 +2507,8 @@ body {
 
   align-items: center;
 
-  background: #17212C;
+  background: #11141A;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 
   border-radius: 18px;
 
@@ -4382,7 +4385,7 @@ html.light-mode .im-mob-cat-card {
 
 /* ── Headset section ── */
 html.light-mode .im-headset-content {
-  background: #F0F2F5 !important;
+  background: transparent !important;
 }
 html.light-mode .im-headset-eyebrow-text {
   color: #6A7078 !important;
