@@ -1001,9 +1001,28 @@ function initProductDetailPage() {
         ]
       }
     },
+    'shadow': {
+      title: 'SHADOW',
+      subtitle: 'Modern Minimalist Gaming Cabinet',
+      eyebrow: 'PC GAMING CABINET',
+      categoryName: 'Gaming Cabinets',
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: 'Shadow Gaming Cabinet',
+      colors: ['black'],
+      defaultColor: 'black',
+      images: {
+        'black': [
+          'assets/images/products/cases/shadow/Black/L10-B-01.png',
+          'assets/images/products/cases/shadow/Black/L10-B-02.png',
+          'assets/images/products/cases/shadow/Black/L10-B-03.png',
+          'assets/images/products/cases/shadow/Black/L10-B-04.png',
+          'assets/images/products/cases/shadow/Black/L10-B-05.png'
+        ]
+      }
+    },
     'trendy': {
       title: 'TRENDY',
-      subtitle: 'Modern Minimalist Gaming Cabinet',
+      subtitle: 'High Airflow Mid-Tower Gaming Cabinet',
       eyebrow: 'PC GAMING CABINET',
       categoryName: 'Gaming Cabinets',
       categoryUrl: 'all-products.html?category=gaming-cabinets',
@@ -1012,11 +1031,11 @@ function initProductDetailPage() {
       defaultColor: 'black',
       images: {
         'black': [
-          'assets/images/products/cases/trendy/Black/L10-B-01.png',
-          'assets/images/products/cases/trendy/Black/L10-B-02.png',
-          'assets/images/products/cases/trendy/Black/L10-B-03.png',
-          'assets/images/products/cases/trendy/Black/L10-B-04.png',
-          'assets/images/products/cases/trendy/Black/L10-B-05.png'
+          'assets/images/products/cases/trendy/Black/trendy_m10_view_1.png',
+          'assets/images/products/cases/trendy/Black/trendy_m10_view_2.png',
+          'assets/images/products/cases/trendy/Black/trendy_m10_view_3.png',
+          'assets/images/products/cases/trendy/Black/trendy_m10_view_4.png',
+          'assets/images/products/cases/trendy/Black/trendy_m10_view_5.png'
         ]
       }
     },
