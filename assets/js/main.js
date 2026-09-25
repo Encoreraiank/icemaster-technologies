@@ -83,10 +83,66 @@ function syncLiveSiteWithAdminData() {
       }
     }
 
-    // 3. Sync Products Grid (all-products.html)
+    // 3. Sync Categories Tiles (all-products.html)
+    const storedCats = JSON.parse(localStorage.getItem('im_wm_categories'));
+    const tilesRow = document.querySelector('.ap-cat-tiles-row');
+    if (tilesRow && Array.isArray(storedCats) && storedCats.length > 0) {
+      storedCats.forEach(c => {
+        let existingTile = tilesRow.querySelector(`.ap-cat-tile[data-cat-key="${c.key}"]`);
+        if (!existingTile) {
+          const tileBtn = document.createElement('button');
+          tileBtn.type = 'button';
+          tileBtn.className = 'ap-cat-tile';
+          tileBtn.setAttribute('role', 'tab');
+          tileBtn.setAttribute('aria-selected', 'false');
+          tileBtn.setAttribute('data-cat-key', c.key);
+          tileBtn.setAttribute('aria-controls', 'ap-products-grid');
+          tileBtn.innerHTML = `
+            <div class="ap-tile-icon-wrap">
+              <img src="${c.thumb || 'assets/images/homepage/im_official_emblem.png'}" alt="${c.name}" style="width: 24px; height: 24px; object-fit: contain;">
+            </div>
+            <span class="ap-tile-label">${c.name}</span>
+            <span class="ap-tile-dot" aria-hidden="true"></span>
+          `;
+          tilesRow.appendChild(tileBtn);
+        } else {
+          const label = existingTile.querySelector('.ap-tile-label');
+          if (label && c.name) label.textContent = c.name;
+        }
+      });
+
+      // Remove tiles of categories that were deleted in admin
+      const activeKeys = new Set(storedCats.map(c => c.key));
+      tilesRow.querySelectorAll('.ap-cat-tile').forEach(t => {
+        const k = t.getAttribute('data-cat-key');
+        if (k && !activeKeys.has(k)) {
+          t.remove();
+        }
+      });
+    }
+
+    // 4. Sync Products Grid (all-products.html)
     const storedProds = JSON.parse(localStorage.getItem('im_wm_products'));
     const prodGrid = document.getElementById('ap-products-grid');
     if (prodGrid && Array.isArray(storedProds) && storedProds.length > 0) {
+      const activeProdIds = new Set(storedProds.map(p => String(p.id)));
+
+      // Remove products deleted in admin
+      prodGrid.querySelectorAll('.im-prod-card').forEach(card => {
+        const link = card.querySelector('a[href*="product="]');
+        if (link) {
+          const href = link.getAttribute('href');
+          const match = href.match(/product=([^&#]+)/);
+          if (match && match[1]) {
+            const pId = match[1];
+            if (!activeProdIds.has(pId)) {
+              card.remove();
+            }
+          }
+        }
+      });
+
+      // Upsert products
       storedProds.forEach(p => {
         let existingCard = prodGrid.querySelector(`a[href*="${p.id}"]`);
         if (!existingCard) {
@@ -798,10 +854,12 @@ function initProductsCategoryNav() {
     });
 
     // 4. Handle Empty Category Cards
+    let hasCustomEmpty = false;
     emptyCards.forEach(empty => {
       const emptyCat = empty.getAttribute('data-category');
       const isVisible = (emptyCat === catKey);
       if (isVisible) {
+        hasCustomEmpty = true;
         empty.classList.remove('hidden');
         empty.style.opacity = '0';
         empty.style.transform = 'translateY(12px)';
@@ -813,6 +871,31 @@ function initProductsCategoryNav() {
         empty.classList.add('hidden');
       }
     });
+
+    // If no products and no custom empty card exists, show a generic empty state
+    let dynamicEmpty = document.getElementById('ap-dynamic-empty-card');
+    if (visibleCount === 0 && !hasCustomEmpty) {
+      if (!dynamicEmpty) {
+        dynamicEmpty = document.createElement('div');
+        dynamicEmpty.id = 'ap-dynamic-empty-card';
+        dynamicEmpty.className = 'ap-empty-category-card';
+        const grid = document.getElementById('ap-products-grid');
+        if (grid) grid.appendChild(dynamicEmpty);
+      }
+      const catTitle = (categoryMeta[catKey] && categoryMeta[catKey].title) || catKey;
+      dynamicEmpty.innerHTML = `
+        <svg class="ap-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h3 class="ap-empty-title">${catTitle} Lineup Coming Soon</h3>
+        <p class="ap-empty-desc">New products for ${catTitle} are currently being prepared. Check back soon for official specifications!</p>
+      `;
+      dynamicEmpty.classList.remove('hidden');
+    } else if (dynamicEmpty) {
+      dynamicEmpty.classList.add('hidden');
+    }
 
     // 5. Legacy Panes Support (if existing)
     if (legacyButtons.length) {
