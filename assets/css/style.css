@@ -1865,6 +1865,28 @@ body {
   user-select: none;
 }
 
+.im-prod-desc {
+  font-family: var(--im-font);
+  font-size: 0.76rem;
+  color: #64748B;
+  text-align: center;
+  line-height: 1.3;
+  margin: 0;
+  padding: 0 16px;
+  position: absolute;
+  bottom: 14%;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+html.light-mode .im-prod-desc {
+  color: #475569;
+}
+
 .im-prod-btn-hitarea {
   position: absolute;
   bottom: 5.5%;
@@ -2887,6 +2909,16 @@ body {
 .pd-color-circle.color-white {
   background: #FFFFFF;
   border: 1px solid #9EB3C7;
+}
+
+.pd-color-circle.color-yellow {
+  background: #FACC15;
+  border: 1px solid #CA8A04;
+}
+
+.pd-color-circle.color-red {
+  background: #E42F38;
+  border: 1px solid #991B1B;
 }
 
 .pd-color-text {

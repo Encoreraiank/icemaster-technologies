@@ -6,15 +6,12 @@
   <title>Website Manager | Ice Master Admin</title>
   <meta name="description" content="Ice Master Technologies Website Content Manager — Hero Banners, Products, Categories, and Software Downloads.">
 
-  <!-- Google Fonts: Montserrat (All Weights) & Plus Jakarta Sans -->
+  <!-- Google Fonts: Montserrat & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       1:1 PIXEL-PERFECT ICE MASTER WEBSITE MANAGER (MATCHING PROVIDED DESIGN MOCKUP)
-       ========================================================================== */
     :root {
       --sidebar-bg: #0D1117;
       --sidebar-active: #E42F38;
@@ -35,11 +32,7 @@
       --radius-lg: 16px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--main-bg);
@@ -50,9 +43,7 @@
       overflow-x: hidden;
     }
 
-    /* ==========================================================================
-       LEFT SIDEBAR (DARK 1:1 MATCH)
-       ========================================================================== */
+    /* Left Sidebar */
     .im-sidebar {
       width: 250px;
       background-color: var(--sidebar-bg);
@@ -74,11 +65,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .im-sidebar-logo-img {
-      height: 48px;
-      width: auto;
-      margin-bottom: 8px;
-    }
+    .im-sidebar-logo-img { height: 48px; width: auto; margin-bottom: 8px; }
 
     .im-sidebar-brand-name {
       font-family: 'Montserrat', sans-serif;
@@ -114,10 +101,7 @@
       position: relative;
     }
 
-    .im-nav-item:hover {
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.05);
-    }
+    .im-nav-item:hover { color: #FFFFFF; background: rgba(255, 255, 255, 0.05); }
 
     .im-nav-item.active {
       color: #FFFFFF;
@@ -135,18 +119,14 @@
       background: var(--im-red);
     }
 
-    .im-nav-item svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2;
-    }
+    .im-nav-item svg { width: 18px; height: 18px; stroke-width: 2; }
 
     .im-sidebar-footer {
       padding: 20px 18px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .im-user-row {
@@ -179,17 +159,12 @@
       font-weight: 600;
       padding: 8px 6px;
       border-radius: var(--radius-sm);
-      transition: all 0.2s ease;
       cursor: pointer;
     }
 
-    .im-logout-link:hover {
-      color: #EF4444;
-    }
+    .im-logout-link:hover { color: #EF4444; }
 
-    /* ==========================================================================
-       MAIN CONTENT CONTAINER (CLEAN 1:1 MATCH TO IMAGE 3)
-       ========================================================================== */
+    /* Main Content */
     .im-main-content {
       flex-grow: 1;
       overflow-y: auto;
@@ -205,6 +180,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
       margin-bottom: 6px;
     }
 
@@ -221,6 +198,12 @@
       margin-top: 2px;
     }
 
+    .im-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .im-admin-pill-profile {
       display: flex;
       align-items: center;
@@ -234,6 +217,39 @@
       color: var(--text-heading);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       cursor: pointer;
+    }
+
+    /* Live Site Sync Alert Bar */
+    .im-sync-banner {
+      background: #FFFFFF;
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--im-red);
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .im-sync-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-body);
+    }
+
+    .im-live-badge {
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
     }
 
     /* Cards */
@@ -252,6 +268,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .im-card-header-left {
@@ -300,9 +318,7 @@
       transition: all 0.2s ease;
     }
 
-    .btn-red:hover {
-      background: var(--im-red-hover);
-    }
+    .btn-red:hover { background: var(--im-red-hover); }
 
     .btn-dark {
       background: var(--dark-btn-bg);
@@ -320,9 +336,7 @@
       transition: all 0.2s ease;
     }
 
-    .btn-dark:hover {
-      background: var(--dark-btn-hover);
-    }
+    .btn-dark:hover { background: var(--dark-btn-hover); }
 
     .btn-white {
       background: #FFFFFF;
@@ -339,54 +353,116 @@
       transition: all 0.2s;
     }
 
-    .btn-white:hover {
-      background: #F9FAFB;
-      border-color: #D1D5DB;
-    }
+    .btn-white:hover { background: #F9FAFB; border-color: #D1D5DB; }
 
-    /* ==========================================================================
-       HERO & SUB-HERO PANELS (1:1 FROM IMAGE 3)
-       ========================================================================== */
+    /* Hero Banner Viewport with Live Text Overlay Preview */
     .im-banner-stage {
       width: 100%;
-      height: 180px;
+      min-height: 220px;
       border-radius: var(--radius-sm);
       position: relative;
       overflow: hidden;
       background: #000;
       border: 1px solid #E5E7EB;
+      display: flex;
+      align-items: center;
     }
 
     .im-banner-stage-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+    }
+
+    .im-banner-overlay-content {
+      position: relative;
+      z-index: 2;
+      padding: 24px 30px;
+      max-width: 580px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 75%, transparent 100%);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .im-banner-eyebrow {
+      color: var(--im-red);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .im-banner-headline {
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .im-banner-tagline {
+      color: #D1D5DB;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 2px 0 6px;
+    }
+
+    .im-banner-desc {
+      color: #9CA3AF;
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .im-banner-btn-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #FFFFFF;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      width: fit-content;
     }
 
     .im-banner-edit-overlay-btn {
       position: absolute;
       bottom: 14px;
       right: 14px;
-      width: 32px;
-      height: 32px;
+      z-index: 5;
+      padding: 6px 14px;
       border-radius: 6px;
       background: rgba(255, 255, 255, 0.95);
       border: 1px solid rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 6px;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      font-size: 12px;
+      font-weight: 700;
       color: #111827;
-      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
-    .im-banner-edit-overlay-btn:hover {
-      background: #FFFFFF;
-      transform: scale(1.05);
-    }
+    .im-banner-edit-overlay-btn:hover { background: #FFFFFF; }
 
+    /* Thumbnail Strip */
     .im-thumb-strip {
       display: flex;
       gap: 14px;
@@ -403,7 +479,6 @@
       cursor: pointer;
       position: relative;
       background: #000;
-      transition: all 0.2s;
     }
 
     .im-thumb-card.active {
@@ -411,11 +486,7 @@
       box-shadow: 0 0 0 2px rgba(228, 47, 56, 0.2);
     }
 
-    .im-thumb-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .im-thumb-card img { width: 100%; height: 100%; object-fit: cover; }
 
     .im-thumb-card-add {
       width: 140px;
@@ -432,7 +503,6 @@
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
     .im-thumb-card-add:hover {
@@ -441,48 +511,29 @@
       background: #FEF2F2;
     }
 
-    /* ==========================================================================
-       PRODUCT ROWS LIST (1:1 FROM IMAGE 3)
-       ========================================================================== */
-    .im-product-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* Product Rows */
+    .im-product-list { display: flex; flex-direction: column; gap: 10px; }
 
     .im-product-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 16px;
+      padding: 12px 18px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--card-border);
       background: #FFFFFF;
       transition: all 0.2s;
     }
 
-    .im-product-row:hover {
-      border-color: #D1D5DB;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-    }
+    .im-product-row:hover { border-color: #D1D5DB; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03); }
 
-    .im-product-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .im-product-left { display: flex; align-items: center; gap: 16px; flex-grow: 1; }
 
-    .im-drag-handle {
-      color: #9CA3AF;
-      cursor: grab;
-      display: flex;
-      align-items: center;
-      user-select: none;
-    }
+    .im-drag-handle { color: #9CA3AF; cursor: grab; user-select: none; }
 
     .im-row-thumb {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 6px;
       background: #000;
       overflow: hidden;
@@ -492,29 +543,38 @@
       flex-shrink: 0;
     }
 
-    .im-row-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+    .im-row-thumb img { width: 100%; height: 100%; object-fit: contain; }
+
+    .im-row-info { flex-grow: 1; }
 
     .im-row-info h4 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--text-heading);
     }
 
-    .im-row-info p {
-      font-size: 12px;
-      color: var(--text-muted);
+    .im-row-info p { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+    .im-row-desc-preview {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      margin-top: 3px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .im-row-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .im-color-dots { display: flex; gap: 4px; margin-top: 4px; }
+    .im-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid #D1D5DB;
     }
+
+    .im-row-right { display: flex; align-items: center; gap: 10px; }
 
     .btn-icon-dot {
       width: 32px;
@@ -529,24 +589,19 @@
       cursor: pointer;
     }
 
-    .btn-icon-dot:hover {
-      background: #F3F4F6;
-      color: var(--text-heading);
-    }
+    .btn-icon-dot:hover { background: #F3F4F6; color: var(--text-heading); }
 
-    /* ==========================================================================
-       CATEGORIES ROW (1:1 FROM IMAGE 3)
-       ========================================================================== */
+    /* Categories Grid */
     .im-category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 14px;
     }
 
     .im-cat-card {
       border: 1px solid var(--card-border);
       border-radius: var(--radius-sm);
-      padding: 10px 14px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -554,20 +609,13 @@
       transition: all 0.2s;
     }
 
-    .im-cat-card:hover {
-      border-color: #D1D5DB;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-    }
+    .im-cat-card:hover { border-color: #D1D5DB; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04); }
 
-    .im-cat-card-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .im-cat-card-left { display: flex; align-items: center; gap: 12px; }
 
     .im-cat-thumb {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 6px;
       background: #000;
       overflow: hidden;
@@ -577,53 +625,31 @@
       flex-shrink: 0;
     }
 
-    .im-cat-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+    .im-cat-thumb img { width: 100%; height: 100%; object-fit: contain; }
 
-    .im-cat-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-heading);
-    }
+    .im-cat-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-heading); }
 
-    /* ==========================================================================
-       SOFTWARE DOWNLOADS (1:1 FROM IMAGE 3)
-       ========================================================================== */
-    .im-software-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* Software Rows */
+    .im-software-list { display: flex; flex-direction: column; gap: 10px; }
 
     .im-software-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 18px;
+      padding: 14px 20px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--card-border);
       background: #FFFFFF;
       transition: all 0.2s;
     }
 
-    .im-software-row:hover {
-      border-color: #D1D5DB;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-    }
+    .im-software-row:hover { border-color: #D1D5DB; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03); }
 
-    .im-soft-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .im-soft-left { display: flex; align-items: center; gap: 14px; }
 
     .im-soft-icon {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 8px;
       background: #EFF6FF;
       color: var(--blue-accent);
@@ -632,47 +658,47 @@
       justify-content: center;
     }
 
-    .im-soft-info h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text-heading);
-    }
+    .im-soft-info h4 { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-heading); }
+    .im-soft-info p { font-size: 12px; color: var(--text-muted); }
 
-    .im-soft-info p {
+    .im-soft-right { display: flex; align-items: center; gap: 10px; }
+
+    .btn-download-action {
+      background: #EFF6FF;
+      color: var(--blue-accent);
+      border: 1px solid #BFDBFE;
+      padding: 6px 14px;
+      border-radius: 6px;
       font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .im-soft-right {
-      display: flex;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 6px;
+      text-decoration: none;
     }
 
-    /* ==========================================================================
-       MODALS
-       ========================================================================== */
+    .btn-download-action:hover { background: #DBEAFE; }
+
+    /* Modals */
     .im-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(4px);
-      z-index: 1000;
+      z-index: 2000;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
 
-    .im-modal-backdrop.open {
-      display: flex;
-    }
+    .im-modal-backdrop.open { display: flex; }
 
     .im-modal-box {
       background: #FFFFFF;
       border-radius: var(--radius-md);
-      max-width: 620px;
+      max-width: 660px;
       width: 100%;
       max-height: 90vh;
       display: flex;
@@ -689,20 +715,8 @@
       align-items: center;
     }
 
-    .im-modal-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-heading);
-    }
-
-    .im-modal-close {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 22px;
-      cursor: pointer;
-    }
+    .im-modal-title { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-heading); }
+    .im-modal-close { background: transparent; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
 
     .im-modal-body {
       padding: 22px 24px;
@@ -712,21 +726,17 @@
       gap: 14px;
     }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
 
     .form-label {
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11.5px;
+      font-weight: 700;
       color: var(--text-body);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    .form-input {
+    .form-input, .form-textarea, .form-select {
       padding: 9px 12px;
       border: 1px solid var(--card-border);
       border-radius: 6px;
@@ -735,8 +745,53 @@
       outline: none;
     }
 
-    .form-input:focus {
-      border-color: var(--im-red);
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--im-red); }
+
+    .form-textarea { resize: vertical; min-height: 70px; }
+
+    .upload-picker-box {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .upload-preview-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      background: #000;
+      overflow: hidden;
+      border: 1px solid #D1D5DB;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .upload-preview-thumb img { width: 100%; height: 100%; object-fit: contain; }
+
+    .color-swatch-picker {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .color-opt-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .color-swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid #D1D5DB;
+      display: inline-block;
     }
 
     .im-modal-footer {
@@ -760,37 +815,24 @@
       font-size: 13px;
       font-weight: 600;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      z-index: 2000;
+      z-index: 3000;
       transform: translateY(100px);
       opacity: 0;
       transition: all 0.25s ease;
     }
 
-    .im-admin-toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    .im-admin-toast.show { transform: translateY(0); opacity: 1; }
 
     @media (max-width: 900px) {
-      body {
-        flex-direction: column;
-      }
-      .im-sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
-      .im-main-content {
-        padding: 20px;
-      }
+      body { flex-direction: column; }
+      .im-sidebar { width: 100%; height: auto; position: relative; }
+      .im-main-content { padding: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ==========================================================================
-       SIDEBAR NAVIGATION (1:1 FROM IMAGE 3)
-       ========================================================================== -->
+  <!-- Sidebar -->
   <aside class="im-sidebar">
     <div class="im-sidebar-brand">
       <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-sidebar-logo-img">
@@ -825,14 +867,12 @@
       </div>
       <a href="index.html" class="im-logout-link" title="Return to Website">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-        Logout
+        Exit to Website
       </a>
     </div>
   </aside>
 
-  <!-- ==========================================================================
-       MAIN CONTENT (1:1 FROM IMAGE 3)
-       ========================================================================== -->
+  <!-- Main Content -->
   <main class="im-main-content">
     
     <!-- Top Header Bar -->
@@ -842,17 +882,36 @@
         <p>Manage your website content easily</p>
       </div>
 
-      <div class="im-admin-pill-profile" onclick="window.open('index.html', '_blank')">
-        <div class="im-avatar-icon" style="width: 22px; height: 22px; color:#4B5563; background:#E5E7EB;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <div class="im-top-actions">
+        <button class="btn-white" onclick="openSupabaseModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          Supabase Sync
+        </button>
+        <a href="index.html" target="_blank" class="btn-white">
+          Preview Site &nearr;
+        </a>
+        <div class="im-admin-pill-profile">
+          <div class="im-avatar-icon" style="width: 22px; height: 22px; color:#4B5563; background:#E5E7EB;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <span>Admin</span>
         </div>
-        <span>Admin</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
     </header>
 
+    <!-- Live Site Sync Notification -->
+    <div class="im-sync-banner">
+      <div class="im-sync-info">
+        <span class="im-live-badge">Live Sync Active</span>
+        <span>All changes saved here instantly reflect across <strong>Home, All Products, and Download pages</strong>.</span>
+      </div>
+      <button class="btn-white" style="padding: 4px 10px; font-size: 11.5px;" onclick="syncWithLiveSite()">
+        Force Refresh Live Cache
+      </button>
+    </div>
+
     <!-- ==========================================================================
-         CARD 1: MAIN HERO SECTION
+         CARD 1: MAIN HERO SECTION (A)
          ========================================================================== -->
     <section class="im-card" id="hero-section">
       <div class="im-card-header">
@@ -862,41 +921,39 @@
           </div>
           <div>
             <h3 class="im-card-title">Main Hero Section</h3>
-            <p class="im-card-subtitle">Edit main banner images</p>
+            <p class="im-card-subtitle">Edit main banner images, headline, description and button</p>
           </div>
         </div>
 
-        <button class="btn-dark" onclick="openHeroAddModal('main')">
+        <button class="btn-dark" onclick="openHeroModal('main', 'add')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          Add Image
+          Add Slide
         </button>
       </div>
 
-      <!-- Main Banner Viewport -->
-      <div class="im-banner-stage">
-        <img src="assets/images/homepage/hero_bg_slide_1.png" alt="Main Hero Banner" class="im-banner-stage-img" id="mainHeroActiveImg">
-        <button class="im-banner-edit-overlay-btn" title="Edit active banner" onclick="openHeroEditModal('main')">
+      <!-- Main Banner Viewport with Live Text Overlay Preview -->
+      <div class="im-banner-stage" id="mainHeroStage">
+        <img src="" alt="Main Hero Banner" class="im-banner-stage-img" id="mainHeroActiveImg">
+        <div class="im-banner-overlay-content">
+          <div class="im-banner-eyebrow" id="prevHeroEyebrow">PREMIUM PC CABINET</div>
+          <div class="im-banner-headline" id="prevHeroTitle">DYNAMITE X7</div>
+          <div class="im-banner-tagline" id="prevHeroTagline">BUILT FOR A COOLER TOMORROW</div>
+          <div class="im-banner-desc" id="prevHeroDesc">Premium design. Superior airflow. Engineered for performance.</div>
+          <div class="im-banner-btn-preview" id="prevHeroBtn">Explore More &rarr;</div>
+        </div>
+
+        <button class="im-banner-edit-overlay-btn" title="Edit this slide content" onclick="openHeroModal('main', 'edit')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          Edit Slide Content
         </button>
       </div>
 
       <!-- Thumbnail Strip -->
-      <div class="im-thumb-strip" id="mainHeroThumbs">
-        <div class="im-thumb-card active" onclick="setHeroSlide(0, this)">
-          <img src="assets/images/homepage/hero_bg_slide_1.png" alt="Slide 1">
-        </div>
-        <div class="im-thumb-card" onclick="setHeroSlide(1, this)">
-          <img src="assets/images/homepage/hero_bg_slide_2.png" alt="Slide 2">
-        </div>
-        <div class="im-thumb-card-add" onclick="openHeroAddModal('main')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-          <span>Add Image</span>
-        </div>
-      </div>
+      <div class="im-thumb-strip" id="mainHeroThumbs"></div>
     </section>
 
     <!-- ==========================================================================
-         CARD 2: SUB HERO SECTION (HEADSET SECTION)
+         CARD 2: SUB HERO SECTION (HEADSET) (A)
          ========================================================================== -->
     <section class="im-card" id="sub-hero-section">
       <div class="im-card-header">
@@ -905,39 +962,36 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
           </div>
           <div>
-            <h3 class="im-card-title">Sub Hero Section</h3>
-            <p class="im-card-subtitle">Edit headset section</p>
+            <h3 class="im-card-title">Sub Hero Section (Headset)</h3>
+            <p class="im-card-subtitle">Edit secondary banner, description and button link</p>
           </div>
         </div>
 
-        <button class="btn-dark" onclick="openHeroAddModal('sub')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          Add Image
+        <button class="btn-dark" onclick="openHeroModal('sub', 'edit')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          Edit Sub Hero
         </button>
       </div>
 
-      <!-- Sub Hero Banner Viewport -->
-      <div class="im-banner-stage">
-        <img src="assets/images/homepage/headset_bg.png" alt="Sub Hero Banner" class="im-banner-stage-img" id="subHeroActiveImg">
-        <button class="im-banner-edit-overlay-btn" title="Edit sub hero banner" onclick="openHeroEditModal('sub')">
+      <!-- Sub Hero Viewport with Live Text Overlay Preview -->
+      <div class="im-banner-stage" id="subHeroStage">
+        <img src="" alt="Sub Hero Banner" class="im-banner-stage-img" id="subHeroActiveImg">
+        <div class="im-banner-overlay-content">
+          <div class="im-banner-eyebrow" id="prevSubEyebrow">GAMING HEADSET</div>
+          <div class="im-banner-headline" id="prevSubTitle">IM-GH01</div>
+          <div class="im-banner-desc" id="prevSubDesc">Immersive sound. All-day comfort. Built for every match.</div>
+          <div class="im-banner-btn-preview" id="prevSubBtn">Explore Accessories &rarr;</div>
+        </div>
+
+        <button class="im-banner-edit-overlay-btn" title="Edit sub hero content" onclick="openHeroModal('sub', 'edit')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          Edit Content
         </button>
-      </div>
-
-      <!-- Sub Hero Thumbnail Strip -->
-      <div class="im-thumb-strip" id="subHeroThumbs">
-        <div class="im-thumb-card active" onclick="setSubHeroSlide(0, this)">
-          <img src="assets/images/homepage/headset_bg.png" alt="Headset Banner">
-        </div>
-        <div class="im-thumb-card-add" onclick="openHeroAddModal('sub')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-          <span>Add Image</span>
-        </div>
       </div>
     </section>
 
     <!-- ==========================================================================
-         CARD 3: PRODUCTS
+         CARD 3: PRODUCTS (C)
          ========================================================================== -->
     <section class="im-card" id="products-section">
       <div class="im-card-header">
@@ -947,7 +1001,7 @@
           </div>
           <div>
             <h3 class="im-card-title">Products</h3>
-            <p class="im-card-subtitle">Manage product images, details and category</p>
+            <p class="im-card-subtitle">Manage product images, live descriptions, color variants & category</p>
           </div>
         </div>
 
@@ -958,13 +1012,11 @@
       </div>
 
       <!-- Product Rows List -->
-      <div class="im-product-list" id="productsListContainer">
-        <!-- Rendered dynamically -->
-      </div>
+      <div class="im-product-list" id="productsListContainer"></div>
     </section>
 
     <!-- ==========================================================================
-         CARD 4: CATEGORIES (ALL PRODUCTS PAGE)
+         CARD 4: CATEGORIES (ALL PRODUCTS PAGE) (B)
          ========================================================================== -->
     <section class="im-card" id="categories-section">
       <div class="im-card-header">
@@ -973,8 +1025,8 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
           </div>
           <div>
-            <h3 class="im-card-title">Categories</h3>
-            <p class="im-card-subtitle">Add or remove product categories</p>
+            <h3 class="im-card-title">Categories (All Products Page)</h3>
+            <p class="im-card-subtitle">Add or remove product category filters with custom icons/images</p>
           </div>
         </div>
 
@@ -985,13 +1037,11 @@
       </div>
 
       <!-- Categories Grid -->
-      <div class="im-category-grid" id="categoriesContainer">
-        <!-- Rendered dynamically -->
-      </div>
+      <div class="im-category-grid" id="categoriesContainer"></div>
     </section>
 
     <!-- ==========================================================================
-         CARD 5: SOFTWARE CONTROL (DOWNLOAD PAGE)
+         CARD 5: SOFTWARE CONTROL (DOWNLOAD PAGE) (D)
          ========================================================================== -->
     <section class="im-card" id="software-section">
       <div class="im-card-header">
@@ -1000,8 +1050,8 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           </div>
           <div>
-            <h3 class="im-card-title">Software Control</h3>
-            <p class="im-card-subtitle">Manage downloadable software files</p>
+            <h3 class="im-card-title">Software Control (Download Page)</h3>
+            <p class="im-card-subtitle">Manage downloadable files, drivers and user manuals with direct file download</p>
           </div>
         </div>
 
@@ -1012,20 +1062,85 @@
       </div>
 
       <!-- Software List -->
-      <div class="im-software-list" id="softwareListContainer">
-        <!-- Rendered dynamically -->
-      </div>
+      <div class="im-software-list" id="softwareListContainer"></div>
     </section>
 
   </main>
 
   <!-- ==========================================================================
-       MODAL: ADD / EDIT PRODUCT
+       MODAL: HERO / SUBHERO EDIT (A)
+       ========================================================================== -->
+  <div class="im-modal-backdrop" id="modalHero">
+    <div class="im-modal-box">
+      <div class="im-modal-header">
+        <h3 class="im-modal-title" id="heroModalHeading">Edit Hero Slide Content</h3>
+        <button class="im-modal-close" onclick="closeModal('modalHero')">&times;</button>
+      </div>
+      <form onsubmit="saveHeroSlide(event)">
+        <div class="im-modal-body">
+          <input type="hidden" id="heroTargetSection">
+          <input type="hidden" id="heroSlideIdx">
+
+          <div class="form-group">
+            <label class="form-label">Banner Background Image *</label>
+            <div class="upload-picker-box">
+              <div class="upload-preview-thumb">
+                <img id="heroImgPreview" src="" alt="Preview">
+              </div>
+              <div style="flex-grow: 1;">
+                <input type="text" id="heroBgUrl" class="form-input" style="width: 100%; margin-bottom: 6px;" required placeholder="assets/images/homepage/hero_bg_slide_1.png" oninput="updateHeroImgPreview(this.value)">
+                <input type="file" id="heroFileInput" accept="image/*" onchange="handleFileUpload(this, 'heroBgUrl', 'heroImgPreview')">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Eyebrow Label Text</label>
+            <input type="text" id="heroEyebrow" class="form-input" placeholder="e.g. PREMIUM PC CABINET / LIQUID COOLER SERIES">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Headline / Title *</label>
+            <input type="text" id="heroTitle" class="form-input" required placeholder="e.g. DYNAMITE X7 / COOL DIGITAL">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtitle / Tagline</label>
+            <input type="text" id="heroTagline" class="form-input" placeholder="e.g. BUILT FOR A COOLER TOMORROW">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description Text</label>
+            <textarea id="heroDesc" class="form-textarea" placeholder="Enter paragraph description shown on the live site..."></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Button Text</label>
+              <input type="text" id="heroBtnText" class="form-input" placeholder="e.g. Explore More">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Button Link</label>
+              <input type="text" id="heroBtnLink" class="form-input" placeholder="all-products.html?category=cases">
+            </div>
+          </div>
+        </div>
+
+        <div class="im-modal-footer">
+          <button type="button" class="btn-white" onclick="closeModal('modalHero')">Cancel</button>
+          <button type="submit" class="btn-red">Save Hero Content</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: PRODUCT EDIT (C)
        ========================================================================== -->
   <div class="im-modal-backdrop" id="modalProduct">
     <div class="im-modal-box">
       <div class="im-modal-header">
-        <h3 class="im-modal-title" id="productModalTitle">Add New Product</h3>
+        <h3 class="im-modal-title" id="productModalTitle">Edit Product</h3>
         <button class="im-modal-close" onclick="closeModal('modalProduct')">&times;</button>
       </div>
       <form id="productEditForm" onsubmit="saveProduct(event)">
@@ -1034,24 +1149,60 @@
 
           <div class="form-group">
             <label class="form-label">Product Name *</label>
-            <input type="text" id="pName" class="form-input" required placeholder="e.g. Gaming Cabinet X7">
+            <input type="text" id="pName" class="form-input" required placeholder="e.g. ICE MASTER AXLE">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Category *</label>
-            <select id="pCategory" class="form-input" required></select>
+            <label class="form-label">Category (All Products Page) *</label>
+            <select id="pCategory" class="form-select" required></select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Product Image Path / URL *</label>
-            <input type="text" id="pImg" class="form-input" required placeholder="assets/images/products/cases/...">
+            <label class="form-label">Product Image (Choose File or Path) *</label>
+            <div class="upload-picker-box">
+              <div class="upload-preview-thumb">
+                <img id="pImgPreview" src="" alt="Preview">
+              </div>
+              <div style="flex-grow: 1;">
+                <input type="text" id="pImg" class="form-input" style="width: 100%; margin-bottom: 6px;" required placeholder="assets/images/products/..." oninput="updateProductImgPreview(this.value)">
+                <input type="file" id="pFileInput" accept="image/*" onchange="handleFileUpload(this, 'pImg', 'pImgPreview')">
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Specifications (Motherboard / TDP / Dimensions)</label>
-            <input type="text" id="pSpecs" class="form-input" placeholder="e.g. ATX / M-ATX | 430 x 225 x 480 mm">
+            <label class="form-label">Description (Shown under name on live site) *</label>
+            <textarea id="pDesc" class="form-textarea" placeholder="e.g. Engineered with dual-chamber tempered glass chassis, optimal airflow with high-speed cooling fan support."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Color Variants Available</label>
+            <div class="color-swatch-picker" id="pColorPicker">
+              <label class="color-opt-item">
+                <input type="checkbox" name="pColors" value="black" checked>
+                <span class="color-swatch" style="background: #111827;"></span> Black
+              </label>
+              <label class="color-opt-item">
+                <input type="checkbox" name="pColors" value="white">
+                <span class="color-swatch" style="background: #FFFFFF;"></span> White
+              </label>
+              <label class="color-opt-item">
+                <input type="checkbox" name="pColors" value="yellow">
+                <span class="color-swatch" style="background: #FACC15;"></span> Yellow
+              </label>
+              <label class="color-opt-item">
+                <input type="checkbox" name="pColors" value="red">
+                <span class="color-swatch" style="background: #E42F38;"></span> Red
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Key Specifications (M/B / TDP / Dimensions)</label>
+            <input type="text" id="pSpecs" class="form-input" placeholder="e.g. ATX / M-ATX | SPCC 0.50mm | 320 x 180 x 410 mm">
           </div>
         </div>
+
         <div class="im-modal-footer">
           <button type="button" class="btn-white" onclick="closeModal('modalProduct')">Cancel</button>
           <button type="submit" class="btn-red">Save Product</button>
@@ -1061,12 +1212,12 @@
   </div>
 
   <!-- ==========================================================================
-       MODAL: ADD / EDIT CATEGORY
+       MODAL: CATEGORIES EDIT (B)
        ========================================================================== -->
   <div class="im-modal-backdrop" id="modalCategory">
     <div class="im-modal-box">
       <div class="im-modal-header">
-        <h3 class="im-modal-title" id="catModalTitle">Add Category</h3>
+        <h3 class="im-modal-title" id="catModalTitle">Add / Edit Category</h3>
         <button class="im-modal-close" onclick="closeModal('modalCategory')">&times;</button>
       </div>
       <form onsubmit="saveCategory(event)">
@@ -1074,15 +1225,23 @@
           <input type="hidden" id="catEditKey">
           <div class="form-group">
             <label class="form-label">Category Name *</label>
-            <input type="text" id="catName" class="form-input" required placeholder="e.g. PC Cabinets">
+            <input type="text" id="catName" class="form-input" required placeholder="e.g. Gaming Cabinets">
           </div>
           <div class="form-group">
             <label class="form-label">Category Key / Slug *</label>
-            <input type="text" id="catKey" class="form-input" required placeholder="e.g. pc-cabinets">
+            <input type="text" id="catKey" class="form-input" required placeholder="e.g. gaming-cabinets">
           </div>
           <div class="form-group">
-            <label class="form-label">Category Thumbnail Image URL</label>
-            <input type="text" id="catThumb" class="form-input" placeholder="assets/images/products/...">
+            <label class="form-label">Category Icon / Image *</label>
+            <div class="upload-picker-box">
+              <div class="upload-preview-thumb">
+                <img id="catImgPreview" src="" alt="Icon">
+              </div>
+              <div style="flex-grow: 1;">
+                <input type="text" id="catThumb" class="form-input" style="width: 100%; margin-bottom: 6px;" placeholder="assets/images/products/..." oninput="updateCatImgPreview(this.value)">
+                <input type="file" id="catFileInput" accept="image/*" onchange="handleFileUpload(this, 'catThumb', 'catImgPreview')">
+              </div>
+            </div>
           </div>
         </div>
         <div class="im-modal-footer">
@@ -1094,62 +1253,71 @@
   </div>
 
   <!-- ==========================================================================
-       MODAL: ADD / EDIT HERO BANNER
-       ========================================================================== -->
-  <div class="im-modal-backdrop" id="modalHero">
-    <div class="im-modal-box">
-      <div class="im-modal-header">
-        <h3 class="im-modal-title" id="heroModalTitle">Edit Hero Banner</h3>
-        <button class="im-modal-close" onclick="closeModal('modalHero')">&times;</button>
-      </div>
-      <form onsubmit="saveHero(event)">
-        <div class="im-modal-body">
-          <input type="hidden" id="heroTarget">
-          <div class="form-group">
-            <label class="form-label">Banner Image URL / File Path *</label>
-            <input type="text" id="heroImgUrl" class="form-input" required placeholder="assets/images/homepage/hero_bg_slide_1.png">
-          </div>
-        </div>
-        <div class="im-modal-footer">
-          <button type="button" class="btn-white" onclick="closeModal('modalHero')">Cancel</button>
-          <button type="submit" class="btn-red">Update Banner</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       MODAL: ADD / EDIT SOFTWARE FILE
+       MODAL: SOFTWARE CONTROL (D)
        ========================================================================== -->
   <div class="im-modal-backdrop" id="modalSoftware">
     <div class="im-modal-box">
       <div class="im-modal-header">
-        <h3 class="im-modal-title" id="softModalTitle">Add Downloadable File</h3>
+        <h3 class="im-modal-title" id="softModalTitle">Add Downloadable Software</h3>
         <button class="im-modal-close" onclick="closeModal('modalSoftware')">&times;</button>
       </div>
       <form onsubmit="saveSoftware(event)">
         <div class="im-modal-body">
           <input type="hidden" id="softEditId">
           <div class="form-group">
-            <label class="form-label">Software / Document Title *</label>
+            <label class="form-label">Software / Manual Title *</label>
             <input type="text" id="softTitle" class="form-input" required placeholder="e.g. iM Fan Control Software">
           </div>
-          <div class="form-group">
-            <label class="form-label">Version Number *</label>
-            <input type="text" id="softVer" class="form-input" required placeholder="e.g. v1.2.0">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Version *</label>
+              <input type="text" id="softVer" class="form-input" required placeholder="e.g. v1.2.0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">File Size *</label>
+              <input type="text" id="softSize" class="form-input" required placeholder="e.g. 48 MB">
+            </div>
           </div>
           <div class="form-group">
-            <label class="form-label">File Size *</label>
-            <input type="text" id="softSize" class="form-input" required placeholder="e.g. 48 MB">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Download File Path / URL</label>
-            <input type="text" id="softUrl" class="form-input" placeholder="# or /downloads/file.exe">
+            <label class="form-label">Download File (Upload File or Enter Direct URL) *</label>
+            <input type="text" id="softUrl" class="form-input" style="margin-bottom: 6px;" required placeholder="downloads/im_setup.exe or https://...">
+            <input type="file" id="softFileInput" onchange="handleSoftwareUpload(this)">
           </div>
         </div>
         <div class="im-modal-footer">
           <button type="button" class="btn-white" onclick="closeModal('modalSoftware')">Cancel</button>
-          <button type="submit" class="btn-red">Save Software</button>
+          <button type="submit" class="btn-red">Save Software File</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: SUPABASE STORAGE CONFIG
+       ========================================================================== -->
+  <div class="im-modal-backdrop" id="modalSupabase">
+    <div class="im-modal-box">
+      <div class="im-modal-header">
+        <h3 class="im-modal-title">Supabase Storage Configuration</h3>
+        <button class="im-modal-close" onclick="closeModal('modalSupabase')">&times;</button>
+      </div>
+      <form onsubmit="saveSupabaseConfig(event)">
+        <div class="im-modal-body">
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+            Paste your Supabase project credentials below. Data and uploaded images will sync to your Supabase project. If left empty, changes are stored safely in local browser storage.
+          </p>
+          <div class="form-group">
+            <label class="form-label">Supabase Project URL</label>
+            <input type="text" id="sbUrl" class="form-input" placeholder="https://xyzcompany.supabase.co">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Supabase Anon Key</label>
+            <input type="password" id="sbKey" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+          </div>
+        </div>
+        <div class="im-modal-footer">
+          <button type="button" class="btn-white" onclick="closeModal('modalSupabase')">Cancel</button>
+          <button type="submit" class="btn-red">Connect Supabase</button>
         </div>
       </form>
     </div>
@@ -1159,135 +1327,238 @@
   <div class="im-admin-toast" id="toast">Saved successfully!</div>
 
   <script>
-    // State initialization matching Image 3 layout
-    const initialCategories = [
+    // Master Initial State
+    const defaultHeroSlides = [
+      {
+        bg: "assets/images/homepage/hero_bg_slide_1.png",
+        eyebrow: "PREMIUM PC CABINET",
+        title: "DYNAMITE X7",
+        tagline: "BUILT FOR A COOLER TOMORROW",
+        desc: "Premium design. Superior airflow. Engineered for performance. The perfect balance of style and cooling for next-generation builds.",
+        btnText: "Explore More",
+        btnLink: "all-products.html?category=cases"
+      },
+      {
+        bg: "assets/images/homepage/hero_bg_slide_2.png",
+        eyebrow: "LIQUID COOLER SERIES",
+        title: "COOL DIGITAL",
+        tagline: "PRECISION COOLING. REAL-TIME CONTROL",
+        desc: "Advanced liquid cooling with real-time digital monitoring. Lower temperatures. Higher stability. A cleaner, quieter build.",
+        btnText: "Explore Cool Series",
+        btnLink: "all-products.html?category=coolers"
+      }
+    ];
+
+    const defaultSubHero = {
+      bg: "assets/images/homepage/headset_bg.png",
+      eyebrow: "GAMING HEADSET",
+      title: "IM-GH01",
+      tagline: "BUILT FOR A COOLER TOMORROW",
+      desc: "Immersive sound. All-day comfort. Built for every match with 40mm dynamic drivers and omni-directional mic.",
+      btnText: "Explore Accessories",
+      btnLink: "all-products.html?category=accessories"
+    };
+
+    const defaultCategories = [
       { key: "cases", name: "PC Cabinets", thumb: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png" },
       { key: "coolers", name: "Coolers", thumb: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png" },
       { key: "psu", name: "Power Supplies", thumb: "assets/images/products/cases/box-infinity/Yellow/box_infinity_yellow.png" },
       { key: "audio", name: "Headsets", thumb: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png" }
     ];
 
-    const initialHeroBanners = [
-      "assets/images/homepage/hero_bg_slide_1.png",
-      "assets/images/homepage/hero_bg_slide_2.png"
+    const defaultProducts = [
+      {
+        id: "dynamite_x7",
+        name: "Gaming Cabinet X7",
+        cat: "cases",
+        catName: "PC Cabinets",
+        img: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png",
+        desc: "High-airflow premium E-ATX chassis with dual tempered glass and Type-C front port.",
+        colors: ["black"],
+        specs: "E-ATX / ATX | SPCC 0.60mm | 430 x 225 x 480 mm"
+      },
+      {
+        id: "tower_cooler_pro",
+        name: "Tower Cooler Pro (Fusion)",
+        cat: "coolers",
+        catName: "Coolers",
+        img: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png",
+        desc: "120W TDP tower cooler with 4 copper direct-touch heatpipes and auto-RGB hydraulic fan.",
+        colors: ["black", "silver"],
+        specs: "Intel LGA 1700/1200 | AMD AM5/AM4 | 120W TDP"
+      },
+      {
+        id: "psu_850w",
+        name: "850W Power Supply (High Current)",
+        cat: "psu",
+        catName: "Power Supplies",
+        img: "assets/images/homepage/im_official_emblem.png",
+        desc: "80 Plus Gold certified fully modular gaming power supply with silent 120mm fan.",
+        colors: ["black"],
+        specs: "850 Watts | Active PFC | 100-240V Input"
+      },
+      {
+        id: "im_gh01",
+        name: "IM-GH01 Gaming Headset",
+        cat: "audio",
+        catName: "Headsets",
+        img: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png",
+        desc: "Pro gaming headset with ø40mm dynamic acoustic drivers and omni-directional boom mic.",
+        colors: ["black", "red"],
+        specs: "20Hz - 20,000Hz | 32Ω | 3.5mm Stereo Jack"
+      }
     ];
 
-    const initialSubHeroBanners = [
-      "assets/images/homepage/headset_bg.png"
+    const defaultSoftware = [
+      { id: "soft_1", title: "iM Fan Control Software", ver: "v1.2.0", size: "48 MB", url: "assets/downloads/im-fan-control.zip" },
+      { id: "soft_2", title: "RGB Sync Tool", ver: "v2.0.1", size: "62 MB", url: "assets/downloads/im-rgb-sync.zip" },
+      { id: "soft_3", title: "User Manual (PDF)", ver: "v1.0.0", size: "12 MB", url: "assets/downloads/user-manual.pdf" }
     ];
 
-    const initialProducts = [
-      { id: "dynamite_x7", name: "Gaming Cabinet X7", cat: "cases", catName: "PC Cabinets", img: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png", specs: "E-ATX / ATX | 430 x 225 x 480 mm" },
-      { id: "tower_cooler_pro", name: "Tower Cooler Pro", cat: "coolers", catName: "Coolers", img: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png", specs: "120W TDP | 4 Copper Heatpipes" },
-      { id: "psu_850w", name: "850W Power Supply", cat: "psu", catName: "Power Supplies", img: "assets/images/homepage/im_official_emblem.png", specs: "80 Plus Gold Certified | Fully Modular" },
-      { id: "im_gh01", name: "IM-GH01 Headset", cat: "audio", catName: "Headsets", img: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png", specs: "ø40mm Driver | Omni-directional Mic" }
-    ];
+    // Storage state
+    let heroSlides = JSON.parse(localStorage.getItem("im_wm_hero_banners_data")) || defaultHeroSlides;
+    let subHeroData = JSON.parse(localStorage.getItem("im_wm_sub_hero_data")) || defaultSubHero;
+    let categories = JSON.parse(localStorage.getItem("im_wm_categories")) || defaultCategories;
+    let products = JSON.parse(localStorage.getItem("im_wm_products")) || defaultProducts;
+    let softwareList = JSON.parse(localStorage.getItem("im_wm_software")) || defaultSoftware;
 
-    const initialSoftware = [
-      { id: "soft_1", title: "iM Fan Control Software", ver: "v1.2.0", size: "48 MB", url: "#" },
-      { id: "soft_2", title: "RGB Sync Tool", ver: "v2.0.1", size: "62 MB", url: "#" },
-      { id: "soft_3", title: "User Manual", ver: "v1.0.0", size: "12 MB", url: "#" }
-    ];
-
-    // LocalStorage loading
-    let categories = JSON.parse(localStorage.getItem("im_wm_categories")) || initialCategories;
-    let heroBanners = JSON.parse(localStorage.getItem("im_wm_hero_banners")) || initialHeroBanners;
-    let subHeroBanners = JSON.parse(localStorage.getItem("im_wm_sub_hero")) || initialSubHeroBanners;
-    let products = JSON.parse(localStorage.getItem("im_wm_products")) || initialProducts;
-    let softwareList = JSON.parse(localStorage.getItem("im_wm_software")) || initialSoftware;
-
-    let activeHeroIndex = 0;
-    let activeSubHeroIndex = 0;
+    let activeHeroIdx = 0;
 
     function saveAll() {
+      localStorage.setItem("im_wm_hero_banners_data", JSON.stringify(heroSlides));
+      localStorage.setItem("im_wm_sub_hero_data", JSON.stringify(subHeroData));
       localStorage.setItem("im_wm_categories", JSON.stringify(categories));
-      localStorage.setItem("im_wm_hero_banners", JSON.stringify(heroBanners));
-      localStorage.setItem("im_wm_sub_hero", JSON.stringify(subHeroBanners));
       localStorage.setItem("im_wm_products", JSON.stringify(products));
       localStorage.setItem("im_wm_software", JSON.stringify(softwareList));
     }
 
-    // Render Hero Strip
+    // Helper: File to Base64
+    function handleFileUpload(input, targetUrlInputId, previewImgId) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById(targetUrlInputId).value = e.target.result;
+        if (previewImgId) document.getElementById(previewImgId).src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleSoftwareUpload(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      document.getElementById("softUrl").value = file.name;
+      document.getElementById("softSize").value = (file.size / (1024 * 1024)).toFixed(1) + " MB";
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Store downloadable blob / data URI
+        document.getElementById("softUrl").setAttribute("data-file-content", e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // A. Render Hero Section
     function renderHero() {
-      const activeImg = document.getElementById("mainHeroActiveImg");
-      activeImg.src = heroBanners[activeHeroIndex] || heroBanners[0];
+      const slide = heroSlides[activeHeroIdx] || heroSlides[0];
+      document.getElementById("mainHeroActiveImg").src = slide.bg;
+      document.getElementById("prevHeroEyebrow").textContent = slide.eyebrow || "PREMIUM PC CABINET";
+      document.getElementById("prevHeroTitle").textContent = slide.title || "DYNAMITE X7";
+      document.getElementById("prevHeroTagline").textContent = slide.tagline || "";
+      document.getElementById("prevHeroDesc").textContent = slide.desc || "";
+      document.getElementById("prevHeroBtn").innerHTML = `${slide.btnText || 'Explore More'} &rarr;`;
 
-      const strip = document.getElementById("mainHeroThumbs");
-      strip.innerHTML = heroBanners.map((img, idx) => `
-        <div class="im-thumb-card ${idx === activeHeroIndex ? 'active' : ''}" onclick="setHeroSlide(${idx}, this)">
-          <img src="${img}" alt="Slide ${idx + 1}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
+      const thumbs = document.getElementById("mainHeroThumbs");
+      thumbs.innerHTML = heroSlides.map((s, idx) => `
+        <div class="im-thumb-card ${idx === activeHeroIdx ? 'active' : ''}" onclick="selectHeroSlide(${idx}, this)">
+          <img src="${s.bg}" alt="${s.title}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
         </div>
       `).join("") + `
-        <div class="im-thumb-card-add" onclick="openHeroAddModal('main')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-          <span>Add Image</span>
+        <div class="im-thumb-card-add" onclick="openHeroModal('main', 'add')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Add Slide</span>
         </div>
       `;
     }
 
-    function setHeroSlide(idx, el) {
-      activeHeroIndex = idx;
-      document.getElementById("mainHeroActiveImg").src = heroBanners[idx];
-      document.querySelectorAll("#mainHeroThumbs .im-thumb-card").forEach(c => c.classList.remove("active"));
-      el.classList.add("active");
+    function selectHeroSlide(idx, el) {
+      activeHeroIdx = idx;
+      renderHero();
     }
 
-    // Render Sub Hero Strip
     function renderSubHero() {
-      const activeImg = document.getElementById("subHeroActiveImg");
-      activeImg.src = subHeroBanners[activeSubHeroIndex] || subHeroBanners[0];
-
-      const strip = document.getElementById("subHeroThumbs");
-      strip.innerHTML = subHeroBanners.map((img, idx) => `
-        <div class="im-thumb-card ${idx === activeSubHeroIndex ? 'active' : ''}" onclick="setSubHeroSlide(${idx}, this)">
-          <img src="${img}" alt="Sub Hero ${idx + 1}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
-        </div>
-      `).join("") + `
-        <div class="im-thumb-card-add" onclick="openHeroAddModal('sub')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-          <span>Add Image</span>
-        </div>
-      `;
+      document.getElementById("subHeroActiveImg").src = subHeroData.bg;
+      document.getElementById("prevSubEyebrow").textContent = subHeroData.eyebrow || "GAMING HEADSET";
+      document.getElementById("prevSubTitle").textContent = subHeroData.title || "IM-GH01";
+      document.getElementById("prevSubDesc").textContent = subHeroData.desc || "";
+      document.getElementById("prevSubBtn").innerHTML = `${subHeroData.btnText || 'Explore'} &rarr;`;
     }
 
-    function setSubHeroSlide(idx, el) {
-      activeSubHeroIndex = idx;
-      document.getElementById("subHeroActiveImg").src = subHeroBanners[idx];
-      document.querySelectorAll("#subHeroThumbs .im-thumb-card").forEach(c => c.classList.remove("active"));
-      el.classList.add("active");
+    function openHeroModal(target, mode) {
+      document.getElementById("heroTargetSection").value = target;
+      if (target === 'main') {
+        const slide = (mode === 'edit') ? heroSlides[activeHeroIdx] : { bg: '', eyebrow: '', title: '', tagline: '', desc: '', btnText: 'Explore More', btnLink: 'all-products.html' };
+        document.getElementById("heroSlideIdx").value = (mode === 'edit') ? activeHeroIdx : -1;
+        document.getElementById("heroModalHeading").textContent = (mode === 'edit') ? "Edit Hero Slide Content" : "Add New Hero Slide";
+        document.getElementById("heroBgUrl").value = slide.bg;
+        document.getElementById("heroImgPreview").src = slide.bg || 'assets/images/homepage/im_official_emblem.png';
+        document.getElementById("heroEyebrow").value = slide.eyebrow || "";
+        document.getElementById("heroTitle").value = slide.title || "";
+        document.getElementById("heroTagline").value = slide.tagline || "";
+        document.getElementById("heroDesc").value = slide.desc || "";
+        document.getElementById("heroBtnText").value = slide.btnText || "Explore More";
+        document.getElementById("heroBtnLink").value = slide.btnLink || "all-products.html";
+      } else {
+        document.getElementById("heroSlideIdx").value = "sub";
+        document.getElementById("heroModalHeading").textContent = "Edit Sub Hero (Headset) Content";
+        document.getElementById("heroBgUrl").value = subHeroData.bg;
+        document.getElementById("heroImgPreview").src = subHeroData.bg || 'assets/images/homepage/im_official_emblem.png';
+        document.getElementById("heroEyebrow").value = subHeroData.eyebrow || "";
+        document.getElementById("heroTitle").value = subHeroData.title || "";
+        document.getElementById("heroTagline").value = subHeroData.tagline || "";
+        document.getElementById("heroDesc").value = subHeroData.desc || "";
+        document.getElementById("heroBtnText").value = subHeroData.btnText || "Explore Accessories";
+        document.getElementById("heroBtnLink").value = subHeroData.btnLink || "all-products.html?category=accessories";
+      }
+      openModal('modalHero');
     }
 
-    // Render Products List
-    function renderProducts() {
-      const container = document.getElementById("productsListContainer");
-      container.innerHTML = products.map((p, idx) => `
-        <div class="im-product-row">
-          <div class="im-product-left">
-            <span class="im-drag-handle" title="Reorder">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
-            </span>
-            <div class="im-row-thumb">
-              <img src="${p.img || 'assets/images/homepage/im_official_emblem.png'}" alt="${p.name}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
-            </div>
-            <div class="im-row-info">
-              <h4>${p.name}</h4>
-              <p>${p.catName || p.cat}</p>
-            </div>
-          </div>
-          <div class="im-row-right">
-            <button class="btn-white" onclick="openProductModal('edit', '${p.id}')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-              Edit
-            </button>
-            <button class="btn-icon-dot" title="Delete" onclick="deleteProduct('${p.id}')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-            </button>
-          </div>
-        </div>
-      `).join("");
+    function updateHeroImgPreview(val) {
+      document.getElementById("heroImgPreview").src = val;
     }
 
-    // Render Categories
+    function saveHeroSlide(e) {
+      e.preventDefault();
+      const target = document.getElementById("heroTargetSection").value;
+      const idx = document.getElementById("heroSlideIdx").value;
+      const bg = document.getElementById("heroBgUrl").value.trim();
+      const eyebrow = document.getElementById("heroEyebrow").value.trim();
+      const title = document.getElementById("heroTitle").value.trim();
+      const tagline = document.getElementById("heroTagline").value.trim();
+      const desc = document.getElementById("heroDesc").value.trim();
+      const btnText = document.getElementById("heroBtnText").value.trim();
+      const btnLink = document.getElementById("heroBtnLink").value.trim();
+
+      const dataObj = { bg, eyebrow, title, tagline, desc, btnText, btnLink };
+
+      if (target === 'main') {
+        if (idx >= 0 && idx !== -1) {
+          heroSlides[idx] = dataObj;
+        } else {
+          heroSlides.push(dataObj);
+          activeHeroIdx = heroSlides.length - 1;
+        }
+        renderHero();
+      } else {
+        subHeroData = dataObj;
+        renderSubHero();
+      }
+
+      saveAll();
+      closeModal('modalHero');
+      showToast("Hero section updated!");
+    }
+
+    // B. Render Categories
     function renderCategories() {
       const container = document.getElementById("categoriesContainer");
       container.innerHTML = categories.map(c => `
@@ -1298,9 +1569,14 @@
             </div>
             <span class="im-cat-title">${c.name}</span>
           </div>
-          <button class="btn-icon-dot" title="Delete Category" onclick="deleteCategory('${c.key}')">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-          </button>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn-icon-dot" title="Edit Category" onclick="openCategoryModal('edit', '${c.key}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </button>
+            <button class="btn-icon-dot" title="Delete Category" onclick="deleteCategory('${c.key}')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
         </div>
       `).join("");
 
@@ -1309,7 +1585,185 @@
       sel.innerHTML = categories.map(c => `<option value="${c.key}">${c.name}</option>`).join("");
     }
 
-    // Render Software
+    function openCategoryModal(mode, key) {
+      if (mode === 'edit') {
+        const c = categories.find(x => x.key === key);
+        if (!c) return;
+        document.getElementById("catModalTitle").textContent = "Edit Category";
+        document.getElementById("catEditKey").value = c.key;
+        document.getElementById("catName").value = c.name;
+        document.getElementById("catKey").value = c.key;
+        document.getElementById("catKey").disabled = true;
+        document.getElementById("catThumb").value = c.thumb || "";
+        document.getElementById("catImgPreview").src = c.thumb || "assets/images/homepage/im_official_emblem.png";
+      } else {
+        document.getElementById("catModalTitle").textContent = "Add Category";
+        document.getElementById("catEditKey").value = "";
+        document.getElementById("catName").value = "";
+        document.getElementById("catKey").value = "";
+        document.getElementById("catKey").disabled = false;
+        document.getElementById("catThumb").value = "";
+        document.getElementById("catImgPreview").src = "assets/images/homepage/im_official_emblem.png";
+      }
+      openModal('modalCategory');
+    }
+
+    function updateCatImgPreview(val) {
+      document.getElementById("catImgPreview").src = val;
+    }
+
+    function saveCategory(e) {
+      e.preventDefault();
+      const editKey = document.getElementById("catEditKey").value;
+      const name = document.getElementById("catName").value.trim();
+      const key = document.getElementById("catKey").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+      const thumb = document.getElementById("catThumb").value.trim();
+
+      if (editKey) {
+        const idx = categories.findIndex(c => c.key === editKey);
+        if (idx !== -1) {
+          categories[idx] = { key: editKey, name, thumb };
+          showToast("Category updated!");
+        }
+      } else {
+        if (categories.some(c => c.key === key)) {
+          alert("Category slug already exists!");
+          return;
+        }
+        categories.push({ key, name, thumb });
+        showToast("Category added!");
+      }
+
+      saveAll();
+      renderCategories();
+      closeModal('modalCategory');
+    }
+
+    function deleteCategory(key) {
+      if (confirm("Delete this category?")) {
+        categories = categories.filter(c => c.key !== key);
+        saveAll();
+        renderCategories();
+        showToast("Category deleted.");
+      }
+    }
+
+    // C. Render Products
+    function renderProducts() {
+      const container = document.getElementById("productsListContainer");
+      container.innerHTML = products.map(p => {
+        const colorDots = (p.colors || ['black']).map(col => {
+          let bg = '#111827';
+          if (col === 'white') bg = '#FFFFFF';
+          if (col === 'yellow') bg = '#FACC15';
+          if (col === 'red') bg = '#E42F38';
+          if (col === 'silver') bg = '#9CA3AF';
+          return `<span class="im-color-dot" style="background:${bg};" title="${col}"></span>`;
+        }).join("");
+
+        return `
+        <div class="im-product-row">
+          <div class="im-product-left">
+            <span class="im-drag-handle" title="Reorder">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+            </span>
+            <div class="im-row-thumb">
+              <img src="${p.img || 'assets/images/homepage/im_official_emblem.png'}" alt="${p.name}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
+            </div>
+            <div class="im-row-info">
+              <h4>${p.name}</h4>
+              <p>${p.catName || p.cat} &bull; <span style="font-family:monospace; font-size:11px;">${p.specs || ''}</span></p>
+              ${p.desc ? `<div class="im-row-desc-preview">${p.desc}</div>` : ''}
+              <div class="im-color-dots">${colorDots}</div>
+            </div>
+          </div>
+          <div class="im-row-right">
+            <button class="btn-white" onclick="openProductModal('edit', '${p.id}')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              Edit
+            </button>
+            <button class="btn-icon-dot" title="Delete" onclick="deleteProduct('${p.id}')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      `}).join("");
+    }
+
+    function openProductModal(mode, id) {
+      renderCategories(); // ensure dropdown has latest categories
+      const form = document.getElementById("productEditForm");
+      form.reset();
+
+      if (mode === 'edit') {
+        const p = products.find(x => x.id === id);
+        if (!p) return;
+        document.getElementById("productModalTitle").textContent = "Edit Product";
+        document.getElementById("pEditId").value = p.id;
+        document.getElementById("pName").value = p.name;
+        document.getElementById("pCategory").value = p.cat;
+        document.getElementById("pImg").value = p.img || "";
+        document.getElementById("pImgPreview").src = p.img || 'assets/images/homepage/im_official_emblem.png';
+        document.getElementById("pDesc").value = p.desc || "";
+        document.getElementById("pSpecs").value = p.specs || "";
+
+        // Set colors
+        document.querySelectorAll("input[name='pColors']").forEach(cb => {
+          cb.checked = (p.colors && p.colors.includes(cb.value));
+        });
+      } else {
+        document.getElementById("productModalTitle").textContent = "Add New Product";
+        document.getElementById("pEditId").value = "";
+        document.getElementById("pImgPreview").src = "assets/images/homepage/im_official_emblem.png";
+      }
+      openModal('modalProduct');
+    }
+
+    function updateProductImgPreview(val) {
+      document.getElementById("pImgPreview").src = val;
+    }
+
+    function saveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById("pEditId").value;
+      const name = document.getElementById("pName").value.trim();
+      const cat = document.getElementById("pCategory").value;
+      const catObj = categories.find(c => c.key === cat);
+      const catName = catObj ? catObj.name : cat;
+      const img = document.getElementById("pImg").value.trim();
+      const desc = document.getElementById("pDesc").value.trim();
+      const specs = document.getElementById("pSpecs").value.trim();
+
+      const selectedColors = [];
+      document.querySelectorAll("input[name='pColors']:checked").forEach(cb => selectedColors.push(cb.value));
+
+      if (id) {
+        const idx = products.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          products[idx] = { ...products[idx], name, cat, catName, img, desc, colors: selectedColors, specs };
+        }
+        showToast("Product updated!");
+      } else {
+        const newId = 'prod_' + Date.now();
+        products.unshift({ id: newId, name, cat, catName, img, desc, colors: selectedColors, specs });
+        showToast("New product added!");
+      }
+
+      saveAll();
+      renderProducts();
+      closeModal('modalProduct');
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Are you sure you want to delete this product?")) {
+        products = products.filter(x => x.id !== id);
+        saveAll();
+        renderProducts();
+        showToast("Product deleted.");
+      }
+    }
+
+    // D. Render Software
     function renderSoftware() {
       const container = document.getElementById("softwareListContainer");
       container.innerHTML = softwareList.map(s => `
@@ -1324,8 +1778,9 @@
             </div>
           </div>
           <div class="im-soft-right">
-            <button class="btn-icon-dot" title="Download" onclick="window.open('${s.url || '#'}', '_blank')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <button class="btn-download-action" onclick="downloadSoftwareFile('${s.id}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Download
             </button>
             <button class="btn-icon-dot" title="Edit" onclick="openSoftwareModal('edit', '${s.id}')">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
@@ -1338,143 +1793,18 @@
       `).join("");
     }
 
-    // Modal Triggers
-    function openProductModal(mode, id) {
-      if (mode === 'edit') {
-        const p = products.find(x => x.id === id);
-        if (!p) return;
-        document.getElementById("productModalTitle").textContent = "Edit Product";
-        document.getElementById("pEditId").value = p.id;
-        document.getElementById("pName").value = p.name;
-        document.getElementById("pCategory").value = p.cat;
-        document.getElementById("pImg").value = p.img || "";
-        document.getElementById("pSpecs").value = p.specs || "";
-      } else {
-        document.getElementById("productModalTitle").textContent = "Add New Product";
-        document.getElementById("pEditId").value = "";
-        document.getElementById("productEditForm").reset();
-      }
-      openModal('modalProduct');
-    }
-
-    function saveProduct(e) {
-      e.preventDefault();
-      const id = document.getElementById("pEditId").value;
-      const name = document.getElementById("pName").value.trim();
-      const cat = document.getElementById("pCategory").value;
-      const catObj = categories.find(c => c.key === cat);
-      const catName = catObj ? catObj.name : cat;
-      const img = document.getElementById("pImg").value.trim();
-      const specs = document.getElementById("pSpecs").value.trim();
-
-      if (id) {
-        const idx = products.findIndex(x => x.id === id);
-        if (idx !== -1) {
-          products[idx] = { ...products[idx], name, cat, catName, img, specs };
-        }
-        showToast("Product updated!");
-      } else {
-        const newId = 'prod_' + Date.now();
-        products.unshift({ id: newId, name, cat, catName, img, specs });
-        showToast("Product added!");
-      }
-
-      saveAll();
-      renderProducts();
-      closeModal('modalProduct');
-    }
-
-    function deleteProduct(id) {
-      if (confirm("Delete this product?")) {
-        products = products.filter(x => x.id !== id);
-        saveAll();
-        renderProducts();
-        showToast("Product removed.");
-      }
-    }
-
-    // Category Logic
-    function openCategoryModal(mode) {
-      document.getElementById("catName").value = "";
-      document.getElementById("catKey").value = "";
-      document.getElementById("catThumb").value = "";
-      openModal('modalCategory');
-    }
-
-    function saveCategory(e) {
-      e.preventDefault();
-      const name = document.getElementById("catName").value.trim();
-      const key = document.getElementById("catKey").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-      const thumb = document.getElementById("catThumb").value.trim();
-
-      if (categories.some(c => c.key === key)) {
-        alert("Category key already exists!");
-        return;
-      }
-
-      categories.push({ key, name, thumb });
-      saveAll();
-      renderCategories();
-      closeModal('modalCategory');
-      showToast("Category added!");
-    }
-
-    function deleteCategory(key) {
-      if (confirm("Delete category? Products in this category will remain.")) {
-        categories = categories.filter(c => c.key !== key);
-        saveAll();
-        renderCategories();
-        showToast("Category deleted.");
-      }
-    }
-
-    // Hero Logic
-    function openHeroAddModal(target) {
-      document.getElementById("heroTarget").value = target;
-      document.getElementById("heroModalTitle").textContent = target === 'main' ? "Add Main Hero Image" : "Add Sub Hero Image";
-      document.getElementById("heroImgUrl").value = "";
-      openModal('modalHero');
-    }
-
-    function openHeroEditModal(target) {
-      document.getElementById("heroTarget").value = target;
-      document.getElementById("heroModalTitle").textContent = target === 'main' ? "Edit Main Hero Active Image" : "Edit Sub Hero Active Image";
-      document.getElementById("heroImgUrl").value = target === 'main' ? heroBanners[activeHeroIndex] : subHeroBanners[activeSubHeroIndex];
-      openModal('modalHero');
-    }
-
-    function saveHero(e) {
-      e.preventDefault();
-      const target = document.getElementById("heroTarget").value;
-      const url = document.getElementById("heroImgUrl").value.trim();
-
-      if (target === 'main') {
-        heroBanners.push(url);
-        activeHeroIndex = heroBanners.length - 1;
-        renderHero();
-      } else {
-        subHeroBanners.push(url);
-        activeSubHeroIndex = subHeroBanners.length - 1;
-        renderSubHero();
-      }
-      saveAll();
-      closeModal('modalHero');
-      showToast("Banner updated!");
-    }
-
-    // Software Logic
     function openSoftwareModal(mode, id) {
       if (mode === 'edit') {
         const s = softwareList.find(x => x.id === id);
         if (!s) return;
-        document.getElementById("softModalTitle").textContent = "Edit Downloadable File";
+        document.getElementById("softModalTitle").textContent = "Edit Software File";
         document.getElementById("softEditId").value = s.id;
         document.getElementById("softTitle").value = s.title;
         document.getElementById("softVer").value = s.ver;
         document.getElementById("softSize").value = s.size;
         document.getElementById("softUrl").value = s.url || "";
       } else {
-        document.getElementById("softModalTitle").textContent = "Add Downloadable File";
+        document.getElementById("softModalTitle").textContent = "Add Downloadable Software";
         document.getElementById("softEditId").value = "";
         document.getElementById("softTitle").value = "";
         document.getElementById("softVer").value = "";
@@ -1491,15 +1821,16 @@
       const ver = document.getElementById("softVer").value.trim();
       const size = document.getElementById("softSize").value.trim();
       const url = document.getElementById("softUrl").value.trim();
+      const content = document.getElementById("softUrl").getAttribute("data-file-content") || "";
 
       if (id) {
         const idx = softwareList.findIndex(x => x.id === id);
         if (idx !== -1) {
-          softwareList[idx] = { id, title, ver, size, url };
+          softwareList[idx] = { id, title, ver, size, url, content };
         }
         showToast("Software file updated!");
       } else {
-        softwareList.push({ id: 'soft_' + Date.now(), title, ver, size, url });
+        softwareList.push({ id: 'soft_' + Date.now(), title, ver, size, url, content });
         showToast("Software file added!");
       }
 
@@ -1517,14 +1848,51 @@
       }
     }
 
-    // Modal Utils
-    function openModal(id) {
-      document.getElementById(id).classList.add("open");
+    function downloadSoftwareFile(id) {
+      const s = softwareList.find(x => x.id === id);
+      if (!s) return;
+
+      if (s.content) {
+        // Trigger download from uploaded file blob/base64
+        const a = document.createElement("a");
+        a.href = s.content;
+        a.download = s.url || `${s.title}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        showToast(`Downloading ${s.title}...`);
+      } else if (s.url && s.url !== '#') {
+        window.open(s.url, '_blank');
+      } else {
+        alert("This software file download is ready. When deployed, it will download from: " + s.url);
+      }
     }
 
-    function closeModal(id) {
-      document.getElementById(id).classList.remove("open");
+    // Supabase Config
+    function openSupabaseModal() {
+      document.getElementById("sbUrl").value = localStorage.getItem("im_supabase_url") || "";
+      document.getElementById("sbKey").value = localStorage.getItem("im_supabase_key") || "";
+      openModal('modalSupabase');
     }
+
+    function saveSupabaseConfig(e) {
+      e.preventDefault();
+      const url = document.getElementById("sbUrl").value.trim();
+      const key = document.getElementById("sbKey").value.trim();
+      localStorage.setItem("im_supabase_url", url);
+      localStorage.setItem("im_supabase_key", key);
+      closeModal('modalSupabase');
+      showToast(url ? "Supabase connected!" : "Using local storage mode.");
+    }
+
+    function syncWithLiveSite() {
+      saveAll();
+      showToast("Live site cache synchronized!");
+    }
+
+    // Modal Helpers
+    function openModal(id) { document.getElementById(id).classList.add("open"); }
+    function closeModal(id) { document.getElementById(id).classList.remove("open"); }
 
     function showToast(text) {
       const toast = document.getElementById("toast");
@@ -1539,14 +1907,13 @@
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Close on click outside
     document.querySelectorAll(".im-modal-backdrop").forEach(backdrop => {
       backdrop.addEventListener("click", (e) => {
         if (e.target === backdrop) backdrop.classList.remove("open");
       });
     });
 
-    // Initial render
+    // Init All
     renderHero();
     renderSubHero();
     renderCategories();

@@ -9,6 +9,7 @@
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
+  syncLiveSiteWithAdminData();
   initThemeToggle();
   initHomepagePillNavbar();
   initMobileHamburger();
@@ -22,6 +23,112 @@ document.addEventListener('DOMContentLoaded', () => {
   initDownloadsPageController();
   initContactPageController();
 });
+
+/* ==========================================================================
+   00a. LIVE SITE SYNC WITH ADMIN PANEL DATA (localStorage / Supabase cache)
+   ========================================================================== */
+function syncLiveSiteWithAdminData() {
+  try {
+    // 1. Sync Hero Section (index.html)
+    const storedHero = JSON.parse(localStorage.getItem('im_wm_hero_banners_data'));
+    if (Array.isArray(storedHero) && storedHero.length > 0) {
+      const slides = document.querySelectorAll('.im-hero-slide');
+      storedHero.forEach((slide, idx) => {
+        let slideEl = slides[idx];
+        if (slideEl) {
+          const bg = slideEl.querySelector('.im-hero-bg-img');
+          if (bg && slide.bg) bg.src = slide.bg;
+
+          const eyebrow = slideEl.querySelector('.im-hero-eyebrow-text');
+          if (eyebrow && slide.eyebrow) eyebrow.textContent = slide.eyebrow;
+
+          const title = slideEl.querySelector('.im-hero-title');
+          if (title && slide.title) title.innerHTML = slide.title;
+
+          const tagline = slideEl.querySelector('.im-hero-tagline');
+          if (tagline && slide.tagline) tagline.textContent = slide.tagline;
+
+          const desc = slideEl.querySelector('.im-hero-desc');
+          if (desc && slide.desc) desc.innerHTML = slide.desc.replace(/\n/g, '<br>');
+
+          const cta = slideEl.querySelector('.im-hero-cta-wrap a');
+          if (cta) {
+            if (slide.btnLink) cta.href = slide.btnLink;
+            const span = cta.querySelector('span');
+            if (span && slide.btnText) span.textContent = slide.btnText;
+          }
+        }
+      });
+    }
+
+    // 2. Sync Sub-Hero Headset Section (index.html)
+    const storedSubHero = JSON.parse(localStorage.getItem('im_wm_sub_hero_data'));
+    if (storedSubHero) {
+      const headsetSec = document.getElementById('headset-spotlight');
+      if (headsetSec) {
+        const bg = headsetSec.querySelector('.im-headset-bg-img');
+        if (bg && storedSubHero.bg) bg.src = storedSubHero.bg;
+
+        const eyebrow = headsetSec.querySelector('.im-headset-eyebrow-text');
+        if (eyebrow && storedSubHero.eyebrow) eyebrow.textContent = storedSubHero.eyebrow;
+
+        const title = headsetSec.querySelector('.im-headset-title');
+        if (title && storedSubHero.title) title.innerHTML = storedSubHero.title;
+
+        const desc = headsetSec.querySelector('.im-headset-desc');
+        if (desc && storedSubHero.desc) desc.innerHTML = storedSubHero.desc.replace(/\n/g, '<br>');
+
+        const link = headsetSec.querySelector('.im-headset-stage-link');
+        if (link && storedSubHero.btnLink) link.href = storedSubHero.btnLink;
+      }
+    }
+
+    // 3. Sync Products Grid (all-products.html)
+    const storedProds = JSON.parse(localStorage.getItem('im_wm_products'));
+    const prodGrid = document.getElementById('ap-products-grid');
+    if (prodGrid && Array.isArray(storedProds) && storedProds.length > 0) {
+      storedProds.forEach(p => {
+        let existingCard = prodGrid.querySelector(`a[href*="${p.id}"]`);
+        if (!existingCard) {
+          const card = document.createElement('article');
+          card.className = 'im-prod-card product-card';
+          card.setAttribute('data-category', p.cat);
+          card.innerHTML = `
+            <a href="product-detail.html?product=${p.id}" class="im-prod-card-link" aria-label="View ${p.name} Details">
+              <div class="im-prod-media">
+                <img src="${p.img || 'assets/images/homepage/im_official_emblem.png'}" alt="${p.name}" class="im-prod-img" loading="lazy">
+              </div>
+              <h3 class="im-prod-title">${p.name}</h3>
+              ${p.desc ? `<p class="im-prod-desc">${p.desc}</p>` : ''}
+              <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
+            </a>
+          `;
+          prodGrid.prepend(card);
+        } else {
+          const card = existingCard.closest('.im-prod-card');
+          if (card) {
+            card.setAttribute('data-category', p.cat);
+            const img = card.querySelector('.im-prod-img');
+            if (img && p.img) img.src = p.img;
+            const title = card.querySelector('.im-prod-title');
+            if (title && p.name) title.textContent = p.name;
+            let desc = card.querySelector('.im-prod-desc');
+            if (p.desc) {
+              if (!desc) {
+                desc = document.createElement('p');
+                desc.className = 'im-prod-desc';
+                title.insertAdjacentElement('afterend', desc);
+              }
+              desc.textContent = p.desc;
+            }
+          }
+        }
+      });
+    }
+  } catch (err) {
+    console.warn('Ice Master Live Sync Note:', err);
+  }
+}
 
 /* ==========================================================================
    THEME TOGGLE — Dark / Light Mode with localStorage persistence
@@ -628,6 +735,20 @@ function initProductsCategoryNav() {
     'power-supply': 'power-supply-units'
   };
 
+  try {
+    const storedCats = JSON.parse(localStorage.getItem('im_wm_categories'));
+    if (Array.isArray(storedCats)) {
+      storedCats.forEach(c => {
+        if (!categoryMeta[c.key]) {
+          categoryMeta[c.key] = {
+            title: c.name,
+            tagline: `${c.name} Engineered for Peak Performance.`
+          };
+        }
+      });
+    }
+  } catch(e) {}
+
   function activateCategory(catKey, scrollToGrid = false, isImmediate = false) {
     if (!catKey) catKey = 'air-coolers';
     if (aliasMap[catKey]) catKey = aliasMap[catKey];
@@ -635,7 +756,8 @@ function initProductsCategoryNav() {
 
     // 1. Update Category Selection Tiles
     catTiles.forEach(tile => {
-      const isMatch = tile.getAttribute('data-cat-key') === catKey;
+      const tileKey = tile.getAttribute('data-cat-key');
+      const isMatch = (tileKey === catKey || aliasMap[tileKey] === catKey);
       tile.classList.toggle('active', isMatch);
       tile.setAttribute('aria-selected', isMatch ? 'true' : 'false');
     });
@@ -655,11 +777,12 @@ function initProductsCategoryNav() {
       }, 140);
     }
 
-    // 3. Filter Product Cards
+    // 3. Filter Product Cards (re-query cards so any dynamically synced products are included)
+    const allProdCards = document.querySelectorAll('.im-prod-card');
     let visibleCount = 0;
-    catCards.forEach(card => {
+    allProdCards.forEach(card => {
       const cardCat = card.getAttribute('data-category');
-      const isVisible = (cardCat === catKey);
+      const isVisible = (cardCat === catKey || aliasMap[cardCat] === catKey || (aliasMap[catKey] && aliasMap[catKey] === cardCat));
       if (isVisible) {
         visibleCount++;
         card.classList.remove('hidden');
@@ -1082,6 +1205,32 @@ function initProductDetailPage() {
     }
   };
 
+  // Merge dynamic admin products from localStorage into catalog
+  try {
+    const storedProds = JSON.parse(localStorage.getItem('im_wm_products'));
+    if (Array.isArray(storedProds)) {
+      storedProds.forEach(p => {
+        const pColors = (p.colors && p.colors.length) ? p.colors : ['black'];
+        const pImages = {};
+        pColors.forEach(c => {
+          pImages[c] = [p.img || 'assets/images/homepage/im_official_emblem.png'];
+        });
+        catalog[p.id] = {
+          title: p.name,
+          subtitle: p.desc || p.name,
+          eyebrow: (p.catName || p.cat || 'PC HARDWARE').toUpperCase(),
+          categoryName: p.catName || p.cat || 'Products',
+          categoryUrl: `all-products.html?category=${p.cat}`,
+          breadcrumbTitle: p.name,
+          colors: pColors,
+          defaultColor: pColors[0],
+          customSpecs: p.specs || '',
+          images: pImages
+        };
+      });
+    }
+  } catch(e) {}
+
   // Load Product based on Query Param or default to 'dynamite-xl-pro'
   const urlParams = new URLSearchParams(window.location.search);
   const paramKey = urlParams.get('product') || 'dynamite-xl-pro';
@@ -1112,23 +1261,32 @@ function initProductDetailPage() {
     enquireLink.setAttribute('aria-label', `Enquire about ${prod.breadcrumbTitle} on WhatsApp`);
   }
 
-  // Specifications section: Pending Client Confirmation (no fake specs)
+  // Specifications section: Display custom specs if present, or pending placeholder
   if (specsContainer) {
-    specsContainer.innerHTML = `
-      <div class="pd-specs-pending-box">
-        <div class="pd-specs-pending-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-          </svg>
+    if (prod.customSpecs) {
+      specsContainer.innerHTML = `
+        <div class="pd-specs-custom-box" style="padding: 18px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; margin-top: 10px;">
+          <div style="font-size: 13px; font-weight: 700; color: #E42F38; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Key Specifications</div>
+          <p style="font-size: 13.5px; color: #E2E8F0; line-height: 1.6; margin: 0; font-family: monospace;">${prod.customSpecs}</p>
         </div>
-        <div class="pd-specs-pending-text">
-          <strong>Official Specifications Pending Client Release</strong>
-          <p>Technical parameters, clearance dimensions, and hardware compatibility for <em>${prod.breadcrumbTitle}</em> will be published here upon official release.</p>
+      `;
+    } else {
+      specsContainer.innerHTML = `
+        <div class="pd-specs-pending-box">
+          <div class="pd-specs-pending-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <div class="pd-specs-pending-text">
+            <strong>Official Specifications Pending Client Release</strong>
+            <p>Technical parameters, clearance dimensions, and hardware compatibility for <em>${prod.breadcrumbTitle}</em> will be published here upon official release.</p>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    }
   }
 
   // Active color state
@@ -1191,25 +1349,18 @@ function initProductDetailPage() {
 
   // Initialize Color Switcher
   if (colorSelector) {
-    const hasWhite = prod.colors.includes('white');
-    const hasBlack = prod.colors.includes('black');
-
-    const blackBtn = colorSelector.querySelector('.pd-color-btn[data-color="black"]');
-    const whiteBtn = colorSelector.querySelector('.pd-color-btn[data-color="white"]');
-
-    if (blackBtn) blackBtn.style.display = hasBlack ? 'inline-flex' : 'none';
-    if (whiteBtn) whiteBtn.style.display = hasWhite ? 'inline-flex' : 'none';
-
-    if (!hasWhite) {
-      // If only black is available, hide switcher or keep single black badge
-      if (blackBtn) blackBtn.classList.add('active');
+    const group = colorSelector.querySelector('.pd-color-group');
+    if (group && prod.colors && prod.colors.length > 0) {
+      group.innerHTML = prod.colors.map(col => `
+        <button type="button" class="pd-color-btn ${col === currentColor ? 'active' : ''}" data-color="${col}" aria-label="Select ${col} Edition">
+          <span class="pd-color-circle color-${col}"></span>
+          <span class="pd-color-text" style="text-transform: capitalize;">${col}</span>
+        </button>
+      `).join('');
     }
 
     const colorBtns = colorSelector.querySelectorAll('.pd-color-btn');
     colorBtns.forEach(btn => {
-      const c = btn.getAttribute('data-color');
-      btn.classList.toggle('active', c === currentColor);
-
       btn.addEventListener('click', () => {
         const color = btn.getAttribute('data-color');
         if (color === currentColor) return;
@@ -1241,22 +1392,53 @@ function initDownloadsPageController() {
   downloadBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const textSpan = btn.querySelector('span');
-      if (!textSpan) return;
-
-      const originalText = textSpan.textContent;
-      textSpan.textContent = 'Downloading...';
-      btn.style.opacity = '0.85';
-      
-      setTimeout(() => {
-        textSpan.textContent = 'Download Started!';
-        setTimeout(() => {
-          textSpan.textContent = originalText;
-          btn.style.opacity = '1';
-        }, 2200);
-      }, 700);
+      triggerSoftwareDownload(btn);
     });
   });
+
+  const primaryCTA = document.getElementById('dl-primary-cta');
+  if (primaryCTA) {
+    primaryCTA.addEventListener('click', (e) => {
+      e.preventDefault();
+      triggerSoftwareDownload(primaryCTA);
+    });
+  }
+
+  function triggerSoftwareDownload(buttonEl) {
+    try {
+      const storedSoft = JSON.parse(localStorage.getItem('im_wm_software'));
+      if (Array.isArray(storedSoft) && storedSoft.length > 0) {
+        const item = storedSoft[0];
+        if (item.content) {
+          const a = document.createElement('a');
+          a.href = item.content;
+          a.download = item.url || `${item.title}.zip`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          return;
+        } else if (item.url && item.url !== '#') {
+          window.open(item.url, '_blank');
+          return;
+        }
+      }
+    } catch(err) {}
+
+    const textSpan = buttonEl.querySelector('.dl-btn-text, span');
+    if (!textSpan) return;
+
+    const originalText = textSpan.textContent;
+    textSpan.textContent = 'Downloading...';
+    buttonEl.style.opacity = '0.85';
+    
+    setTimeout(() => {
+      textSpan.textContent = 'Download Started!';
+      setTimeout(() => {
+        textSpan.textContent = originalText;
+        buttonEl.style.opacity = '1';
+      }, 2200);
+    }, 700);
+  }
 }
 
 /* ==========================================================================
