@@ -900,6 +900,183 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+  
+    /* Category Filter Tabs & Search Controls */
+    .im-prod-controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .im-prod-filter-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .im-filter-tab {
+      background: #141824;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .im-filter-tab:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-heading);
+    }
+    .im-filter-tab.active {
+      background: var(--im-red) !important;
+      border-color: var(--im-red) !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(228, 47, 56, 0.35);
+    }
+    .im-search-box {
+      position: relative;
+      min-width: 250px;
+    }
+    .im-search-box svg {
+      position: absolute;
+      left: 11px;
+      top: 11px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+    .search-input {
+      padding-left: 32px !important;
+      font-size: 12.5px !important;
+      height: 36px !important;
+      border-radius: 8px !important;
+    }
+
+    /* Product Row Clean Organization */
+    .im-prod-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      background: #141824;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+    .im-prod-row:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: #181d2c;
+    }
+    .im-prod-thumb-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      background: #0f131d;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 4px;
+    }
+    .im-prod-thumb-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .im-prod-meta-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .im-prod-header-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .im-prod-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .im-cat-pill {
+      font-size: 11px;
+      font-weight: 600;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: capitalize;
+    }
+    .im-prod-highlights-line {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .im-spec-pill {
+      font-size: 11px;
+      color: #CBD5E1;
+      background: rgba(228, 47, 56, 0.08);
+      border: 1px solid rgba(228, 47, 56, 0.2);
+      padding: 1px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .im-prod-desc-line {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 700px;
+    }
+    .im-prod-actions-col {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .btn-action-edit {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-body);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .btn-action-edit:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .im-cat-icon-frame {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: #0f131d;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
   </style>
 </head>
 <body>

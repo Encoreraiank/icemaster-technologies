@@ -5256,3 +5256,98 @@ html, body,
 .ct-form-textarea {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
 }
+
+
+/* ==========================================================================
+   PRODUCT DETAIL — MODERN SPECIFICATIONS TABLE (DARK & LIGHT MODE)
+   ========================================================================== */
+.pd-specs-container-card {
+  margin-top: 18px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #141824;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+.light-mode .pd-specs-container-card {
+  border: 1px solid #E2E8F0;
+  background: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.pd-specs-table-header {
+  padding: 14px 20px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #E42F38;
+  background: rgba(228, 47, 56, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.light-mode .pd-specs-table-header {
+  background: rgba(228, 47, 56, 0.05);
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.pd-spec-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 13.5px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background 0.15s ease;
+}
+.pd-spec-item-row:last-child {
+  border-bottom: none;
+}
+.pd-spec-item-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+.pd-spec-item-row:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.light-mode .pd-spec-item-row {
+  border-bottom: 1px solid #F8FAFC;
+}
+.light-mode .pd-spec-item-row:nth-child(even) {
+  background: #F8FAFC;
+}
+.light-mode .pd-spec-item-row:hover {
+  background: #F1F5F9;
+}
+
+.pd-spec-label {
+  color: #94A3B8;
+  font-weight: 600;
+  width: 44%;
+  font-size: 13px;
+}
+.light-mode .pd-spec-label {
+  color: #475569;
+  font-weight: 600;
+}
+
+.pd-spec-value {
+  color: #F8FAFC;
+  font-weight: 600;
+  width: 54%;
+  text-align: right;
+  font-size: 13px;
+}
+.light-mode .pd-spec-value {
+  color: #0F172A;
+  font-weight: 700;
+}
+
+/* Fix: Do NOT display product description text inside preview cards on all-products grid */
+.im-prod-card .im-prod-desc {
+  display: none !important;
+}
