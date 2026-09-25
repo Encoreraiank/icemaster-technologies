@@ -3,1253 +3,1555 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICE MASTER | Product Management & WhatsApp Routing Admin</title>
-  <meta name="description" content="Ice Master Technologies - Admin Control Panel for Product Catalog & WhatsApp Inquiry Routing.">
+  <title>Website Manager | Ice Master Admin</title>
+  <meta name="description" content="Ice Master Technologies Website Content Manager — Hero Banners, Products, Categories, and Software Downloads.">
 
   <!-- Google Fonts: Montserrat (All Weights) & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Main Website Stylesheet for 1:1 Design Tokens -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       ICEMASTER ADMIN CONSOLE - 1:1 BRAND SYSTEM STYLES
-       Overriding generic elements to perfectly match Ice Master website aesthetic
+       1:1 PIXEL-PERFECT ICE MASTER WEBSITE MANAGER (MATCHING PROVIDED DESIGN MOCKUP)
        ========================================================================== */
     :root {
-      --admin-bg: #050505;
-      --admin-surface: #0E1015;
-      --admin-surface-card: rgba(14, 18, 26, 0.85);
-      --admin-border: rgba(255, 255, 255, 0.10);
-      --admin-border-hover: rgba(255, 255, 255, 0.25);
+      --sidebar-bg: #0D1117;
+      --sidebar-active: #E42F38;
+      --main-bg: #F0F2F6;
+      --card-bg: #FFFFFF;
+      --card-border: #E5E7EB;
+      --text-heading: #111827;
+      --text-body: #4B5563;
+      --text-muted: #6B7280;
+      --text-dim: #9CA3AF;
       --im-red: #E42F38;
-      --im-red-hover: #ff222d;
-      --im-gray-muted: #8A8F97;
-      --im-gray-dark: #3F4348;
-      --wa-green: #25D366;
+      --im-red-hover: #C92029;
+      --dark-btn-bg: #1F2937;
+      --dark-btn-hover: #111827;
+      --blue-accent: #2563EB;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
     }
 
-    body.im-admin-body {
-      background-color: var(--admin-bg);
-      color: #FFFFFF;
-      font-family: var(--im-font);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--main-bg);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-heading);
       min-height: 100vh;
+      display: flex;
       overflow-x: hidden;
-      padding-top: 100px; /* Space for floating pill navbar */
-      padding-bottom: 80px;
     }
 
-    /* Fixed Floating Pill Navbar Matching Site Exactly */
-    .im-admin-floating-header {
-      position: fixed;
-      top: 18px;
-      left: 0;
-      width: 100%;
+    /* ==========================================================================
+       LEFT SIDEBAR (DARK 1:1 MATCH)
+       ========================================================================== */
+    .im-sidebar {
+      width: 250px;
+      background-color: var(--sidebar-bg);
       display: flex;
-      justify-content: center;
-      z-index: 1000;
-      padding: 0 16px;
-      pointer-events: none;
+      flex-direction: column;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      flex-shrink: 0;
+      z-index: 100;
     }
 
-    .im-admin-pill-navbar {
-      pointer-events: auto;
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(10, 14, 20, 0.85) 100%), rgba(14, 18, 26, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-top: 1px solid rgba(255, 255, 255, 0.32);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 9999px;
-      padding: 7px 22px;
-      gap: 20px;
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    }
-
-    .im-admin-brand {
+    .im-sidebar-brand {
+      padding: 28px 24px 24px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 10px;
-      text-decoration: none;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .im-admin-logo-img {
-      height: 24px;
+    .im-sidebar-logo-img {
+      height: 48px;
       width: auto;
+      margin-bottom: 8px;
     }
 
-    .im-admin-brand-title {
+    .im-sidebar-brand-name {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 13px;
       letter-spacing: 2px;
       color: #FFFFFF;
-    }
-
-    .im-admin-badge-tag {
-      background: rgba(228, 47, 56, 0.15);
-      border: 1px solid rgba(228, 47, 56, 0.4);
-      color: var(--im-red);
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      padding: 2px 7px;
-      border-radius: 20px;
       text-transform: uppercase;
     }
 
-    .im-admin-nav-links {
+    .im-sidebar-nav {
+      padding: 24px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+    }
+
+    .im-nav-item {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      color: #9CA3AF;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      position: relative;
     }
 
-    .im-admin-nav-btn {
-      color: #8A8F97;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+    .im-nav-item:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .im-nav-item.active {
+      color: #FFFFFF;
+      background: rgba(228, 47, 56, 0.14);
+    }
+
+    .im-nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 4px;
+      border-radius: 0 4px 4px 0;
+      background: var(--im-red);
+    }
+
+    .im-nav-item svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+    }
+
+    .im-sidebar-footer {
+      padding: 20px 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .im-user-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .im-avatar-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #D1D5DB;
+    }
+
+    .im-logout-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #9CA3AF;
       text-decoration: none;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 6px;
+      border-radius: var(--radius-sm);
       transition: all 0.2s ease;
       cursor: pointer;
     }
 
-    .im-admin-nav-btn:hover {
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.06);
+    .im-logout-link:hover {
+      color: #EF4444;
     }
 
-    .im-admin-nav-btn.active {
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .im-admin-divider {
-      width: 1px;
-      height: 18px;
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* Main Container */
-    .im-admin-container {
-      max-width: 1360px;
-      margin: 0 auto;
-      padding: 0 24px;
+    /* ==========================================================================
+       MAIN CONTENT CONTAINER (CLEAN 1:1 MATCH TO IMAGE 3)
+       ========================================================================== */
+    .im-main-content {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 28px 40px 60px;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 24px;
+      max-width: 1300px;
     }
 
-    /* Hero / Header Section */
-    .im-admin-hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding-bottom: 22px;
-      border-bottom: 1px solid var(--admin-border);
-    }
-
-    .im-admin-eyebrow {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--im-red);
-      text-transform: uppercase;
-      margin-bottom: 6px;
+    /* Top Bar Header */
+    .im-top-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      margin-bottom: 6px;
     }
 
-    .im-admin-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--im-red);
-      box-shadow: 0 0 8px var(--im-red);
-    }
-
-    .im-admin-title {
+    .im-top-title h1 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      color: #FFFFFF;
-      text-transform: uppercase;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-heading);
     }
 
-    .im-admin-subtitle {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 14px;
-      color: var(--im-gray-muted);
-      margin-top: 4px;
+    .im-top-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    .im-admin-hero-actions {
+    .im-admin-pill-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 7px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-heading);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+    }
+
+    /* Cards */
+    .im-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .im-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .im-card-header-left {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    /* Buttons */
-    .im-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      border: 1px solid transparent;
-    }
-
-    .im-btn-red {
-      background: var(--im-red);
-      color: #FFFFFF;
-      box-shadow: 0 4px 18px rgba(228, 47, 56, 0.35);
-    }
-
-    .im-btn-red:hover {
-      background: var(--im-red-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 22px rgba(228, 47, 56, 0.5);
-    }
-
-    .im-btn-glass {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.15);
-      color: #FFFFFF;
-    }
-
-    .im-btn-glass:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .im-btn-wa {
-      background: rgba(37, 211, 102, 0.12);
-      border-color: rgba(37, 211, 102, 0.35);
-      color: var(--wa-green);
-    }
-
-    .im-btn-wa:hover {
-      background: rgba(37, 211, 102, 0.22);
-      border-color: var(--wa-green);
-    }
-
-    /* Hardware Metrics Row */
-    .im-admin-metrics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .im-metric-card {
-      background: var(--admin-surface-card);
-      border: 1px solid var(--admin-border);
-      border-radius: 12px;
-      padding: 18px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(16px);
-    }
-
-    .im-metric-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .im-metric-card.accent-red::before {
-      background: var(--im-red);
-    }
-
-    .im-metric-card.accent-wa::before {
-      background: var(--wa-green);
-    }
-
-    .im-metric-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: var(--im-gray-muted);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .im-metric-val {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 24px;
-      font-weight: 900;
-      color: #FFFFFF;
-    }
-
-    /* WhatsApp Routing Bar */
-    .im-wa-bar {
-      background: linear-gradient(90deg, rgba(14, 18, 26, 0.95) 0%, rgba(10, 20, 16, 0.95) 100%);
-      border: 1px solid rgba(37, 211, 102, 0.25);
-      border-radius: 12px;
-      padding: 16px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .im-wa-info {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .im-wa-icon-wrap {
+    .im-card-icon-box {
       width: 36px;
       height: 36px;
       border-radius: 8px;
-      background: rgba(37, 211, 102, 0.15);
-      border: 1px solid rgba(37, 211, 102, 0.3);
+      background: #F3F4F6;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--wa-green);
+      color: #374151;
     }
 
-    .im-wa-title {
+    .im-card-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+
+    .im-card-subtitle {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* Buttons */
+    .btn-red {
+      background: var(--im-red);
       color: #FFFFFF;
-      text-transform: uppercase;
-    }
-
-    .im-wa-desc {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
       font-size: 12px;
-      color: var(--im-gray-muted);
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
     }
 
-    .im-wa-controls {
+    .btn-red:hover {
+      background: var(--im-red-hover);
+    }
+
+    .btn-dark {
+      background: var(--dark-btn-bg);
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-dark:hover {
+      background: var(--dark-btn-hover);
+    }
+
+    .btn-white {
+      background: #FFFFFF;
+      color: var(--text-heading);
+      border: 1px solid var(--card-border);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-white:hover {
+      background: #F9FAFB;
+      border-color: #D1D5DB;
+    }
+
+    /* ==========================================================================
+       HERO & SUB-HERO PANELS (1:1 FROM IMAGE 3)
+       ========================================================================== */
+    .im-banner-stage {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius-sm);
+      position: relative;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid #E5E7EB;
+    }
+
+    .im-banner-stage-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .im-banner-edit-overlay-btn {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      color: #111827;
+      transition: all 0.2s;
+    }
+
+    .im-banner-edit-overlay-btn:hover {
+      background: #FFFFFF;
+      transform: scale(1.05);
+    }
+
+    .im-thumb-strip {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .im-thumb-card {
+      width: 150px;
+      height: 75px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+      background: #000;
+      transition: all 0.2s;
+    }
+
+    .im-thumb-card.active {
+      border-color: var(--im-red);
+      box-shadow: 0 0 0 2px rgba(228, 47, 56, 0.2);
+    }
+
+    .im-thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .im-thumb-card-add {
+      width: 140px;
+      height: 75px;
+      border-radius: 8px;
+      border: 1.5px dashed #D1D5DB;
+      background: #F9FAFB;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: #6B7280;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .im-thumb-card-add:hover {
+      border-color: var(--im-red);
+      color: var(--im-red);
+      background: #FEF2F2;
+    }
+
+    /* ==========================================================================
+       PRODUCT ROWS LIST (1:1 FROM IMAGE 3)
+       ========================================================================== */
+    .im-product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .im-product-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: #FFFFFF;
+      transition: all 0.2s;
+    }
+
+    .im-product-row:hover {
+      border-color: #D1D5DB;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .im-product-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .im-drag-handle {
+      color: #9CA3AF;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      user-select: none;
+    }
+
+    .im-row-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .im-row-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .im-row-info h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+
+    .im-row-info p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .im-row-right {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .im-wa-input {
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #FFFFFF;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 9px 14px;
+    .btn-icon-dot {
+      width: 32px;
+      height: 32px;
       border-radius: 6px;
-      width: 175px;
-      outline: none;
-      letter-spacing: 1px;
+      background: transparent;
+      border: none;
+      color: #9CA3AF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
-    .im-wa-input:focus {
-      border-color: var(--wa-green);
+    .btn-icon-dot:hover {
+      background: #F3F4F6;
+      color: var(--text-heading);
     }
 
-    /* Product Catalog Table Container */
-    .im-catalog-box {
-      background: var(--admin-surface);
-      border: 1px solid var(--admin-border);
-      border-radius: 14px;
+    /* ==========================================================================
+       CATEGORIES ROW (1:1 FROM IMAGE 3)
+       ========================================================================== */
+    .im-category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .im-cat-card {
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      transition: all 0.2s;
+    }
+
+    .im-cat-card:hover {
+      border-color: #D1D5DB;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .im-cat-card-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .im-cat-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: #000;
       overflow: hidden;
       display: flex;
-      flex-direction: column;
-    }
-
-    .im-catalog-toolbar {
-      padding: 18px 22px;
-      border-bottom: 1px solid var(--admin-border);
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      background: rgba(10, 14, 22, 0.6);
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    .im-filter-pills {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: thin;
-    }
-
-    .im-pill-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      color: var(--im-gray-muted);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-    }
-
-    .im-pill-btn:hover {
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .im-pill-btn.active {
-      color: #FFFFFF;
-      background: rgba(228, 47, 56, 0.15);
-      border-color: var(--im-red);
-    }
-
-    .im-search-input {
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #FFFFFF;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px;
-      padding: 8px 16px;
-      border-radius: 6px;
-      width: 250px;
-      outline: none;
-    }
-
-    .im-search-input:focus {
-      border-color: rgba(255, 255, 255, 0.35);
-    }
-
-    /* Table Styling */
-    .im-table-wrap {
-      overflow-x: auto;
-    }
-
-    .im-table {
+    .im-cat-thumb img {
       width: 100%;
-      border-collapse: collapse;
-      text-align: left;
+      height: 100%;
+      object-fit: contain;
     }
 
-    .im-table th {
-      background: #07090e;
-      color: var(--im-gray-muted);
+    .im-cat-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--admin-border);
-      white-space: nowrap;
+      color: var(--text-heading);
     }
 
-    .im-table td {
-      padding: 14px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      vertical-align: middle;
-      color: #FFFFFF;
+    /* ==========================================================================
+       SOFTWARE DOWNLOADS (1:1 FROM IMAGE 3)
+       ========================================================================== */
+    .im-software-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .im-table tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
+    .im-software-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: #FFFFFF;
+      transition: all 0.2s;
     }
 
-    .im-prod-col {
+    .im-software-row:hover {
+      border-color: #D1D5DB;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .im-soft-left {
       display: flex;
       align-items: center;
       gap: 14px;
     }
 
-    .im-prod-thumb-box {
-      width: 48px;
-      height: 48px;
+    .im-soft-icon {
+      width: 38px;
+      height: 38px;
       border-radius: 8px;
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #EFF6FF;
+      color: var(--blue-accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
     }
 
-    .im-prod-thumb-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 2px;
-    }
-
-    .im-prod-name {
+    .im-soft-info h4 {
       font-family: 'Montserrat', sans-serif;
       font-size: 13.5px;
-      font-weight: 800;
-      color: #FFFFFF;
-      letter-spacing: 0.5px;
-    }
-
-    .im-prod-sub {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 11.5px;
-      color: var(--im-gray-muted);
-    }
-
-    .im-cat-badge {
-      display: inline-block;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 9.5px;
       font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.06);
-      color: #d1d5db;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-heading);
     }
 
-    .im-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 20px;
+    .im-soft-info p {
+      font-size: 12px;
+      color: var(--text-muted);
     }
 
-    .im-status-pill.active {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      color: #10b981;
-    }
-
-    .im-status-pill.draft {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      color: #f59e0b;
-    }
-
-    .im-row-actions {
+    .im-soft-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
     }
 
-    .im-icon-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--im-gray-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .im-icon-btn:hover {
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .im-icon-btn.delete:hover {
-      background: rgba(228, 47, 56, 0.2);
-      border-color: var(--im-red);
-      color: var(--im-red);
-    }
-
-    /* Modal Form */
-    .im-modal-overlay {
+    /* ==========================================================================
+       MODALS
+       ========================================================================== */
+    .im-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(12px);
-      z-index: 2000;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
     }
 
-    .im-modal-overlay.open {
+    .im-modal-backdrop.open {
       display: flex;
     }
 
-    .im-modal-dialog {
-      background: #0E1015;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 16px;
-      max-width: 680px;
+    .im-modal-box {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      max-width: 620px;
       width: 100%;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
       overflow: hidden;
     }
 
     .im-modal-header {
-      padding: 20px 26px;
-      border-bottom: 1px solid var(--admin-border);
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10, 14, 22, 0.6);
     }
 
     .im-modal-title {
       font-family: 'Montserrat', sans-serif;
       font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      color: #FFFFFF;
+      font-weight: 700;
+      color: var(--text-heading);
     }
 
     .im-modal-close {
       background: transparent;
       border: none;
-      color: var(--im-gray-muted);
-      font-size: 20px;
+      color: var(--text-muted);
+      font-size: 22px;
       cursor: pointer;
     }
 
-    .im-modal-close:hover {
-      color: #FFFFFF;
-    }
-
     .im-modal-body {
-      padding: 24px 26px;
+      padding: 22px 24px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-    }
-
-    .im-form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
 
-    .im-form-group {
+    .form-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
 
-    .im-form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    .im-form-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--im-gray-muted);
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-body);
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .im-form-control {
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #FFFFFF;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 13.5px;
-      padding: 10px 14px;
+    .form-input {
+      padding: 9px 12px;
+      border: 1px solid var(--card-border);
       border-radius: 6px;
+      font-size: 13.5px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       outline: none;
     }
 
-    .im-form-control:focus {
+    .form-input:focus {
       border-color: var(--im-red);
     }
 
     .im-modal-footer {
-      padding: 18px 26px;
-      border-top: 1px solid var(--admin-border);
+      padding: 16px 24px;
+      border-top: 1px solid var(--card-border);
       display: flex;
       justify-content: flex-end;
-      gap: 12px;
-      background: rgba(10, 14, 22, 0.6);
+      gap: 10px;
+      background: #F9FAFB;
     }
 
     /* Toast */
-    .im-toast {
+    .im-admin-toast {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: #0E1015;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-left: 4px solid var(--im-red);
+      background: #111827;
       color: #FFFFFF;
       padding: 12px 20px;
-      border-radius: 6px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      z-index: 3000;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      z-index: 2000;
       transform: translateY(100px);
       opacity: 0;
       transition: all 0.25s ease;
     }
 
-    .im-toast.show {
+    .im-admin-toast.show {
       transform: translateY(0);
       opacity: 1;
     }
 
-    @media (max-width: 860px) {
-      body.im-admin-body {
-        padding-top: 130px;
-      }
-      .im-form-grid {
-        grid-template-columns: 1fr;
-      }
-      .im-admin-nav-links {
-        display: none;
-      }
-      .im-admin-hero {
+    @media (max-width: 900px) {
+      body {
         flex-direction: column;
-        align-items: flex-start;
+      }
+      .im-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .im-main-content {
+        padding: 20px;
       }
     }
   </style>
 </head>
-<body class="im-admin-body">
+<body>
 
   <!-- ==========================================================================
-       ICEMASTER FLOATING GLASS PILL NAVBAR (1:1 Matching Website Header)
+       SIDEBAR NAVIGATION (1:1 FROM IMAGE 3)
        ========================================================================== -->
-  <header class="im-admin-floating-header">
-    <div class="im-admin-pill-navbar">
-      <!-- Brand & Emblem -->
-      <a href="index.html" class="im-admin-brand">
-        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Emblem" class="im-admin-logo-img">
-        <span class="im-admin-brand-title">ICE MASTER</span>
-        <span class="im-admin-badge-tag">ADMIN</span>
-      </a>
-
-      <div class="im-admin-divider"></div>
-
-      <!-- Quick Nav Clusters -->
-      <nav class="im-admin-nav-links">
-        <a class="im-admin-nav-btn active" onclick="scrollToSection('catalog')">CATALOG</a>
-        <a class="im-admin-nav-btn" onclick="scrollToSection('whatsapp')">WHATSAPP</a>
-        <a href="product-specs.html" class="im-admin-nav-btn" target="_blank">SPECS PORTAL &nearr;</a>
-        <a href="all-products.html" class="im-admin-nav-btn" target="_blank">LIVE STOREFRONT &nearr;</a>
-      </nav>
+  <aside class="im-sidebar">
+    <div class="im-sidebar-brand">
+      <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-sidebar-logo-img">
+      <div class="im-sidebar-brand-name">ICE MASTER</div>
     </div>
-  </header>
+
+    <nav class="im-sidebar-nav">
+      <a class="im-nav-item active" onclick="scrollToCard('hero-section', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Hero
+      </a>
+      <a class="im-nav-item" onclick="scrollToCard('products-section', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        Products
+      </a>
+      <a class="im-nav-item" onclick="scrollToCard('categories-section', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Categories
+      </a>
+      <a class="im-nav-item" onclick="scrollToCard('software-section', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Software
+      </a>
+    </nav>
+
+    <div class="im-sidebar-footer">
+      <div class="im-user-row">
+        <div class="im-avatar-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <span>Admin</span>
+      </div>
+      <a href="index.html" class="im-logout-link" title="Return to Website">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
 
   <!-- ==========================================================================
-       MAIN CONTENT CONTAINER
+       MAIN CONTENT (1:1 FROM IMAGE 3)
        ========================================================================== -->
-  <main class="im-admin-container">
+  <main class="im-main-content">
     
-    <!-- Hero / Header Strip -->
-    <section class="im-admin-hero">
-      <div>
-        <div class="im-admin-eyebrow">ADMIN CONSOLE // INVENTORY & CATALOG</div>
-        <h1 class="im-admin-title">PRODUCT LISTINGS</h1>
-        <p class="im-admin-subtitle">Directly manage PC cabinets, liquid coolers, air coolers & customer WhatsApp routing.</p>
+    <!-- Top Header Bar -->
+    <header class="im-top-bar">
+      <div class="im-top-title">
+        <h1>Website Manager</h1>
+        <p>Manage your website content easily</p>
       </div>
 
-      <div class="im-admin-hero-actions">
-        <button class="im-btn im-btn-glass" onclick="exportJSON()" title="Export JSON data">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          Export Data
+      <div class="im-admin-pill-profile" onclick="window.open('index.html', '_blank')">
+        <div class="im-avatar-icon" style="width: 22px; height: 22px; color:#4B5563; background:#E5E7EB;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <span>Admin</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+    </header>
+
+    <!-- ==========================================================================
+         CARD 1: MAIN HERO SECTION
+         ========================================================================== -->
+    <section class="im-card" id="hero-section">
+      <div class="im-card-header">
+        <div class="im-card-header-left">
+          <div class="im-card-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          </div>
+          <div>
+            <h3 class="im-card-title">Main Hero Section</h3>
+            <p class="im-card-subtitle">Edit main banner images</p>
+          </div>
+        </div>
+
+        <button class="btn-dark" onclick="openHeroAddModal('main')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add Image
         </button>
-        <button class="im-btn im-btn-red" onclick="openAddModal()">
+      </div>
+
+      <!-- Main Banner Viewport -->
+      <div class="im-banner-stage">
+        <img src="assets/images/homepage/hero_bg_slide_1.png" alt="Main Hero Banner" class="im-banner-stage-img" id="mainHeroActiveImg">
+        <button class="im-banner-edit-overlay-btn" title="Edit active banner" onclick="openHeroEditModal('main')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        </button>
+      </div>
+
+      <!-- Thumbnail Strip -->
+      <div class="im-thumb-strip" id="mainHeroThumbs">
+        <div class="im-thumb-card active" onclick="setHeroSlide(0, this)">
+          <img src="assets/images/homepage/hero_bg_slide_1.png" alt="Slide 1">
+        </div>
+        <div class="im-thumb-card" onclick="setHeroSlide(1, this)">
+          <img src="assets/images/homepage/hero_bg_slide_2.png" alt="Slide 2">
+        </div>
+        <div class="im-thumb-card-add" onclick="openHeroAddModal('main')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>Add Image</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CARD 2: SUB HERO SECTION (HEADSET SECTION)
+         ========================================================================== -->
+    <section class="im-card" id="sub-hero-section">
+      <div class="im-card-header">
+        <div class="im-card-header-left">
+          <div class="im-card-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          </div>
+          <div>
+            <h3 class="im-card-title">Sub Hero Section</h3>
+            <p class="im-card-subtitle">Edit headset section</p>
+          </div>
+        </div>
+
+        <button class="btn-dark" onclick="openHeroAddModal('sub')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add Image
+        </button>
+      </div>
+
+      <!-- Sub Hero Banner Viewport -->
+      <div class="im-banner-stage">
+        <img src="assets/images/homepage/headset_bg.png" alt="Sub Hero Banner" class="im-banner-stage-img" id="subHeroActiveImg">
+        <button class="im-banner-edit-overlay-btn" title="Edit sub hero banner" onclick="openHeroEditModal('sub')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        </button>
+      </div>
+
+      <!-- Sub Hero Thumbnail Strip -->
+      <div class="im-thumb-strip" id="subHeroThumbs">
+        <div class="im-thumb-card active" onclick="setSubHeroSlide(0, this)">
+          <img src="assets/images/homepage/headset_bg.png" alt="Headset Banner">
+        </div>
+        <div class="im-thumb-card-add" onclick="openHeroAddModal('sub')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>Add Image</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CARD 3: PRODUCTS
+         ========================================================================== -->
+    <section class="im-card" id="products-section">
+      <div class="im-card-header">
+        <div class="im-card-header-left">
+          <div class="im-card-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </div>
+          <div>
+            <h3 class="im-card-title">Products</h3>
+            <p class="im-card-subtitle">Manage product images, details and category</p>
+          </div>
+        </div>
+
+        <button class="btn-red" onclick="openProductModal('add')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           Add Product
         </button>
       </div>
-    </section>
 
-    <!-- Hardware Metrics Summary -->
-    <section class="im-admin-metrics">
-      <div class="im-metric-card accent-red">
-        <div>
-          <div class="im-metric-label">Total Listed Models</div>
-          <div class="im-metric-val" id="metricTotal">23</div>
-        </div>
-      </div>
-
-      <div class="im-metric-card">
-        <div>
-          <div class="im-metric-label">Active Categories</div>
-          <div class="im-metric-val">5</div>
-        </div>
-      </div>
-
-      <div class="im-metric-card">
-        <div>
-          <div class="im-metric-label">Packaging Verified</div>
-          <div class="im-metric-val" id="metricActive" style="color: #10b981;">23</div>
-        </div>
-      </div>
-
-      <div class="im-metric-card accent-wa">
-        <div>
-          <div class="im-metric-label">Inquiry Channel</div>
-          <div class="im-metric-val" style="font-size: 16px; color: var(--wa-green); letter-spacing: 0.5px;">WHATSAPP DIRECT</div>
-        </div>
+      <!-- Product Rows List -->
+      <div class="im-product-list" id="productsListContainer">
+        <!-- Rendered dynamically -->
       </div>
     </section>
 
-    <!-- WhatsApp Quick Routing Section -->
-    <section class="im-wa-bar" id="section-whatsapp">
-      <div class="im-wa-info">
-        <div class="im-wa-icon-wrap">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    <!-- ==========================================================================
+         CARD 4: CATEGORIES (ALL PRODUCTS PAGE)
+         ========================================================================== -->
+    <section class="im-card" id="categories-section">
+      <div class="im-card-header">
+        <div class="im-card-header-left">
+          <div class="im-card-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </div>
+          <div>
+            <h3 class="im-card-title">Categories</h3>
+            <p class="im-card-subtitle">Add or remove product categories</p>
+          </div>
         </div>
-        <div>
-          <div class="im-wa-title">Direct WhatsApp Leads Destination</div>
-          <div class="im-wa-desc">Customer buy & inquiry requests on the storefront will launch WhatsApp to this number.</div>
-        </div>
+
+        <button class="btn-red" onclick="openCategoryModal('add')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add Category
+        </button>
       </div>
 
-      <div class="im-wa-controls">
-        <input type="text" id="waPhoneInput" class="im-wa-input" value="+919876543210" placeholder="+91 Phone">
-        <button class="im-btn im-btn-wa" onclick="saveWaNumber()">Save Number</button>
-        <button class="im-btn im-btn-glass" onclick="testWaLink()">Test Link</button>
+      <!-- Categories Grid -->
+      <div class="im-category-grid" id="categoriesContainer">
+        <!-- Rendered dynamically -->
       </div>
     </section>
 
-    <!-- Product Catalog Table Card -->
-    <section class="im-catalog-box" id="section-catalog">
-      <div class="im-catalog-toolbar">
-        <div class="im-filter-pills">
-          <button class="im-pill-btn active" onclick="setCategory('all', this)">All Models (<span id="countPillsAll">23</span>)</button>
-          <button class="im-pill-btn" onclick="setCategory('cases', this)">Cabinets (16)</button>
-          <button class="im-pill-btn" onclick="setCategory('liquid_coolers', this)">Liquid Coolers (4)</button>
-          <button class="im-pill-btn" onclick="setCategory('air_coolers', this)">Air Coolers (2)</button>
-          <button class="im-pill-btn" onclick="setCategory('audio', this)">Audio (1)</button>
+    <!-- ==========================================================================
+         CARD 5: SOFTWARE CONTROL (DOWNLOAD PAGE)
+         ========================================================================== -->
+    <section class="im-card" id="software-section">
+      <div class="im-card-header">
+        <div class="im-card-header-left">
+          <div class="im-card-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          </div>
+          <div>
+            <h3 class="im-card-title">Software Control</h3>
+            <p class="im-card-subtitle">Manage downloadable software files</p>
+          </div>
         </div>
 
-        <div>
-          <input type="text" id="searchInput" class="im-search-input" placeholder="Search product model, socket, form...">
-        </div>
+        <button class="btn-red" onclick="openSoftwareModal('add')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add File
+        </button>
       </div>
 
-      <div class="im-table-wrap">
-        <table class="im-table">
-          <thead>
-            <tr>
-              <th>Model Details</th>
-              <th>Category</th>
-              <th>Form / Socket</th>
-              <th>Chassis Dimensions</th>
-              <th>Status</th>
-              <th>WhatsApp Lead</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="catalogTableBody"></tbody>
-        </table>
+      <!-- Software List -->
+      <div class="im-software-list" id="softwareListContainer">
+        <!-- Rendered dynamically -->
       </div>
     </section>
 
   </main>
 
-  <!-- Add / Edit Modal -->
-  <div class="im-modal-overlay" id="productModal">
-    <div class="im-modal-dialog">
+  <!-- ==========================================================================
+       MODAL: ADD / EDIT PRODUCT
+       ========================================================================== -->
+  <div class="im-modal-backdrop" id="modalProduct">
+    <div class="im-modal-box">
       <div class="im-modal-header">
-        <div class="im-modal-title" id="modalHeading">Add New Product</div>
-        <button class="im-modal-close" onclick="closeProductModal()">&times;</button>
+        <h3 class="im-modal-title" id="productModalTitle">Add New Product</h3>
+        <button class="im-modal-close" onclick="closeModal('modalProduct')">&times;</button>
       </div>
-
-      <form id="productForm" onsubmit="submitProductForm(event)">
+      <form id="productEditForm" onsubmit="saveProduct(event)">
         <div class="im-modal-body">
-          <input type="hidden" id="editKey">
+          <input type="hidden" id="pEditId">
 
-          <div class="im-form-grid">
-            <div class="im-form-group">
-              <label class="im-form-label">Model Name *</label>
-              <input type="text" id="formName" class="im-form-control" required placeholder="e.g. ICE MASTER AXLE">
-            </div>
+          <div class="form-group">
+            <label class="form-label">Product Name *</label>
+            <input type="text" id="pName" class="form-input" required placeholder="e.g. Gaming Cabinet X7">
+          </div>
 
-            <div class="im-form-group">
-              <label class="im-form-label">Product ID / Slug *</label>
-              <input type="text" id="formId" class="im-form-control" required placeholder="e.g. axle">
-            </div>
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select id="pCategory" class="form-input" required></select>
+          </div>
 
-            <div class="im-form-group">
-              <label class="im-form-label">Category *</label>
-              <select id="formCat" class="im-form-control" required>
-                <option value="cases">Gaming Cabinets / Cases</option>
-                <option value="liquid_coolers">Liquid Coolers (AIO)</option>
-                <option value="air_coolers">Air Coolers</option>
-                <option value="audio">Gaming Audio / Headphones</option>
-                <option value="psu">Power Supply Units</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label class="form-label">Product Image Path / URL *</label>
+            <input type="text" id="pImg" class="form-input" required placeholder="assets/images/products/cases/...">
+          </div>
 
-            <div class="im-form-group">
-              <label class="im-form-label">Subtitle / Form Factor</label>
-              <input type="text" id="formType" class="im-form-control" placeholder="e.g. Mid Tower Gaming Case">
-            </div>
-
-            <div class="im-form-group">
-              <label class="im-form-label">Motherboard / CPU Socket</label>
-              <input type="text" id="formMb" class="im-form-control" placeholder="e.g. ATX / M-ATX / ITX">
-            </div>
-
-            <div class="im-form-group">
-              <label class="im-form-label">Material / Structure</label>
-              <input type="text" id="formMaterial" class="im-form-control" placeholder="e.g. SPCC 0.50mm">
-            </div>
-
-            <div class="im-form-group">
-              <label class="im-form-label">Drive Bays / Fans Included</label>
-              <input type="text" id="formBays" class="im-form-control" placeholder="e.g. 1x HDD + 2x SSD">
-            </div>
-
-            <div class="im-form-group">
-              <label class="im-form-label">Front I/O / Ports</label>
-              <input type="text" id="formIo" class="im-form-control" placeholder="e.g. 1x USB 3.0, 2x USB 2.0">
-            </div>
-
-            <div class="im-form-group">
-              <label class="im-form-label">Dimensions (L x W x H)</label>
-              <input type="text" id="formDims" class="im-form-control" placeholder="e.g. 320 x 180 x 410 mm">
-            </div>
-
-            <div class="im-form-group">
-              <label class="im-form-label">Weight / TDP</label>
-              <input type="text" id="formWeight" class="im-form-control" placeholder="e.g. 3.90 kg NW / 4.90 kg GW">
-            </div>
-
-            <div class="im-form-group full">
-              <label class="im-form-label">Catalog Status</label>
-              <select id="formStatus" class="im-form-control">
-                <option value="active">Active (Published)</option>
-                <option value="draft">Draft (Hidden)</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label class="form-label">Specifications (Motherboard / TDP / Dimensions)</label>
+            <input type="text" id="pSpecs" class="form-input" placeholder="e.g. ATX / M-ATX | 430 x 225 x 480 mm">
           </div>
         </div>
-
         <div class="im-modal-footer">
-          <button type="button" class="im-btn im-btn-glass" onclick="closeProductModal()">Cancel</button>
-          <button type="submit" class="im-btn im-btn-red">Save Product</button>
+          <button type="button" class="btn-white" onclick="closeModal('modalProduct')">Cancel</button>
+          <button type="submit" class="btn-red">Save Product</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="im-toast" id="imToast">Changes saved successfully.</div>
+  <!-- ==========================================================================
+       MODAL: ADD / EDIT CATEGORY
+       ========================================================================== -->
+  <div class="im-modal-backdrop" id="modalCategory">
+    <div class="im-modal-box">
+      <div class="im-modal-header">
+        <h3 class="im-modal-title" id="catModalTitle">Add Category</h3>
+        <button class="im-modal-close" onclick="closeModal('modalCategory')">&times;</button>
+      </div>
+      <form onsubmit="saveCategory(event)">
+        <div class="im-modal-body">
+          <input type="hidden" id="catEditKey">
+          <div class="form-group">
+            <label class="form-label">Category Name *</label>
+            <input type="text" id="catName" class="form-input" required placeholder="e.g. PC Cabinets">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category Key / Slug *</label>
+            <input type="text" id="catKey" class="form-input" required placeholder="e.g. pc-cabinets">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category Thumbnail Image URL</label>
+            <input type="text" id="catThumb" class="form-input" placeholder="assets/images/products/...">
+          </div>
+        </div>
+        <div class="im-modal-footer">
+          <button type="button" class="btn-white" onclick="closeModal('modalCategory')">Cancel</button>
+          <button type="submit" class="btn-red">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: ADD / EDIT HERO BANNER
+       ========================================================================== -->
+  <div class="im-modal-backdrop" id="modalHero">
+    <div class="im-modal-box">
+      <div class="im-modal-header">
+        <h3 class="im-modal-title" id="heroModalTitle">Edit Hero Banner</h3>
+        <button class="im-modal-close" onclick="closeModal('modalHero')">&times;</button>
+      </div>
+      <form onsubmit="saveHero(event)">
+        <div class="im-modal-body">
+          <input type="hidden" id="heroTarget">
+          <div class="form-group">
+            <label class="form-label">Banner Image URL / File Path *</label>
+            <input type="text" id="heroImgUrl" class="form-input" required placeholder="assets/images/homepage/hero_bg_slide_1.png">
+          </div>
+        </div>
+        <div class="im-modal-footer">
+          <button type="button" class="btn-white" onclick="closeModal('modalHero')">Cancel</button>
+          <button type="submit" class="btn-red">Update Banner</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: ADD / EDIT SOFTWARE FILE
+       ========================================================================== -->
+  <div class="im-modal-backdrop" id="modalSoftware">
+    <div class="im-modal-box">
+      <div class="im-modal-header">
+        <h3 class="im-modal-title" id="softModalTitle">Add Downloadable File</h3>
+        <button class="im-modal-close" onclick="closeModal('modalSoftware')">&times;</button>
+      </div>
+      <form onsubmit="saveSoftware(event)">
+        <div class="im-modal-body">
+          <input type="hidden" id="softEditId">
+          <div class="form-group">
+            <label class="form-label">Software / Document Title *</label>
+            <input type="text" id="softTitle" class="form-input" required placeholder="e.g. iM Fan Control Software">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Version Number *</label>
+            <input type="text" id="softVer" class="form-input" required placeholder="e.g. v1.2.0">
+          </div>
+          <div class="form-group">
+            <label class="form-label">File Size *</label>
+            <input type="text" id="softSize" class="form-input" required placeholder="e.g. 48 MB">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Download File Path / URL</label>
+            <input type="text" id="softUrl" class="form-input" placeholder="# or /downloads/file.exe">
+          </div>
+        </div>
+        <div class="im-modal-footer">
+          <button type="button" class="btn-white" onclick="closeModal('modalSoftware')">Cancel</button>
+          <button type="submit" class="btn-red">Save Software</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="im-admin-toast" id="toast">Saved successfully!</div>
 
   <script>
-    // Master Products with exact image references matching Ice Master folders
-    const initialMasterData = [
-      { id: "axle", cat: "cases", name: "ICE MASTER AXLE", type: "Mid Tower Gaming Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.50mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "320 x 180 x 410 mm", weight: "3.90 kg", img: "assets/images/products/cases/axle/axle_view_1.png", status: "active" },
-      { id: "box_infinity", cat: "cases", name: "BOX INFINITY", type: "Compact Tower Case", mb: "M-ATX / ITX", material: "SPCC 1.0mm", bays: "3x HDD + 2x SSD", io: "1x USB 3.0, 1x Type-C", dims: "398 x 211 x 324 mm", weight: "4.90 kg", img: "assets/images/products/cases/box-infinity/Yellow/box_infinity_yellow.png", status: "active" },
-      { id: "dynamite_x5", cat: "cases", name: "DYNAMITE X5", type: "Micro-ATX Gaming Case", mb: "M-ATX / ITX", material: "SPCC 0.45mm", bays: "1x HDD, 1x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "350 x 210 x 380 mm", weight: "4.43 kg", img: "assets/images/products/cases/dynamite-x5/Black/06_dynamite_x5_view_1.png", status: "active" },
-      { id: "dynamite_x6", cat: "cases", name: "DYNAMITE X6", type: "ATX Gaming Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.60mm", bays: "1x HDD, 1x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 2.0", dims: "423 x 220 x 467 mm", weight: "6.00 kg", img: "assets/images/products/cases/dynamite-x6/Black/07_dynamite_x6_view_1.png", status: "active" },
-      { id: "dynamite_x7", cat: "cases", name: "DYNAMITE X7", type: "Full ATX / E-ATX Case", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.60mm", bays: "2x HDD, 2x SSD", io: "1x USB 3.0, 1x Type-C, 2x USB 2.0", dims: "430 x 225 x 480 mm", weight: "7.24 kg", img: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png", status: "active" },
-      { id: "dynamite_xl_pro", cat: "cases", name: "DYNAMITE XL / PRO", type: "Dual Chamber Showcase", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.90mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 1.0", dims: "416.5 x 300 x 385 mm", weight: "7.80 kg", img: "assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png", status: "active" },
-      { id: "frosty", cat: "cases", name: "FROSTY", type: "High Airflow Gaming Case", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.55mm", bays: "2x HDD, 4x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "395 x 210 x 475 mm", weight: "6.90 kg", img: "assets/images/products/cases/frosty/Black/02_frosty_view_1.png", status: "active" },
-      { id: "glacier", cat: "cases", name: "GLACIER", type: "Mid Tower Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.50mm", bays: "2x HDD, 2x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "358 x 200 x 460 mm", weight: "3.90 kg", img: "assets/images/products/cases/glacier/Black/glacier_view_1.png", status: "active" },
-      { id: "nexus_360", cat: "cases", name: "NEXUS 360", type: "Panoramic Showcase Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.60mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 2.0", dims: "455 x 210 x 485 mm", weight: "3.90 kg", img: "assets/images/products/cases/nexus-360/nexus_360_view_1.png", status: "active" },
-      { id: "roar", cat: "cases", name: "ROAR", type: "Micro-ATX Mini Case", mb: "Micro-ATX / Mini-ITX", material: "SPCC 0.45mm", bays: "1x HDD, 1x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "290 x 190 x 375 mm", weight: "2.25 kg", img: "assets/images/products/cases/roar/roar_view_1.png", status: "active" },
-      { id: "shadow", cat: "cases", name: "SHADOW", type: "Mid Tower Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.45mm", bays: "2x HDD, 3x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "345 x 183 x 430 mm", weight: "3.90 kg", img: "assets/images/products/cases/shadow/Black/L10-B-01.png", status: "active" },
-      { id: "spark", cat: "cases", name: "SPARK", type: "Cube Gaming Case", mb: "M-ATX / ITX", material: "SPCC 0.45mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 1x USB 1.0", dims: "325 x 270 x 315 mm", weight: "3.80 kg", img: "assets/images/products/cases/spark/Black/03_spark_view_1.png", status: "active" },
-      { id: "star", cat: "cases", name: "STAR", type: "Micro-ATX Case", mb: "M-ATX / ITX", material: "SPCC 0.40mm", bays: "2x HDD, 2x SSD", io: "2x USB 1.0", dims: "265 x 165 x 350 mm", weight: "2.40 kg", img: "assets/images/products/cases/star/Black/star_view_1.png", status: "active" },
-      { id: "thunder", cat: "cases", name: "THUNDER", type: "Gaming Case", mb: "ATX / Micro-ATX / ITX", material: "SPCC 0.35mm", bays: "2x HDD+1x SSD or 3x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "326 x 190 x 433 mm", weight: "3.95 kg", img: "assets/images/products/cases/thunder/thunder_view_1.png", status: "active" },
-      { id: "torrent", cat: "cases", name: "TORRENT", type: "Airflow Mesh Case", mb: "ATX / Micro-ATX / ITX", material: "SPCC 0.45mm", bays: "2x HDD, 2x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "335 x 195 x 440 mm", weight: "3.53 kg", img: "assets/images/products/cases/torrent/Black/torrent_view_1.png", status: "active" },
-      { id: "trendy", cat: "cases", name: "TRENDY", type: "E-ATX Showcase Case", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.55mm", bays: "2x HDD, 4x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 2.0", dims: "395 x 210 x 475 mm", weight: "6.90 kg", img: "assets/images/products/cases/trendy/Black/trendy_m10_view_1.png", status: "active" },
-      // Coolers
-      { id: "cool_240_argb", cat: "liquid_coolers", name: "COOL 240 ARGB", type: "240mm AIO Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper Base & Radiator", bays: "2x 120mm ARGB Fans", io: "4Pin PWM + 3Pin ARGB", dims: "274 x 120 x 27 mm", weight: "250W TDP", img: "assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png", status: "active" },
-      { id: "cool_360_argb", cat: "liquid_coolers", name: "COOL 360 ARGB", type: "360mm AIO Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper Base & Radiator", bays: "3x 120mm ARGB Fans", io: "4Pin PWM + 3Pin ARGB", dims: "394 x 120 x 27 mm", weight: "270W TDP", img: "assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png", status: "active" },
-      { id: "hurricane_gf_240", cat: "liquid_coolers", name: "HURRICANE GF-240", type: "240mm ARGB Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper + Aluminum", bays: "2x 120mm ARGB Fans", io: "4Pin PWM + 5V ARGB", dims: "272 x 120 x 27 mm", weight: "250W TDP", img: "assets/images/products/liquid-coolers/hurricane-240-argb/Black/hurricane_240_argb_black_view_1.png", status: "active" },
-      { id: "hurricane_gf_360", cat: "liquid_coolers", name: "HURRICANE GF-360", type: "360mm ARGB Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper + Aluminum", bays: "3x 120mm ARGB Fans", io: "4Pin PWM + 5V ARGB", dims: "360mm Radiator Series", weight: "250W TDP", img: "assets/images/products/liquid-coolers/hurricane-360-argb/Black/hurricane_360_argb_black_view_1.png", status: "active" },
-      { id: "fusion", cat: "air_coolers", name: "FUSION AIR COOLER", type: "Tower Air Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "4x 6mm Copper Heat Pipes", bays: "1x 120mm Auto RGB Fan", io: "4PIN PWM", dims: "140 x 110 x 170 mm", weight: "120W TDP", img: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png", status: "active" },
-      { id: "turbo", cat: "air_coolers", name: "TURBO AIR COOLER", type: "Compact Air Cooler", mb: "Intel 1700/1200 | AMD AM4", material: "2x Copper Heat Pipes", bays: "1x 120mm Auto RGB Fan", io: "3PIN PWM", dims: "130 x 85 x 145 mm", weight: "~100W TDP", img: "assets/images/products/air-coolers/turbo/turbo_aircooler_view_1.png", status: "active" },
-      // Audio
-      { id: "gh_01", cat: "audio", name: "GH-01 GAMING HEADPHONE", type: "Pro Gaming Headset", mb: "3.5mm Stereo Plug", material: "ø40mm Dynamic Driver", bays: "Omni-directional Mic", io: "32 Ω / 110 dB", dims: "Standard Package", weight: "MRP ₹2,499", img: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png", status: "active" }
+    // State initialization matching Image 3 layout
+    const initialCategories = [
+      { key: "cases", name: "PC Cabinets", thumb: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png" },
+      { key: "coolers", name: "Coolers", thumb: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png" },
+      { key: "psu", name: "Power Supplies", thumb: "assets/images/products/cases/box-infinity/Yellow/box_infinity_yellow.png" },
+      { key: "audio", name: "Headsets", thumb: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png" }
     ];
 
-    let products = JSON.parse(localStorage.getItem("im_admin_products")) || initialMasterData;
-    let waPhone = localStorage.getItem("im_admin_wa_phone") || "+919876543210";
-    let selectedCategory = "all";
-    let filterTerm = "";
+    const initialHeroBanners = [
+      "assets/images/homepage/hero_bg_slide_1.png",
+      "assets/images/homepage/hero_bg_slide_2.png"
+    ];
 
-    function saveProducts() {
-      localStorage.setItem("im_admin_products", JSON.stringify(products));
-      updateMetrics();
+    const initialSubHeroBanners = [
+      "assets/images/homepage/headset_bg.png"
+    ];
+
+    const initialProducts = [
+      { id: "dynamite_x7", name: "Gaming Cabinet X7", cat: "cases", catName: "PC Cabinets", img: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png", specs: "E-ATX / ATX | 430 x 225 x 480 mm" },
+      { id: "tower_cooler_pro", name: "Tower Cooler Pro", cat: "coolers", catName: "Coolers", img: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png", specs: "120W TDP | 4 Copper Heatpipes" },
+      { id: "psu_850w", name: "850W Power Supply", cat: "psu", catName: "Power Supplies", img: "assets/images/homepage/im_official_emblem.png", specs: "80 Plus Gold Certified | Fully Modular" },
+      { id: "im_gh01", name: "IM-GH01 Headset", cat: "audio", catName: "Headsets", img: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png", specs: "ø40mm Driver | Omni-directional Mic" }
+    ];
+
+    const initialSoftware = [
+      { id: "soft_1", title: "iM Fan Control Software", ver: "v1.2.0", size: "48 MB", url: "#" },
+      { id: "soft_2", title: "RGB Sync Tool", ver: "v2.0.1", size: "62 MB", url: "#" },
+      { id: "soft_3", title: "User Manual", ver: "v1.0.0", size: "12 MB", url: "#" }
+    ];
+
+    // LocalStorage loading
+    let categories = JSON.parse(localStorage.getItem("im_wm_categories")) || initialCategories;
+    let heroBanners = JSON.parse(localStorage.getItem("im_wm_hero_banners")) || initialHeroBanners;
+    let subHeroBanners = JSON.parse(localStorage.getItem("im_wm_sub_hero")) || initialSubHeroBanners;
+    let products = JSON.parse(localStorage.getItem("im_wm_products")) || initialProducts;
+    let softwareList = JSON.parse(localStorage.getItem("im_wm_software")) || initialSoftware;
+
+    let activeHeroIndex = 0;
+    let activeSubHeroIndex = 0;
+
+    function saveAll() {
+      localStorage.setItem("im_wm_categories", JSON.stringify(categories));
+      localStorage.setItem("im_wm_hero_banners", JSON.stringify(heroBanners));
+      localStorage.setItem("im_wm_sub_hero", JSON.stringify(subHeroBanners));
+      localStorage.setItem("im_wm_products", JSON.stringify(products));
+      localStorage.setItem("im_wm_software", JSON.stringify(softwareList));
     }
 
-    function updateMetrics() {
-      document.getElementById("metricTotal").textContent = products.length;
-      document.getElementById("metricActive").textContent = products.filter(p => p.status === 'active').length;
-      document.getElementById("countPillsAll").textContent = products.length;
+    // Render Hero Strip
+    function renderHero() {
+      const activeImg = document.getElementById("mainHeroActiveImg");
+      activeImg.src = heroBanners[activeHeroIndex] || heroBanners[0];
+
+      const strip = document.getElementById("mainHeroThumbs");
+      strip.innerHTML = heroBanners.map((img, idx) => `
+        <div class="im-thumb-card ${idx === activeHeroIndex ? 'active' : ''}" onclick="setHeroSlide(${idx}, this)">
+          <img src="${img}" alt="Slide ${idx + 1}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
+        </div>
+      `).join("") + `
+        <div class="im-thumb-card-add" onclick="openHeroAddModal('main')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>Add Image</span>
+        </div>
+      `;
     }
 
-    function renderTable() {
-      const tbody = document.getElementById("catalogTableBody");
-      const filtered = products.filter(p => {
-        const matchesCat = selectedCategory === "all" || p.cat === selectedCategory;
-        const matchesSearch = !filterTerm || 
-          p.name.toLowerCase().includes(filterTerm) ||
-          p.id.toLowerCase().includes(filterTerm) ||
-          (p.mb && p.mb.toLowerCase().includes(filterTerm));
-        return matchesCat && matchesSearch;
-      });
+    function setHeroSlide(idx, el) {
+      activeHeroIndex = idx;
+      document.getElementById("mainHeroActiveImg").src = heroBanners[idx];
+      document.querySelectorAll("#mainHeroThumbs .im-thumb-card").forEach(c => c.classList.remove("active"));
+      el.classList.add("active");
+    }
 
-      if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 48px; color: var(--im-gray-muted);">No products found in this category.</td></tr>`;
+    // Render Sub Hero Strip
+    function renderSubHero() {
+      const activeImg = document.getElementById("subHeroActiveImg");
+      activeImg.src = subHeroBanners[activeSubHeroIndex] || subHeroBanners[0];
+
+      const strip = document.getElementById("subHeroThumbs");
+      strip.innerHTML = subHeroBanners.map((img, idx) => `
+        <div class="im-thumb-card ${idx === activeSubHeroIndex ? 'active' : ''}" onclick="setSubHeroSlide(${idx}, this)">
+          <img src="${img}" alt="Sub Hero ${idx + 1}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
+        </div>
+      `).join("") + `
+        <div class="im-thumb-card-add" onclick="openHeroAddModal('sub')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>Add Image</span>
+        </div>
+      `;
+    }
+
+    function setSubHeroSlide(idx, el) {
+      activeSubHeroIndex = idx;
+      document.getElementById("subHeroActiveImg").src = subHeroBanners[idx];
+      document.querySelectorAll("#subHeroThumbs .im-thumb-card").forEach(c => c.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    // Render Products List
+    function renderProducts() {
+      const container = document.getElementById("productsListContainer");
+      container.innerHTML = products.map((p, idx) => `
+        <div class="im-product-row">
+          <div class="im-product-left">
+            <span class="im-drag-handle" title="Reorder">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+            </span>
+            <div class="im-row-thumb">
+              <img src="${p.img || 'assets/images/homepage/im_official_emblem.png'}" alt="${p.name}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
+            </div>
+            <div class="im-row-info">
+              <h4>${p.name}</h4>
+              <p>${p.catName || p.cat}</p>
+            </div>
+          </div>
+          <div class="im-row-right">
+            <button class="btn-white" onclick="openProductModal('edit', '${p.id}')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              Edit
+            </button>
+            <button class="btn-icon-dot" title="Delete" onclick="deleteProduct('${p.id}')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // Render Categories
+    function renderCategories() {
+      const container = document.getElementById("categoriesContainer");
+      container.innerHTML = categories.map(c => `
+        <div class="im-cat-card">
+          <div class="im-cat-card-left">
+            <div class="im-cat-thumb">
+              <img src="${c.thumb || 'assets/images/homepage/im_official_emblem.png'}" alt="${c.name}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
+            </div>
+            <span class="im-cat-title">${c.name}</span>
+          </div>
+          <button class="btn-icon-dot" title="Delete Category" onclick="deleteCategory('${c.key}')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+          </button>
+        </div>
+      `).join("");
+
+      // Update product category dropdown
+      const sel = document.getElementById("pCategory");
+      sel.innerHTML = categories.map(c => `<option value="${c.key}">${c.name}</option>`).join("");
+    }
+
+    // Render Software
+    function renderSoftware() {
+      const container = document.getElementById("softwareListContainer");
+      container.innerHTML = softwareList.map(s => `
+        <div class="im-software-row">
+          <div class="im-soft-left">
+            <div class="im-soft-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+            <div class="im-soft-info">
+              <h4>${s.title}</h4>
+              <p>${s.ver} &nbsp;|&nbsp; ${s.size}</p>
+            </div>
+          </div>
+          <div class="im-soft-right">
+            <button class="btn-icon-dot" title="Download" onclick="window.open('${s.url || '#'}', '_blank')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </button>
+            <button class="btn-icon-dot" title="Edit" onclick="openSoftwareModal('edit', '${s.id}')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </button>
+            <button class="btn-icon-dot" title="Delete" onclick="deleteSoftware('${s.id}')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // Modal Triggers
+    function openProductModal(mode, id) {
+      if (mode === 'edit') {
+        const p = products.find(x => x.id === id);
+        if (!p) return;
+        document.getElementById("productModalTitle").textContent = "Edit Product";
+        document.getElementById("pEditId").value = p.id;
+        document.getElementById("pName").value = p.name;
+        document.getElementById("pCategory").value = p.cat;
+        document.getElementById("pImg").value = p.img || "";
+        document.getElementById("pSpecs").value = p.specs || "";
+      } else {
+        document.getElementById("productModalTitle").textContent = "Add New Product";
+        document.getElementById("pEditId").value = "";
+        document.getElementById("productEditForm").reset();
+      }
+      openModal('modalProduct');
+    }
+
+    function saveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById("pEditId").value;
+      const name = document.getElementById("pName").value.trim();
+      const cat = document.getElementById("pCategory").value;
+      const catObj = categories.find(c => c.key === cat);
+      const catName = catObj ? catObj.name : cat;
+      const img = document.getElementById("pImg").value.trim();
+      const specs = document.getElementById("pSpecs").value.trim();
+
+      if (id) {
+        const idx = products.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          products[idx] = { ...products[idx], name, cat, catName, img, specs };
+        }
+        showToast("Product updated!");
+      } else {
+        const newId = 'prod_' + Date.now();
+        products.unshift({ id: newId, name, cat, catName, img, specs });
+        showToast("Product added!");
+      }
+
+      saveAll();
+      renderProducts();
+      closeModal('modalProduct');
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Delete this product?")) {
+        products = products.filter(x => x.id !== id);
+        saveAll();
+        renderProducts();
+        showToast("Product removed.");
+      }
+    }
+
+    // Category Logic
+    function openCategoryModal(mode) {
+      document.getElementById("catName").value = "";
+      document.getElementById("catKey").value = "";
+      document.getElementById("catThumb").value = "";
+      openModal('modalCategory');
+    }
+
+    function saveCategory(e) {
+      e.preventDefault();
+      const name = document.getElementById("catName").value.trim();
+      const key = document.getElementById("catKey").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+      const thumb = document.getElementById("catThumb").value.trim();
+
+      if (categories.some(c => c.key === key)) {
+        alert("Category key already exists!");
         return;
       }
 
-      tbody.innerHTML = filtered.map(p => {
-        const waMsg = encodeURIComponent(`Hi Ice Master, I am interested in inquiring about ${p.name}. Please share pricing and availability.`);
-        const waClean = waPhone.replace(/[^0-9]/g, '');
-        const waUrl = `https://wa.me/${waClean}?text=${waMsg}`;
-        
-        return `
-        <tr>
-          <td>
-            <div class="im-prod-col">
-              <div class="im-prod-thumb-box">
-                <img src="${p.img || 'assets/images/homepage/im_official_emblem.png'}" alt="${p.name}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
-              </div>
-              <div>
-                <div class="im-prod-name">${p.name}</div>
-                <div class="im-prod-sub">#${p.id} &bull; ${p.type || ''}</div>
-              </div>
-            </div>
-          </td>
-          <td><span class="im-cat-badge">${formatCategory(p.cat)}</span></td>
-          <td style="font-weight:600; font-size:13px; color:#FFFFFF;">${p.mb || '-'}</td>
-          <td style="font-family:'Montserrat', sans-serif; font-size:12px; color:var(--im-gray-muted);">${p.dims || '-'}</td>
-          <td>
-            <span class="im-status-pill ${p.status === 'active' ? 'active' : 'draft'}">
-              &bull; ${p.status === 'active' ? 'Active' : 'Draft'}
-            </span>
-          </td>
-          <td>
-            <a href="${waUrl}" target="_blank" class="im-btn im-btn-wa" style="padding: 5px 12px; font-size: 10.5px;">
-              WhatsApp
-            </a>
-          </td>
-          <td>
-            <div class="im-row-actions">
-              <button class="im-icon-btn" title="Edit Product" onclick="openEditModal('${p.id}')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-              </button>
-              <button class="im-icon-btn delete" title="Delete Product" onclick="deleteItem('${p.id}')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-              </button>
-            </div>
-          </td>
-        </tr>
-      `}).join("");
+      categories.push({ key, name, thumb });
+      saveAll();
+      renderCategories();
+      closeModal('modalCategory');
+      showToast("Category added!");
     }
 
-    function formatCategory(cat) {
-      if (cat === "cases") return "Cabinet";
-      if (cat === "liquid_coolers") return "Liquid Cooler";
-      if (cat === "air_coolers") return "Air Cooler";
-      if (cat === "audio") return "Gaming Audio";
-      if (cat === "psu") return "Power Supply";
-      return cat;
+    function deleteCategory(key) {
+      if (confirm("Delete category? Products in this category will remain.")) {
+        categories = categories.filter(c => c.key !== key);
+        saveAll();
+        renderCategories();
+        showToast("Category deleted.");
+      }
     }
 
-    function setCategory(cat, btn) {
-      selectedCategory = cat;
-      document.querySelectorAll(".im-pill-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      renderTable();
+    // Hero Logic
+    function openHeroAddModal(target) {
+      document.getElementById("heroTarget").value = target;
+      document.getElementById("heroModalTitle").textContent = target === 'main' ? "Add Main Hero Image" : "Add Sub Hero Image";
+      document.getElementById("heroImgUrl").value = "";
+      openModal('modalHero');
     }
 
-    document.getElementById("searchInput").addEventListener("input", (e) => {
-      filterTerm = e.target.value.toLowerCase().trim();
-      renderTable();
-    });
-
-    // Modal Operations
-    function openAddModal() {
-      document.getElementById("modalHeading").textContent = "Add New Product";
-      document.getElementById("editKey").value = "";
-      document.getElementById("productForm").reset();
-      document.getElementById("formId").disabled = false;
-      document.getElementById("productModal").classList.add("open");
+    function openHeroEditModal(target) {
+      document.getElementById("heroTarget").value = target;
+      document.getElementById("heroModalTitle").textContent = target === 'main' ? "Edit Main Hero Active Image" : "Edit Sub Hero Active Image";
+      document.getElementById("heroImgUrl").value = target === 'main' ? heroBanners[activeHeroIndex] : subHeroBanners[activeSubHeroIndex];
+      openModal('modalHero');
     }
 
-    function openEditModal(id) {
-      const p = products.find(x => x.id === id);
-      if (!p) return;
-
-      document.getElementById("modalHeading").textContent = `Edit Product: ${p.name}`;
-      document.getElementById("editKey").value = p.id;
-      document.getElementById("formId").value = p.id;
-      document.getElementById("formId").disabled = true;
-      document.getElementById("formName").value = p.name;
-      document.getElementById("formCat").value = p.cat;
-      document.getElementById("formType").value = p.type || "";
-      document.getElementById("formMb").value = p.mb || "";
-      document.getElementById("formMaterial").value = p.material || "";
-      document.getElementById("formBays").value = p.bays || "";
-      document.getElementById("formIo").value = p.io || "";
-      document.getElementById("formDims").value = p.dims || "";
-      document.getElementById("formWeight").value = p.weight || "";
-      document.getElementById("formStatus").value = p.status || "active";
-
-      document.getElementById("productModal").classList.add("open");
-    }
-
-    function closeProductModal() {
-      document.getElementById("productModal").classList.remove("open");
-    }
-
-    function submitProductForm(e) {
+    function saveHero(e) {
       e.preventDefault();
-      const editKey = document.getElementById("editKey").value;
-      const id = editKey || document.getElementById("formId").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '_');
-      const name = document.getElementById("formName").value.trim();
-      const cat = document.getElementById("formCat").value;
-      const type = document.getElementById("formType").value.trim();
-      const mb = document.getElementById("formMb").value.trim();
-      const material = document.getElementById("formMaterial").value.trim();
-      const bays = document.getElementById("formBays").value.trim();
-      const io = document.getElementById("formIo").value.trim();
-      const dims = document.getElementById("formDims").value.trim();
-      const weight = document.getElementById("formWeight").value.trim();
-      const status = document.getElementById("formStatus").value;
+      const target = document.getElementById("heroTarget").value;
+      const url = document.getElementById("heroImgUrl").value.trim();
 
-      if (editKey) {
-        const idx = products.findIndex(p => p.id === editKey);
-        if (idx !== -1) {
-          products[idx] = { ...products[idx], name, cat, type, mb, material, bays, io, dims, weight, status };
-        }
-        showToast("Product updated successfully!");
+      if (target === 'main') {
+        heroBanners.push(url);
+        activeHeroIndex = heroBanners.length - 1;
+        renderHero();
       } else {
-        if (products.some(p => p.id === id)) {
-          alert("Product ID already exists. Please choose a unique ID.");
-          return;
+        subHeroBanners.push(url);
+        activeSubHeroIndex = subHeroBanners.length - 1;
+        renderSubHero();
+      }
+      saveAll();
+      closeModal('modalHero');
+      showToast("Banner updated!");
+    }
+
+    // Software Logic
+    function openSoftwareModal(mode, id) {
+      if (mode === 'edit') {
+        const s = softwareList.find(x => x.id === id);
+        if (!s) return;
+        document.getElementById("softModalTitle").textContent = "Edit Downloadable File";
+        document.getElementById("softEditId").value = s.id;
+        document.getElementById("softTitle").value = s.title;
+        document.getElementById("softVer").value = s.ver;
+        document.getElementById("softSize").value = s.size;
+        document.getElementById("softUrl").value = s.url || "";
+      } else {
+        document.getElementById("softModalTitle").textContent = "Add Downloadable File";
+        document.getElementById("softEditId").value = "";
+        document.getElementById("softTitle").value = "";
+        document.getElementById("softVer").value = "";
+        document.getElementById("softSize").value = "";
+        document.getElementById("softUrl").value = "";
+      }
+      openModal('modalSoftware');
+    }
+
+    function saveSoftware(e) {
+      e.preventDefault();
+      const id = document.getElementById("softEditId").value;
+      const title = document.getElementById("softTitle").value.trim();
+      const ver = document.getElementById("softVer").value.trim();
+      const size = document.getElementById("softSize").value.trim();
+      const url = document.getElementById("softUrl").value.trim();
+
+      if (id) {
+        const idx = softwareList.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          softwareList[idx] = { id, title, ver, size, url };
         }
-        products.unshift({ id, name, cat, type, mb, material, bays, io, dims, weight, status });
-        showToast("New product added to catalog!");
+        showToast("Software file updated!");
+      } else {
+        softwareList.push({ id: 'soft_' + Date.now(), title, ver, size, url });
+        showToast("Software file added!");
       }
 
-      saveProducts();
-      renderTable();
-      closeProductModal();
+      saveAll();
+      renderSoftware();
+      closeModal('modalSoftware');
     }
 
-    function deleteItem(id) {
-      const p = products.find(x => x.id === id);
-      if (!p) return;
-
-      if (confirm(`Are you sure you want to delete "${p.name}"?`)) {
-        products = products.filter(x => x.id !== id);
-        saveProducts();
-        renderTable();
-        showToast("Product deleted from catalog.");
+    function deleteSoftware(id) {
+      if (confirm("Delete this download file?")) {
+        softwareList = softwareList.filter(s => s.id !== id);
+        saveAll();
+        renderSoftware();
+        showToast("File removed.");
       }
     }
 
-    // WhatsApp settings
-    function saveWaNumber() {
-      const val = document.getElementById("waPhoneInput").value.trim();
-      if (!val) return;
-      waPhone = val;
-      localStorage.setItem("im_admin_wa_phone", val);
-      showToast("WhatsApp number updated!");
-      renderTable();
+    // Modal Utils
+    function openModal(id) {
+      document.getElementById(id).classList.add("open");
     }
 
-    function testWaLink() {
-      const clean = waPhone.replace(/[^0-9]/g, '');
-      const testUrl = `https://wa.me/${clean}?text=${encodeURIComponent('Hello Ice Master Technologies, testing live WhatsApp customer inquiry routing.')}`;
-      window.open(testUrl, '_blank');
-    }
-
-    function exportJSON() {
-      const str = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(products, null, 2));
-      const a = document.createElement("a");
-      a.setAttribute("href", str);
-      a.setAttribute("download", "ice-master-catalog.json");
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      showToast("ice-master-catalog.json exported!");
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
     }
 
     function showToast(text) {
-      const toast = document.getElementById("imToast");
+      const toast = document.getElementById("toast");
       toast.textContent = text;
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 2500);
     }
 
-    function scrollToSection(sec) {
-      if (sec === 'whatsapp') {
-        document.getElementById("section-whatsapp").scrollIntoView({ behavior: 'smooth' });
-      } else {
-        document.getElementById("section-catalog").scrollIntoView({ behavior: 'smooth' });
-      }
+    function scrollToCard(id, el) {
+      document.querySelectorAll(".im-nav-item").forEach(item => item.classList.remove("active"));
+      el.classList.add("active");
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
 
-    document.getElementById("productModal").addEventListener("click", (e) => {
-      if (e.target.id === "productModal") closeProductModal();
+    // Close on click outside
+    document.querySelectorAll(".im-modal-backdrop").forEach(backdrop => {
+      backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) backdrop.classList.remove("open");
+      });
     });
 
-    // Init
-    document.getElementById("waPhoneInput").value = waPhone;
-    updateMetrics();
-    renderTable();
+    // Initial render
+    renderHero();
+    renderSubHero();
+    renderCategories();
+    renderProducts();
+    renderSoftware();
   </script>
 </body>
 </html>
