@@ -988,303 +988,409 @@ function initProductDetailPage() {
   const thumbContainer = document.getElementById('pd-thumbnail-strip');
   if (!pdStageImg && !thumbContainer) return;
 
-  // Complete Catalog of 14 Real Products from Final_Z_Products
+  // Complete Catalog of Official Products (31 Models)
   const catalog = {
-    // Air Coolers
     'fusion': {
-      title: 'FUSION',
-      subtitle: 'High-Performance CPU Air Cooler',
-      eyebrow: 'CPU AIR COOLER',
-      categoryName: 'Air Coolers',
+      title: "Fusion CPU Air Cooler",
+      subtitle: "High-performance CPU air cooler with 4 direct-touch copper heatpipes and dynamic hydraulic RGB fan.",
+      eyebrow: "AIR COOLERS",
+      categoryName: "Air Coolers",
       categoryUrl: 'all-products.html?category=air-coolers',
-      breadcrumbTitle: 'Fusion CPU Air Cooler',
-      colors: ['black'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png',
-          'assets/images/products/air-coolers/fusion/fusion_aircooler_view_2.png',
-          'assets/images/products/air-coolers/fusion/fusion_aircooler_view_3.png',
-          'assets/images/products/air-coolers/fusion/fusion_aircooler_view_4.png',
-          'assets/images/products/air-coolers/fusion/fusion_aircooler_view_5.png'
-        ]
-      }
+      breadcrumbTitle: "Fusion CPU Air Cooler",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png"]},
+      customSpecs: [{"label":"Cooler Dimensions","value":"140 x 110 x 170 mm"},{"label":"TDP Rating","value":"120W TDP"},{"label":"Heatpipe Structure","value":"4x 6mm Direct Touch Copper"},{"label":"Fan Specification","value":"1x 120mm Auto RGB (Hydraulic Bearing)"},{"label":"Fan Speed & Airflow","value":"800 - 2000 RPM (PWM) / 67.96 CFM"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM5/AM4"}]
     },
 
-    // Liquid Coolers
+    'turbo': {
+      title: "Turbo CPU Air Cooler",
+      subtitle: "Compact tower CPU cooler with 2 copper heatpipes and ultra-quiet 24 dBA auto RGB fan.",
+      eyebrow: "AIR COOLERS",
+      categoryName: "Air Coolers",
+      categoryUrl: 'all-products.html?category=air-coolers',
+      breadcrumbTitle: "Turbo CPU Air Cooler",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/air-coolers/turbo/turbo_aircooler_view_1.png"]},
+      customSpecs: [{"label":"Cooler Dimensions","value":"130 x 85 x 145 mm"},{"label":"TDP Rating","value":"95W - 105W TDP"},{"label":"Heatpipe Structure","value":"2x Copper Heat Pipes (HDT Direct Touch)"},{"label":"Fan Specification","value":"1x 120mm Auto RGB (Hydraulic Bearing)"},{"label":"Fan Speed & Noise","value":"1900 RPM (+/-10%) / 38 CFM / 24 dBA"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM4/AM3/AM2"}]
+    },
+
     'cool-240-argb': {
-      title: 'COOL 240 ARGB',
-      subtitle: '240mm ARGB Liquid CPU Cooler',
-      eyebrow: 'LIQUID CPU COOLER',
-      categoryName: 'Liquid Coolers',
+      title: "Cool 240 ARGB",
+      subtitle: "240mm dual-chamber ARGB liquid CPU cooler engineered for high thermal efficiency and quiet acoustics.",
+      eyebrow: "LIQUID COOLERS",
+      categoryName: "Liquid Coolers",
       categoryUrl: 'all-products.html?category=liquid-coolers',
-      breadcrumbTitle: 'Cool 240 ARGB Liquid Cooler',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': ['assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png'],
-        'white': ['assets/images/products/liquid-coolers/cool-240-argb/White/cool_240_argb_white.png']
-      }
-    },
-    'cool-360-argb': {
-      title: 'COOL 360 ARGB',
-      subtitle: '360mm ARGB Liquid CPU Cooler',
-      eyebrow: 'LIQUID CPU COOLER',
-      categoryName: 'Liquid Coolers',
-      categoryUrl: 'all-products.html?category=liquid-coolers',
-      breadcrumbTitle: 'Cool 360 ARGB Liquid Cooler',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': ['assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png'],
-        'white': ['assets/images/products/liquid-coolers/cool-360-argb/White/cool_360_argb_white.png']
-      }
-    },
-    'cool-240-digital-argb': {
-      title: 'COOL 240 DIGITAL ARGB',
-      subtitle: '240mm Digital Display Liquid CPU Cooler',
-      eyebrow: 'LIQUID CPU COOLER',
-      categoryName: 'Liquid Coolers',
-      categoryUrl: 'all-products.html?category=liquid-coolers',
-      breadcrumbTitle: 'Cool 240 Digital ARGB Liquid Cooler',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': ['assets/images/products/liquid-coolers/cool-240-digital-argb/Black/cool_240_digital_argb_black.png'],
-        'white': ['assets/images/products/liquid-coolers/cool-240-digital-argb/White/cool_240_digital_argb_white.png']
-      }
-    },
-    'cool-360-digital-argb': {
-      title: 'COOL 360 DIGITAL ARGB',
-      subtitle: '360mm Digital Display Liquid CPU Cooler',
-      eyebrow: 'LIQUID CPU COOLER',
-      categoryName: 'Liquid Coolers',
-      categoryUrl: 'all-products.html?category=liquid-coolers',
-      breadcrumbTitle: 'Cool 360 Digital ARGB Liquid Cooler',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': ['assets/images/products/liquid-coolers/cool-360-digital-argb/Black/cool_360_digital_argb_black.png'],
-        'white': ['assets/images/products/liquid-coolers/cool-360-digital-argb/White/cool_360_digital_argb_white.png']
-      }
+      breadcrumbTitle: "Cool 240 ARGB",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png"]},
+      customSpecs: [{"label":"Radiator Dimensions","value":"274 x 120 x 27 mm"},{"label":"TDP Rating","value":"250W TDP"},{"label":"Cold Plate Material","value":"Micro-Channel Pure Copper"},{"label":"Pump Speed & Bearing","value":"2800 RPM (+/-10%) / Ceramic (50K hrs)"},{"label":"Fans Included","value":"2x 120mm ARGB PWM (800-1800 RPM / 67.96 CFM)"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM5/AM4"}]
     },
 
-    // Gaming Cabinets
+    'cool-360-argb': {
+      title: "Cool 360 ARGB",
+      subtitle: "360mm extreme liquid CPU cooler with triple 120mm ARGB PWM fans for overclocked multi-core processors.",
+      eyebrow: "LIQUID COOLERS",
+      categoryName: "Liquid Coolers",
+      categoryUrl: 'all-products.html?category=liquid-coolers',
+      breadcrumbTitle: "Cool 360 ARGB",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png"]},
+      customSpecs: [{"label":"Radiator Dimensions","value":"394 x 120 x 27 mm"},{"label":"TDP Rating","value":"270W - 300W TDP"},{"label":"Cold Plate Material","value":"Micro-Channel Pure Copper"},{"label":"Pump Speed & Bearing","value":"2800 RPM (+/-10%) / Ceramic (50K hrs)"},{"label":"Fans Included","value":"3x 120mm ARGB PWM (800-1800 RPM / 67.96 CFM)"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM5/AM4"}]
+    },
+
+    'cool-240-digital-argb': {
+      title: "Cool 240 Digital ARGB",
+      subtitle: "240mm liquid cooler with real-time digital CPU temperature display embedded directly on the pump block.",
+      eyebrow: "LIQUID COOLERS",
+      categoryName: "Liquid Coolers",
+      categoryUrl: 'all-products.html?category=liquid-coolers',
+      breadcrumbTitle: "Cool 240 Digital ARGB",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/liquid-coolers/cool-240-digital-argb/Black/cool_240_digital_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-240-digital-argb/Black/cool_240_digital_argb_black.png"]},
+      customSpecs: [{"label":"Display Feature","value":"Real-Time Digital Temperature HUD"},{"label":"Radiator Dimensions","value":"277 x 120 x 27 mm"},{"label":"TDP Rating","value":"Up to 250W TDP"},{"label":"Pump Speed","value":"2800 RPM (+/-10%)"},{"label":"Fans Included","value":"2x 120mm ARGB PWM"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM5/AM4"}]
+    },
+
+    'cool-360-digital-argb': {
+      title: "Cool 360 Digital ARGB",
+      subtitle: "360mm extreme performance liquid cooler with real-time digital status monitor on pump block.",
+      eyebrow: "LIQUID COOLERS",
+      categoryName: "Liquid Coolers",
+      categoryUrl: 'all-products.html?category=liquid-coolers',
+      breadcrumbTitle: "Cool 360 Digital ARGB",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/liquid-coolers/cool-360-digital-argb/Black/cool_360_digital_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-360-digital-argb/Black/cool_360_digital_argb_black.png"]},
+      customSpecs: [{"label":"Display Feature","value":"Real-Time Digital Status HUD"},{"label":"Radiator Dimensions","value":"397 x 120 x 27 mm"},{"label":"TDP Rating","value":"Up to 320W TDP"},{"label":"Pump Speed","value":"2800 RPM (+/-10%)"},{"label":"Fans Included","value":"3x 120mm ARGB PWM"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM5/AM4"}]
+    },
+
+    'hurricane-240-argb': {
+      title: "Hurricane GF-240 ARGB",
+      subtitle: "240mm high-static pressure ARGB liquid cooler with copper base plate and low-noise 2700 RPM pump.",
+      eyebrow: "LIQUID COOLERS",
+      categoryName: "Liquid Coolers",
+      categoryUrl: 'all-products.html?category=liquid-coolers',
+      breadcrumbTitle: "Hurricane GF-240 ARGB",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/liquid-coolers/hurricane-240-argb/Black/hurricane_240_argb_black.png"],"white":["assets/images/products/liquid-coolers/hurricane-240-argb/Black/hurricane_240_argb_black.png"]},
+      customSpecs: [{"label":"Radiator Dimensions","value":"272 x 120 x 27 mm"},{"label":"TDP Rating","value":"250W TDP"},{"label":"Materials","value":"Copper Base Plate + Aluminum Radiator"},{"label":"Pump Speed & Noise","value":"2700 RPM (+/-10%) / 26.9 dB Ultra Quiet"},{"label":"Fans Included","value":"2x 120mm ARGB (2700 RPM max / 58 CFM)"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM5/AM4"}]
+    },
+
+    'hurricane-360-argb': {
+      title: "Hurricane GF-360 ARGB",
+      subtitle: "360mm high-airflow liquid cooler with triple ARGB fans engineered for heavy multi-threaded workloads.",
+      eyebrow: "LIQUID COOLERS",
+      categoryName: "Liquid Coolers",
+      categoryUrl: 'all-products.html?category=liquid-coolers',
+      breadcrumbTitle: "Hurricane GF-360 ARGB",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/liquid-coolers/hurricane-360-argb/Black/hurricane_360_argb_black.png"],"white":["assets/images/products/liquid-coolers/hurricane-360-argb/Black/hurricane_360_argb_black.png"]},
+      customSpecs: [{"label":"Radiator Dimensions","value":"397 x 120 x 27 mm (3 Fans)"},{"label":"TDP Rating","value":"250W - 320W TDP"},{"label":"Materials","value":"Copper Base Plate + Aluminum Radiator"},{"label":"Pump Speed & Noise","value":"2700 RPM (+/-10%) / 26.9 dB Ultra Quiet"},{"label":"Fans Included","value":"3x 120mm ARGB (2700 RPM max / 58 CFM)"},{"label":"Socket Compatibility","value":"Intel LGA 1700/1200/115X | AMD AM5/AM4"}]
+    },
+
     'dynamite-xl-pro': {
-      title: 'DYNAMITE XL PRO',
-      subtitle: 'Dual Chamber Premium Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Dynamite XL Pro",
+      subtitle: "Dual-chamber panoramic showcase chassis with 270-degree tempered glass and vertical GPU mount ready.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Dynamite XL Pro Gaming Cabinet',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png',
-          'assets/images/products/cases/dynamite-xl-pro/Black/2001-b-5.png',
-          'assets/images/products/cases/dynamite-xl-pro/Black/3c8a8cb83dc7aabfe00de8eaf8382e5.png',
-          'assets/images/products/cases/dynamite-xl-pro/Black/ecae38b2e98f976ec42ad6997ac08de.png',
-          'assets/images/products/cases/dynamite-xl-pro/Black/fd8e7cc46e9237e4a77a46972c8a2d9.png'
-        ],
-        'white': [
-          'assets/images/products/cases/dynamite-xl-pro/White/2001-w-4.png',
-          'assets/images/products/cases/dynamite-xl-pro/White/2001-w-5.png',
-          'assets/images/products/cases/dynamite-xl-pro/White/6d5b254c74b7574e69e3b6f0bbd84a7.png',
-          'assets/images/products/cases/dynamite-xl-pro/White/b4292f6039abee2018bff785e7ca063.png',
-          'assets/images/products/cases/dynamite-xl-pro/White/d5174cabf6c433c391c146064ce2080.png'
-        ]
-      }
+      breadcrumbTitle: "Dynamite XL Pro",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png"],"white":["assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"E-ATX / ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"416.5 x 300 x 385 mm"},{"label":"Material & Thickness","value":"SPCC 0.90mm High-Grade Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 1x Type-C, 1x USB 1.0, HD Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"7+3 Slots (Vertical GPU Ready)"},{"label":"Weight","value":"7.80 kg (NW) / 9.10 kg (GW)"}]
     },
+
     'frosty': {
-      title: 'FROSTY',
-      subtitle: 'High Airflow Micro-ATX / ATX Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Frosty",
+      subtitle: "High airflow gaming chassis with full-mesh front ventilation and tempered glass side window.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Frosty Gaming Cabinet',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/frosty/Black/02_frosty_view_1.png',
-          'assets/images/products/cases/frosty/Black/02_frosty_view_2.png',
-          'assets/images/products/cases/frosty/Black/02_frosty_view_3.png',
-          'assets/images/products/cases/frosty/Black/02_frosty_view_4.png'
-        ],
-        'white': [
-          'assets/images/products/cases/frosty/White/02_frosty_view_5.png',
-          'assets/images/products/cases/frosty/White/02_frosty_view_6.png'
-        ]
-      }
+      breadcrumbTitle: "Frosty",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/frosty/Black/02_frosty_view_1.png"],"white":["assets/images/products/cases/frosty/Black/02_frosty_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"E-ATX / ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"395 x 210 x 475 mm"},{"label":"Material & Thickness","value":"SPCC 0.55mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"2x 3.5\" HDD, 4x 2.5\" SSD"},{"label":"Expansion Slots","value":"7+2 Slots"},{"label":"Weight","value":"6.90 kg (NW) / 7.90 kg (GW)"}]
     },
+
     'spark': {
-      title: 'SPARK',
-      subtitle: 'Compact High-Airflow Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Spark",
+      subtitle: "Compact Micro-ATX cube case engineered for space-efficient desks without sacrificing cooling.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Spark Gaming Cabinet',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/spark/Black/8001-B-1.png',
-          'assets/images/products/cases/spark/Black/8001-B-2.png',
-          'assets/images/products/cases/spark/Black/8001-B-3.png',
-          'assets/images/products/cases/spark/Black/8001-B-4.png',
-          'assets/images/products/cases/spark/Black/8001-B-5.png'
-        ],
-        'white': [
-          'assets/images/products/cases/spark/White/8001-W-1.png',
-          'assets/images/products/cases/spark/White/8001-W-2.png',
-          'assets/images/products/cases/spark/White/8001-W-3.png',
-          'assets/images/products/cases/spark/White/8001-W-4.png',
-          'assets/images/products/cases/spark/White/8001-W-5.png'
-        ]
-      }
+      breadcrumbTitle: "Spark",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/spark/Black/8001-B-1.png"],"white":["assets/images/products/cases/spark/Black/8001-B-1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"M-ATX / ITX"},{"label":"Chassis Dimensions","value":"325 x 270 x 315 mm"},{"label":"Material & Thickness","value":"SPCC 0.45mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 1x USB 1.0, Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"4 Slots"},{"label":"Weight","value":"3.80 kg (NW) / 4.60 kg (GW)"}]
     },
+
     'star': {
-      title: 'STAR',
-      subtitle: 'Geometric Mesh Flow Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Star",
+      subtitle: "Sleek entry gaming chassis with custom geometric front air intake and compact footprint.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Star Gaming Cabinet',
-      colors: ['black'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/star/Black/T34-1.png',
-          'assets/images/products/cases/star/Black/T34-02.png',
-          'assets/images/products/cases/star/Black/T34-05.png',
-          'assets/images/products/cases/star/Black/T34-3.png',
-          'assets/images/products/cases/star/Black/T34-4.png',
-          'assets/images/products/cases/star/Black/99fccebc7f97ab7b9fd0bc30385bfbd.png',
-          'assets/images/products/cases/star/Black/d47814733135cc9b5cc7c1dfca5ebe3.png'
-        ]
-      }
+      breadcrumbTitle: "Star",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/star/Black/T34-1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"M-ATX / ITX"},{"label":"Chassis Dimensions","value":"265 x 165 x 350 mm"},{"label":"Material & Thickness","value":"SPCC 0.40mm Steel"},{"label":"Front I/O Ports","value":"2x USB 1.0, Audio"},{"label":"Drive Bays","value":"2x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"4 Slots"},{"label":"Weight","value":"2.40 kg (NW) / 2.80 kg (GW)"}]
     },
+
     'torrent': {
-      title: 'TORRENT',
-      subtitle: 'High-Velocity Performance Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Torrent",
+      subtitle: "Massive front intake ATX gaming tower optimized for high-power GPUs and continuous airflow.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Torrent Gaming Cabinet',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/torrent/Black/05_torrent_black_view_1.png',
-          'assets/images/products/cases/torrent/Black/05_torrent_black_view_2.png',
-          'assets/images/products/cases/torrent/Black/05_torrent_black_view_3.png',
-          'assets/images/products/cases/torrent/Black/05_torrent_black_view_4.png'
-        ],
-        'white': [
-          'assets/images/products/cases/torrent/White/05_torrent_white_view_1.png',
-          'assets/images/products/cases/torrent/White/05_torrent_white_view_2.png'
-        ]
-      }
+      breadcrumbTitle: "Torrent",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/torrent/Black/05_torrent_black_view_1.png"],"white":["assets/images/products/cases/torrent/Black/05_torrent_black_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"ATX / Micro-ATX / ITX"},{"label":"Chassis Dimensions","value":"335 x 195 x 440 mm"},{"label":"Material & Thickness","value":"SPCC 0.45mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 1.0, Audio"},{"label":"Drive Bays","value":"2x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"7 Slots"},{"label":"Weight","value":"3.53 kg (NW) / 4.41 kg (GW)"}]
     },
+
+    'dynamite-x5': {
+      title: "Dynamite X5",
+      subtitle: "Micro-ATX high airflow gaming case with full edge-to-edge transparent acrylic side panel.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Dynamite X5",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/dynamite-x5/Black/dynamite_x5_black_view_1.png"],"white":["assets/images/products/cases/dynamite-x5/Black/dynamite_x5_black_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"M-ATX / ITX"},{"label":"Chassis Dimensions","value":"350 x 210 x 380 mm"},{"label":"Material & Thickness","value":"SPCC 0.45mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 1.0, HD Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 1x 2.5\" SSD"},{"label":"Expansion Slots","value":"4 Slots"},{"label":"Weight","value":"4.43 kg (NW) / 5.30 kg (GW)"}]
+    },
+
+    'dynamite-x6': {
+      title: "Dynamite X6",
+      subtitle: "Premium ATX gaming chassis with Type-C front port, 0.60mm rigid steel chassis, and tempered glass.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Dynamite X6",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/dynamite-x6/Black/dynamite_x6_black_view_1.png"],"white":["assets/images/products/cases/dynamite-x6/Black/dynamite_x6_black_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"423 x 220 x 467 mm"},{"label":"Material & Thickness","value":"SPCC 0.60mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 1x Type-C, 1x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 1x 2.5\" SSD"},{"label":"Expansion Slots","value":"7 Slots"},{"label":"Weight","value":"6.00 kg (NW) / 6.80 kg (GW)"}]
+    },
+
     'dynamite-x7': {
-      title: 'DYNAMITE X7',
-      subtitle: 'Panoramic Tempered Glass Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Dynamite X7",
+      subtitle: "Flagship E-ATX dual-tempered-glass cabinet with high thermal clearance and front Type-C high-speed IO.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Dynamite X7 Gaming Cabinet',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png',
-          'assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_3.png',
-          'assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_4.png'
-        ],
-        'white': [
-          'assets/images/products/cases/dynamite-x7/White/08_dynamite_x7_view_2.png'
-        ]
-      }
+      breadcrumbTitle: "Dynamite X7",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png"],"white":["assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"E-ATX / ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"430 x 225 x 480 mm"},{"label":"Material & Thickness","value":"SPCC 0.60mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 1x Type-C, 2x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"2x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"7 Slots"},{"label":"Weight","value":"7.24 kg (NW) / 8.36 kg (GW)"}]
     },
+
+    'dynamite-base': {
+      title: "Dynamite Base",
+      subtitle: "Panoramic mini-tower showcase with curved seamless glass corner and clean dual-chamber cable management.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Dynamite Base",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/dynamite-base/Black/dynamite_black_view_1.png"],"white":["assets/images/products/cases/dynamite-base/Black/dynamite_black_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"M-ATX / ITX"},{"label":"Chassis Dimensions","value":"350 x 210 x 390 mm"},{"label":"Material & Thickness","value":"SPCC 0.60mm Steel + Tempered Glass"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"4 Slots"}]
+    },
+
+    'glacier': {
+      title: "Glacier",
+      subtitle: "Mid tower gaming case with frost-inspired front mesh grill and dedicated bottom PSU shroud.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Glacier",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/glacier/Black/glacier_black_view_1.png"],"white":["assets/images/products/cases/glacier/Black/glacier_black_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"358 x 200 x 460 mm"},{"label":"Material & Thickness","value":"SPCC 0.50mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"2x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"7 Slots"},{"label":"Weight","value":"3.90 kg (NW) / 4.90 kg (GW)"}]
+    },
+
+    'axle': {
+      title: "Axle",
+      subtitle: "Versatile ATX mid-tower case with solid chassis structure and optimal front-to-back straight airflow path.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Axle",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/axle/Black/axle_black_perspective.png"],"white":["assets/images/products/cases/axle/Black/axle_black_perspective.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"320 x 180 x 410 mm"},{"label":"Material & Thickness","value":"SPCC 0.50mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"7 Slots"},{"label":"Weight","value":"3.90 kg (NW) / 4.90 kg (GW)"}]
+    },
+
     'shadow': {
-      title: 'SHADOW',
-      subtitle: 'Modern Minimalist Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Shadow",
+      subtitle: "Stealth matte-black mid-tower cabinet with understated aesthetics and full cable management routing.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Shadow Gaming Cabinet',
-      colors: ['black'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/shadow/Black/L10-B-01.png',
-          'assets/images/products/cases/shadow/Black/L10-B-02.png',
-          'assets/images/products/cases/shadow/Black/L10-B-03.png',
-          'assets/images/products/cases/shadow/Black/L10-B-04.png',
-          'assets/images/products/cases/shadow/Black/L10-B-05.png'
-        ]
-      }
+      breadcrumbTitle: "Shadow",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/shadow/Black/L10-B-01.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"345 x 183 x 430 mm"},{"label":"Material & Thickness","value":"SPCC 0.45mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 1.0, HD Audio"},{"label":"Drive Bays","value":"2x 3.5\" HDD, 3x 2.5\" SSD"},{"label":"Expansion Slots","value":"7 Slots"},{"label":"Weight","value":"3.90 kg (NW) / 4.90 kg (GW)"}]
     },
-    'trendy': {
-      title: 'TRENDY',
-      subtitle: 'High Airflow Mid-Tower Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
-      categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Trendy Gaming Cabinet',
-      colors: ['black'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/trendy/Black/trendy_m10_view_1.png',
-          'assets/images/products/cases/trendy/Black/trendy_m10_view_2.png',
-          'assets/images/products/cases/trendy/Black/trendy_m10_view_3.png',
-          'assets/images/products/cases/trendy/Black/trendy_m10_view_4.png',
-          'assets/images/products/cases/trendy/Black/trendy_m10_view_5.png'
-        ]
-      }
-    },
+
     'roar': {
-      title: 'ROAR',
-      subtitle: 'Extreme Airflow Aggressive Gaming Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+      title: "Roar",
+      subtitle: "Aggressive compact gaming case with bold angular intake slots and lightweight sturdy frame.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Roar Gaming Cabinet',
-      colors: ['black', 'white'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/roar/Black/roar_black_1.png',
-          'assets/images/products/cases/roar/Black/roar_black_2.png',
-          'assets/images/products/cases/roar/Black/roar_black_3.png'
-        ],
-        'white': [
-          'assets/images/products/cases/roar/White/roar_white_1.png',
-          'assets/images/products/cases/roar/White/roar_white_2.png',
-          'assets/images/products/cases/roar/White/roar_white_3.png'
-        ]
-      }
+      breadcrumbTitle: "Roar",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/roar/Black/roar_black_1.png"],"white":["assets/images/products/cases/roar/Black/roar_black_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"Micro-ATX / Mini-ITX"},{"label":"Chassis Dimensions","value":"290 x 190 x 375 mm"},{"label":"Material & Thickness","value":"SPCC 0.45mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 1x 2.5\" SSD"},{"label":"Expansion Slots","value":"4 Slots"},{"label":"Weight","value":"2.25 kg (NW) / 2.85 kg (GW)"}]
     },
-    'thunder': {
-      title: 'THUNDER',
-      subtitle: 'Bold Industrial Performance Cabinet',
-      eyebrow: 'PC GAMING CABINET',
-      categoryName: 'Gaming Cabinets',
+
+    'nexus-360': {
+      title: "Nexus 360",
+      subtitle: "Panoramic showcase case featuring dual tempered glass panels and full 360mm top radiator support.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
       categoryUrl: 'all-products.html?category=gaming-cabinets',
-      breadcrumbTitle: 'Thunder Gaming Cabinet',
-      colors: ['black'],
-      defaultColor: 'black',
-      images: {
-        'black': [
-          'assets/images/products/cases/thunder/Black/i50-1.png',
-          'assets/images/products/cases/thunder/Black/i50-2.png',
-          'assets/images/products/cases/thunder/Black/i50-3.png',
-          'assets/images/products/cases/thunder/Black/i50-4.png',
-          'assets/images/products/cases/thunder/Black/i50-5.png'
-        ]
-      }
+      breadcrumbTitle: "Nexus 360",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/nexus-360/Black/nexus_360_black.png"],"white":["assets/images/products/cases/nexus-360/Black/nexus_360_black.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"455 x 210 x 485 mm"},{"label":"Material & Thickness","value":"SPCC 0.60mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 1x Type-C, 2x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"1x 3.5\" HDD, 2x 2.5\" SSD"},{"label":"Expansion Slots","value":"7 Slots"},{"label":"Weight","value":"3.90 kg (NW) / 4.90 kg (GW)"}]
+    },
+
+    'thunder': {
+      title: "Thunder",
+      subtitle: "Rugged industrial gaming tower with high-density mesh and multiple internal storage drive mounting options.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Thunder",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/thunder/Black/i50-1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"ATX / Micro-ATX / ITX"},{"label":"Chassis Dimensions","value":"326 x 190 x 433 mm"},{"label":"Material & Thickness","value":"SPCC 0.35mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 2x USB 1.0, Audio"},{"label":"Drive Bays","value":"2x HDD+1x SSD / 1x HDD+2x SSD / 3x SSD"},{"label":"Expansion Slots","value":"6 Slots"},{"label":"Weight","value":"3.95 kg (NW) / 4.70 kg (GW)"}]
+    },
+
+    'box-infinity': {
+      title: "Box Infinity",
+      subtitle: "Heavy-duty 1.0mm SPCC compact tower chassis with front Type-C port and versatile modular drive brackets.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Box Infinity",
+      colors: ["black","white","yellow"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/box-infinity/box_infinity_view_1.png"],"white":["assets/images/products/cases/box-infinity/box_infinity_view_1.png"],"yellow":["assets/images/products/cases/box-infinity/box_infinity_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"M-ATX / ITX"},{"label":"Chassis Dimensions","value":"398 x 211 x 324 mm"},{"label":"Material & Thickness","value":"SPCC 1.0mm Heavy-Duty Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 1x Type-C, HD Audio"},{"label":"Drive Bays","value":"3x HDD + 2x SSD (or 1x HDD + 4x SSD)"},{"label":"Expansion Slots","value":"4 Slots"},{"label":"Weight","value":"4.90 kg (NW) / 5.80 kg (GW)"}]
+    },
+
+    'trendy': {
+      title: "Trendy",
+      subtitle: "Modern aesthetic E-ATX gaming cabinet with vertical GPU expansion slots and dual glass showcase design.",
+      eyebrow: "GAMING CABINETS",
+      categoryName: "Gaming Cabinets",
+      categoryUrl: 'all-products.html?category=gaming-cabinets',
+      breadcrumbTitle: "Trendy",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/cases/trendy/Black/trendy_m10_view_1.png"]},
+      customSpecs: [{"label":"Motherboard Support","value":"E-ATX / ATX / M-ATX / ITX"},{"label":"Chassis Dimensions","value":"395 x 210 x 475 mm"},{"label":"Material & Thickness","value":"SPCC 0.55mm Steel"},{"label":"Front I/O Ports","value":"1x USB 3.0, 1x Type-C, 1x USB 2.0, HD Audio"},{"label":"Drive Bays","value":"2x 3.5\" HDD, 4x 2.5\" SSD"},{"label":"Expansion Slots","value":"7+2 Slots"},{"label":"Weight","value":"6.90 kg (NW) / 7.90 kg (GW)"}]
+    },
+
+    'gh-01': {
+      title: "GH-01 Gaming Headset",
+      subtitle: "Immersive gaming audio gear with 40mm dynamic drivers, omni-directional boom mic, and 2.0m durable braided cable.",
+      eyebrow: "GAMING HEADPHONES",
+      categoryName: "Gaming Headphones",
+      categoryUrl: 'all-products.html?category=gaming-headphones',
+      breadcrumbTitle: "GH-01 Gaming Headset",
+      colors: ["black","white"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/gaming-headphones/gh-01/Black/gh01_black_view_1.png"],"white":["assets/images/products/gaming-headphones/gh-01/Black/gh01_black_view_1.png"]},
+      customSpecs: [{"label":"Acoustic Driver","value":"ø40mm Dynamic Neodymium Driver"},{"label":"Frequency Response","value":"20 Hz - 20,000 Hz"},{"label":"Impedance & Sensitivity","value":"32 Ω / 110 dB +/- 5 dB"},{"label":"Rated Power","value":"20 mW (Max 30 mW)"},{"label":"Microphone Type","value":"Omni-directional (-42 dB +/- 2 dB, 2.2KΩ)"},{"label":"Connector Type","value":"3.5mm Stereo Plug + USB RGB"},{"label":"Cable Length","value":"~2.0 m Braided Heavy-Duty"},{"label":"Official Retail Price","value":"Rs. 2,499"}]
+    },
+
+    'high-current-450w': {
+      title: "High Current 450W PSU",
+      subtitle: "Reliable 450W continuous power supply with 80 Plus efficiency, active PFC, and silent 120mm cooling fan.",
+      eyebrow: "POWER SUPPLY UNITS",
+      categoryName: "Power Supply Units",
+      categoryUrl: 'all-products.html?category=power-supply-units',
+      breadcrumbTitle: "High Current 450W PSU",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/power-supply-units/450w/450w_box_view_1.png"]},
+      customSpecs: [{"label":"Continuous Output","value":"450 Watts Continuous"},{"label":"Efficiency Rating","value":"80 Plus Certified"},{"label":"Power Factor Correction","value":"Active PFC (>0.99 Typical)"},{"label":"Cooling Fan","value":"120mm Silent Hydraulic Bearing Fan"},{"label":"Protection Suite","value":"OVP / UVP / OPP / SCP Protections"},{"label":"AC Input Voltage","value":"100-240V AC Full Range"},{"label":"Cabling Type","value":"Flat Stealth Black Cables"}]
+    },
+
+    'high-current-550w': {
+      title: "High Current 550W PSU",
+      subtitle: "550W 80 Plus Bronze certified PSU with dual PCIe 8-pin power connectors for modern mid-range GPUs.",
+      eyebrow: "POWER SUPPLY UNITS",
+      categoryName: "Power Supply Units",
+      categoryUrl: 'all-products.html?category=power-supply-units',
+      breadcrumbTitle: "High Current 550W PSU",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/power-supply-units/550w/550w_box_view_1.png"]},
+      customSpecs: [{"label":"Continuous Output","value":"550 Watts Continuous"},{"label":"Efficiency Rating","value":"80 Plus Bronze Certified"},{"label":"Power Factor Correction","value":"Active PFC (>0.99 Typical)"},{"label":"Cooling Fan","value":"120mm Silent Hydraulic Bearing Fan"},{"label":"PCIe Connectors","value":"2x PCIe 8-pin (6+2)"},{"label":"Protection Suite","value":"OVP / UVP / OPP / SCP / OCP"},{"label":"AC Input Voltage","value":"100-240V AC Full Range"}]
+    },
+
+    'high-current-650w': {
+      title: "High Current 650W PSU",
+      subtitle: "650W high-efficiency power supply unit with dedicated single +12V rail and silent thermal fan curve.",
+      eyebrow: "POWER SUPPLY UNITS",
+      categoryName: "Power Supply Units",
+      categoryUrl: 'all-products.html?category=power-supply-units',
+      breadcrumbTitle: "High Current 650W PSU",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/power-supply-units/650w/650w_box_view_1.png"]},
+      customSpecs: [{"label":"Continuous Output","value":"650 Watts Continuous"},{"label":"Efficiency Rating","value":"80 Plus Bronze Certified"},{"label":"Power Factor Correction","value":"Active PFC (>0.99 Typical)"},{"label":"Cooling Fan","value":"120mm Silent Hydraulic Bearing Fan"},{"label":"PCIe Connectors","value":"2x PCIe 8-pin (6+2)"},{"label":"Protection Suite","value":"OVP / UVP / OPP / SCP / OCP"},{"label":"AC Input Voltage","value":"100-240V AC Full Range"}]
+    },
+
+    'high-current-750w': {
+      title: "High Current 750W PSU",
+      subtitle: "750W high-performance power supply unit engineered for gaming rigs with multi-fan ARGB setups and high-TDP GPUs.",
+      eyebrow: "POWER SUPPLY UNITS",
+      categoryName: "Power Supply Units",
+      categoryUrl: 'all-products.html?category=power-supply-units',
+      breadcrumbTitle: "High Current 750W PSU",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/power-supply-units/750w/750w_box_view_1.png"]},
+      customSpecs: [{"label":"Continuous Output","value":"750 Watts Continuous"},{"label":"Efficiency Rating","value":"80 Plus Bronze / Gold"},{"label":"Power Factor Correction","value":"Active PFC (>0.99 Typical)"},{"label":"Cooling Fan","value":"120mm Silent Hydraulic Bearing Fan"},{"label":"PCIe Connectors","value":"4x PCIe 8-pin (6+2)"},{"label":"Protection Suite","value":"Full Industrial Protections (OVP/UVP/OPP/SCP/OCP/OTP)"},{"label":"AC Input Voltage","value":"100-240V AC Full Range"}]
+    },
+
+    'high-current-850w': {
+      title: "High Current 850W PSU",
+      subtitle: "850W enthusiast-grade power supply featuring 80 Plus Gold efficiency and high-output +12V rail for flagship graphics cards.",
+      eyebrow: "POWER SUPPLY UNITS",
+      categoryName: "Power Supply Units",
+      categoryUrl: 'all-products.html?category=power-supply-units',
+      breadcrumbTitle: "High Current 850W PSU",
+      colors: ["black"],
+      defaultColor: "black",
+      images: {"black":["assets/images/products/power-supply-units/850w/850w_box_view_1.png"]},
+      customSpecs: [{"label":"Continuous Output","value":"850 Watts Continuous"},{"label":"Efficiency Rating","value":"80 Plus Gold High Efficiency"},{"label":"Power Factor Correction","value":"Active PFC (>0.99 Typical)"},{"label":"Cooling Fan","value":"120mm Silent Hydraulic Bearing Fan"},{"label":"PCIe Connectors","value":"4x PCIe 8-pin + 12VHPWR Ready"},{"label":"Protection Suite","value":"Full Industrial Protections (OVP/UVP/OPP/SCP/OCP/OTP)"},{"label":"AC Input Voltage","value":"100-240V AC Full Range"}]
     }
   };
 

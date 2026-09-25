@@ -955,10 +955,6 @@
       </div>
 
       <div class="im-top-actions">
-        <button class="btn-dark" onclick="resetToLiveCatalog()" title="Reset and sync with official live site catalog">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-          Sync Official Live Data
-        </button>
         <div class="im-status-pill">
           <span class="im-status-dot"></span>
           <span>Live Site Connected</span>
@@ -1071,6 +1067,22 @@
       </div>
 
       <!-- Product Rows List -->
+      <!-- Category Filter Tabs & Live Search Bar -->
+      <div class="im-prod-controls-bar">
+        <div class="im-prod-filter-tabs" id="prodCatFilterTabs">
+          <button type="button" class="im-filter-tab active" data-cat="all" onclick="filterAdminProducts('all')">All (<span id="cntAll">31</span>)</button>
+          <button type="button" class="im-filter-tab" data-cat="air-coolers" onclick="filterAdminProducts('air-coolers')">Air Coolers (<span id="cntAir">2</span>)</button>
+          <button type="button" class="im-filter-tab" data-cat="liquid-coolers" onclick="filterAdminProducts('liquid-coolers')">Liquid Coolers (<span id="cntLiquid">6</span>)</button>
+          <button type="button" class="im-filter-tab" data-cat="gaming-cabinets" onclick="filterAdminProducts('gaming-cabinets')">Cabinets (<span id="cntCases">17</span>)</button>
+          <button type="button" class="im-filter-tab" data-cat="gaming-headphones" onclick="filterAdminProducts('gaming-headphones')">Audio (<span id="cntAudio">1</span>)</button>
+          <button type="button" class="im-filter-tab" data-cat="power-supply-units" onclick="filterAdminProducts('power-supply-units')">Power Supplies (<span id="cntPSU">5</span>)</button>
+        </div>
+        <div class="im-search-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="adminProdSearchInput" class="form-input search-input" placeholder="Search products by name or specs..." oninput="handleAdminProductSearch(this.value)">
+        </div>
+      </div>
+
       <div class="im-product-list" id="productsListContainer"></div>
     </section>
 
@@ -1361,14 +1373,24 @@
 
   <script>
     // ==========================================================================
-    // COMPLETE REAL DATASET FROM THE LIVE WEBSITE (19 Products & 5 Categories)
+    // OFFICIAL SVG CATEGORY ICONS (Matching Live Site 1:1)
     // ==========================================================================
+    const categoryIcons = {
+      'air-coolers': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: #E42F38;"><rect x="5" y="4" width="14" height="13" rx="1.5"></rect><line x1="5" y1="7" x2="19" y2="7"></line><line x1="5" y1="10" x2="19" y2="10"></line><line x1="5" y1="13" x2="19" y2="13"></line><circle cx="12" cy="10.5" r="4.2"></circle><circle cx="12" cy="10.5" r="1.2" fill="currentColor"></circle></svg>',
+      'liquid-coolers': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: #38BDF8;"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><circle cx="8" cy="12" r="3.2"></circle><circle cx="16" cy="12" r="3.2"></circle><line x1="11.2" y1="10" x2="12.8" y2="10"></line><line x1="11.2" y1="14" x2="12.8" y2="14"></line></svg>',
+      'gaming-cabinets': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: #A78BFA;"><rect x="5" y="2.5" width="14" height="19" rx="2"></rect><line x1="5" y1="7.5" x2="19" y2="7.5"></line><circle cx="9.5" cy="5" r="0.9" fill="currentColor"></circle><circle cx="12" cy="5" r="0.9" fill="currentColor"></circle><rect x="7.5" y="9.5" width="9" height="9.5" rx="1" stroke-dasharray="2 2"></rect></svg>',
+      'gaming-headphones': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: #F43F5E;"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path><path d="M19 17v1.5a3 3 0 0 1-3 3h-2"></path><circle cx="13" cy="21.5" r="1" fill="currentColor"></circle></svg>',
+      'power-supply-units': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: #F59E0B;"><rect x="3" y="4.5" width="18" height="15" rx="2"></rect><circle cx="9.5" cy="12" r="4.2"></circle><circle cx="9.5" cy="12" r="1.3" fill="currentColor"></circle><line x1="9.5" y1="8.5" x2="9.5" y2="15.5" stroke-width="1.1"></line><line x1="6" y1="12" x2="13" y2="12" stroke-width="1.1"></line><rect x="15.8" y="7.5" width="3.2" height="4" rx="0.5"></rect><rect x="15.8" y="13.5" width="3.2" height="3" rx="0.5"></rect></svg>'
+    };
+
+    const defaultCategoryIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 22px; height: 22px; color: #E42F38;"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>';
+
     const liveSiteCategories = [
-      { key: "air-coolers", name: "Air Coolers", thumb: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png" },
-      { key: "liquid-coolers", name: "Liquid Coolers", thumb: "assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png" },
-      { key: "gaming-cabinets", name: "Gaming Cabinets", thumb: "assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png" },
-      { key: "gaming-headphones", name: "Gaming Headphones", thumb: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png" },
-      { key: "power-supply-units", name: "Power Supply Units", thumb: "assets/images/homepage/im_official_emblem.png" }
+      { key: "air-coolers", name: "Air Coolers" },
+      { key: "liquid-coolers", name: "Liquid Coolers" },
+      { key: "gaming-cabinets", name: "Gaming Cabinets" },
+      { key: "gaming-headphones", name: "Gaming Headphones" },
+      { key: "power-supply-units", name: "Power Supply Units" }
     ];
 
     const liveSiteHeroSlides = [
@@ -1403,350 +1425,1273 @@
     };
 
     const liveSiteProducts = [
+  {
+    "id": "fusion",
+    "name": "Fusion CPU Air Cooler",
+    "cat": "air-coolers",
+    "catName": "Air Coolers",
+    "img": "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png",
+    "desc": "High-performance CPU air cooler with 4 direct-touch copper heatpipes and dynamic hydraulic RGB fan.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
       {
-        id: "fusion",
-        name: "Fusion CPU Air Cooler",
-        cat: "air-coolers",
-        catName: "Air Coolers",
-        img: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png",
-        desc: "High-performance CPU air cooler with 4 direct-touch copper heatpipes and dynamic hydraulic RGB fan.",
-        colors: ["black"],
-        specs: [
-          { label: "TDP Support", value: "120W TDP" },
-          { label: "Socket Compatibility", value: "Intel LGA 1700/1200 | AMD AM5/AM4" },
-          { label: "Heatpipe Structure", value: "4x 6mm Direct Touch Copper" },
-          { label: "Fan Speed", value: "800 - 1800 RPM (PWM Controlled)" },
-          { label: "Bearing Type", value: "Silent Hydraulic Bearing" },
-          { label: "Overall Dimensions", value: "120 x 75 x 155 mm" }
-        ]
+        "label": "Cooler Dimensions",
+        "value": "140 x 110 x 170 mm"
       },
       {
-        id: "cool-240-argb",
-        name: "Cool 240 ARGB",
-        cat: "liquid-coolers",
-        catName: "Liquid Coolers",
-        img: "assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png",
-        desc: "240mm dual-chamber ARGB liquid CPU cooler engineered for high thermal efficiency and quiet acoustics.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Radiator Dimensions", value: "277 x 120 x 27 mm" },
-          { label: "Fan Speed", value: "800 - 1800 RPM ± 10%" },
-          { label: "Pump Speed", value: "2600 RPM ± 10%" },
-          { label: "TDP Rating", value: "Up to 250W TDP" },
-          { label: "Cold Plate Material", value: "Micro-Channel Pure Copper" },
-          { label: "Socket Compatibility", value: "Intel LGA 1700/1200 | AMD AM5/AM4" }
-        ]
+        "label": "TDP Rating",
+        "value": "120W TDP"
       },
       {
-        id: "cool-360-argb",
-        name: "Cool 360 ARGB",
-        cat: "liquid-coolers",
-        catName: "Liquid Coolers",
-        img: "assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png",
-        desc: "360mm extreme liquid CPU cooler with triple 120mm ARGB PWM fans for overclocked multi-core processors.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Radiator Dimensions", value: "397 x 120 x 27 mm" },
-          { label: "Fan Speed", value: "800 - 1800 RPM ± 10%" },
-          { label: "Pump Speed", value: "2600 RPM ± 10%" },
-          { label: "TDP Rating", value: "Up to 300W TDP" },
-          { label: "Cold Plate Material", value: "Micro-Channel Pure Copper" },
-          { label: "Socket Compatibility", value: "Intel LGA 1700/1200 | AMD AM5/AM4" }
-        ]
+        "label": "Heatpipe Structure",
+        "value": "4x 6mm Direct Touch Copper"
       },
       {
-        id: "cool-240-digital-argb",
-        name: "Cool 240 Digital ARGB",
-        cat: "liquid-coolers",
-        catName: "Liquid Coolers",
-        img: "assets/images/products/liquid-coolers/cool-240-digital-argb/Black/cool_240_digital_argb_black.png",
-        desc: "240mm liquid cooler with real-time digital CPU temperature display embedded directly on the pump block.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Display Feature", value: "Real-Time Digital Temperature HUD" },
-          { label: "Radiator Dimensions", value: "277 x 120 x 27 mm" },
-          { label: "TDP Rating", value: "Up to 250W TDP" },
-          { label: "Pump Speed", value: "2800 RPM ± 10%" },
-          { label: "Socket Compatibility", value: "Intel LGA 1700/1200 | AMD AM5/AM4" }
-        ]
+        "label": "Fan Specification",
+        "value": "1x 120mm Auto RGB (Hydraulic Bearing)"
       },
       {
-        id: "cool-360-digital-argb",
-        name: "Cool 360 Digital ARGB",
-        cat: "liquid-coolers",
-        catName: "Liquid Coolers",
-        img: "assets/images/products/liquid-coolers/cool-360-digital-argb/Black/cool_360_digital_argb_black.png",
-        desc: "360mm extreme performance liquid cooler with real-time digital status monitor on pump block.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Display Feature", value: "Real-Time Digital Temperature HUD" },
-          { label: "Radiator Dimensions", value: "397 x 120 x 27 mm" },
-          { label: "TDP Rating", value: "Up to 320W TDP" },
-          { label: "Pump Speed", value: "2800 RPM ± 10%" },
-          { label: "Socket Compatibility", value: "Intel LGA 1700/1200 | AMD AM5/AM4" }
-        ]
+        "label": "Fan Speed & Airflow",
+        "value": "800 - 2000 RPM (PWM) / 67.96 CFM"
       },
       {
-        id: "dynamite-xl-pro",
-        name: "Dynamite XL Pro",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png",
-        desc: "Dual-chamber panoramic showcase chassis with 270-degree tempered glass and vertical GPU mount ready.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Motherboard Support", value: "E-ATX / ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "416.5 x 300 x 385 mm" },
-          { label: "Chassis Material", value: "SPCC 0.90mm High-Grade Steel" },
-          { label: "Drive Bays", value: "3.5\" HDD x1, 2.5\" SSD x2" },
-          { label: "I/O Ports", value: "1x USB 3.0, 1x Type-C, 1x USB 1.0, HD Audio" },
-          { label: "PCI Slots", value: "7+3 Slots (Vertical GPU Ready)" },
-          { label: "Weight", value: "7.80 kg (NW) / 9.10 kg (GW)" }
-        ]
-      },
-      {
-        id: "frosty",
-        name: "Frosty",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/frosty/Black/02_frosty_view_1.png",
-        desc: "High-airflow performance cabinet with full mesh front panel and multi-fan bracket support.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Motherboard Support", value: "E-ATX / ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "395 x 210 x 475 mm" },
-          { label: "Chassis Material", value: "SPCC 0.55mm" },
-          { label: "Drive Bays", value: "3.5\" HDD x2, 2.5\" SSD x4" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" },
-          { label: "PCI Slots", value: "7+2 Slots" }
-        ]
-      },
-      {
-        id: "spark",
-        name: "Spark",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/spark/Black/8001-B-1.png",
-        desc: "Compact gaming tower featuring geometric diamond intake pattern and edge-to-edge glass.",
-        colors: ["black"],
-        specs: [
-          { label: "Motherboard Support", value: "ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "380 x 205 x 440 mm" },
-          { label: "Chassis Material", value: "SPCC 0.50mm" },
-          { label: "Drive Bays", value: "3.5\" HDD x2, 2.5\" SSD x2" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" },
-          { label: "PCI Slots", value: "7 Slots" }
-        ]
-      },
-      {
-        id: "star",
-        name: "Star",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/star/Black/T34-1.png",
-        desc: "Precision-crafted mid-tower case with optimized heat dissipation channels and clean cable routing.",
-        colors: ["black"],
-        specs: [
-          { label: "Motherboard Support", value: "ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "365 x 200 x 450 mm" },
-          { label: "Chassis Material", value: "SPCC 0.50mm" },
-          { label: "Drive Bays", value: "3.5\" HDD x2, 2.5\" SSD x2" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" }
-        ]
-      },
-      {
-        id: "torrent",
-        name: "Torrent",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/torrent/Black/05_torrent_black_view_1.png",
-        desc: "Aggressive airflow chassis designed for high-power modern graphics cards and dual radiators.",
-        colors: ["black"],
-        specs: [
-          { label: "Motherboard Support", value: "ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "400 x 215 x 460 mm" },
-          { label: "Chassis Material", value: "SPCC 0.55mm" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" }
-        ]
-      },
-      {
-        id: "dynamite-x7",
-        name: "Dynamite X7",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png",
-        desc: "Flagship E-ATX full tower with dual tempered glass panels and front Type-C port.",
-        colors: ["black"],
-        specs: [
-          { label: "Motherboard Support", value: "E-ATX / ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "430 x 225 x 480 mm" },
-          { label: "Chassis Material", value: "SPCC 0.60mm" },
-          { label: "Drive Bays", value: "3.5\" HDD x2, 2.5\" SSD x2" },
-          { label: "I/O Ports", value: "1x USB 3.0, 1x Type-C, 2x USB 2.0, HD Audio" },
-          { label: "Weight", value: "7.24 kg (NW) / 8.36 kg (GW)" }
-        ]
-      },
-      {
-        id: "shadow",
-        name: "Shadow",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/shadow/Black/L10-B-01.png",
-        desc: "Stealth aesthetic gaming chassis with tinted glass and direct airflow intakes.",
-        colors: ["black"],
-        specs: [
-          { label: "Motherboard Support", value: "ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "370 x 205 x 445 mm" },
-          { label: "Chassis Material", value: "SPCC 0.50mm" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" }
-        ]
-      },
-      {
-        id: "trendy",
-        name: "Trendy",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/trendy/Black/trendy_m10_view_1.png",
-        desc: "Modern minimalist micro-ATX chassis with clean cable management channels.",
-        colors: ["black"],
-        specs: [
-          { label: "Motherboard Support", value: "M-ATX / Mini-ITX" },
-          { label: "Chassis Dimensions", value: "350 x 200 x 390 mm" },
-          { label: "Chassis Material", value: "SPCC 0.50mm" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" }
-        ]
-      },
-      {
-        id: "roar",
-        name: "Roar",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/roar/Black/roar_black_1.png",
-        desc: "Bold industrial gaming case engineered for extreme multi-fan airflow.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Motherboard Support", value: "ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "410 x 210 x 470 mm" },
-          { label: "Chassis Material", value: "SPCC 0.60mm" },
-          { label: "I/O Ports", value: "1x USB 3.0, 1x Type-C, HD Audio" }
-        ]
-      },
-      {
-        id: "thunder",
-        name: "Thunder",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/thunder/Black/i50-1.png",
-        desc: "Heavy-duty gaming cabinet with reinforced structure and high-velocity fan mountings.",
-        colors: ["black"],
-        specs: [
-          { label: "Motherboard Support", value: "ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "420 x 215 x 480 mm" },
-          { label: "Chassis Material", value: "SPCC 0.60mm" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" }
-        ]
-      },
-      {
-        id: "axle",
-        name: "AXLE",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png",
-        desc: "Mid-tower gaming chassis with robust 0.50mm SPCC build and high-speed USB 3.0.",
-        colors: ["black", "white"],
-        specs: [
-          { label: "Motherboard Support", value: "ATX / M-ATX / ITX" },
-          { label: "Chassis Dimensions", value: "320 x 180 x 410 mm" },
-          { label: "Chassis Material", value: "SPCC 0.50mm" },
-          { label: "Drive Bays", value: "3.5\" HDD x1, 2.5\" SSD x2" },
-          { label: "I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" },
-          { label: "Weight", value: "3.90 kg (NW) / 4.90 kg (GW)" }
-        ]
-      },
-      {
-        id: "box-infinity",
-        name: "Box Infinity",
-        cat: "gaming-cabinets",
-        catName: "Gaming Cabinets",
-        img: "assets/images/products/cases/box-infinity/Yellow/box_infinity_yellow.png",
-        desc: "Compact showcase tower with heavy-duty 1.0mm SPCC steel and USB Type-C front port.",
-        colors: ["black", "white", "yellow"],
-        specs: [
-          { label: "Motherboard Support", value: "M-ATX / Mini-ITX" },
-          { label: "Chassis Dimensions", value: "398 x 211 x 324 mm" },
-          { label: "Chassis Material", value: "SPCC 1.0mm Heavy Gauge Steel" },
-          { label: "Drive Bays", value: "3x HDD + 2x SSD or 1x HDD + 4x SSD" },
-          { label: "I/O Ports", value: "1x USB 3.0, 1x Type-C, HD Audio" },
-          { label: "Weight", value: "4.90 kg (NW) / 5.80 kg (GW)" }
-        ]
-      },
-      {
-        id: "gh-01",
-        name: "GH-01 Gaming Headset",
-        cat: "gaming-headphones",
-        catName: "Gaming Headphones",
-        img: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png",
-        desc: "Pro gaming headset with 40mm dynamic acoustic drivers and omni-directional boom mic.",
-        colors: ["black", "red"],
-        specs: [
-          { label: "Driver Unit", value: "40mm High-Flux Neodymium Dynamic Drivers" },
-          { label: "Frequency Response", value: "20 Hz - 20,000 Hz" },
-          { label: "Impedance", value: "32 Ohm" },
-          { label: "Connector", value: "3.5mm Gold-Plated Stereo Audio Jack" },
-          { label: "Microphone", value: "Omni-Directional Noise Reducing Boom Mic" }
-        ]
-      },
-      {
-        id: "psu-650w",
-        name: "650W Power Supply Unit",
-        cat: "power-supply-units",
-        catName: "Power Supply Units",
-        img: "assets/images/homepage/im_official_emblem.png",
-        desc: "High-efficiency 650W power supply with active PFC and silent 120mm hydraulic bearing fan.",
-        colors: ["black"],
-        specs: [
-          { label: "Total Wattage", value: "650 Watts Continuous" },
-          { label: "Efficiency", value: "80 PLUS Certified High Efficiency" },
-          { label: "PFC", value: "Active PFC (0.99 Typical)" },
-          { label: "Cooling Fan", value: "120mm Silent Hydraulic Bearing Fan" },
-          { label: "Input Voltage", value: "100-240V AC Full Range" }
-        ]
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM5/AM4"
       }
-    ];
+    ]
+  },
+  {
+    "id": "turbo",
+    "name": "Turbo CPU Air Cooler",
+    "cat": "air-coolers",
+    "catName": "Air Coolers",
+    "img": "assets/images/products/air-coolers/turbo/turbo_aircooler_view_1.png",
+    "desc": "Compact tower CPU cooler with 2 copper heatpipes and ultra-quiet 24 dBA auto RGB fan.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Cooler Dimensions",
+        "value": "130 x 85 x 145 mm"
+      },
+      {
+        "label": "TDP Rating",
+        "value": "95W - 105W TDP"
+      },
+      {
+        "label": "Heatpipe Structure",
+        "value": "2x Copper Heat Pipes (HDT Direct Touch)"
+      },
+      {
+        "label": "Fan Specification",
+        "value": "1x 120mm Auto RGB (Hydraulic Bearing)"
+      },
+      {
+        "label": "Fan Speed & Noise",
+        "value": "1900 RPM (+/-10%) / 38 CFM / 24 dBA"
+      },
+      {
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM4/AM3/AM2"
+      }
+    ]
+  },
+  {
+    "id": "cool-240-argb",
+    "name": "Cool 240 ARGB",
+    "cat": "liquid-coolers",
+    "catName": "Liquid Coolers",
+    "img": "assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png",
+    "desc": "240mm dual-chamber ARGB liquid CPU cooler engineered for high thermal efficiency and quiet acoustics.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Radiator Dimensions",
+        "value": "274 x 120 x 27 mm"
+      },
+      {
+        "label": "TDP Rating",
+        "value": "250W TDP"
+      },
+      {
+        "label": "Cold Plate Material",
+        "value": "Micro-Channel Pure Copper"
+      },
+      {
+        "label": "Pump Speed & Bearing",
+        "value": "2800 RPM (+/-10%) / Ceramic (50K hrs)"
+      },
+      {
+        "label": "Fans Included",
+        "value": "2x 120mm ARGB PWM (800-1800 RPM / 67.96 CFM)"
+      },
+      {
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM5/AM4"
+      }
+    ]
+  },
+  {
+    "id": "cool-360-argb",
+    "name": "Cool 360 ARGB",
+    "cat": "liquid-coolers",
+    "catName": "Liquid Coolers",
+    "img": "assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png",
+    "desc": "360mm extreme liquid CPU cooler with triple 120mm ARGB PWM fans for overclocked multi-core processors.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Radiator Dimensions",
+        "value": "394 x 120 x 27 mm"
+      },
+      {
+        "label": "TDP Rating",
+        "value": "270W - 300W TDP"
+      },
+      {
+        "label": "Cold Plate Material",
+        "value": "Micro-Channel Pure Copper"
+      },
+      {
+        "label": "Pump Speed & Bearing",
+        "value": "2800 RPM (+/-10%) / Ceramic (50K hrs)"
+      },
+      {
+        "label": "Fans Included",
+        "value": "3x 120mm ARGB PWM (800-1800 RPM / 67.96 CFM)"
+      },
+      {
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM5/AM4"
+      }
+    ]
+  },
+  {
+    "id": "cool-240-digital-argb",
+    "name": "Cool 240 Digital ARGB",
+    "cat": "liquid-coolers",
+    "catName": "Liquid Coolers",
+    "img": "assets/images/products/liquid-coolers/cool-240-digital-argb/Black/cool_240_digital_argb_black.png",
+    "desc": "240mm liquid cooler with real-time digital CPU temperature display embedded directly on the pump block.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Display Feature",
+        "value": "Real-Time Digital Temperature HUD"
+      },
+      {
+        "label": "Radiator Dimensions",
+        "value": "277 x 120 x 27 mm"
+      },
+      {
+        "label": "TDP Rating",
+        "value": "Up to 250W TDP"
+      },
+      {
+        "label": "Pump Speed",
+        "value": "2800 RPM (+/-10%)"
+      },
+      {
+        "label": "Fans Included",
+        "value": "2x 120mm ARGB PWM"
+      },
+      {
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM5/AM4"
+      }
+    ]
+  },
+  {
+    "id": "cool-360-digital-argb",
+    "name": "Cool 360 Digital ARGB",
+    "cat": "liquid-coolers",
+    "catName": "Liquid Coolers",
+    "img": "assets/images/products/liquid-coolers/cool-360-digital-argb/Black/cool_360_digital_argb_black.png",
+    "desc": "360mm extreme performance liquid cooler with real-time digital status monitor on pump block.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Display Feature",
+        "value": "Real-Time Digital Status HUD"
+      },
+      {
+        "label": "Radiator Dimensions",
+        "value": "397 x 120 x 27 mm"
+      },
+      {
+        "label": "TDP Rating",
+        "value": "Up to 320W TDP"
+      },
+      {
+        "label": "Pump Speed",
+        "value": "2800 RPM (+/-10%)"
+      },
+      {
+        "label": "Fans Included",
+        "value": "3x 120mm ARGB PWM"
+      },
+      {
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM5/AM4"
+      }
+    ]
+  },
+  {
+    "id": "hurricane-240-argb",
+    "name": "Hurricane GF-240 ARGB",
+    "cat": "liquid-coolers",
+    "catName": "Liquid Coolers",
+    "img": "assets/images/products/liquid-coolers/hurricane-240-argb/Black/hurricane_240_argb_black.png",
+    "desc": "240mm high-static pressure ARGB liquid cooler with copper base plate and low-noise 2700 RPM pump.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Radiator Dimensions",
+        "value": "272 x 120 x 27 mm"
+      },
+      {
+        "label": "TDP Rating",
+        "value": "250W TDP"
+      },
+      {
+        "label": "Materials",
+        "value": "Copper Base Plate + Aluminum Radiator"
+      },
+      {
+        "label": "Pump Speed & Noise",
+        "value": "2700 RPM (+/-10%) / 26.9 dB Ultra Quiet"
+      },
+      {
+        "label": "Fans Included",
+        "value": "2x 120mm ARGB (2700 RPM max / 58 CFM)"
+      },
+      {
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM5/AM4"
+      }
+    ]
+  },
+  {
+    "id": "hurricane-360-argb",
+    "name": "Hurricane GF-360 ARGB",
+    "cat": "liquid-coolers",
+    "catName": "Liquid Coolers",
+    "img": "assets/images/products/liquid-coolers/hurricane-360-argb/Black/hurricane_360_argb_black.png",
+    "desc": "360mm high-airflow liquid cooler with triple ARGB fans engineered for heavy multi-threaded workloads.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Radiator Dimensions",
+        "value": "397 x 120 x 27 mm (3 Fans)"
+      },
+      {
+        "label": "TDP Rating",
+        "value": "250W - 320W TDP"
+      },
+      {
+        "label": "Materials",
+        "value": "Copper Base Plate + Aluminum Radiator"
+      },
+      {
+        "label": "Pump Speed & Noise",
+        "value": "2700 RPM (+/-10%) / 26.9 dB Ultra Quiet"
+      },
+      {
+        "label": "Fans Included",
+        "value": "3x 120mm ARGB (2700 RPM max / 58 CFM)"
+      },
+      {
+        "label": "Socket Compatibility",
+        "value": "Intel LGA 1700/1200/115X | AMD AM5/AM4"
+      }
+    ]
+  },
+  {
+    "id": "dynamite-xl-pro",
+    "name": "Dynamite XL Pro",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png",
+    "desc": "Dual-chamber panoramic showcase chassis with 270-degree tempered glass and vertical GPU mount ready.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "E-ATX / ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "416.5 x 300 x 385 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.90mm High-Grade Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 1x Type-C, 1x USB 1.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7+3 Slots (Vertical GPU Ready)"
+      },
+      {
+        "label": "Weight",
+        "value": "7.80 kg (NW) / 9.10 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "frosty",
+    "name": "Frosty",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/frosty/Black/02_frosty_view_1.png",
+    "desc": "High airflow gaming chassis with full-mesh front ventilation and tempered glass side window.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "E-ATX / ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "395 x 210 x 475 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.55mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x 3.5-inch HDD, 4x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7+2 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "6.90 kg (NW) / 7.90 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "spark",
+    "name": "Spark",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/spark/Black/8001-B-1.png",
+    "desc": "Compact Micro-ATX cube case engineered for space-efficient desks without sacrificing cooling.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "325 x 270 x 315 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.45mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 1x USB 1.0, Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "4 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "3.80 kg (NW) / 4.60 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "star",
+    "name": "Star",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/star/Black/T34-1.png",
+    "desc": "Sleek entry gaming chassis with custom geometric front air intake and compact footprint.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "265 x 165 x 350 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.40mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "2x USB 1.0, Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "4 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "2.40 kg (NW) / 2.80 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "torrent",
+    "name": "Torrent",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/torrent/Black/05_torrent_black_view_1.png",
+    "desc": "Massive front intake ATX gaming tower optimized for high-power GPUs and continuous airflow.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "ATX / Micro-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "335 x 195 x 440 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.45mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 1.0, Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "3.53 kg (NW) / 4.41 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "dynamite-x5",
+    "name": "Dynamite X5",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/dynamite-x5/Black/dynamite_x5_black_view_1.png",
+    "desc": "Micro-ATX high airflow gaming case with full edge-to-edge transparent acrylic side panel.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "350 x 210 x 380 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.45mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 1.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 1x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "4 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "4.43 kg (NW) / 5.30 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "dynamite-x6",
+    "name": "Dynamite X6",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/dynamite-x6/Black/dynamite_x6_black_view_1.png",
+    "desc": "Premium ATX gaming chassis with Type-C front port, 0.60mm rigid steel chassis, and tempered glass.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "423 x 220 x 467 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.60mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 1x Type-C, 1x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 1x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "6.00 kg (NW) / 6.80 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "dynamite-x7",
+    "name": "Dynamite X7",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png",
+    "desc": "Flagship E-ATX dual-tempered-glass cabinet with high thermal clearance and front Type-C high-speed IO.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "E-ATX / ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "430 x 225 x 480 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.60mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 1x Type-C, 2x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "7.24 kg (NW) / 8.36 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "dynamite-base",
+    "name": "Dynamite Base",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/dynamite-base/Black/dynamite_black_view_1.png",
+    "desc": "Panoramic mini-tower showcase with curved seamless glass corner and clean dual-chamber cable management.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "350 x 210 x 390 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.60mm Steel + Tempered Glass"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "4 Slots"
+      }
+    ]
+  },
+  {
+    "id": "glacier",
+    "name": "Glacier",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/glacier/Black/glacier_black_view_1.png",
+    "desc": "Mid tower gaming case with frost-inspired front mesh grill and dedicated bottom PSU shroud.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "358 x 200 x 460 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.50mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "3.90 kg (NW) / 4.90 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "axle",
+    "name": "Axle",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/axle/Black/axle_black_perspective.png",
+    "desc": "Versatile ATX mid-tower case with solid chassis structure and optimal front-to-back straight airflow path.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "320 x 180 x 410 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.50mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "3.90 kg (NW) / 4.90 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "shadow",
+    "name": "Shadow",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/shadow/Black/L10-B-01.png",
+    "desc": "Stealth matte-black mid-tower cabinet with understated aesthetics and full cable management routing.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "345 x 183 x 430 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.45mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 1.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x 3.5-inch HDD, 3x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "3.90 kg (NW) / 4.90 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "roar",
+    "name": "Roar",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/roar/Black/roar_black_1.png",
+    "desc": "Aggressive compact gaming case with bold angular intake slots and lightweight sturdy frame.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "Micro-ATX / Mini-ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "290 x 190 x 375 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.45mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 1x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "4 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "2.25 kg (NW) / 2.85 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "nexus-360",
+    "name": "Nexus 360",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/nexus-360/Black/nexus_360_black.png",
+    "desc": "Panoramic showcase case featuring dual tempered glass panels and full 360mm top radiator support.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "455 x 210 x 485 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.60mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 1x Type-C, 2x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "1x 3.5-inch HDD, 2x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "3.90 kg (NW) / 4.90 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "thunder",
+    "name": "Thunder",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/thunder/Black/i50-1.png",
+    "desc": "Rugged industrial gaming tower with high-density mesh and multiple internal storage drive mounting options.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "ATX / Micro-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "326 x 190 x 433 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.35mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 2x USB 1.0, Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x HDD+1x SSD / 1x HDD+2x SSD / 3x SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "6 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "3.95 kg (NW) / 4.70 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "box-infinity",
+    "name": "Box Infinity",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/box-infinity/box_infinity_view_1.png",
+    "desc": "Heavy-duty 1.0mm SPCC compact tower chassis with front Type-C port and versatile modular drive brackets.",
+    "colors": [
+      "black",
+      "white",
+      "yellow"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "398 x 211 x 324 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 1.0mm Heavy-Duty Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 1x Type-C, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "3x HDD + 2x SSD (or 1x HDD + 4x SSD)"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "4 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "4.90 kg (NW) / 5.80 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "trendy",
+    "name": "Trendy",
+    "cat": "gaming-cabinets",
+    "catName": "Gaming Cabinets",
+    "img": "assets/images/products/cases/trendy/Black/trendy_m10_view_1.png",
+    "desc": "Modern aesthetic E-ATX gaming cabinet with vertical GPU expansion slots and dual glass showcase design.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Motherboard Support",
+        "value": "E-ATX / ATX / M-ATX / ITX"
+      },
+      {
+        "label": "Chassis Dimensions",
+        "value": "395 x 210 x 475 mm"
+      },
+      {
+        "label": "Material & Thickness",
+        "value": "SPCC 0.55mm Steel"
+      },
+      {
+        "label": "Front I/O Ports",
+        "value": "1x USB 3.0, 1x Type-C, 1x USB 2.0, HD Audio"
+      },
+      {
+        "label": "Drive Bays",
+        "value": "2x 3.5-inch HDD, 4x 2.5-inch SSD"
+      },
+      {
+        "label": "Expansion Slots",
+        "value": "7+2 Slots"
+      },
+      {
+        "label": "Weight",
+        "value": "6.90 kg (NW) / 7.90 kg (GW)"
+      }
+    ]
+  },
+  {
+    "id": "gh-01",
+    "name": "GH-01 Gaming Headset",
+    "cat": "gaming-headphones",
+    "catName": "Gaming Headphones",
+    "img": "assets/images/products/gaming-headphones/gh-01/Black/gh01_black_view_1.png",
+    "desc": "Immersive gaming audio gear with 40mm dynamic drivers, omni-directional boom mic, and 2.0m durable braided cable.",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "specs": [
+      {
+        "label": "Acoustic Driver",
+        "value": "ø40mm Dynamic Neodymium Driver"
+      },
+      {
+        "label": "Frequency Response",
+        "value": "20 Hz - 20,000 Hz"
+      },
+      {
+        "label": "Impedance & Sensitivity",
+        "value": "32 Ω / 110 dB +/- 5 dB"
+      },
+      {
+        "label": "Rated Power",
+        "value": "20 mW (Max 30 mW)"
+      },
+      {
+        "label": "Microphone Type",
+        "value": "Omni-directional (-42 dB +/- 2 dB, 2.2KΩ)"
+      },
+      {
+        "label": "Connector Type",
+        "value": "3.5mm Stereo Plug + USB RGB"
+      },
+      {
+        "label": "Cable Length",
+        "value": "~2.0 m Braided Heavy-Duty"
+      },
+      {
+        "label": "Official Retail Price",
+        "value": "Rs. 2,499"
+      }
+    ]
+  },
+  {
+    "id": "high-current-450w",
+    "name": "High Current 450W PSU",
+    "cat": "power-supply-units",
+    "catName": "Power Supply Units",
+    "img": "assets/images/products/power-supply-units/450w/450w_box_view_1.png",
+    "desc": "Reliable 450W continuous power supply with 80 Plus efficiency, active PFC, and silent 120mm cooling fan.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Continuous Output",
+        "value": "450 Watts Continuous"
+      },
+      {
+        "label": "Efficiency Rating",
+        "value": "80 Plus Certified"
+      },
+      {
+        "label": "Power Factor Correction",
+        "value": "Active PFC (>0.99 Typical)"
+      },
+      {
+        "label": "Cooling Fan",
+        "value": "120mm Silent Hydraulic Bearing Fan"
+      },
+      {
+        "label": "Protection Suite",
+        "value": "OVP / UVP / OPP / SCP Protections"
+      },
+      {
+        "label": "AC Input Voltage",
+        "value": "100-240V AC Full Range"
+      },
+      {
+        "label": "Cabling Type",
+        "value": "Flat Stealth Black Cables"
+      }
+    ]
+  },
+  {
+    "id": "high-current-550w",
+    "name": "High Current 550W PSU",
+    "cat": "power-supply-units",
+    "catName": "Power Supply Units",
+    "img": "assets/images/products/power-supply-units/550w/550w_box_view_1.png",
+    "desc": "550W 80 Plus Bronze certified PSU with dual PCIe 8-pin power connectors for modern mid-range GPUs.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Continuous Output",
+        "value": "550 Watts Continuous"
+      },
+      {
+        "label": "Efficiency Rating",
+        "value": "80 Plus Bronze Certified"
+      },
+      {
+        "label": "Power Factor Correction",
+        "value": "Active PFC (>0.99 Typical)"
+      },
+      {
+        "label": "Cooling Fan",
+        "value": "120mm Silent Hydraulic Bearing Fan"
+      },
+      {
+        "label": "PCIe Connectors",
+        "value": "2x PCIe 8-pin (6+2)"
+      },
+      {
+        "label": "Protection Suite",
+        "value": "OVP / UVP / OPP / SCP / OCP"
+      },
+      {
+        "label": "AC Input Voltage",
+        "value": "100-240V AC Full Range"
+      }
+    ]
+  },
+  {
+    "id": "high-current-650w",
+    "name": "High Current 650W PSU",
+    "cat": "power-supply-units",
+    "catName": "Power Supply Units",
+    "img": "assets/images/products/power-supply-units/650w/650w_box_view_1.png",
+    "desc": "650W high-efficiency power supply unit with dedicated single +12V rail and silent thermal fan curve.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Continuous Output",
+        "value": "650 Watts Continuous"
+      },
+      {
+        "label": "Efficiency Rating",
+        "value": "80 Plus Bronze Certified"
+      },
+      {
+        "label": "Power Factor Correction",
+        "value": "Active PFC (>0.99 Typical)"
+      },
+      {
+        "label": "Cooling Fan",
+        "value": "120mm Silent Hydraulic Bearing Fan"
+      },
+      {
+        "label": "PCIe Connectors",
+        "value": "2x PCIe 8-pin (6+2)"
+      },
+      {
+        "label": "Protection Suite",
+        "value": "OVP / UVP / OPP / SCP / OCP"
+      },
+      {
+        "label": "AC Input Voltage",
+        "value": "100-240V AC Full Range"
+      }
+    ]
+  },
+  {
+    "id": "high-current-750w",
+    "name": "High Current 750W PSU",
+    "cat": "power-supply-units",
+    "catName": "Power Supply Units",
+    "img": "assets/images/products/power-supply-units/750w/750w_box_view_1.png",
+    "desc": "750W high-performance power supply unit engineered for gaming rigs with multi-fan ARGB setups and high-TDP GPUs.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Continuous Output",
+        "value": "750 Watts Continuous"
+      },
+      {
+        "label": "Efficiency Rating",
+        "value": "80 Plus Bronze / Gold"
+      },
+      {
+        "label": "Power Factor Correction",
+        "value": "Active PFC (>0.99 Typical)"
+      },
+      {
+        "label": "Cooling Fan",
+        "value": "120mm Silent Hydraulic Bearing Fan"
+      },
+      {
+        "label": "PCIe Connectors",
+        "value": "4x PCIe 8-pin (6+2)"
+      },
+      {
+        "label": "Protection Suite",
+        "value": "Full Industrial Protections (OVP/UVP/OPP/SCP/OCP/OTP)"
+      },
+      {
+        "label": "AC Input Voltage",
+        "value": "100-240V AC Full Range"
+      }
+    ]
+  },
+  {
+    "id": "high-current-850w",
+    "name": "High Current 850W PSU",
+    "cat": "power-supply-units",
+    "catName": "Power Supply Units",
+    "img": "assets/images/products/power-supply-units/850w/850w_box_view_1.png",
+    "desc": "850W enthusiast-grade power supply featuring 80 Plus Gold efficiency and high-output +12V rail for flagship graphics cards.",
+    "colors": [
+      "black"
+    ],
+    "specs": [
+      {
+        "label": "Continuous Output",
+        "value": "850 Watts Continuous"
+      },
+      {
+        "label": "Efficiency Rating",
+        "value": "80 Plus Gold High Efficiency"
+      },
+      {
+        "label": "Power Factor Correction",
+        "value": "Active PFC (>0.99 Typical)"
+      },
+      {
+        "label": "Cooling Fan",
+        "value": "120mm Silent Hydraulic Bearing Fan"
+      },
+      {
+        "label": "PCIe Connectors",
+        "value": "4x PCIe 8-pin + 12VHPWR Ready"
+      },
+      {
+        "label": "Protection Suite",
+        "value": "Full Industrial Protections (OVP/UVP/OPP/SCP/OCP/OTP)"
+      },
+      {
+        "label": "AC Input Voltage",
+        "value": "100-240V AC Full Range"
+      }
+    ]
+  }
+];
 
     const liveSiteSoftware = [
       { id: "soft_1", title: "iM Fan Control Software", size: "48 MB", fileName: "im-fan-control.zip", content: "" },
       { id: "soft_2", title: "RGB Sync Tool", size: "62 MB", fileName: "im-rgb-sync.zip", content: "" },
       { id: "soft_3", title: "User Manual (PDF)", size: "12 MB", fileName: "user-manual.pdf", content: "" }
     ];
-
-    // Auto-migrate if older dummy dataset is detected
-    const CATALOG_VERSION = "im_v5_live_full";
-    if (localStorage.getItem("im_admin_catalog_ver") !== CATALOG_VERSION) {
-      localStorage.setItem("im_wm_categories", JSON.stringify(liveSiteCategories));
-      localStorage.setItem("im_wm_products", JSON.stringify(liveSiteProducts));
-      localStorage.setItem("im_wm_hero_banners_data", JSON.stringify(liveSiteHeroSlides));
-      localStorage.setItem("im_wm_sub_hero_data", JSON.stringify(liveSiteSubHero));
-      localStorage.setItem("im_wm_software", JSON.stringify(liveSiteSoftware));
-      localStorage.setItem("im_admin_catalog_ver", CATALOG_VERSION);
-    }
-
-    function resetToLiveCatalog() {
-      if (confirm("Reset to the official live website data (19 products & 5 categories)?")) {
-        categories = JSON.parse(JSON.stringify(liveSiteCategories));
-        products = JSON.parse(JSON.stringify(liveSiteProducts));
-        heroSlides = JSON.parse(JSON.stringify(liveSiteHeroSlides));
-        subHeroData = JSON.parse(JSON.stringify(liveSiteSubHero));
-        softwareList = JSON.parse(JSON.stringify(liveSiteSoftware));
-        saveAll();
-        renderHero();
-        renderSubHero();
-        renderCategories();
-        renderProducts();
-        renderSoftware();
-        showToast("Official live catalog loaded!");
-      }
-    }
 
     // Read stored data safely
     function getStored(key, fallback) {
@@ -1758,6 +2703,39 @@
       }
     }
 
+    // Smart data migration: ensure all official 31 products exist without erasing user-created items
+    const CATALOG_VERSION = "im_v6_31_prods";
+    if (localStorage.getItem("im_admin_catalog_ver") !== CATALOG_VERSION) {
+      try {
+        let existingProds = getStored("im_wm_products", []);
+        if (!Array.isArray(existingProds) || existingProds.length === 0) {
+          existingProds = liveSiteProducts;
+        } else {
+          // Merge: ensure all liveSiteProducts exist
+          const existingIds = new Set(existingProds.map(p => String(p.id)));
+          liveSiteProducts.forEach(lp => {
+            if (!existingIds.has(String(lp.id))) {
+              existingProds.push(lp);
+            }
+          });
+        }
+        localStorage.setItem("im_wm_products", JSON.stringify(existingProds));
+        localStorage.setItem("im_wm_categories", JSON.stringify(liveSiteCategories));
+        if (!localStorage.getItem("im_wm_hero_banners_data")) {
+          localStorage.setItem("im_wm_hero_banners_data", JSON.stringify(liveSiteHeroSlides));
+        }
+        if (!localStorage.getItem("im_wm_sub_hero_data")) {
+          localStorage.setItem("im_wm_sub_hero_data", JSON.stringify(liveSiteSubHero));
+        }
+        if (!localStorage.getItem("im_wm_software")) {
+          localStorage.setItem("im_wm_software", JSON.stringify(liveSiteSoftware));
+        }
+        localStorage.setItem("im_admin_catalog_ver", CATALOG_VERSION);
+      } catch (err) {
+        console.warn('Migration note:', err);
+      }
+    }
+
     let heroSlides = getStored("im_wm_hero_banners_data", liveSiteHeroSlides);
     let subHeroData = getStored("im_wm_sub_hero_data", liveSiteSubHero);
     let categories = getStored("im_wm_categories", liveSiteCategories);
@@ -1765,6 +2743,8 @@
     let softwareList = getStored("im_wm_software", liveSiteSoftware);
 
     let activeHeroIdx = 0;
+    let currentAdminCatFilter = 'all';
+    let currentAdminSearchQuery = '';
 
     // Safe saveAll that never crashes
     function saveAll() {
@@ -1776,71 +2756,72 @@
     }
 
     // ==========================================================================
-    // CANVAS IMAGE COMPRESSOR (Reduces 10MB phone uploads to ~40KB Web-Safe images)
+    // CANVAS IMAGE COMPRESSOR (Reduces uploads to ~40KB Web-Safe images)
     // ==========================================================================
-    function compressImage(file, maxWidth, maxHeight, quality, callback) {
-      if (!file || !file.type.startsWith('image/')) {
-        callback('');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          let w = img.width;
-          let h = img.height;
-          if (w > maxWidth) {
-            h = Math.round((h * maxWidth) / w);
-            w = maxWidth;
-          }
-          if (h > maxHeight) {
-            w = Math.round((w * maxHeight) / h);
-            h = maxHeight;
-          }
-          const canvas = document.createElement('canvas');
-          canvas.width = w;
-          canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
-          const compressed = canvas.toDataURL('image/jpeg', quality);
-          callback(compressed);
+    function compressImageFile(file, maxWidth = 800, maxHeight = 800, quality = 0.82) {
+      return new Promise((resolve) => {
+        if (!file || !file.type.startsWith('image/')) {
+          return resolve(null);
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth || height > maxHeight) {
+              if (width > height) {
+                height = Math.round((height * maxWidth) / width);
+                width = maxWidth;
+              } else {
+                width = Math.round((width * maxHeight) / height);
+                height = maxHeight;
+              }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            const compressed = canvas.toDataURL('image/jpeg', quality);
+            resolve(compressed);
+          };
+          img.onerror = function() {
+            resolve(e.target.result);
+          };
+          img.src = e.target.result;
         };
-        img.onerror = function() {
-          callback(e.target.result);
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function handleFileUpload(input, targetUrlInputId, previewImgId) {
-      if (!input.files || !input.files[0]) return;
-      const file = input.files[0];
-      compressImage(file, 800, 800, 0.82, function(compressedUrl) {
-        document.getElementById(targetUrlInputId).value = compressedUrl;
-        if (previewImgId) document.getElementById(previewImgId).src = compressedUrl;
+        reader.readAsDataURL(file);
       });
     }
 
-    // ==========================================================================
-    // SIMPLE SOFTWARE FILE PICKER
-    // ==========================================================================
+    async function handleFileUpload(input, targetUrlInputId, previewImgId) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        showToast("Optimizing image...");
+        const compressedBase64 = await compressImageFile(file, 800, 800, 0.82);
+        if (compressedBase64) {
+          document.getElementById(targetUrlInputId).value = compressedBase64;
+          if (previewImgId) {
+            document.getElementById(previewImgId).src = compressedBase64;
+          }
+          showToast("Image ready!");
+        }
+      }
+    }
+
     let pendingSoftwareContent = "";
+    let pendingSoftwareFileName = "";
     let pendingSoftwareSize = "";
-    let pendingSoftwareName = "";
 
     function handleSimpleSoftwarePick(input) {
       if (!input.files || !input.files[0]) return;
       const file = input.files[0];
-      pendingSoftwareName = file.name;
-      pendingSoftwareSize = (file.size / (1024 * 1024)).toFixed(1) + " MB";
-      
-      const titleInput = document.getElementById("softTitle");
-      if (!titleInput.value.trim()) {
-        titleInput.value = file.name.replace(/\.[^/.]+$/, "");
-      }
+      pendingSoftwareFileName = file.name;
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+      pendingSoftwareSize = sizeMB > 0.1 ? (sizeMB + " MB") : (Math.round(file.size / 1024) + " KB");
 
-      document.getElementById("softFileBadge").innerHTML = `Selected: <strong>${file.name}</strong> (${pendingSoftwareSize})`;
+      document.getElementById("softFileBadge").innerHTML = "Selected: <strong>" + file.name + "</strong> (" + pendingSoftwareSize + ")";
 
       if (file.size < 3 * 1024 * 1024) {
         const reader = new FileReader();
@@ -1854,51 +2835,58 @@
     }
 
     // ==========================================================================
-    // A. HERO & SUB HERO RENDERING
+    // TOAST NOTIFICATION
+    // ==========================================================================
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    // ==========================================================================
+    // MODAL HELPERS
+    // ==========================================================================
+    function openModal(id) {
+      document.getElementById(id).classList.add("active");
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("active");
+    }
+
+    // ==========================================================================
+    // A. HERO BANNER CONTROLS
     // ==========================================================================
     function renderHero() {
       const slide = heroSlides[activeHeroIdx] || heroSlides[0];
-      document.getElementById("mainHeroActiveImg").src = slide.bg;
-      document.getElementById("prevHeroEyebrow").textContent = slide.eyebrow || "PREMIUM PC CABINET";
-      document.getElementById("prevHeroTitle").textContent = slide.title || "DYNAMITE X7";
+      document.getElementById("heroActiveImg").src = slide.bg || "assets/images/homepage/hero_bg_slide_1.png";
+      document.getElementById("prevHeroEyebrow").textContent = slide.eyebrow || "";
+      document.getElementById("prevHeroTitle").textContent = slide.title || "";
       document.getElementById("prevHeroTagline").textContent = slide.tagline || "";
       document.getElementById("prevHeroDesc").textContent = slide.desc || "";
-      document.getElementById("prevHeroBtn").innerHTML = `${slide.btnText || 'Explore More'} &rarr;`;
+      document.getElementById("prevHeroBtn").textContent = (slide.btnText || "Explore More") + " →";
 
-      const thumbs = document.getElementById("mainHeroThumbs");
-      thumbs.innerHTML = heroSlides.map((s, idx) => `
-        <div class="im-thumb-card ${idx === activeHeroIdx ? 'active' : ''}" onclick="selectHeroSlide(${idx}, this)">
-          <img src="${s.bg}" alt="${s.title}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
-        </div>
-      `).join("") + `
-        <div class="im-thumb-card-add" onclick="openHeroModal('main', 'add')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          <span>Add Slide</span>
-        </div>
-      `;
+      document.querySelectorAll(".im-slide-chip").forEach((btn, idx) => {
+        btn.classList.toggle("active", idx === activeHeroIdx);
+      });
     }
 
-    function selectHeroSlide(idx) {
+    function switchHeroSlide(idx) {
       activeHeroIdx = idx;
       renderHero();
     }
 
-    function renderSubHero() {
-      document.getElementById("subHeroActiveImg").src = subHeroData.bg;
-      document.getElementById("prevSubEyebrow").textContent = subHeroData.eyebrow || "GAMING HEADSET";
-      document.getElementById("prevSubTitle").textContent = subHeroData.title || "IM-GH01";
-      document.getElementById("prevSubDesc").textContent = subHeroData.desc || "";
-      document.getElementById("prevSubBtn").innerHTML = `${subHeroData.btnText || 'Explore'} &rarr;`;
-    }
-
     function openHeroModal(target, mode) {
-      document.getElementById("heroTargetSection").value = target;
-      if (target === 'main') {
-        const slide = (mode === 'edit') ? heroSlides[activeHeroIdx] : { bg: '', eyebrow: '', title: '', tagline: '', desc: '', btnText: 'Explore More', btnLink: 'all-products.html' };
-        document.getElementById("heroSlideIdx").value = (mode === 'edit') ? activeHeroIdx : -1;
-        document.getElementById("heroModalHeading").textContent = (mode === 'edit') ? "Edit Hero Slide Content" : "Add New Hero Slide";
-        document.getElementById("heroBgUrl").value = slide.bg;
-        document.getElementById("heroImgPreview").src = slide.bg || 'assets/images/homepage/im_official_emblem.png';
+      if (target === 'hero') {
+        const slide = heroSlides[activeHeroIdx] || heroSlides[0];
+        document.getElementById("heroSlideIdx").value = activeHeroIdx;
+        document.getElementById("heroModalHeading").textContent = "Edit Main Hero Slide " + (activeHeroIdx + 1);
+        document.getElementById("heroBgUrl").value = slide.bg || "";
+        document.getElementById("heroImgPreview").src = slide.bg || "";
         document.getElementById("heroEyebrow").value = slide.eyebrow || "";
         document.getElementById("heroTitle").value = slide.title || "";
         document.getElementById("heroTagline").value = slide.tagline || "";
@@ -1908,8 +2896,8 @@
       } else {
         document.getElementById("heroSlideIdx").value = "sub";
         document.getElementById("heroModalHeading").textContent = "Edit Sub Hero (Headset) Content";
-        document.getElementById("heroBgUrl").value = subHeroData.bg;
-        document.getElementById("heroImgPreview").src = subHeroData.bg || 'assets/images/homepage/im_official_emblem.png';
+        document.getElementById("heroBgUrl").value = subHeroData.bg || "";
+        document.getElementById("heroImgPreview").src = subHeroData.bg || "";
         document.getElementById("heroEyebrow").value = subHeroData.eyebrow || "";
         document.getElementById("heroTitle").value = subHeroData.title || "";
         document.getElementById("heroTagline").value = subHeroData.tagline || "";
@@ -1924,10 +2912,9 @@
       document.getElementById("heroImgPreview").src = val;
     }
 
-    function saveHeroSlide(e) {
+    function saveHero(e) {
       e.preventDefault();
-      const target = document.getElementById("heroTargetSection").value;
-      const idx = document.getElementById("heroSlideIdx").value;
+      const target = document.getElementById("heroSlideIdx").value;
       const bg = document.getElementById("heroBgUrl").value.trim();
       const eyebrow = document.getElementById("heroEyebrow").value.trim();
       const title = document.getElementById("heroTitle").value.trim();
@@ -1936,58 +2923,66 @@
       const btnText = document.getElementById("heroBtnText").value.trim();
       const btnLink = document.getElementById("heroBtnLink").value.trim();
 
-      const dataObj = { bg, eyebrow, title, tagline, desc, btnText, btnLink };
-
-      if (target === 'main') {
-        if (idx >= 0 && idx !== -1) {
-          heroSlides[idx] = dataObj;
-        } else {
-          heroSlides.push(dataObj);
-          activeHeroIdx = heroSlides.length - 1;
-        }
-        renderHero();
-      } else {
-        subHeroData = dataObj;
+      if (target === "sub") {
+        subHeroData = { bg, eyebrow, title, tagline, desc, btnText, btnLink };
         renderSubHero();
+        showToast("Sub hero banner updated!");
+      } else {
+        const idx = parseInt(target, 10);
+        heroSlides[idx] = { bg, eyebrow, title, tagline, desc, btnText, btnLink };
+        renderHero();
+        showToast("Main hero slide " + (idx + 1) + " updated!");
       }
 
       saveAll();
       closeModal('modalHero');
-      showToast("Hero section updated successfully!");
+    }
+
+    function renderSubHero() {
+      document.getElementById("subHeroActiveImg").src = subHeroData.bg || "assets/images/homepage/headset_bg.png";
+      document.getElementById("prevSubEyebrow").textContent = subHeroData.eyebrow || "";
+      document.getElementById("prevSubTitle").textContent = subHeroData.title || "";
+      document.getElementById("prevSubDesc").textContent = subHeroData.desc || "";
+      document.getElementById("prevSubBtn").textContent = (subHeroData.btnText || "Explore Accessories") + " →";
     }
 
     // ==========================================================================
-    // B. CATEGORIES RENDERING & CRUD
+    // B. CATEGORIES SECTION (SVG ICONS MATCHING LIVE SITE)
     // ==========================================================================
     function renderCategories() {
       const container = document.getElementById("categoriesContainer");
       document.getElementById("categoryCountBadge").textContent = categories.length;
 
-      container.innerHTML = categories.map(c => `
-        <div class="im-cat-card">
-          <div class="im-cat-card-left">
-            <div class="im-cat-thumb">
-              <img src="${c.thumb || 'assets/images/homepage/im_official_emblem.png'}" alt="${c.name}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
+      container.innerHTML = categories.map(c => {
+        const iconSvg = categoryIcons[c.key] || defaultCategoryIcon;
+        return `
+          <div class="im-cat-card">
+            <div class="im-cat-card-left">
+              <div class="im-cat-icon-frame">
+                ${iconSvg}
+              </div>
+              <div>
+                <span class="im-cat-title">${c.name}</span>
+                <p style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">slug: ${c.key}</p>
+              </div>
             </div>
-            <div>
-              <span class="im-cat-title">${c.name}</span>
-              <p style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">slug: ${c.key}</p>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn-icon-dot" title="Edit Category" onclick="openCategoryModal('edit', '${c.key}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              </button>
+              <button class="btn-icon-dot" title="Delete Category" onclick="deleteCategory('${c.key}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
             </div>
           </div>
-          <div style="display: flex; gap: 6px;">
-            <button class="btn-icon-dot" title="Edit Category" onclick="openCategoryModal('edit', '${c.key}')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-            </button>
-            <button class="btn-icon-dot" title="Delete Category" onclick="deleteCategory('${c.key}')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-            </button>
-          </div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
 
       // Update product category dropdown
       const sel = document.getElementById("pCategory");
-      sel.innerHTML = categories.map(c => `<option value="${c.key}">${c.name}</option>`).join("");
+      if (sel) {
+        sel.innerHTML = categories.map(c => `<option value="${c.key}">${c.name}</option>`).join("");
+      }
     }
 
     function openCategoryModal(mode, key) {
@@ -1999,22 +2994,14 @@
         document.getElementById("catName").value = c.name;
         document.getElementById("catKey").value = c.key;
         document.getElementById("catKey").disabled = true;
-        document.getElementById("catThumb").value = c.thumb || "";
-        document.getElementById("catImgPreview").src = c.thumb || "assets/images/homepage/im_official_emblem.png";
       } else {
         document.getElementById("catModalTitle").textContent = "Add Category";
         document.getElementById("catEditKey").value = "";
         document.getElementById("catName").value = "";
         document.getElementById("catKey").value = "";
         document.getElementById("catKey").disabled = false;
-        document.getElementById("catThumb").value = "";
-        document.getElementById("catImgPreview").src = "assets/images/homepage/im_official_emblem.png";
       }
       openModal('modalCategory');
-    }
-
-    function updateCatImgPreview(val) {
-      document.getElementById("catImgPreview").src = val;
     }
 
     function saveCategory(e) {
@@ -2023,24 +3010,24 @@
       const name = document.getElementById("catName").value.trim();
       let key = document.getElementById("catKey").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
       if (!key) key = name.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-      const thumb = document.getElementById("catThumb").value.trim();
 
       if (editKey) {
         const idx = categories.findIndex(c => c.key === editKey);
         if (idx !== -1) {
-          categories[idx] = { key: editKey, name, thumb };
+          categories[idx] = { ...categories[idx], name };
           showToast("Category updated!");
         }
       } else {
         if (categories.some(c => c.key === key)) {
           key = key + '-' + Date.now().toString().slice(-4);
         }
-        categories.push({ key, name, thumb });
+        categories.push({ key, name });
         showToast("Category added!");
       }
 
       saveAll();
       renderCategories();
+      updateFilterTabCounts();
       closeModal('modalCategory');
     }
 
@@ -2052,6 +3039,7 @@
       categories = categories.filter(c => c.key !== key);
       saveAll();
       renderCategories();
+      updateFilterTabCounts();
       showToast("Category removed.");
     }
 
@@ -2064,7 +3052,7 @@
       { label: "Structure Material", value: "0.60mm SPCC Steel & Tempered Glass" },
       { label: "Cooling Fan Support", value: "Front: 3x120mm, Top: 2x120mm, Rear: 1x120mm" },
       { label: "Radiator Support", value: "Up to 360mm Front / 240mm Top" },
-      { label: "Drive Bays", value: "2x 3.5\" HDD + 2x 2.5\" SSD" },
+      { label: "Drive Bays", value: "2x 3.5-inch HDD + 2x 2.5-inch SSD" },
       { label: "Front I/O Ports", value: "1x USB 3.0, 1x Type-C, HD Audio" },
       { label: "GPU Max Clearance", value: "Up to 340 mm" }
     ];
@@ -2076,134 +3064,190 @@
       }
       container.innerHTML = specsArray.map((s, idx) => `
         <div class="im-spec-row" data-idx="${idx}">
-          <input type="text" class="spec-name-input" value="${escapeHtml(s.label || '')}" placeholder="Parameter (e.g. Dimensions)">
-          <input type="text" class="spec-val-input" value="${escapeHtml(s.value || '')}" placeholder="Value (e.g. 430 x 225 x 480 mm)">
-          <button type="button" class="spec-remove-btn" onclick="removeSpecRow(${idx})" title="Remove parameter">&times;</button>
+          <input type="text" class="form-input im-spec-key" placeholder="Parameter (e.g. Dimensions)" value="${(s.label || '').replace(/"/g, '&quot;')}" required>
+          <input type="text" class="form-input im-spec-val" placeholder="Value (e.g. 430 x 225 x 480 mm)" value="${(s.value || '').replace(/"/g, '&quot;')}" required>
+          <button type="button" class="btn-remove-spec" onclick="removeSpecRow(this)" title="Remove parameter">&times;</button>
         </div>
       `).join("");
     }
 
-    function addSpecRow() {
-      const current = getSpecsFromForm();
-      current.push({ label: "", value: "" });
-      renderSpecRows(current);
+    function addSpecRow(label = "", val = "") {
+      const container = document.getElementById("pSpecsContainer");
+      const div = document.createElement("div");
+      div.className = "im-spec-row";
+      div.innerHTML = `
+        <input type="text" class="form-input im-spec-key" placeholder="Parameter (e.g. Dimensions)" value="${label.replace(/"/g, '&quot;')}" required>
+        <input type="text" class="form-input im-spec-val" placeholder="Value (e.g. 430 x 225 x 480 mm)" value="${val.replace(/"/g, '&quot;')}" required>
+        <button type="button" class="btn-remove-spec" onclick="removeSpecRow(this)" title="Remove parameter">&times;</button>
+      `;
+      container.appendChild(div);
     }
 
-    function removeSpecRow(idx) {
-      const current = getSpecsFromForm();
-      current.splice(idx, 1);
-      renderSpecRows(current);
+    function removeSpecRow(btn) {
+      const row = btn.closest(".im-spec-row");
+      if (document.querySelectorAll("#pSpecsContainer .im-spec-row").length > 1) {
+        row.remove();
+      } else {
+        row.querySelector(".im-spec-key").value = "";
+        row.querySelector(".im-spec-val").value = "";
+      }
     }
 
     function getSpecsFromForm() {
       const rows = document.querySelectorAll("#pSpecsContainer .im-spec-row");
-      const list = [];
+      const specs = [];
       rows.forEach(r => {
-        const label = r.querySelector(".spec-name-input").value.trim();
-        const value = r.querySelector(".spec-val-input").value.trim();
-        if (label || value) {
-          list.push({ label, value });
+        const k = r.querySelector(".im-spec-key").value.trim();
+        const v = r.querySelector(".im-spec-val").value.trim();
+        if (k && v) {
+          specs.push({ label: k, value: v });
         }
       });
-      return list;
-    }
-
-    function escapeHtml(str) {
-      return (str || '').replace(/"/g, '&quot;');
+      return specs;
     }
 
     // ==========================================================================
-    // C. PRODUCTS RENDERING & CRUD
+    // FILTER & SEARCH HANDLERS FOR PRODUCTS (CLEAN & ORGANIZED)
+    // ==========================================================================
+    function filterAdminProducts(catKey) {
+      currentAdminCatFilter = catKey;
+      document.querySelectorAll(".im-filter-tab").forEach(tab => {
+        tab.classList.toggle("active", tab.getAttribute("data-cat") === catKey);
+      });
+      renderProducts();
+    }
+
+    function handleAdminProductSearch(query) {
+      currentAdminSearchQuery = (query || "").trim();
+      renderProducts();
+    }
+
+    function updateFilterTabCounts() {
+      const cntAll = document.getElementById("cntAll");
+      const cntAir = document.getElementById("cntAir");
+      const cntLiquid = document.getElementById("cntLiquid");
+      const cntCases = document.getElementById("cntCases");
+      const cntAudio = document.getElementById("cntAudio");
+      const cntPSU = document.getElementById("cntPSU");
+
+      if (cntAll) cntAll.textContent = products.length;
+      if (cntAir) cntAir.textContent = products.filter(p => p.cat === 'air-coolers').length;
+      if (cntLiquid) cntLiquid.textContent = products.filter(p => p.cat === 'liquid-coolers').length;
+      if (cntCases) cntCases.textContent = products.filter(p => p.cat === 'gaming-cabinets').length;
+      if (cntAudio) cntAudio.textContent = products.filter(p => p.cat === 'gaming-headphones').length;
+      if (cntPSU) cntPSU.textContent = products.filter(p => p.cat === 'power-supply-units').length;
+    }
+
+    // ==========================================================================
+    // C. PRODUCTS LIST RENDERER (ORGANIZED, CLEAN & CONFUSION-FREE)
     // ==========================================================================
     function renderProducts() {
       const container = document.getElementById("productsListContainer");
       document.getElementById("productCountBadge").textContent = products.length;
 
-      container.innerHTML = products.map(p => {
+      // Filter products by selected category and search query
+      let filtered = products;
+      if (currentAdminCatFilter !== 'all') {
+        filtered = filtered.filter(p => p.cat === currentAdminCatFilter);
+      }
+      if (currentAdminSearchQuery) {
+        const q = currentAdminSearchQuery.toLowerCase();
+        filtered = filtered.filter(p => 
+          (p.name && p.name.toLowerCase().includes(q)) || 
+          (p.catName && p.catName.toLowerCase().includes(q)) ||
+          (p.desc && p.desc.toLowerCase().includes(q))
+        );
+      }
+
+      updateFilterTabCounts();
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="padding: 34px; text-align: center; color: var(--text-dim); font-size: 13px;">No products match the selected filter or search keyword.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => {
         const colorDots = (p.colors || ['black']).map(col => {
           let bg = '#111827';
-          if (col === 'white') bg = '#FFFFFF';
-          if (col === 'yellow') bg = '#FACC15';
-          if (col === 'red') bg = '#E42F38';
-          if (col === 'silver') bg = '#9CA3AF';
-          return `<span class="im-color-dot" style="background:${bg};" title="${col}"></span>`;
+          if (col === 'white') bg = '#F8FAFC';
+          if (col === 'yellow') bg = '#EAB308';
+          return '<span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: ' + bg + '; border: 1px solid rgba(255,255,255,0.3);" title="' + col + '"></span>';
         }).join("");
 
-        // Specs summary preview
-        let specsPreview = '';
-        if (Array.isArray(p.specs)) {
-          specsPreview = p.specs.slice(0, 3).map(s => `${s.label}: ${s.value}`).join(' | ');
-        } else if (typeof p.specs === 'string') {
-          specsPreview = p.specs;
+        // Highlight chips (top 3 key parameters)
+        let highlightChips = '';
+        if (Array.isArray(p.specs) && p.specs.length > 0) {
+          highlightChips = p.specs.slice(0, 3).map(s => 
+            '<span class="im-spec-pill" title="' + s.label + ': ' + s.value + '">' + s.value + '</span>'
+          ).join("");
         }
 
         return `
-        <div class="im-product-row">
-          <div class="im-product-left">
-            <span class="im-drag-handle" title="Product">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
-            </span>
-            <div class="im-row-thumb">
+          <div class="im-prod-row" data-id="${p.id}">
+            <div class="im-prod-thumb-box">
               <img src="${p.img || 'assets/images/homepage/im_official_emblem.png'}" alt="${p.name}" onerror="this.src='assets/images/homepage/im_official_emblem.png'">
             </div>
-            <div class="im-row-info">
-              <h4>${p.name}</h4>
-              <p>${p.catName || p.cat} ${specsPreview ? `&bull; <span style="font-family:monospace; font-size:11px; opacity:0.8;">${specsPreview}</span>` : ''}</p>
-              ${p.desc ? `<div class="im-row-desc-preview">${p.desc}</div>` : ''}
-              <div class="im-color-dots">${colorDots}</div>
+            <div class="im-prod-meta-col">
+              <div class="im-prod-header-line">
+                <span class="im-prod-title">${p.name}</span>
+                <span class="im-cat-pill">${p.catName || p.cat}</span>
+                <div style="display: flex; gap: 4px; align-items: center; margin-left: 2px;">${colorDots}</div>
+              </div>
+              ${highlightChips ? `<div class="im-prod-highlights-line">${highlightChips}</div>` : ''}
+              ${p.desc ? `<p class="im-prod-desc-line">${p.desc}</p>` : ''}
+            </div>
+            <div class="im-prod-actions-col">
+              <button class="btn-action-edit" onclick="openProductModal('edit', '${p.id}')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                Edit
+              </button>
+              <button class="btn-icon-dot" title="Delete Product" onclick="deleteProduct('${p.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
             </div>
           </div>
-          <div class="im-row-right">
-            <button class="btn-white" onclick="openProductModal('edit', '${p.id}')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-              Edit
-            </button>
-            <button class="btn-icon-dot" title="Delete Product" onclick="deleteProduct('${p.id}')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-            </button>
-          </div>
-        </div>
-      `}).join("");
+        `;
+      }).join("");
     }
 
     function openProductModal(mode, id) {
-      renderCategories(); // ensure dropdown has latest categories
-      const form = document.getElementById("productEditForm");
-      form.reset();
-
       if (mode === 'edit') {
         const p = products.find(x => String(x.id) === String(id));
         if (!p) return;
-        document.getElementById("productModalTitle").textContent = "Edit Product";
+        document.getElementById("productModalTitle").textContent = "Edit Product: " + p.name;
         document.getElementById("pEditId").value = p.id;
         document.getElementById("pName").value = p.name;
         document.getElementById("pCategory").value = p.cat;
         document.getElementById("pImg").value = p.img || "";
-        document.getElementById("pImgPreview").src = p.img || 'assets/images/homepage/im_official_emblem.png';
+        document.getElementById("pImgPreview").src = p.img || "assets/images/homepage/im_official_emblem.png";
         document.getElementById("pDesc").value = p.desc || "";
 
-        // Render specs
-        if (Array.isArray(p.specs)) {
+        if (Array.isArray(p.specs) && p.specs.length > 0) {
           renderSpecRows(p.specs);
-        } else if (typeof p.specs === 'string' && p.specs.includes('|')) {
-          const parsed = p.specs.split('|').map(s => {
-            const parts = s.split(':');
-            return { label: parts[0]?.trim() || "Spec", value: parts[1]?.trim() || s.trim() };
+        } else if (typeof p.specs === 'string' && p.specs.trim()) {
+          const parsed = p.specs.split(/\n|,|;/).map(line => {
+            const parts = line.split(/:|=/);
+            return { label: (parts[0] || 'Spec').trim(), value: (parts[1] || parts[0]).trim() };
           });
           renderSpecRows(parsed);
         } else {
           renderSpecRows(defaultHardwareTemplate);
         }
 
-        // Set colors
         document.querySelectorAll("input[name='pColors']").forEach(cb => {
           cb.checked = (p.colors && p.colors.includes(cb.value));
         });
       } else {
         document.getElementById("productModalTitle").textContent = "Add New Product";
         document.getElementById("pEditId").value = "";
+        document.getElementById("pName").value = "";
+        document.getElementById("pImg").value = "";
+        document.getElementById("pDesc").value = "";
         document.getElementById("pImgPreview").src = "assets/images/homepage/im_official_emblem.png";
         renderSpecRows(defaultHardwareTemplate);
+        document.querySelectorAll("input[name='pColors']").forEach((cb, idx) => {
+          cb.checked = (idx === 0);
+        });
       }
       openModal('modalProduct');
     }
@@ -2269,110 +3313,85 @@
           </div>
           <div class="im-soft-right">
             <button class="btn-download-action" onclick="downloadSoftwareFile('${s.id}')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               Download
             </button>
-            <button class="btn-icon-dot" title="Delete" onclick="deleteSoftware('${s.id}')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            <button class="btn-icon-dot" title="Delete software" onclick="deleteSoftware('${s.id}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
             </button>
           </div>
         </div>
       `).join("");
     }
 
-    function openSoftwareModal(mode) {
+    function openSoftwareModal() {
       document.getElementById("softTitle").value = "";
       document.getElementById("softFileInput").value = "";
-      document.getElementById("softFileBadge").innerHTML = "Select any .zip, .exe, or .pdf software file";
+      document.getElementById("softFileBadge").textContent = "Select any .zip, .exe, or .pdf software file";
       pendingSoftwareContent = "";
+      pendingSoftwareFileName = "";
       pendingSoftwareSize = "";
-      pendingSoftwareName = "";
       openModal('modalSoftware');
     }
 
     function saveSoftware(e) {
       e.preventDefault();
       const title = document.getElementById("softTitle").value.trim();
-      const size = pendingSoftwareSize || "18 MB";
-      const fileName = pendingSoftwareName || `${title}.zip`;
-      const content = pendingSoftwareContent || "";
-
-      softwareList.unshift({
-        id: 'soft_' + Date.now(),
-        title,
-        size,
-        fileName,
-        content
+      const newId = 'soft_' + Date.now();
+      softwareList.push({
+        id: newId,
+        title: title,
+        size: pendingSoftwareSize || "45 MB",
+        fileName: pendingSoftwareFileName || (title.toLowerCase().replace(/\s+/g, '-') + '.zip'),
+        content: pendingSoftwareContent || ""
       });
-
       saveAll();
       renderSoftware();
       closeModal('modalSoftware');
-      showToast("Software file added!");
+      showToast("Software package added!");
     }
 
     function deleteSoftware(id) {
-      softwareList = softwareList.filter(s => String(s.id) !== String(id));
+      softwareList = softwareList.filter(s => s.id !== id);
       saveAll();
       renderSoftware();
-      showToast("Software file removed.");
+      showToast("Software removed.");
     }
 
     function downloadSoftwareFile(id) {
-      const s = softwareList.find(x => String(x.id) === String(id));
+      const s = softwareList.find(x => x.id === id);
       if (!s) return;
-
       if (s.content) {
         const a = document.createElement("a");
         a.href = s.content;
-        a.download = s.fileName || `${s.title}.zip`;
+        a.download = s.fileName || (s.title + '.zip');
         document.body.appendChild(a);
         a.click();
         a.remove();
-        showToast(`Downloading ${s.title}...`);
+        showToast("Downloading " + s.title + "...");
       } else {
-        showToast(`Starting download: ${s.title}`);
-        const blob = new Blob([`Ice Master Official Software Package - ${s.title}`], { type: 'application/octet-stream' });
+        showToast("Starting download: " + s.title);
+        const blob = new Blob(["Ice Master Official Software Package - " + s.title], { type: 'application/octet-stream' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = s.fileName || `${s.title}.zip`;
+        a.download = s.fileName || (s.title + '.zip');
         document.body.appendChild(a);
         a.click();
         a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
       }
     }
 
-    // Modal Helpers
-    function openModal(id) { document.getElementById(id).classList.add("open"); }
-    function closeModal(id) { document.getElementById(id).classList.remove("open"); }
-
-    function showToast(text) {
-      const toast = document.getElementById("toast");
-      toast.textContent = text;
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2500);
-    }
-
-    function scrollToCard(id, el) {
-      document.querySelectorAll(".im-nav-item").forEach(item => item.classList.remove("active"));
-      el.classList.add("active");
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-
-    document.querySelectorAll(".im-modal-backdrop").forEach(backdrop => {
-      backdrop.addEventListener("click", (e) => {
-        if (e.target === backdrop) backdrop.classList.remove("open");
-      });
+    // ==========================================================================
+    // INITIALIZATION
+    // ==========================================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      renderHero();
+      renderSubHero();
+      renderCategories();
+      renderProducts();
+      renderSoftware();
     });
-
-    // Init All
-    renderHero();
-    renderSubHero();
-    renderCategories();
-    renderProducts();
-    renderSoftware();
-  </script>
+</script>
 </body>
 </html>
