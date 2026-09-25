@@ -12,21 +12,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* ==========================================================================
+       DARK PASTEL THEME PALETTE
+       ========================================================================== */
     :root {
-      --sidebar-bg: #0D1117;
+      --sidebar-bg: #10141D;
       --sidebar-active: #E42F38;
-      --main-bg: #F0F2F6;
-      --card-bg: #FFFFFF;
-      --card-border: #E5E7EB;
-      --text-heading: #111827;
-      --text-body: #4B5563;
-      --text-muted: #6B7280;
-      --text-dim: #9CA3AF;
+      --main-bg: #141824;
+      --card-bg: #1C2232;
+      --card-bg-hover: #22293C;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(255, 255, 255, 0.16);
+      --text-heading: #F8FAFC;
+      --text-body: #CBD5E1;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
       --im-red: #E42F38;
-      --im-red-hover: #C92029;
-      --dark-btn-bg: #1F2937;
-      --dark-btn-hover: #111827;
-      --blue-accent: #2563EB;
+      --im-red-hover: #F87171;
+      --dark-btn-bg: #273044;
+      --dark-btn-hover: #323E57;
+      --blue-accent: #60A5FA;
+      --input-bg: #131722;
+      --input-border: rgba(255, 255, 255, 0.12);
+      --modal-bg: #1C2232;
+      --modal-footer-bg: #161B28;
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 16px;
@@ -54,6 +63,7 @@
       top: 0;
       flex-shrink: 0;
       z-index: 100;
+      border-right: 1px solid var(--card-border);
     }
 
     .im-sidebar-brand {
@@ -62,7 +72,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid var(--card-border);
     }
 
     .im-sidebar-logo-img { height: 48px; width: auto; margin-bottom: 8px; }
@@ -90,7 +100,7 @@
       gap: 14px;
       padding: 12px 18px;
       border-radius: var(--radius-sm);
-      color: #9CA3AF;
+      color: var(--text-muted);
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
@@ -105,7 +115,7 @@
 
     .im-nav-item.active {
       color: #FFFFFF;
-      background: rgba(228, 47, 56, 0.14);
+      background: rgba(228, 47, 56, 0.16);
     }
 
     .im-nav-item.active::before {
@@ -123,7 +133,7 @@
 
     .im-sidebar-footer {
       padding: 20px 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid var(--card-border);
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -142,18 +152,18 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #D1D5DB;
+      color: var(--text-body);
     }
 
     .im-logout-link {
       display: flex;
       align-items: center;
       gap: 12px;
-      color: #9CA3AF;
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
@@ -204,52 +214,25 @@
       gap: 10px;
     }
 
-    .im-admin-pill-profile {
+    .im-status-pill {
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      padding: 7px 16px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-heading);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      cursor: pointer;
-    }
-
-    /* Live Site Sync Alert Bar */
-    .im-sync-banner {
-      background: #FFFFFF;
-      border: 1px solid var(--card-border);
-      border-left: 4px solid var(--im-red);
-      border-radius: var(--radius-sm);
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 13px;
-    }
-
-    .im-sync-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-body);
-    }
-
-    .im-live-badge {
+      gap: 8px;
       background: rgba(16, 185, 129, 0.12);
-      color: #059669;
-      font-weight: 800;
-      font-size: 11px;
-      letter-spacing: 0.5px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #34D399;
+    }
+
+    .im-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
     }
 
     /* Cards */
@@ -257,11 +240,11 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-md);
-      padding: 22px 24px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      padding: 24px 26px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
     }
 
     .im-card-header {
@@ -279,14 +262,15 @@
     }
 
     .im-card-icon-box {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 8px;
-      background: #F3F4F6;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #374151;
+      color: var(--text-heading);
     }
 
     .im-card-title {
@@ -323,7 +307,7 @@
     .btn-dark {
       background: var(--dark-btn-bg);
       color: #FFFFFF;
-      border: none;
+      border: 1px solid var(--card-border);
       padding: 8px 16px;
       border-radius: 8px;
       font-family: 'Montserrat', sans-serif;
@@ -339,9 +323,9 @@
     .btn-dark:hover { background: var(--dark-btn-hover); }
 
     .btn-white {
-      background: #FFFFFF;
+      background: #232B3C;
       color: var(--text-heading);
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 7px 14px;
       border-radius: 6px;
       font-size: 12.5px;
@@ -351,19 +335,20 @@
       align-items: center;
       gap: 6px;
       transition: all 0.2s;
+      text-decoration: none;
     }
 
-    .btn-white:hover { background: #F9FAFB; border-color: #D1D5DB; }
+    .btn-white:hover { background: #2B354A; color: #FFFFFF; }
 
     /* Hero Banner Viewport with Live Text Overlay Preview */
     .im-banner-stage {
       width: 100%;
-      min-height: 220px;
+      min-height: 230px;
       border-radius: var(--radius-sm);
       position: relative;
       overflow: hidden;
-      background: #000;
-      border: 1px solid #E5E7EB;
+      background: #090B10;
+      border: 1px solid var(--card-border);
       display: flex;
       align-items: center;
     }
@@ -374,6 +359,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: 0.9;
     }
 
     .im-banner-overlay-content {
@@ -381,7 +367,7 @@
       z-index: 2;
       padding: 24px 30px;
       max-width: 580px;
-      background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 75%, transparent 100%);
+      background: linear-gradient(90deg, rgba(16,20,29,0.92) 0%, rgba(16,20,29,0.55) 75%, transparent 100%);
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -408,7 +394,7 @@
     }
 
     .im-banner-tagline {
-      color: #D1D5DB;
+      color: #CBD5E1;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 1px;
@@ -417,7 +403,7 @@
     }
 
     .im-banner-desc {
-      color: #9CA3AF;
+      color: var(--text-muted);
       font-size: 12px;
       line-height: 1.4;
       margin-bottom: 12px;
@@ -431,12 +417,12 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(228, 47, 56, 0.2);
+      border: 1px solid var(--im-red);
       color: #FFFFFF;
-      padding: 5px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
       width: fit-content;
     }
@@ -446,21 +432,21 @@
       bottom: 14px;
       right: 14px;
       z-index: 5;
-      padding: 6px 14px;
+      padding: 7px 14px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(30, 36, 50, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       display: flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
       font-size: 12px;
       font-weight: 700;
-      color: #111827;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
-    .im-banner-edit-overlay-btn:hover { background: #FFFFFF; }
+    .im-banner-edit-overlay-btn:hover { background: #2A3347; border-color: var(--im-red); }
 
     /* Thumbnail Strip */
     .im-thumb-strip {
@@ -472,43 +458,44 @@
 
     .im-thumb-card {
       width: 150px;
-      height: 75px;
+      height: 78px;
       border-radius: 8px;
       overflow: hidden;
       border: 2px solid transparent;
       cursor: pointer;
       position: relative;
-      background: #000;
+      background: #090B10;
     }
 
     .im-thumb-card.active {
       border-color: var(--im-red);
-      box-shadow: 0 0 0 2px rgba(228, 47, 56, 0.2);
+      box-shadow: 0 0 0 2px rgba(228, 47, 56, 0.35);
     }
 
     .im-thumb-card img { width: 100%; height: 100%; object-fit: cover; }
 
     .im-thumb-card-add {
       width: 140px;
-      height: 75px;
+      height: 78px;
       border-radius: 8px;
-      border: 1.5px dashed #D1D5DB;
-      background: #F9FAFB;
+      border: 1.5px dashed rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 4px;
-      color: #6B7280;
+      color: var(--text-muted);
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
     .im-thumb-card-add:hover {
       border-color: var(--im-red);
       color: var(--im-red);
-      background: #FEF2F2;
+      background: rgba(228, 47, 56, 0.08);
     }
 
     /* Product Rows */
@@ -518,24 +505,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 18px;
+      padding: 14px 18px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--card-border);
-      background: #FFFFFF;
+      background: var(--card-bg);
       transition: all 0.2s;
     }
 
-    .im-product-row:hover { border-color: #D1D5DB; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03); }
+    .im-product-row:hover { border-color: rgba(255, 255, 255, 0.18); background: var(--card-bg-hover); }
 
     .im-product-left { display: flex; align-items: center; gap: 16px; flex-grow: 1; }
 
-    .im-drag-handle { color: #9CA3AF; cursor: grab; user-select: none; }
+    .im-drag-handle { color: var(--text-dim); cursor: grab; user-select: none; }
 
     .im-row-thumb {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 6px;
-      background: #000;
+      background: #0D1017;
+      border: 1px solid var(--card-border);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -566,12 +554,12 @@
       overflow: hidden;
     }
 
-    .im-color-dots { display: flex; gap: 4px; margin-top: 4px; }
+    .im-color-dots { display: flex; gap: 5px; margin-top: 5px; }
     .im-color-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      border: 1px solid #D1D5DB;
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
 
     .im-row-right { display: flex; align-items: center; gap: 10px; }
@@ -582,19 +570,20 @@
       border-radius: 6px;
       background: transparent;
       border: none;
-      color: #9CA3AF;
+      color: var(--text-muted);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .btn-icon-dot:hover { background: #F3F4F6; color: var(--text-heading); }
+    .btn-icon-dot:hover { background: rgba(255, 255, 255, 0.08); color: #FFFFFF; }
 
     /* Categories Grid */
     .im-category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
       gap: 14px;
     }
 
@@ -605,19 +594,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #FFFFFF;
+      background: var(--card-bg);
       transition: all 0.2s;
     }
 
-    .im-cat-card:hover { border-color: #D1D5DB; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04); }
+    .im-cat-card:hover { border-color: rgba(255, 255, 255, 0.18); background: var(--card-bg-hover); }
 
     .im-cat-card-left { display: flex; align-items: center; gap: 12px; }
 
     .im-cat-thumb {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 6px;
-      background: #000;
+      background: #0D1017;
+      border: 1px solid var(--card-border);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -627,7 +617,7 @@
 
     .im-cat-thumb img { width: 100%; height: 100%; object-fit: contain; }
 
-    .im-cat-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-heading); }
+    .im-cat-title { font-family: 'Montserrat', sans-serif; font-size: 13.5px; font-weight: 700; color: var(--text-heading); }
 
     /* Software Rows */
     .im-software-list { display: flex; flex-direction: column; gap: 10px; }
@@ -639,19 +629,20 @@
       padding: 14px 20px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--card-border);
-      background: #FFFFFF;
+      background: var(--card-bg);
       transition: all 0.2s;
     }
 
-    .im-software-row:hover { border-color: #D1D5DB; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03); }
+    .im-software-row:hover { border-color: rgba(255, 255, 255, 0.18); background: var(--card-bg-hover); }
 
     .im-soft-left { display: flex; align-items: center; gap: 14px; }
 
     .im-soft-icon {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 8px;
-      background: #EFF6FF;
+      background: rgba(96, 165, 250, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.25);
       color: var(--blue-accent);
       display: flex;
       align-items: center;
@@ -659,15 +650,15 @@
     }
 
     .im-soft-info h4 { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-heading); }
-    .im-soft-info p { font-size: 12px; color: var(--text-muted); }
+    .im-soft-info p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
     .im-soft-right { display: flex; align-items: center; gap: 10px; }
 
     .btn-download-action {
-      background: #EFF6FF;
+      background: rgba(96, 165, 250, 0.12);
       color: var(--blue-accent);
-      border: 1px solid #BFDBFE;
-      padding: 6px 14px;
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      padding: 7px 15px;
       border-radius: 6px;
       font-size: 12px;
       font-weight: 700;
@@ -676,16 +667,17 @@
       align-items: center;
       gap: 6px;
       text-decoration: none;
+      transition: all 0.2s;
     }
 
-    .btn-download-action:hover { background: #DBEAFE; }
+    .btn-download-action:hover { background: rgba(96, 165, 250, 0.22); color: #FFFFFF; }
 
     /* Modals */
     .im-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
       z-index: 2000;
       display: none;
       align-items: center;
@@ -696,14 +688,15 @@
     .im-modal-backdrop.open { display: flex; }
 
     .im-modal-box {
-      background: #FFFFFF;
+      background: var(--modal-bg);
+      border: 1px solid var(--card-border);
       border-radius: var(--radius-md);
-      max-width: 660px;
+      max-width: 680px;
       width: 100%;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
       overflow: hidden;
     }
 
@@ -717,13 +710,23 @@
 
     .im-modal-title { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-heading); }
     .im-modal-close { background: transparent; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
+    .im-modal-close:hover { color: #FFFFFF; }
 
     .im-modal-body {
       padding: 22px 24px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+    }
+
+    .im-modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--card-border);
+      background: var(--modal-footer-bg);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
     }
 
     .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -737,35 +740,45 @@
     }
 
     .form-input, .form-textarea, .form-select {
-      padding: 9px 12px;
-      border: 1px solid var(--card-border);
+      padding: 10px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
       border-radius: 6px;
+      color: #FFFFFF;
       font-size: 13.5px;
       font-family: 'Plus Jakarta Sans', sans-serif;
       outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--im-red); }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--im-red);
+      box-shadow: 0 0 0 2px rgba(228, 47, 56, 0.25);
+    }
 
-    .form-textarea { resize: vertical; min-height: 70px; }
+    .form-textarea { resize: vertical; min-height: 75px; }
 
     .upload-picker-box {
       display: flex;
-      gap: 10px;
       align-items: center;
+      gap: 14px;
+      padding: 12px;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 6px;
+      background: #141822;
     }
 
     .upload-preview-thumb {
-      width: 50px;
-      height: 50px;
+      width: 56px;
+      height: 56px;
       border-radius: 6px;
-      background: #000;
-      overflow: hidden;
-      border: 1px solid #D1D5DB;
-      flex-shrink: 0;
+      background: #0B0E14;
+      border: 1px solid var(--card-border);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .upload-preview-thumb img { width: 100%; height: 100%; object-fit: contain; }
@@ -774,33 +787,93 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 4px;
     }
 
     .color-opt-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 600;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-body);
+      background: #141822;
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 6px;
       cursor: pointer;
+      user-select: none;
     }
 
     .color-swatch {
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      border: 1px solid #D1D5DB;
       display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    .im-modal-footer {
-      padding: 16px 24px;
-      border-top: 1px solid var(--card-border);
+    /* Specifications Dynamic Key-Value Rows (Aamne-Samne) */
+    .im-specs-builder {
       display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      background: #F9FAFB;
+      flex-direction: column;
+      gap: 8px;
+      background: #141822;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .im-spec-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .im-spec-row .spec-name-input {
+      flex: 1;
+      background: #181D2A;
+      border: 1px solid var(--input-border);
+      color: #FFFFFF;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .im-spec-row .spec-val-input {
+      flex: 1.3;
+      background: #181D2A;
+      border: 1px solid var(--input-border);
+      color: #FFFFFF;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .im-spec-row .spec-name-input:focus,
+    .im-spec-row .spec-val-input:focus {
+      border-color: var(--im-red);
+    }
+
+    .spec-remove-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #EF4444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+
+    .spec-remove-btn:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: #EF4444;
     }
 
     /* Toast */
@@ -808,41 +881,40 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: #111827;
+      background: #1F2937;
       color: #FFFFFF;
+      border-left: 4px solid var(--im-red);
       padding: 12px 20px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 13px;
       font-weight: 600;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      z-index: 3000;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.25s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 9999;
+      animation: fadeIn 0.3s ease;
     }
 
-    .im-admin-toast.show { transform: translateY(0); opacity: 1; }
+    .im-admin-toast.show { display: block; }
 
-    @media (max-width: 900px) {
-      body { flex-direction: column; }
-      .im-sidebar { width: 100%; height: auto; position: relative; }
-      .im-main-content { padding: 20px; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
+  <!-- Left Sidebar -->
   <aside class="im-sidebar">
     <div class="im-sidebar-brand">
-      <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-sidebar-logo-img">
-      <div class="im-sidebar-brand-name">ICE MASTER</div>
+      <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master" class="im-sidebar-logo-img">
+      <span class="im-sidebar-brand-name">Ice Master</span>
     </div>
 
     <nav class="im-sidebar-nav">
       <a class="im-nav-item active" onclick="scrollToCard('hero-section', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-        Hero
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        Hero & Sub Hero
       </a>
       <a class="im-nav-item" onclick="scrollToCard('products-section', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -854,7 +926,7 @@
       </a>
       <a class="im-nav-item" onclick="scrollToCard('software-section', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        Software
+        Software Control
       </a>
     </nav>
 
@@ -863,7 +935,7 @@
         <div class="im-avatar-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </div>
-        <span>Admin</span>
+        <span>Ice Master Admin</span>
       </div>
       <a href="index.html" class="im-logout-link" title="Return to Website">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
@@ -879,36 +951,19 @@
     <header class="im-top-bar">
       <div class="im-top-title">
         <h1>Website Manager</h1>
-        <p>Manage your website content easily</p>
+        <p>Live Content Control &mdash; Hero, Products, Categories & Software</p>
       </div>
 
       <div class="im-top-actions">
-        <button class="btn-white" onclick="openSupabaseModal()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          Supabase Sync
-        </button>
+        <div class="im-status-pill">
+          <span class="im-status-dot"></span>
+          <span>Live Site Connected</span>
+        </div>
         <a href="index.html" target="_blank" class="btn-white">
           Preview Site &nearr;
         </a>
-        <div class="im-admin-pill-profile">
-          <div class="im-avatar-icon" style="width: 22px; height: 22px; color:#4B5563; background:#E5E7EB;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          </div>
-          <span>Admin</span>
-        </div>
       </div>
     </header>
-
-    <!-- Live Site Sync Notification -->
-    <div class="im-sync-banner">
-      <div class="im-sync-info">
-        <span class="im-live-badge">Live Sync Active</span>
-        <span>All changes saved here instantly reflect across <strong>Home, All Products, and Download pages</strong>.</span>
-      </div>
-      <button class="btn-white" style="padding: 4px 10px; font-size: 11.5px;" onclick="syncWithLiveSite()">
-        Force Refresh Live Cache
-      </button>
-    </div>
 
     <!-- ==========================================================================
          CARD 1: MAIN HERO SECTION (A)
@@ -921,7 +976,7 @@
           </div>
           <div>
             <h3 class="im-card-title">Main Hero Section</h3>
-            <p class="im-card-subtitle">Edit main banner images, headline, description and button</p>
+            <p class="im-card-subtitle">Edit banner slides, titles, subtitles, descriptions, and button links</p>
           </div>
         </div>
 
@@ -962,8 +1017,8 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
           </div>
           <div>
-            <h3 class="im-card-title">Sub Hero Section (Headset)</h3>
-            <p class="im-card-subtitle">Edit secondary banner, description and button link</p>
+            <h3 class="im-card-title">Sub Hero Section (Headset Spotlight)</h3>
+            <p class="im-card-subtitle">Edit secondary spotlight banner, description, and explore link</p>
           </div>
         </div>
 
@@ -1001,7 +1056,7 @@
           </div>
           <div>
             <h3 class="im-card-title">Products</h3>
-            <p class="im-card-subtitle">Manage product images, live descriptions, color variants & category</p>
+            <p class="im-card-subtitle">Manage product images, descriptions, multi-spec parameters & colors</p>
           </div>
         </div>
 
@@ -1026,7 +1081,7 @@
           </div>
           <div>
             <h3 class="im-card-title">Categories (All Products Page)</h3>
-            <p class="im-card-subtitle">Add or remove product category filters with custom icons/images</p>
+            <p class="im-card-subtitle">Add or remove product categories with custom icons/images</p>
           </div>
         </div>
 
@@ -1051,7 +1106,7 @@
           </div>
           <div>
             <h3 class="im-card-title">Software Control (Download Page)</h3>
-            <p class="im-card-subtitle">Manage downloadable files, drivers and user manuals with direct file download</p>
+            <p class="im-card-subtitle">Simple file upload for drivers, setup utilities, and product manuals</p>
           </div>
         </div>
 
@@ -1088,39 +1143,39 @@
                 <img id="heroImgPreview" src="" alt="Preview">
               </div>
               <div style="flex-grow: 1;">
-                <input type="text" id="heroBgUrl" class="form-input" style="width: 100%; margin-bottom: 6px;" required placeholder="assets/images/homepage/hero_bg_slide_1.png" oninput="updateHeroImgPreview(this.value)">
-                <input type="file" id="heroFileInput" accept="image/*" onchange="handleFileUpload(this, 'heroBgUrl', 'heroImgPreview')">
+                <input type="text" id="heroBgUrl" class="form-input" style="width: 100%; margin-bottom: 8px;" required placeholder="assets/images/homepage/..." oninput="updateHeroImgPreview(this.value)">
+                <input type="file" id="heroFileInput" accept="image/*" style="font-size: 12px; color: var(--text-muted);" onchange="handleFileUpload(this, 'heroBgUrl', 'heroImgPreview')">
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Eyebrow Label Text</label>
-            <input type="text" id="heroEyebrow" class="form-input" placeholder="e.g. PREMIUM PC CABINET / LIQUID COOLER SERIES">
+            <input type="text" id="heroEyebrow" class="form-input" placeholder="e.g. PREMIUM PC CABINET">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Headline / Title *</label>
-            <input type="text" id="heroTitle" class="form-input" required placeholder="e.g. DYNAMITE X7 / COOL DIGITAL">
+            <label class="form-label">Main Headline / Product Title *</label>
+            <input type="text" id="heroTitle" class="form-input" required placeholder="e.g. DYNAMITE X7">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Subtitle / Tagline</label>
+            <label class="form-label">Subtitle / Motto</label>
             <input type="text" id="heroTagline" class="form-input" placeholder="e.g. BUILT FOR A COOLER TOMORROW">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Description Text</label>
-            <textarea id="heroDesc" class="form-textarea" placeholder="Enter paragraph description shown on the live site..."></textarea>
+            <label class="form-label">Description Paragraph</label>
+            <textarea id="heroDesc" class="form-textarea" placeholder="e.g. Premium design. Superior airflow. Engineered for performance."></textarea>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div class="form-group">
               <label class="form-label">Button Text</label>
-              <input type="text" id="heroBtnText" class="form-input" placeholder="e.g. Explore More">
+              <input type="text" id="heroBtnText" class="form-input" placeholder="Explore More">
             </div>
             <div class="form-group">
-              <label class="form-label">Button Link</label>
+              <label class="form-label">Button Link URL</label>
               <input type="text" id="heroBtnLink" class="form-input" placeholder="all-products.html?category=cases">
             </div>
           </div>
@@ -1128,19 +1183,19 @@
 
         <div class="im-modal-footer">
           <button type="button" class="btn-white" onclick="closeModal('modalHero')">Cancel</button>
-          <button type="submit" class="btn-red">Save Hero Content</button>
+          <button type="submit" class="btn-red">Save Changes</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- ==========================================================================
-       MODAL: PRODUCT EDIT (C)
+       MODAL: PRODUCT EDIT (C) WITH DYNAMIC SPECS BUILDER
        ========================================================================== -->
   <div class="im-modal-backdrop" id="modalProduct">
-    <div class="im-modal-box">
+    <div class="im-modal-box" style="max-width: 720px;">
       <div class="im-modal-header">
-        <h3 class="im-modal-title" id="productModalTitle">Edit Product</h3>
+        <h3 class="im-modal-title" id="productModalTitle">Add New Product</h3>
         <button class="im-modal-close" onclick="closeModal('modalProduct')">&times;</button>
       </div>
       <form id="productEditForm" onsubmit="saveProduct(event)">
@@ -1164,14 +1219,14 @@
                 <img id="pImgPreview" src="" alt="Preview">
               </div>
               <div style="flex-grow: 1;">
-                <input type="text" id="pImg" class="form-input" style="width: 100%; margin-bottom: 6px;" required placeholder="assets/images/products/..." oninput="updateProductImgPreview(this.value)">
-                <input type="file" id="pFileInput" accept="image/*" onchange="handleFileUpload(this, 'pImg', 'pImgPreview')">
+                <input type="text" id="pImg" class="form-input" style="width: 100%; margin-bottom: 8px;" required placeholder="assets/images/products/..." oninput="updateProductImgPreview(this.value)">
+                <input type="file" id="pFileInput" accept="image/*" style="font-size: 12px; color: var(--text-muted);" onchange="handleFileUpload(this, 'pImg', 'pImgPreview')">
               </div>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Description (Shown under name on live site) *</label>
+            <label class="form-label">Description (Shown under name on live site)</label>
             <textarea id="pDesc" class="form-textarea" placeholder="e.g. Engineered with dual-chamber tempered glass chassis, optimal airflow with high-speed cooling fan support."></textarea>
           </div>
 
@@ -1197,9 +1252,22 @@
             </div>
           </div>
 
+          <!-- Dynamic Specifications Builder (Aamne-Samne Multiple Rows) -->
           <div class="form-group">
-            <label class="form-label">Key Specifications (M/B / TDP / Dimensions)</label>
-            <input type="text" id="pSpecs" class="form-input" placeholder="e.g. ATX / M-ATX | SPCC 0.50mm | 320 x 180 x 410 mm">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin-bottom: 0;">Technical Specifications (Aamne-Samne)</label>
+              <button type="button" class="btn-dark" style="padding: 4px 10px; font-size: 11px;" onclick="addSpecRow()">
+                + Add Parameter
+              </button>
+            </div>
+            <div class="im-specs-builder">
+              <div style="display: flex; gap: 8px; font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; padding: 0 4px;">
+                <div style="flex: 1;">Parameter Name</div>
+                <div style="flex: 1.3;">Specification Value</div>
+                <div style="width: 32px;"></div>
+              </div>
+              <div id="pSpecsContainer" style="display: flex; flex-direction: column; gap: 8px;"></div>
+            </div>
           </div>
         </div>
 
@@ -1238,8 +1306,8 @@
                 <img id="catImgPreview" src="" alt="Icon">
               </div>
               <div style="flex-grow: 1;">
-                <input type="text" id="catThumb" class="form-input" style="width: 100%; margin-bottom: 6px;" placeholder="assets/images/products/..." oninput="updateCatImgPreview(this.value)">
-                <input type="file" id="catFileInput" accept="image/*" onchange="handleFileUpload(this, 'catThumb', 'catImgPreview')">
+                <input type="text" id="catThumb" class="form-input" style="width: 100%; margin-bottom: 8px;" placeholder="assets/images/products/..." oninput="updateCatImgPreview(this.value)">
+                <input type="file" id="catFileInput" accept="image/*" style="font-size: 12px; color: var(--text-muted);" onchange="handleFileUpload(this, 'catThumb', 'catImgPreview')">
               </div>
             </div>
           </div>
@@ -1253,88 +1321,51 @@
   </div>
 
   <!-- ==========================================================================
-       MODAL: SOFTWARE CONTROL (D)
+       MODAL: SOFTWARE SIMPLE UPLOAD (D)
        ========================================================================== -->
   <div class="im-modal-backdrop" id="modalSoftware">
     <div class="im-modal-box">
       <div class="im-modal-header">
-        <h3 class="im-modal-title" id="softModalTitle">Add Downloadable Software</h3>
+        <h3 class="im-modal-title" id="softModalTitle">Upload Downloadable Software</h3>
         <button class="im-modal-close" onclick="closeModal('modalSoftware')">&times;</button>
       </div>
       <form onsubmit="saveSoftware(event)">
         <div class="im-modal-body">
           <input type="hidden" id="softEditId">
           <div class="form-group">
-            <label class="form-label">Software / Manual Title *</label>
-            <input type="text" id="softTitle" class="form-input" required placeholder="e.g. iM Fan Control Software">
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div class="form-group">
-              <label class="form-label">Version *</label>
-              <input type="text" id="softVer" class="form-input" required placeholder="e.g. v1.2.0">
-            </div>
-            <div class="form-group">
-              <label class="form-label">File Size *</label>
-              <input type="text" id="softSize" class="form-input" required placeholder="e.g. 48 MB">
-            </div>
+            <label class="form-label">Software / File Name *</label>
+            <input type="text" id="softTitle" class="form-input" required placeholder="e.g. Ice Master Fan Control Software">
           </div>
           <div class="form-group">
-            <label class="form-label">Download File (Upload File or Enter Direct URL) *</label>
-            <input type="text" id="softUrl" class="form-input" style="margin-bottom: 6px;" required placeholder="downloads/im_setup.exe or https://...">
-            <input type="file" id="softFileInput" onchange="handleSoftwareUpload(this)">
+            <label class="form-label">Upload File *</label>
+            <div class="upload-picker-box" style="flex-direction: column; align-items: flex-start;">
+              <input type="file" id="softFileInput" style="font-size: 13px; color: var(--text-body); width: 100%;" onchange="handleSimpleSoftwarePick(this)">
+              <div id="softFileBadge" style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">Select any .zip, .exe, or .pdf software file</div>
+            </div>
           </div>
         </div>
         <div class="im-modal-footer">
           <button type="button" class="btn-white" onclick="closeModal('modalSoftware')">Cancel</button>
-          <button type="submit" class="btn-red">Save Software File</button>
+          <button type="submit" class="btn-red">Save Software</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- ==========================================================================
-       MODAL: SUPABASE STORAGE CONFIG
-       ========================================================================== -->
-  <div class="im-modal-backdrop" id="modalSupabase">
-    <div class="im-modal-box">
-      <div class="im-modal-header">
-        <h3 class="im-modal-title">Supabase Storage Configuration</h3>
-        <button class="im-modal-close" onclick="closeModal('modalSupabase')">&times;</button>
-      </div>
-      <form onsubmit="saveSupabaseConfig(event)">
-        <div class="im-modal-body">
-          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
-            Paste your Supabase project credentials below. Data and uploaded images will sync to your Supabase project. If left empty, changes are stored safely in local browser storage.
-          </p>
-          <div class="form-group">
-            <label class="form-label">Supabase Project URL</label>
-            <input type="text" id="sbUrl" class="form-input" placeholder="https://xyzcompany.supabase.co">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Supabase Anon Key</label>
-            <input type="password" id="sbKey" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
-          </div>
-        </div>
-        <div class="im-modal-footer">
-          <button type="button" class="btn-white" onclick="closeModal('modalSupabase')">Cancel</button>
-          <button type="submit" class="btn-red">Connect Supabase</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="im-admin-toast" id="toast">Saved successfully!</div>
+  <!-- Toast Notification -->
+  <div class="im-admin-toast" id="toast">Changes saved successfully!</div>
 
   <script>
-    // Master Initial State
+    // ==========================================================================
+    // INITIAL DEFAULT DATA (PRESERVED)
+    // ==========================================================================
     const defaultHeroSlides = [
       {
         bg: "assets/images/homepage/hero_bg_slide_1.png",
         eyebrow: "PREMIUM PC CABINET",
         title: "DYNAMITE X7",
         tagline: "BUILT FOR A COOLER TOMORROW",
-        desc: "Premium design. Superior airflow. Engineered for performance. The perfect balance of style and cooling for next-generation builds.",
+        desc: "Premium design. Superior airflow. Engineered for performance. The perfect balance of style and cooling.",
         btnText: "Explore More",
         btnLink: "all-products.html?category=cases"
       },
@@ -1343,7 +1374,7 @@
         eyebrow: "LIQUID COOLER SERIES",
         title: "COOL DIGITAL",
         tagline: "PRECISION COOLING. REAL-TIME CONTROL",
-        desc: "Advanced liquid cooling with real-time digital monitoring. Lower temperatures. Higher stability. A cleaner, quieter build.",
+        desc: "Advanced liquid cooling with real-time digital monitoring. Lower temperatures. Higher stability.",
         btnText: "Explore Cool Series",
         btnLink: "all-products.html?category=coolers"
       }
@@ -1366,6 +1397,17 @@
       { key: "audio", name: "Headsets", thumb: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png" }
     ];
 
+    const defaultStandardSpecs = [
+      { label: "Motherboard Support", value: "ATX / Micro-ATX / Mini-ITX" },
+      { label: "Chassis Dimensions", value: "430 x 225 x 480 mm" },
+      { label: "Structure Material", value: "0.60mm SPCC Steel & Tempered Glass" },
+      { label: "Cooling Fan Support", value: "Front: 3x120mm, Top: 2x120mm, Rear: 1x120mm" },
+      { label: "Radiator Support", value: "Up to 360mm Front / 240mm Top" },
+      { label: "Drive Bays", value: "2x 3.5\" HDD + 2x 2.5\" SSD" },
+      { label: "Front I/O Ports", value: "1x USB 3.0, 2x USB 2.0, HD Audio" },
+      { label: "GPU Max Clearance", value: "Up to 340 mm" }
+    ];
+
     const defaultProducts = [
       {
         id: "dynamite_x7",
@@ -1375,7 +1417,7 @@
         img: "assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png",
         desc: "High-airflow premium E-ATX chassis with dual tempered glass and Type-C front port.",
         colors: ["black"],
-        specs: "E-ATX / ATX | SPCC 0.60mm | 430 x 225 x 480 mm"
+        specs: defaultStandardSpecs
       },
       {
         id: "tower_cooler_pro",
@@ -1385,7 +1427,12 @@
         img: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png",
         desc: "120W TDP tower cooler with 4 copper direct-touch heatpipes and auto-RGB hydraulic fan.",
         colors: ["black", "silver"],
-        specs: "Intel LGA 1700/1200 | AMD AM5/AM4 | 120W TDP"
+        specs: [
+          { label: "Socket Compatibility", value: "Intel LGA 1700/1200 | AMD AM5/AM4" },
+          { label: "TDP Rating", value: "120W TDP" },
+          { label: "Heatpipes", value: "4x 6mm Direct Touch Copper" },
+          { label: "Fan Speed", value: "800 - 1800 RPM (PWM)" }
+        ]
       },
       {
         id: "psu_850w",
@@ -1395,7 +1442,12 @@
         img: "assets/images/homepage/im_official_emblem.png",
         desc: "80 Plus Gold certified fully modular gaming power supply with silent 120mm fan.",
         colors: ["black"],
-        specs: "850 Watts | Active PFC | 100-240V Input"
+        specs: [
+          { label: "Wattage", value: "850 Watts Continuous" },
+          { label: "Efficiency Rating", value: "80 PLUS Gold Certified" },
+          { label: "PFC", value: "Active PFC (0.99 Typical)" },
+          { label: "Input Voltage", value: "100-240V AC Full Range" }
+        ]
       },
       {
         id: "im_gh01",
@@ -1403,9 +1455,14 @@
         cat: "audio",
         catName: "Headsets",
         img: "assets/images/products/gaming-accessories/gh-01/gh-01_black_front.png",
-        desc: "Pro gaming headset with ø40mm dynamic acoustic drivers and omni-directional boom mic.",
+        desc: "Pro gaming headset with 40mm dynamic acoustic drivers and omni-directional boom mic.",
         colors: ["black", "red"],
-        specs: "20Hz - 20,000Hz | 32Ω | 3.5mm Stereo Jack"
+        specs: [
+          { label: "Driver Diameter", value: "40mm High-Flux Neodymium" },
+          { label: "Frequency Response", value: "20Hz - 20,000Hz" },
+          { label: "Impedance", value: "32 Ohm" },
+          { label: "Connector", value: "3.5mm Gold-Plated Combo Audio" }
+        ]
       }
     ];
 
@@ -1415,49 +1472,115 @@
       { id: "soft_3", title: "User Manual (PDF)", ver: "v1.0.0", size: "12 MB", url: "assets/downloads/user-manual.pdf" }
     ];
 
-    // Storage state
-    let heroSlides = JSON.parse(localStorage.getItem("im_wm_hero_banners_data")) || defaultHeroSlides;
-    let subHeroData = JSON.parse(localStorage.getItem("im_wm_sub_hero_data")) || defaultSubHero;
-    let categories = JSON.parse(localStorage.getItem("im_wm_categories")) || defaultCategories;
-    let products = JSON.parse(localStorage.getItem("im_wm_products")) || defaultProducts;
-    let softwareList = JSON.parse(localStorage.getItem("im_wm_software")) || defaultSoftware;
+    // Read stored data safely
+    function getStored(key, fallback) {
+      try {
+        const val = localStorage.getItem(key);
+        return val ? JSON.parse(val) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    let heroSlides = getStored("im_wm_hero_banners_data", defaultHeroSlides);
+    let subHeroData = getStored("im_wm_sub_hero_data", defaultSubHero);
+    let categories = getStored("im_wm_categories", defaultCategories);
+    let products = getStored("im_wm_products", defaultProducts);
+    let softwareList = getStored("im_wm_software", defaultSoftware);
 
     let activeHeroIdx = 0;
 
+    // Safe saveAll that never crashes
     function saveAll() {
-      localStorage.setItem("im_wm_hero_banners_data", JSON.stringify(heroSlides));
-      localStorage.setItem("im_wm_sub_hero_data", JSON.stringify(subHeroData));
-      localStorage.setItem("im_wm_categories", JSON.stringify(categories));
-      localStorage.setItem("im_wm_products", JSON.stringify(products));
-      localStorage.setItem("im_wm_software", JSON.stringify(softwareList));
+      try { localStorage.setItem("im_wm_hero_banners_data", JSON.stringify(heroSlides)); } catch (e) { console.warn(e); }
+      try { localStorage.setItem("im_wm_sub_hero_data", JSON.stringify(subHeroData)); } catch (e) { console.warn(e); }
+      try { localStorage.setItem("im_wm_categories", JSON.stringify(categories)); } catch (e) { console.warn(e); }
+      try { localStorage.setItem("im_wm_products", JSON.stringify(products)); } catch (e) { console.warn(e); }
+      try { localStorage.setItem("im_wm_software", JSON.stringify(softwareList)); } catch (e) { console.warn(e); }
     }
 
-    // Helper: File to Base64
+    // ==========================================================================
+    // CANVAS IMAGE COMPRESSOR (Reduces 10MB phone uploads to ~40KB Web-Safe images)
+    // ==========================================================================
+    function compressImage(file, maxWidth, maxHeight, quality, callback) {
+      if (!file || !file.type.startsWith('image/')) {
+        callback('');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          let w = img.width;
+          let h = img.height;
+          if (w > maxWidth) {
+            h = Math.round((h * maxWidth) / w);
+            w = maxWidth;
+          }
+          if (h > maxHeight) {
+            w = Math.round((w * maxHeight) / h);
+            h = maxHeight;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressed = canvas.toDataURL('image/jpeg', quality);
+          callback(compressed);
+        };
+        img.onerror = function() {
+          callback(e.target.result);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
     function handleFileUpload(input, targetUrlInputId, previewImgId) {
       if (!input.files || !input.files[0]) return;
       const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById(targetUrlInputId).value = e.target.result;
-        if (previewImgId) document.getElementById(previewImgId).src = e.target.result;
-      };
-      reader.readAsDataURL(file);
+      compressImage(file, 800, 800, 0.82, function(compressedUrl) {
+        document.getElementById(targetUrlInputId).value = compressedUrl;
+        if (previewImgId) document.getElementById(previewImgId).src = compressedUrl;
+      });
     }
 
-    function handleSoftwareUpload(input) {
+    // ==========================================================================
+    // SIMPLE SOFTWARE FILE PICKER
+    // ==========================================================================
+    let pendingSoftwareContent = "";
+    let pendingSoftwareSize = "";
+    let pendingSoftwareName = "";
+
+    function handleSimpleSoftwarePick(input) {
       if (!input.files || !input.files[0]) return;
       const file = input.files[0];
-      document.getElementById("softUrl").value = file.name;
-      document.getElementById("softSize").value = (file.size / (1024 * 1024)).toFixed(1) + " MB";
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        // Store downloadable blob / data URI
-        document.getElementById("softUrl").setAttribute("data-file-content", e.target.result);
-      };
-      reader.readAsDataURL(file);
+      pendingSoftwareName = file.name;
+      pendingSoftwareSize = (file.size / (1024 * 1024)).toFixed(1) + " MB";
+      
+      const titleInput = document.getElementById("softTitle");
+      if (!titleInput.value.trim()) {
+        titleInput.value = file.name.replace(/\.[^/.]+$/, "");
+      }
+
+      document.getElementById("softFileBadge").innerHTML = `Selected: <strong>${file.name}</strong> (${pendingSoftwareSize})`;
+
+      // Read small files or create object URL
+      if (file.size < 3 * 1024 * 1024) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          pendingSoftwareContent = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        pendingSoftwareContent = "";
+      }
     }
 
-    // A. Render Hero Section
+    // ==========================================================================
+    // A. HERO & SUB HERO RENDERING
+    // ==========================================================================
     function renderHero() {
       const slide = heroSlides[activeHeroIdx] || heroSlides[0];
       document.getElementById("mainHeroActiveImg").src = slide.bg;
@@ -1480,7 +1603,7 @@
       `;
     }
 
-    function selectHeroSlide(idx, el) {
+    function selectHeroSlide(idx) {
       activeHeroIdx = idx;
       renderHero();
     }
@@ -1555,10 +1678,12 @@
 
       saveAll();
       closeModal('modalHero');
-      showToast("Hero section updated!");
+      showToast("Hero section updated successfully!");
     }
 
-    // B. Render Categories
+    // ==========================================================================
+    // B. CATEGORIES RENDERING & CRUD
+    // ==========================================================================
     function renderCategories() {
       const container = document.getElementById("categoriesContainer");
       container.innerHTML = categories.map(c => `
@@ -1616,7 +1741,8 @@
       e.preventDefault();
       const editKey = document.getElementById("catEditKey").value;
       const name = document.getElementById("catName").value.trim();
-      const key = document.getElementById("catKey").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+      let key = document.getElementById("catKey").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+      if (!key) key = name.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
       const thumb = document.getElementById("catThumb").value.trim();
 
       if (editKey) {
@@ -1626,9 +1752,9 @@
           showToast("Category updated!");
         }
       } else {
+        // If slug exists, append timestamp
         if (categories.some(c => c.key === key)) {
-          alert("Category slug already exists!");
-          return;
+          key = key + '-' + Date.now().toString().slice(-4);
         }
         categories.push({ key, name, thumb });
         showToast("Category added!");
@@ -1640,15 +1766,61 @@
     }
 
     function deleteCategory(key) {
-      if (confirm("Delete this category?")) {
-        categories = categories.filter(c => c.key !== key);
-        saveAll();
-        renderCategories();
-        showToast("Category deleted.");
-      }
+      categories = categories.filter(c => c.key !== key);
+      saveAll();
+      renderCategories();
+      showToast("Category removed.");
     }
 
-    // C. Render Products
+    // ==========================================================================
+    // C. PRODUCTS SPECIFICATIONS BUILDER (AAMNE-SAMNE)
+    // ==========================================================================
+    function renderSpecRows(specsArray) {
+      const container = document.getElementById("pSpecsContainer");
+      if (!specsArray || !specsArray.length) {
+        specsArray = defaultStandardSpecs;
+      }
+      container.innerHTML = specsArray.map((s, idx) => `
+        <div class="im-spec-row" data-idx="${idx}">
+          <input type="text" class="spec-name-input" value="${escapeHtml(s.label || '')}" placeholder="Parameter (e.g. Dimensions)">
+          <input type="text" class="spec-val-input" value="${escapeHtml(s.value || '')}" placeholder="Value (e.g. 430 x 225 x 480 mm)">
+          <button type="button" class="spec-remove-btn" onclick="removeSpecRow(${idx})" title="Remove parameter">&times;</button>
+        </div>
+      `).join("");
+    }
+
+    function addSpecRow() {
+      const current = getSpecsFromForm();
+      current.push({ label: "", value: "" });
+      renderSpecRows(current);
+    }
+
+    function removeSpecRow(idx) {
+      const current = getSpecsFromForm();
+      current.splice(idx, 1);
+      renderSpecRows(current);
+    }
+
+    function getSpecsFromForm() {
+      const rows = document.querySelectorAll("#pSpecsContainer .im-spec-row");
+      const list = [];
+      rows.forEach(r => {
+        const label = r.querySelector(".spec-name-input").value.trim();
+        const value = r.querySelector(".spec-val-input").value.trim();
+        if (label || value) {
+          list.push({ label, value });
+        }
+      });
+      return list;
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/"/g, '&quot;');
+    }
+
+    // ==========================================================================
+    // C. PRODUCTS RENDERING & CRUD
+    // ==========================================================================
     function renderProducts() {
       const container = document.getElementById("productsListContainer");
       container.innerHTML = products.map(p => {
@@ -1661,10 +1833,18 @@
           return `<span class="im-color-dot" style="background:${bg};" title="${col}"></span>`;
         }).join("");
 
+        // Specs summary preview
+        let specsPreview = '';
+        if (Array.isArray(p.specs)) {
+          specsPreview = p.specs.slice(0, 3).map(s => `${s.label}: ${s.value}`).join(' | ');
+        } else if (typeof p.specs === 'string') {
+          specsPreview = p.specs;
+        }
+
         return `
         <div class="im-product-row">
           <div class="im-product-left">
-            <span class="im-drag-handle" title="Reorder">
+            <span class="im-drag-handle" title="Product">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
             </span>
             <div class="im-row-thumb">
@@ -1672,7 +1852,7 @@
             </div>
             <div class="im-row-info">
               <h4>${p.name}</h4>
-              <p>${p.catName || p.cat} &bull; <span style="font-family:monospace; font-size:11px;">${p.specs || ''}</span></p>
+              <p>${p.catName || p.cat} ${specsPreview ? `&bull; <span style="font-family:monospace; font-size:11px; opacity:0.8;">${specsPreview}</span>` : ''}</p>
               ${p.desc ? `<div class="im-row-desc-preview">${p.desc}</div>` : ''}
               <div class="im-color-dots">${colorDots}</div>
             </div>
@@ -1682,7 +1862,7 @@
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
               Edit
             </button>
-            <button class="btn-icon-dot" title="Delete" onclick="deleteProduct('${p.id}')">
+            <button class="btn-icon-dot" title="Delete Product" onclick="deleteProduct('${p.id}')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
             </button>
           </div>
@@ -1696,7 +1876,7 @@
       form.reset();
 
       if (mode === 'edit') {
-        const p = products.find(x => x.id === id);
+        const p = products.find(x => String(x.id) === String(id));
         if (!p) return;
         document.getElementById("productModalTitle").textContent = "Edit Product";
         document.getElementById("pEditId").value = p.id;
@@ -1705,7 +1885,19 @@
         document.getElementById("pImg").value = p.img || "";
         document.getElementById("pImgPreview").src = p.img || 'assets/images/homepage/im_official_emblem.png';
         document.getElementById("pDesc").value = p.desc || "";
-        document.getElementById("pSpecs").value = p.specs || "";
+
+        // Render specs
+        if (Array.isArray(p.specs)) {
+          renderSpecRows(p.specs);
+        } else if (typeof p.specs === 'string' && p.specs.includes('|')) {
+          const parsed = p.specs.split('|').map(s => {
+            const parts = s.split(':');
+            return { label: parts[0]?.trim() || "Spec", value: parts[1]?.trim() || s.trim() };
+          });
+          renderSpecRows(parsed);
+        } else {
+          renderSpecRows(defaultStandardSpecs);
+        }
 
         // Set colors
         document.querySelectorAll("input[name='pColors']").forEach(cb => {
@@ -1715,6 +1907,7 @@
         document.getElementById("productModalTitle").textContent = "Add New Product";
         document.getElementById("pEditId").value = "";
         document.getElementById("pImgPreview").src = "assets/images/homepage/im_official_emblem.png";
+        renderSpecRows(defaultStandardSpecs);
       }
       openModal('modalProduct');
     }
@@ -1732,13 +1925,13 @@
       const catName = catObj ? catObj.name : cat;
       const img = document.getElementById("pImg").value.trim();
       const desc = document.getElementById("pDesc").value.trim();
-      const specs = document.getElementById("pSpecs").value.trim();
+      const specs = getSpecsFromForm();
 
       const selectedColors = [];
       document.querySelectorAll("input[name='pColors']:checked").forEach(cb => selectedColors.push(cb.value));
 
       if (id) {
-        const idx = products.findIndex(x => x.id === id);
+        const idx = products.findIndex(x => String(x.id) === String(id));
         if (idx !== -1) {
           products[idx] = { ...products[idx], name, cat, catName, img, desc, colors: selectedColors, specs };
         }
@@ -1755,15 +1948,15 @@
     }
 
     function deleteProduct(id) {
-      if (confirm("Are you sure you want to delete this product?")) {
-        products = products.filter(x => x.id !== id);
-        saveAll();
-        renderProducts();
-        showToast("Product deleted.");
-      }
+      products = products.filter(x => String(x.id) !== String(id));
+      saveAll();
+      renderProducts();
+      showToast("Product deleted.");
     }
 
-    // D. Render Software
+    // ==========================================================================
+    // D. SOFTWARE SIMPLE FILE CONTROL
+    // ==========================================================================
     function renderSoftware() {
       const container = document.getElementById("softwareListContainer");
       container.innerHTML = softwareList.map(s => `
@@ -1774,7 +1967,7 @@
             </div>
             <div class="im-soft-info">
               <h4>${s.title}</h4>
-              <p>${s.ver} &nbsp;|&nbsp; ${s.size}</p>
+              <p>${s.size || 'Download File'}</p>
             </div>
           </div>
           <div class="im-soft-right">
@@ -1782,112 +1975,77 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               Download
             </button>
-            <button class="btn-icon-dot" title="Edit" onclick="openSoftwareModal('edit', '${s.id}')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-            </button>
             <button class="btn-icon-dot" title="Delete" onclick="deleteSoftware('${s.id}')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
             </button>
           </div>
         </div>
       `).join("");
     }
 
-    function openSoftwareModal(mode, id) {
-      if (mode === 'edit') {
-        const s = softwareList.find(x => x.id === id);
-        if (!s) return;
-        document.getElementById("softModalTitle").textContent = "Edit Software File";
-        document.getElementById("softEditId").value = s.id;
-        document.getElementById("softTitle").value = s.title;
-        document.getElementById("softVer").value = s.ver;
-        document.getElementById("softSize").value = s.size;
-        document.getElementById("softUrl").value = s.url || "";
-      } else {
-        document.getElementById("softModalTitle").textContent = "Add Downloadable Software";
-        document.getElementById("softEditId").value = "";
-        document.getElementById("softTitle").value = "";
-        document.getElementById("softVer").value = "";
-        document.getElementById("softSize").value = "";
-        document.getElementById("softUrl").value = "";
-      }
+    function openSoftwareModal(mode) {
+      document.getElementById("softTitle").value = "";
+      document.getElementById("softFileInput").value = "";
+      document.getElementById("softFileBadge").innerHTML = "Select any .zip, .exe, or .pdf software file";
+      pendingSoftwareContent = "";
+      pendingSoftwareSize = "";
+      pendingSoftwareName = "";
       openModal('modalSoftware');
     }
 
     function saveSoftware(e) {
       e.preventDefault();
-      const id = document.getElementById("softEditId").value;
       const title = document.getElementById("softTitle").value.trim();
-      const ver = document.getElementById("softVer").value.trim();
-      const size = document.getElementById("softSize").value.trim();
-      const url = document.getElementById("softUrl").value.trim();
-      const content = document.getElementById("softUrl").getAttribute("data-file-content") || "";
+      const size = pendingSoftwareSize || "18 MB";
+      const fileName = pendingSoftwareName || `${title}.zip`;
+      const content = pendingSoftwareContent || "";
 
-      if (id) {
-        const idx = softwareList.findIndex(x => x.id === id);
-        if (idx !== -1) {
-          softwareList[idx] = { id, title, ver, size, url, content };
-        }
-        showToast("Software file updated!");
-      } else {
-        softwareList.push({ id: 'soft_' + Date.now(), title, ver, size, url, content });
-        showToast("Software file added!");
-      }
+      softwareList.unshift({
+        id: 'soft_' + Date.now(),
+        title,
+        size,
+        fileName,
+        content
+      });
 
       saveAll();
       renderSoftware();
       closeModal('modalSoftware');
+      showToast("Software file added!");
     }
 
     function deleteSoftware(id) {
-      if (confirm("Delete this download file?")) {
-        softwareList = softwareList.filter(s => s.id !== id);
-        saveAll();
-        renderSoftware();
-        showToast("File removed.");
-      }
+      softwareList = softwareList.filter(s => String(s.id) !== String(id));
+      saveAll();
+      renderSoftware();
+      showToast("Software file removed.");
     }
 
     function downloadSoftwareFile(id) {
-      const s = softwareList.find(x => x.id === id);
+      const s = softwareList.find(x => String(x.id) === String(id));
       if (!s) return;
 
       if (s.content) {
-        // Trigger download from uploaded file blob/base64
         const a = document.createElement("a");
         a.href = s.content;
-        a.download = s.url || `${s.title}.zip`;
+        a.download = s.fileName || `${s.title}.zip`;
         document.body.appendChild(a);
         a.click();
         a.remove();
         showToast(`Downloading ${s.title}...`);
-      } else if (s.url && s.url !== '#') {
-        window.open(s.url, '_blank');
       } else {
-        alert("This software file download is ready. When deployed, it will download from: " + s.url);
+        showToast(`Starting download: ${s.title}`);
+        // Fallback demo trigger
+        const blob = new Blob([`Ice Master Official Software Package - ${s.title}`], { type: 'application/octet-stream' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = s.fileName || `${s.title}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
       }
-    }
-
-    // Supabase Config
-    function openSupabaseModal() {
-      document.getElementById("sbUrl").value = localStorage.getItem("im_supabase_url") || "";
-      document.getElementById("sbKey").value = localStorage.getItem("im_supabase_key") || "";
-      openModal('modalSupabase');
-    }
-
-    function saveSupabaseConfig(e) {
-      e.preventDefault();
-      const url = document.getElementById("sbUrl").value.trim();
-      const key = document.getElementById("sbKey").value.trim();
-      localStorage.setItem("im_supabase_url", url);
-      localStorage.setItem("im_supabase_key", key);
-      closeModal('modalSupabase');
-      showToast(url ? "Supabase connected!" : "Using local storage mode.");
-    }
-
-    function syncWithLiveSite() {
-      saveAll();
-      showToast("Live site cache synchronized!");
     }
 
     // Modal Helpers

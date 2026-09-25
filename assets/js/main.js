@@ -1264,12 +1264,32 @@ function initProductDetailPage() {
   // Specifications section: Display custom specs if present, or pending placeholder
   if (specsContainer) {
     if (prod.customSpecs) {
-      specsContainer.innerHTML = `
-        <div class="pd-specs-custom-box" style="padding: 18px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; margin-top: 10px;">
-          <div style="font-size: 13px; font-weight: 700; color: #E42F38; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Key Specifications</div>
-          <p style="font-size: 13.5px; color: #E2E8F0; line-height: 1.6; margin: 0; font-family: monospace;">${prod.customSpecs}</p>
-        </div>
-      `;
+      let specsHTML = '';
+      if (Array.isArray(prod.customSpecs) && prod.customSpecs.length > 0) {
+        specsHTML = `
+          <div class="pd-specs-table-box" style="margin-top: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden;">
+            <div style="padding: 12px 18px; background: rgba(255,255,255,0.05); font-size: 12px; font-weight: 800; color: #E42F38; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+              Technical Parameters & Compatibility
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              ${prod.customSpecs.map((s, i) => `
+                <div style="display: flex; justify-content: space-between; padding: 10px 18px; border-bottom: 1px solid rgba(255,255,255,0.04); background: ${i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)'}; font-size: 13px;">
+                  <span style="color: #94A3B8; font-weight: 600; width: 44%;">${s.label}</span>
+                  <span style="color: #F1F5F9; font-weight: 500; width: 54%; text-align: right; font-family: monospace;">${s.value}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else {
+        specsHTML = `
+          <div class="pd-specs-custom-box" style="padding: 18px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; margin-top: 10px;">
+            <div style="font-size: 13px; font-weight: 700; color: #E42F38; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Key Specifications</div>
+            <p style="font-size: 13.5px; color: #E2E8F0; line-height: 1.6; margin: 0; font-family: monospace;">${prod.customSpecs}</p>
+          </div>
+        `;
+      }
+      specsContainer.innerHTML = specsHTML;
     } else {
       specsContainer.innerHTML = `
         <div class="pd-specs-pending-box">
