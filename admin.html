@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE MASTER | Product Management Admin Panel</title>
+  <meta name="description" content="Ice Master Technologies - Admin Control Panel for Product Catalog & WhatsApp Inquiry Routing.">
+
+  <!-- Google Fonts: Montserrat & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #080b11;
+      --bg-surface: #0f1523;
+      --bg-surface-elevated: #162035;
+      --bg-input: #0a0f1d;
+      --border-color: rgba(0, 229, 255, 0.16);
+      --border-focus: #00e5ff;
+      --accent-cyan: #00e5ff;
+      --accent-blue: #0072ff;
+      --accent-glow: rgba(0, 229, 255, 0.25);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --whatsapp-green: #25d366;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 114, 255, 0.08), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 229, 255, 0.06), transparent 40%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .admin-sidebar {
+      width: 270px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-logo {
+      height: 36px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.5));
+    }
+
+    .brand-text h2 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #fff 50%, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text span {
+      font-size: 0.65rem;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .sidebar-nav {
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+    }
+
+    .nav-label {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px 12px 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: rgba(0, 229, 255, 0.08);
+      color: #fff;
+    }
+
+    .nav-item.active {
+      background: rgba(0, 229, 255, 0.12);
+      border-color: rgba(0, 229, 255, 0.3);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+    }
+
+    .nav-item svg {
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+      padding: 18px 16px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .store-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .store-link-btn:hover {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* Main Content Wrapper */
+    .admin-main {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 28px 36px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Top Bar */
+    .admin-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-heading);
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .page-title p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface-elevated);
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .btn-success {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--success);
+    }
+
+    .btn-success:hover {
+      background: rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-whatsapp {
+      background: rgba(37, 211, 102, 0.15);
+      border-color: rgba(37, 211, 102, 0.4);
+      color: var(--whatsapp-green);
+    }
+
+    .btn-whatsapp:hover {
+      background: rgba(37, 211, 102, 0.25);
+    }
+
+    /* Stat Cards Row */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 100%;
+      background: radial-gradient(circle at 100% 50%, rgba(0, 229, 255, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+    }
+
+    /* WhatsApp Routing Alert Banner */
+    .whatsapp-banner {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.1) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .whatsapp-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .whatsapp-icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--whatsapp-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .whatsapp-info h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .whatsapp-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .whatsapp-config-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .whatsapp-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      width: 170px;
+    }
+
+    /* Catalog Table Card */
+    .catalog-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .catalog-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .catalog-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .tab-pill {
+      background: rgba(30, 41, 59, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-pill:hover {
+      color: #fff;
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    .tab-pill.active {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .search-filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      width: 240px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* Product Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+
+    .product-table th {
+      background: rgba(10, 15, 26, 0.8);
+      color: var(--accent-cyan);
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .product-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .product-table tr:hover td {
+      background: rgba(0, 229, 255, 0.02);
+    }
+
+    .product-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .product-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-meta .p-name {
+      font-weight: 700;
+      font-family: var(--font-heading);
+      color: #fff;
+    }
+
+    .product-meta .p-id {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-status.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-status.draft {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .actions-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .action-btn.btn-del:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    /* Modal Form for Add/Edit */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 229, 255, 0.15);
+    }
+
+    .modal-header {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+    }
+
+    .modal-body {
+      padding: 24px 26px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-control {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-family: var(--font-body);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .modal-footer {
+      padding: 18px 26px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.5);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      border: 1px solid var(--accent-cyan);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 229, 255, 0.3);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .admin-main {
+        padding: 20px;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="brand-logo" onerror="this.style.display='none'">
+      <div class="brand-text">
+        <h2>ICE MASTER</h2>
+        <span>ADMIN PANEL</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Catalog Management</div>
+      <a class="nav-item active" id="navProducts" onclick="selectNav('products')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Products Listing
+      </a>
+      <a class="nav-item" id="navWhatsapp" onclick="selectNav('whatsapp')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        WhatsApp Routing
+      </a>
+      <a class="nav-item" href="product-specs.html" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Client Specs Portal &nearr;
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="all-products.html" class="store-link-btn" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        View Live Website
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    
+    <!-- Top Bar -->
+    <header class="admin-topbar">
+      <div class="page-title">
+        <h1>Product Listings & Inventory</h1>
+        <p>Manage all Ice Master PC cases, coolers, audio & specs. Direct all buyer queries to WhatsApp.</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn btn-secondary" onclick="exportJSON()" title="Download updated products.json">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Export Data
+        </button>
+        <button class="btn btn-primary" onclick="openAddModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add New Product
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats Row -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Total Listed Products</div>
+          <div class="stat-number" id="statTotalProducts">23</div>
+        </div>
+        <div class="stat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Active Categories</div>
+          <div class="stat-number">5</div>
+        </div>
+        <div class="stat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Specs Verified</div>
+          <div class="stat-number" style="color: var(--success);" id="statVerified">23</div>
+        </div>
+        <div class="stat-icon" style="color: var(--success); background: rgba(16, 185, 129, 0.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Query Route</div>
+          <div class="stat-number" style="font-size: 1.25rem; color: var(--whatsapp-green);">WhatsApp Direct</div>
+        </div>
+        <div class="stat-icon" style="color: var(--whatsapp-green); background: rgba(37, 211, 102, 0.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Quick Routing Banner -->
+    <section class="whatsapp-banner">
+      <div class="whatsapp-info">
+        <div class="whatsapp-icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        </div>
+        <div>
+          <h4>WhatsApp Customer Inquiries Config</h4>
+          <p>Buyers will be redirected to this number with product details pre-filled.</p>
+        </div>
+      </div>
+
+      <div class="whatsapp-config-box">
+        <input type="text" id="waNumberInput" class="whatsapp-input" value="+919876543210" placeholder="+91 Phone Number">
+        <button class="btn btn-whatsapp" onclick="saveWhatsAppNumber()">Save Number</button>
+        <button class="btn btn-secondary" onclick="testWhatsAppLink()">Test Link</button>
+      </div>
+    </section>
+
+    <!-- Products Catalog Section -->
+    <section class="catalog-card">
+      <div class="catalog-header">
+        <div class="catalog-tabs">
+          <button class="tab-pill active" onclick="filterCategory('all', this)">All (<span id="countAll">23</span>)</button>
+          <button class="tab-pill" onclick="filterCategory('cases', this)">Cabinets (16)</button>
+          <button class="tab-pill" onclick="filterCategory('liquid_coolers', this)">Liquid Coolers (4)</button>
+          <button class="tab-pill" onclick="filterCategory('air_coolers', this)">Air Coolers (2)</button>
+          <button class="tab-pill" onclick="filterCategory('audio', this)">Audio / Headset (1)</button>
+        </div>
+
+        <div class="search-filter-wrap">
+          <input type="text" id="adminSearch" class="search-input" placeholder="Search product name, ID...">
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Product Details</th>
+              <th>Category</th>
+              <th>Key Form / Socket</th>
+              <th>Dimensions</th>
+              <th>Status</th>
+              <th>Inquiry Link</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Add / Edit Product Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalActionTitle">Add New Product</h3>
+        <button class="modal-close" onclick="closeProductModal()">&times;</button>
+      </div>
+
+      <form id="productForm" onsubmit="handleFormSubmit(event)">
+        <div class="modal-body">
+          <input type="hidden" id="editProductId">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Product Name *</label>
+              <input type="text" id="formName" class="form-control" required placeholder="e.g. ICE MASTER AXLE">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Product ID / Slug *</label>
+              <input type="text" id="formId" class="form-control" required placeholder="e.g. axle">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select id="formCategory" class="form-control" required>
+                <option value="cases">Gaming Cabinets / Cases</option>
+                <option value="liquid_coolers">Liquid Coolers (AIO)</option>
+                <option value="air_coolers">Air Coolers</option>
+                <option value="audio">Gaming Audio / Headphones</option>
+                <option value="psu">Power Supply Units</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Type / Subtitle</label>
+              <input type="text" id="formType" class="form-control" placeholder="e.g. Mid Tower Gaming Case">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Motherboard / Socket Support</label>
+              <input type="text" id="formMb" class="form-control" placeholder="e.g. ATX / M-ATX / ITX">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Material / Structure</label>
+              <input type="text" id="formMaterial" class="form-control" placeholder="e.g. SPCC 0.50mm">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Drive Bays / Fans Included</label>
+              <input type="text" id="formBays" class="form-control" placeholder="e.g. 1x HDD + 2x SSD">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Front I/O / Ports</label>
+              <input type="text" id="formIo" class="form-control" placeholder="e.g. 1x USB 3.0, 2x USB 2.0">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Product Dimensions</label>
+              <input type="text" id="formDims" class="form-control" placeholder="e.g. 320 x 180 x 410 mm">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Weight / TDP / Price</label>
+              <input type="text" id="formWeight" class="form-control" placeholder="e.g. 3.90 kg NW / 4.90 kg GW">
+            </div>
+
+            <div class="form-group full">
+              <label class="form-label">Status</label>
+              <select id="formStatus" class="form-control">
+                <option value="active">Active (Published)</option>
+                <option value="draft">Draft (Hidden)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveProduct">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="adminToast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"></path></svg>
+    <span id="adminToastMsg">Changes saved!</span>
+  </div>
+
+  <script>
+    // Initial 23 Master Products
+    const defaultProducts = [
+      { id: "axle", cat: "cases", name: "ICE MASTER AXLE", type: "Mid Tower Gaming Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.50mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "320 x 180 x 410 mm", weight: "3.90 kg", status: "active" },
+      { id: "box_infinity", cat: "cases", name: "BOX INFINITY", type: "Compact Tower Case", mb: "M-ATX / ITX", material: "SPCC 1.0mm", bays: "3x HDD + 2x SSD", io: "1x USB 3.0, 1x Type-C", dims: "398 x 211 x 324 mm", weight: "4.90 kg", status: "active" },
+      { id: "dynamite_x5", cat: "cases", name: "DYNAMITE X5", type: "Micro-ATX Gaming Case", mb: "M-ATX / ITX", material: "SPCC 0.45mm", bays: "1x HDD, 1x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "350 x 210 x 380 mm", weight: "4.43 kg", status: "active" },
+      { id: "dynamite_x6", cat: "cases", name: "DYNAMITE X6", type: "ATX Gaming Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.60mm", bays: "1x HDD, 1x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 2.0", dims: "423 x 220 x 467 mm", weight: "6.00 kg", status: "active" },
+      { id: "dynamite_x7", cat: "cases", name: "DYNAMITE X7", type: "Full ATX / E-ATX Case", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.60mm", bays: "2x HDD, 2x SSD", io: "1x USB 3.0, 1x Type-C, 2x USB 2.0", dims: "430 x 225 x 480 mm", weight: "7.24 kg", status: "active" },
+      { id: "dynamite_xl_pro", cat: "cases", name: "DYNAMITE XL / PRO", type: "Dual Chamber Showcase", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.90mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 1.0", dims: "416.5 x 300 x 385 mm", weight: "7.80 kg", status: "active" },
+      { id: "frosty", cat: "cases", name: "FROSTY", type: "High Airflow Gaming Case", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.55mm", bays: "2x HDD, 4x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "395 x 210 x 475 mm", weight: "6.90 kg", status: "active" },
+      { id: "glacier", cat: "cases", name: "GLACIER", type: "Mid Tower Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.50mm", bays: "2x HDD, 2x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "358 x 200 x 460 mm", weight: "3.90 kg", status: "active" },
+      { id: "nexus_360", cat: "cases", name: "NEXUS 360", type: "Panoramic Showcase Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.60mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 2.0", dims: "455 x 210 x 485 mm", weight: "3.90 kg", status: "active" },
+      { id: "roar", cat: "cases", name: "ROAR", type: "Micro-ATX Mini Case", mb: "Micro-ATX / Mini-ITX", material: "SPCC 0.45mm", bays: "1x HDD, 1x SSD", io: "1x USB 3.0, 2x USB 2.0", dims: "290 x 190 x 375 mm", weight: "2.25 kg", status: "active" },
+      { id: "shadow", cat: "cases", name: "SHADOW", type: "Mid Tower Case", mb: "ATX / M-ATX / ITX", material: "SPCC 0.45mm", bays: "2x HDD, 3x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "345 x 183 x 430 mm", weight: "3.90 kg", status: "active" },
+      { id: "spark", cat: "cases", name: "SPARK", type: "Cube Gaming Case", mb: "M-ATX / ITX", material: "SPCC 0.45mm", bays: "1x HDD, 2x SSD", io: "1x USB 3.0, 1x USB 1.0", dims: "325 x 270 x 315 mm", weight: "3.80 kg", status: "active" },
+      { id: "star", cat: "cases", name: "STAR", type: "Micro-ATX Case", mb: "M-ATX / ITX", material: "SPCC 0.40mm", bays: "2x HDD, 2x SSD", io: "2x USB 1.0", dims: "265 x 165 x 350 mm", weight: "2.40 kg", status: "active" },
+      { id: "thunder", cat: "cases", name: "THUNDER", type: "Gaming Case", mb: "ATX / Micro-ATX / ITX", material: "SPCC 0.35mm", bays: "2x HDD+1x SSD or 3x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "326 x 190 x 433 mm", weight: "3.95 kg", status: "active" },
+      { id: "torrent", cat: "cases", name: "TORRENT", type: "Airflow Mesh Case", mb: "ATX / Micro-ATX / ITX", material: "SPCC 0.45mm", bays: "2x HDD, 2x SSD", io: "1x USB 3.0, 2x USB 1.0", dims: "335 x 195 x 440 mm", weight: "3.53 kg", status: "active" },
+      { id: "trendy", cat: "cases", name: "TRENDY", type: "E-ATX Showcase Case", mb: "E-ATX / ATX / M-ATX / ITX", material: "SPCC 0.55mm", bays: "2x HDD, 4x SSD", io: "1x USB 3.0, 1x Type-C, 1x USB 2.0", dims: "395 x 210 x 475 mm", weight: "6.90 kg", status: "active" },
+      // Coolers
+      { id: "cool_240_argb", cat: "liquid_coolers", name: "COOL 240 ARGB", type: "240mm AIO Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper Base & Radiator", bays: "2x 120mm ARGB Fans", io: "4Pin PWM + 3Pin ARGB", dims: "274 x 120 x 27 mm", weight: "250W TDP", status: "active" },
+      { id: "cool_360_argb", cat: "liquid_coolers", name: "COOL 360 ARGB", type: "360mm AIO Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper Base & Radiator", bays: "3x 120mm ARGB Fans", io: "4Pin PWM + 3Pin ARGB", dims: "394 x 120 x 27 mm", weight: "270W TDP", status: "active" },
+      { id: "hurricane_gf_240", cat: "liquid_coolers", name: "HURRICANE GF-240", type: "240mm ARGB Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper + Aluminum", bays: "2x 120mm ARGB Fans", io: "4Pin PWM + 5V ARGB", dims: "272 x 120 x 27 mm", weight: "250W TDP", status: "active" },
+      { id: "hurricane_gf_360", cat: "liquid_coolers", name: "HURRICANE GF-360", type: "360mm ARGB Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "Copper + Aluminum", bays: "3x 120mm ARGB Fans", io: "4Pin PWM + 5V ARGB", dims: "360mm Radiator Series", weight: "250W TDP", status: "active" },
+      { id: "fusion", cat: "air_coolers", name: "FUSION AIR COOLER", type: "Tower Air Cooler", mb: "Intel 1700/1200 | AMD AM5/AM4", material: "4x 6mm Copper Heat Pipes", bays: "1x 120mm Auto RGB Fan", io: "4PIN PWM", dims: "140 x 110 x 170 mm", weight: "120W TDP", status: "active" },
+      { id: "turbo", cat: "air_coolers", name: "TURBO AIR COOLER", type: "Compact Air Cooler", mb: "Intel 1700/1200 | AMD AM4", material: "2x Copper Heat Pipes", bays: "1x 120mm Auto RGB Fan", io: "3PIN PWM", dims: "130 x 85 x 145 mm", weight: "~100W TDP", status: "active" },
+      // Audio
+      { id: "gh_01", cat: "audio", name: "GH-01 GAMING HEADPHONE", type: "Pro Gaming Headset", mb: "3.5mm Stereo Plug", material: "ø40mm Dynamic Driver", bays: "Omni-directional Mic", io: "32 Ω / 110 dB", dims: "Standard Package", weight: "MRP ₹2,499", status: "active" }
+    ];
+
+    let products = JSON.parse(localStorage.getItem("im_admin_products")) || defaultProducts;
+    let whatsAppNumber = localStorage.getItem("im_admin_wa_number") || "+919876543210";
+    let activeCategory = "all";
+    let filterQuery = "";
+
+    function saveToStorage() {
+      localStorage.setItem("im_admin_products", JSON.stringify(products));
+      updateCounts();
+    }
+
+    function updateCounts() {
+      document.getElementById("statTotalProducts").textContent = products.length;
+      document.getElementById("statVerified").textContent = products.filter(p => p.status === 'active').length;
+      document.getElementById("countAll").textContent = products.length;
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById("productTableBody");
+      const filtered = products.filter(p => {
+        const matchCat = activeCategory === "all" || p.cat === activeCategory;
+        const matchSearch = !filterQuery || 
+          p.name.toLowerCase().includes(filterQuery) ||
+          p.id.toLowerCase().includes(filterQuery) ||
+          (p.mb && p.mb.toLowerCase().includes(filterQuery));
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 40px; color: var(--text-dim);">No products found matching criteria.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(p => `
+        <tr>
+          <td>
+            <div class="product-cell">
+              <div class="product-thumb">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              </div>
+              <div class="product-meta">
+                <div class="p-name">${p.name}</div>
+                <div class="p-id">#${p.id} &bull; ${p.type || ''}</div>
+              </div>
+            </div>
+          </td>
+          <td><span style="font-size:0.75rem; color:var(--accent-cyan); text-transform:uppercase;">${formatCat(p.cat)}</span></td>
+          <td style="font-weight:600; font-size:0.82rem;">${p.mb || '-'}</td>
+          <td style="font-family:var(--font-mono); font-size:0.78rem;">${p.dims || '-'}</td>
+          <td>
+            <span class="badge-status ${p.status === 'active' ? 'active' : 'draft'}">
+              ${p.status === 'active' ? '&bull; Active' : '&bull; Draft'}
+            </span>
+          </td>
+          <td>
+            <a href="https://wa.me/${whatsAppNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hello Ice Master, I am interested in inquiring about ' + p.name)}" target="_blank" class="btn btn-whatsapp" style="padding: 4px 10px; font-size: 0.72rem;">
+              WhatsApp
+            </a>
+          </td>
+          <td>
+            <div class="actions-cell">
+              <button class="action-btn" title="Edit Product" onclick="openEditModal('${p.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+              </button>
+              <button class="action-btn btn-del" title="Delete Product" onclick="deleteProduct('${p.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function formatCat(cat) {
+      if (cat === "cases") return "Cabinet";
+      if (cat === "liquid_coolers") return "Liquid Cooler";
+      if (cat === "air_coolers") return "Air Cooler";
+      if (cat === "audio") return "Gaming Audio";
+      if (cat === "psu") return "Power Supply";
+      return cat;
+    }
+
+    function filterCategory(cat, el) {
+      activeCategory = cat;
+      document.querySelectorAll(".tab-pill").forEach(t => t.classList.remove("active"));
+      el.classList.add("active");
+      renderTable();
+    }
+
+    document.getElementById("adminSearch").addEventListener("input", (e) => {
+      filterQuery = e.target.value.toLowerCase().trim();
+      renderTable();
+    });
+
+    // Add / Edit Modal Logic
+    function openAddModal() {
+      document.getElementById("modalActionTitle").textContent = "Add New Product";
+      document.getElementById("editProductId").value = "";
+      document.getElementById("productForm").reset();
+      document.getElementById("formId").disabled = false;
+      document.getElementById("productModal").classList.add("open");
+    }
+
+    function openEditModal(id) {
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById("modalActionTitle").textContent = `Edit Product: ${p.name}`;
+      document.getElementById("editProductId").value = p.id;
+      document.getElementById("formId").value = p.id;
+      document.getElementById("formId").disabled = true;
+      document.getElementById("formName").value = p.name;
+      document.getElementById("formCategory").value = p.cat;
+      document.getElementById("formType").value = p.type || "";
+      document.getElementById("formMb").value = p.mb || "";
+      document.getElementById("formMaterial").value = p.material || "";
+      document.getElementById("formBays").value = p.bays || "";
+      document.getElementById("formIo").value = p.io || "";
+      document.getElementById("formDims").value = p.dims || "";
+      document.getElementById("formWeight").value = p.weight || "";
+      document.getElementById("formStatus").value = p.status || "active";
+
+      document.getElementById("productModal").classList.add("open");
+    }
+
+    function closeProductModal() {
+      document.getElementById("productModal").classList.remove("open");
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const editId = document.getElementById("editProductId").value;
+      const id = editId || document.getElementById("formId").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+      const name = document.getElementById("formName").value.trim();
+      const cat = document.getElementById("formCategory").value;
+      const type = document.getElementById("formType").value.trim();
+      const mb = document.getElementById("formMb").value.trim();
+      const material = document.getElementById("formMaterial").value.trim();
+      const bays = document.getElementById("formBays").value.trim();
+      const io = document.getElementById("formIo").value.trim();
+      const dims = document.getElementById("formDims").value.trim();
+      const weight = document.getElementById("formWeight").value.trim();
+      const status = document.getElementById("formStatus").value;
+
+      if (editId) {
+        // Edit existing
+        const idx = products.findIndex(p => p.id === editId);
+        if (idx !== -1) {
+          products[idx] = { ...products[idx], name, cat, type, mb, material, bays, io, dims, weight, status };
+        }
+        showToast("Product updated successfully!");
+      } else {
+        // Create new
+        if (products.some(p => p.id === id)) {
+          alert("Product ID already exists! Please use a unique ID.");
+          return;
+        }
+        products.unshift({ id, name, cat, type, mb, material, bays, io, dims, weight, status });
+        showToast("New product added to catalog!");
+      }
+
+      saveToStorage();
+      renderTable();
+      closeProductModal();
+    }
+
+    function deleteProduct(id) {
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+
+      if (confirm(`Are you sure you want to delete "${p.name}"?`)) {
+        products = products.filter(item => item.id !== id);
+        saveToStorage();
+        renderTable();
+        showToast("Product removed from catalog.");
+      }
+    }
+
+    // WhatsApp settings
+    function saveWhatsAppNumber() {
+      const num = document.getElementById("waNumberInput").value.trim();
+      if (!num) return;
+      whatsAppNumber = num;
+      localStorage.setItem("im_admin_wa_number", num);
+      showToast("WhatsApp number updated!");
+      renderTable();
+    }
+
+    function testWhatsAppLink() {
+      const cleaned = whatsAppNumber.replace(/[^0-9]/g, '');
+      const testUrl = `https://wa.me/${cleaned}?text=${encodeURIComponent('Hi Ice Master, this is a test inquiry from the admin panel.')}`;
+      window.open(testUrl, '_blank');
+    }
+
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(products, null, 2));
+      const downloadAnchor = document.createElement("a");
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "ice-master-products.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast("products.json exported!");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("adminToast");
+      document.getElementById("adminToastMsg").textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    function selectNav(item) {
+      if (item === 'whatsapp') {
+        document.querySelector(".whatsapp-banner").scrollIntoView({ behavior: 'smooth' });
+      } else {
+        document.querySelector(".catalog-card").scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Close on click outside
+    document.getElementById("productModal").addEventListener("click", (e) => {
+      if (e.target.id === "productModal") closeProductModal();
+    });
+
+    // Init
+    document.getElementById("waNumberInput").value = whatsAppNumber;
+    updateCounts();
+    renderTable();
+  </script>
+</body>
+</html>

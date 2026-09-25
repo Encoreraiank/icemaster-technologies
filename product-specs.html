@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE MASTER | Product Specifications & Client Verification Portal</title>
+  <meta name="description" content="Official Product Specifications and Client Verification Portal for Ice Master Technologies.">
+
+  <!-- Google Fonts: Montserrat & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0d14;
+      --bg-card: rgba(16, 23, 38, 0.85);
+      --bg-card-hover: rgba(22, 33, 54, 0.95);
+      --border-color: rgba(0, 229, 255, 0.18);
+      --border-hover: rgba(0, 229, 255, 0.45);
+      --accent-cyan: #00e5ff;
+      --accent-blue: #0072ff;
+      --accent-glow: rgba(0, 229, 255, 0.25);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --badge-bg: rgba(0, 229, 255, 0.1);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 114, 255, 0.18), transparent 70%),
+        radial-gradient(circle at 100% 60%, rgba(0, 229, 255, 0.08), transparent 50%),
+        radial-gradient(circle at 0% 90%, rgba(0, 114, 255, 0.08), transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      padding-bottom: 80px;
+      min-height: 100vh;
+    }
+
+    /* Top Sticky Header */
+    .portal-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 13, 20, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      height: 38px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.5));
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 260px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      padding: 10px 16px 10px 38px;
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 0.88rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.7);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(51, 65, 85, 0.9);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.5);
+    }
+
+    /* Hero / Banner */
+    .hero-banner {
+      max-width: 1400px;
+      margin: 28px auto 20px;
+      padding: 0 24px;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, rgba(16, 28, 54, 0.6) 0%, rgba(10, 16, 30, 0.8) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 30px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100%;
+      background: radial-gradient(circle at 100% 50%, rgba(0, 229, 255, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-info h1 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .hero-info p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 700px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 40px;
+      padding: 8px 18px;
+      text-align: center;
+    }
+
+    .stat-pill .num {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+    }
+
+    .stat-pill .lbl {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Filter Tabs & View Toggle */
+    .controls-wrap {
+      max-width: 1400px;
+      margin: 0 auto 24px;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+
+    .tab-btn {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      background: rgba(30, 41, 59, 0.9);
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+
+    .tab-count {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+    }
+
+    .tab-btn.active .tab-count {
+      background: var(--accent-cyan);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .view-toggles {
+      display: flex;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 3px;
+    }
+
+    .view-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .view-btn.active {
+      background: rgba(0, 229, 255, 0.2);
+      color: var(--accent-cyan);
+    }
+
+    /* Content Area */
+    .content-area {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Grid Layout */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 22px;
+    }
+
+    /* Product Card */
+    .spec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .spec-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 229, 255, 0.15);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .badge-category {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--badge-bg);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+    }
+
+    .badge-verified {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .card-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    /* Spec Key-Value List */
+    .specs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 18px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 0.83rem;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 7px;
+    }
+
+    .spec-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .spec-key {
+      color: var(--text-muted);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .spec-val {
+      color: #fff;
+      font-weight: 600;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .spec-val.highlight {
+      color: var(--accent-cyan);
+    }
+
+    /* Card Actions */
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .card-actions .btn {
+      flex: 1;
+      justify-content: center;
+      padding: 8px 12px;
+      font-size: 0.76rem;
+    }
+
+    /* Table View */
+    .specs-table-wrap {
+      display: none;
+      overflow-x: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+
+    .specs-table th {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--accent-cyan);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 14px 16px;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .specs-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .specs-table tr:hover td {
+      background: rgba(0, 229, 255, 0.03);
+    }
+
+    .specs-table .model-name {
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--font-heading);
+    }
+
+    /* Modal for Box Photo */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 229, 255, 0.2);
+    }
+
+    .modal-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.4rem;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 6px;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .modal-img {
+      max-width: 100%;
+      max-height: 65vh;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      object-fit: contain;
+    }
+
+    .modal-tip {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      border: 1px solid var(--accent-cyan);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 229, 255, 0.3);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+      .portal-header, .hero-card, .controls-wrap, .card-actions, .badge-verified {
+        display: none !important;
+      }
+      .specs-table-wrap {
+        display: block !important;
+        border: 1px solid #ccc;
+      }
+      .specs-grid {
+        display: none !important;
+      }
+      .specs-table th {
+        background: #f1f5f9;
+        color: #000;
+      }
+      .specs-table td {
+        color: #000;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Sticky Header -->
+  <header class="portal-header">
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Emblem" class="brand-logo" onerror="this.style.display='none'">
+        <div>
+          <div class="brand-title">ICE MASTER TECHNOLOGIES</div>
+          <div class="brand-sub">Product Specs & Client Verification Portal</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" placeholder="Search model, form factor, socket, etc...">
+        </div>
+        <button class="btn btn-secondary" onclick="window.print()" title="Print or Export to PDF">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print / PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Sign-Off Banner -->
+  <section class="hero-banner">
+    <div class="hero-card">
+      <div class="hero-info">
+        <h1>Official Specification Review & Confirmation</h1>
+        <p>
+          All product specifications shown below have been meticulously extracted directly from the back of the official retail packaging boxes. Click <strong>"View Box Photo"</strong> on any item to cross-verify against the actual box packaging.
+        </p>
+      </div>
+      <div class="hero-meta">
+        <div class="stat-pill">
+          <div class="num" id="totalCount">23</div>
+          <div class="lbl">Products Extracted</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" style="color: var(--success);">100%</div>
+          <div class="lbl">Box Verified</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" style="color: var(--warning);">Pending</div>
+          <div class="lbl">High Current PSU</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls (Categories & View Toggle) -->
+  <section class="controls-wrap">
+    <div class="filter-tabs" id="filterTabs">
+      <button class="tab-btn active" data-cat="all">All Products <span class="tab-count" id="countAll">23</span></button>
+      <button class="tab-btn" data-cat="cases">Cabinets / Cases <span class="tab-count">16</span></button>
+      <button class="tab-btn" data-cat="liquid_coolers">Liquid Coolers <span class="tab-count">4</span></button>
+      <button class="tab-btn" data-cat="air_coolers">Air Coolers <span class="tab-count">2</span></button>
+      <button class="tab-btn" data-cat="audio">Gaming Audio <span class="tab-count">1</span></button>
+      <button class="tab-btn" data-cat="psu" style="opacity: 0.6;">Power Supplies <span class="tab-count" style="background:#f59e0b; color:#000;">Pending</span></button>
+    </div>
+
+    <div class="view-toggles">
+      <button class="view-btn active" id="btnViewGrid" onclick="switchView('grid')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Cards
+      </button>
+      <button class="view-btn" id="btnViewTable" onclick="switchView('table')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        Table
+      </button>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="content-area">
+    <!-- Grid View -->
+    <div class="specs-grid" id="specsGrid"></div>
+
+    <!-- Table View -->
+    <div class="specs-table-wrap" id="specsTableWrap">
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Product Model</th>
+            <th>Category / Type</th>
+            <th>Key Specs (M/B / Socket / TDP)</th>
+            <th>Storage / Fans / Driver</th>
+            <th>Front I/O / Connectivity</th>
+            <th>Dimensions</th>
+            <th>Weight</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="specsTableBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Photo Modal -->
+  <div class="modal-backdrop" id="photoModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Retail Packaging Box</div>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="Packaging Box Photo" class="modal-img" id="modalImg">
+        <div class="modal-tip">Original photo received from warehouse packaging box.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+    <span id="toastMsg">Specs copied to clipboard!</span>
+  </div>
+
+  <script>
+    // Master Product Data extracted from box photos
+    const products = [
+      // Cases
+      {
+        id: "axle",
+        cat: "cases",
+        name: "ICE MASTER AXLE",
+        type: "Mid Tower Gaming Case",
+        material: "SPCC 0.50mm",
+        mb: "ATX / M-ATX / ITX",
+        bays: "1x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "1x USB 3.0, 2x USB 2.0, HD Audio",
+        pci: "7 Slots",
+        dims: "320 x 180 x 410 mm",
+        weight: "3.90 kg (NW) / 4.90 kg (GW)",
+        boxPhoto: "assets/Specs rough/Axle.jpeg"
+      },
+      {
+        id: "box_infinity",
+        cat: "cases",
+        name: "BOX INFINITY",
+        type: "Compact Tower Case (Black/White/Yellow)",
+        material: "SPCC 1.0mm Heavy Duty",
+        mb: "M-ATX / ITX",
+        bays: "3x HDD + 2x SSD (or 1x HDD + 4x SSD)",
+        io: "1x USB 3.0, 1x Type-C, HD Audio",
+        pci: "4 Slots",
+        dims: "398 x 211 x 324 mm",
+        weight: "4.90 kg (NW) / 5.80 kg (GW)",
+        boxPhoto: "assets/Specs rough/Box yellow.jpeg"
+      },
+      {
+        id: "dynamite_x5",
+        cat: "cases",
+        name: "DYNAMITE X5",
+        type: "Micro-ATX Gaming Case",
+        material: "SPCC 0.45mm",
+        mb: "M-ATX / ITX",
+        bays: "1x 3.5\" HDD, 1x 2.5\" SSD",
+        io: "1x USB 3.0, 2x USB 1.0, HD Audio",
+        pci: "4 Slots",
+        dims: "350 x 210 x 380 mm",
+        weight: "4.43 kg (NW) / 5.30 kg (GW)",
+        boxPhoto: "assets/Specs rough/Dynamite x5.jpeg"
+      },
+      {
+        id: "dynamite_x6",
+        cat: "cases",
+        name: "DYNAMITE X6",
+        type: "ATX Gaming Case",
+        material: "SPCC 0.60mm",
+        mb: "ATX / M-ATX / ITX",
+        bays: "1x 3.5\" HDD, 1x 2.5\" SSD",
+        io: "1x USB 3.0, 1x Type-C, 1x USB 2.0, HD Audio",
+        pci: "7 Slots",
+        dims: "423 x 220 x 467 mm",
+        weight: "6.00 kg (NW) / 6.80 kg (GW)",
+        boxPhoto: "assets/Specs rough/Dynamite x6.jpeg"
+      },
+      {
+        id: "dynamite_x7",
+        cat: "cases",
+        name: "DYNAMITE X7",
+        type: "Full ATX / E-ATX Gaming Case",
+        material: "SPCC 0.60mm",
+        mb: "E-ATX / ATX / M-ATX / ITX",
+        bays: "2x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "1x USB 3.0, 1x Type-C, 2x USB 2.0, HD Audio",
+        pci: "7 Slots",
+        dims: "430 x 225 x 480 mm",
+        weight: "7.24 kg (NW) / 8.36 kg (GW)",
+        boxPhoto: "assets/Specs rough/Dynamite x7.jpeg"
+      },
+      {
+        id: "dynamite_xl_pro",
+        cat: "cases",
+        name: "DYNAMITE XL / PRO",
+        type: "Dual Chamber Showcase Case",
+        material: "SPCC 0.90mm",
+        mb: "E-ATX / ATX / M-ATX / ITX",
+        bays: "1x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "1x USB 3.0, 1x Type-C, 1x USB 1.0, HD Audio",
+        pci: "7+3 Slots (Vertical GPU Ready)",
+        dims: "416.5 x 300 x 385 mm",
+        weight: "7.80 kg (NW) / 9.10 kg (GW)",
+        boxPhoto: "assets/Specs rough/Dynamite XL Pro and XL.jpeg"
+      },
+      {
+        id: "frosty",
+        cat: "cases",
+        name: "FROSTY",
+        type: "High Airflow Gaming Case",
+        material: "SPCC 0.55mm",
+        mb: "E-ATX / ATX / M-ATX / ITX",
+        bays: "2x 3.5\" HDD, 4x 2.5\" SSD",
+        io: "1x USB 3.0, 2x USB 2.0, HD Audio",
+        pci: "7+2 Slots",
+        dims: "395 x 210 x 475 mm",
+        weight: "6.90 kg (NW) / 7.90 kg (GW)",
+        boxPhoto: "assets/Specs rough/Frosty.jpeg"
+      },
+      {
+        id: "glacier",
+        cat: "cases",
+        name: "GLACIER",
+        type: "Mid Tower Gaming Case",
+        material: "SPCC 0.50mm",
+        mb: "ATX / M-ATX / ITX",
+        bays: "2x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "1x USB 3.0, 2x USB 2.0, HD Audio",
+        pci: "7 Slots",
+        dims: "358 x 200 x 460 mm",
+        weight: "3.90 kg (NW) / 4.90 kg (GW)",
+        boxPhoto: "assets/Specs rough/Glacier.jpeg"
+      },
+      {
+        id: "nexus_360",
+        cat: "cases",
+        name: "NEXUS 360",
+        type: "Panoramic Showcase Case",
+        material: "SPCC 0.60mm",
+        mb: "ATX / M-ATX / ITX",
+        bays: "1x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "1x USB 3.0, 1x Type-C, 1x USB 2.0, HD Audio",
+        pci: "7 Slots",
+        dims: "455 x 210 x 485 mm",
+        weight: "3.90 kg (NW) / 4.90 kg (GW)",
+        boxPhoto: "assets/Specs rough/Nexus 360.jpeg"
+      },
+      {
+        id: "roar",
+        cat: "cases",
+        name: "ROAR",
+        type: "Micro-ATX Mini Case",
+        material: "SPCC 0.45mm",
+        mb: "Micro-ATX / Mini-ITX",
+        bays: "1x 3.5\" HDD, 1x 2.5\" SSD",
+        io: "1x USB 3.0, 2x USB 2.0, HD Audio",
+        pci: "4 Slots",
+        dims: "290 x 190 x 375 mm",
+        weight: "2.25 kg (NW) / 2.85 kg (GW)",
+        boxPhoto: "assets/Specs rough/Roar.jpeg"
+      },
+      {
+        id: "shadow",
+        cat: "cases",
+        name: "SHADOW",
+        type: "Mid Tower Case (Shadow Black)",
+        material: "SPCC 0.45mm",
+        mb: "ATX / M-ATX / ITX",
+        bays: "2x 3.5\" HDD, 3x 2.5\" SSD",
+        io: "1x USB 3.0, 2x USB 1.0, Audio",
+        pci: "7 Slots",
+        dims: "345 x 183 x 430 mm",
+        weight: "3.90 kg (NW) / 4.90 kg (GW)",
+        boxPhoto: "assets/Specs rough/Shadow.jpeg"
+      },
+      {
+        id: "spark",
+        cat: "cases",
+        name: "SPARK",
+        type: "Cube Gaming Case",
+        material: "SPCC 0.45mm",
+        mb: "M-ATX / ITX",
+        bays: "1x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "1x USB 3.0, 1x USB 1.0, Audio",
+        pci: "4 Slots",
+        dims: "325 x 270 x 315 mm",
+        weight: "3.80 kg (NW) / 4.60 kg (GW)",
+        boxPhoto: "assets/Specs rough/Spark.jpeg"
+      },
+      {
+        id: "star",
+        cat: "cases",
+        name: "STAR",
+        type: "Micro-ATX Case",
+        material: "SPCC 0.40mm",
+        mb: "M-ATX / ITX",
+        bays: "2x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "2x USB 1.0, Audio",
+        pci: "4 Slots",
+        dims: "265 x 165 x 350 mm",
+        weight: "2.40 kg (NW) / 2.80 kg (GW)",
+        boxPhoto: "assets/Specs rough/Star.jpeg"
+      },
+      {
+        id: "thunder",
+        cat: "cases",
+        name: "THUNDER",
+        type: "Gaming Case (Thunder Black)",
+        material: "SPCC 0.35mm",
+        mb: "ATX / Micro-ATX / ITX",
+        bays: "2x HDD+1x SSD / 1x HDD+2x SSD / 3x SSD",
+        io: "1x USB 3.0, 2x USB 1.0, Audio",
+        pci: "6 Slots",
+        dims: "326 x 190 x 433 mm",
+        weight: "3.95 kg (NW) / 4.70 kg (GW)",
+        boxPhoto: "assets/Specs rough/Thunder.jpeg"
+      },
+      {
+        id: "torrent",
+        cat: "cases",
+        name: "TORRENT",
+        type: "Airflow Mesh Case",
+        material: "SPCC 0.45mm",
+        mb: "ATX / Micro-ATX / ITX",
+        bays: "2x 3.5\" HDD, 2x 2.5\" SSD",
+        io: "1x USB 3.0, 2x USB 1.0, Audio",
+        pci: "7 Slots",
+        dims: "335 x 195 x 440 mm",
+        weight: "3.53 kg (NW) / 4.41 kg (GW)",
+        boxPhoto: "assets/Specs rough/Torrent.jpeg"
+      },
+      {
+        id: "trendy",
+        cat: "cases",
+        name: "TRENDY",
+        type: "E-ATX Showcase Case",
+        material: "SPCC 0.55mm",
+        mb: "E-ATX / ATX / M-ATX / ITX",
+        bays: "2x 3.5\" HDD, 4x 2.5\" SSD",
+        io: "1x USB 3.0, 1x Type-C, 1x USB 2.0, HD Audio",
+        pci: "7+2 Slots",
+        dims: "395 x 210 x 475 mm",
+        weight: "6.90 kg (NW) / 7.90 kg (GW)",
+        boxPhoto: "assets/Specs rough/Trendy.jpeg"
+      },
+
+      // Liquid Coolers
+      {
+        id: "cool_240_argb",
+        cat: "liquid_coolers",
+        name: "COOL 240 ARGB",
+        type: "240mm AIO Liquid Cooler",
+        material: "Copper Base & Radiator",
+        mb: "Intel LGA 1700/1200/115X/2011/2066 | AMD AM5/AM4",
+        bays: "2x 120mm ARGB PWM Fans (67.96 CFM)",
+        io: "4Pin PWM + 3Pin 5V ARGB Sync",
+        pci: "2800 RPM Pump (Ceramic, 50K hrs)",
+        dims: "274 x 120 x 27 mm (Radiator)",
+        weight: "TDP: 250W (±10%)",
+        boxPhoto: "assets/Specs rough/cool 240/WhatsApp Image 2026-09-25 at 12.10.01 PM.jpeg"
+      },
+      {
+        id: "cool_360_argb",
+        cat: "liquid_coolers",
+        name: "COOL 360 ARGB",
+        type: "360mm AIO Liquid Cooler",
+        material: "Copper Base & Radiator",
+        mb: "Intel LGA 1700/1200/115X/2011/2066 | AMD AM5/AM4",
+        bays: "3x 120mm ARGB PWM Fans (67.96 CFM)",
+        io: "4Pin PWM + 3Pin 5V ARGB Sync",
+        pci: "2800 RPM Pump (Ceramic, 50K hrs)",
+        dims: "394 x 120 x 27 mm (Radiator)",
+        weight: "TDP: 270W (±10%)",
+        boxPhoto: "assets/Specs rough/cool 360/WhatsApp Image 2026-09-25 at 12.09.49 PM.jpeg"
+      },
+      {
+        id: "hurricane_gf_240",
+        cat: "liquid_coolers",
+        name: "HURRICANE GF-240",
+        type: "240mm ARGB Liquid Cooler",
+        material: "Copper Base + Aluminum Radiator",
+        mb: "Intel LGA 1700/1200/115X/2011 | AMD AM5/AM4/AM3",
+        bays: "2x 120mm ARGB Fans (58 CFM)",
+        io: "4Pin PWM + 5V 3PIN ARGB",
+        pci: "2700 RPM Pump (26.9 dB)",
+        dims: "272 x 120 x 27 mm (Radiator)",
+        weight: "TDP: 250W",
+        boxPhoto: "assets/Specs rough/HURRICANE/1 HURRICANE 240.jpeg"
+      },
+      {
+        id: "hurricane_gf_360",
+        cat: "liquid_coolers",
+        name: "HURRICANE GF-360",
+        type: "360mm ARGB Liquid Cooler",
+        material: "Copper Base + Aluminum Radiator",
+        mb: "Intel LGA 1700/1200/115X/2011 | AMD AM5/AM4/AM3",
+        bays: "3x 120mm ARGB Fans (58 CFM)",
+        io: "4Pin PWM + 5V 3PIN ARGB",
+        pci: "2700 RPM Pump (26.9 dB)",
+        dims: "360mm Radiator Series",
+        weight: "TDP: 250W",
+        boxPhoto: "assets/Specs rough/HURRICANE/1 HURRICANE 360.jpeg"
+      },
+
+      // Air Coolers
+      {
+        id: "fusion",
+        cat: "air_coolers",
+        name: "FUSION AIR COOLER",
+        type: "Tower CPU Air Radiator",
+        material: "4x 6mm Copper Heat Pipes (HDT)",
+        mb: "Intel LGA 1700/1200/115X/2011 | AMD AM5/AM4/AM3",
+        bays: "1x 120mm Auto RGB Fan (800-2000 RPM, 67.96 CFM)",
+        io: "4PIN (PWM) *1",
+        pci: "Anti-oxidation Aluminum Fin Layer",
+        dims: "140 x 110 x 170 mm",
+        weight: "TDP: 120W",
+        boxPhoto: "assets/Specs rough/FUSION/FUSION1.jpeg"
+      },
+      {
+        id: "turbo",
+        cat: "air_coolers",
+        name: "TURBO AIR COOLER",
+        type: "Compact Tower Air Cooler",
+        material: "2x Copper Heat Pipes (HDT)",
+        mb: "Intel LGA 1700/1200/115X | AMD AM4/AM3/AM2",
+        bays: "1x 120mm Auto RGB Fan (1900 RPM, 38 CFM)",
+        io: "3PIN (PWM) *1",
+        pci: "Ultra Quiet 24 dBA Noise",
+        dims: "130 x 85 x 145 mm",
+        weight: "TDP: ~100W",
+        boxPhoto: "assets/Specs rough/TURBO/TURBO1.jpeg"
+      },
+
+      // Audio
+      {
+        id: "gh_01",
+        cat: "audio",
+        name: "GH-01 GAMING HEADPHONE",
+        type: "Pro Gaming Headset with Mic",
+        material: "Dynamic ø40mm Driver",
+        mb: "3.5mm Stereo Plug (~2.0m Cable)",
+        bays: "Omni-directional Mic (-42 dB ± 2 dB)",
+        io: "Impedance: 32 Ω | Sensitivity: 110 dB",
+        pci: "Freq: 20 Hz - 20,000 Hz",
+        dims: "Retail Package Box",
+        weight: "MRP: ₹2,499 (Incl. Taxes)",
+        boxPhoto: "assets/Specs rough/GH-01.jpeg"
+      }
+    ];
+
+    let currentCategory = "all";
+    let searchQuery = "";
+    let currentView = "grid";
+
+    function renderCards() {
+      const grid = document.getElementById("specsGrid");
+      const filtered = products.filter(p => {
+        const matchesCat = currentCategory === "all" || p.cat === currentCategory;
+        const matchesQuery = !searchQuery || 
+          p.name.toLowerCase().includes(searchQuery) ||
+          p.type.toLowerCase().includes(searchQuery) ||
+          p.mb.toLowerCase().includes(searchQuery) ||
+          p.material.toLowerCase().includes(searchQuery) ||
+          p.dims.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 60px 20px; color: var(--text-dim);">
+          <h3>No products match "${searchQuery}" in this category</h3>
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => `
+        <div class="spec-card" id="card-${p.id}">
+          <div>
+            <div class="card-top">
+              <span class="badge-category">${formatCat(p.cat)}</span>
+              <span class="badge-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Box Verified
+              </span>
+            </div>
+            <h3 class="card-title">${p.name}</h3>
+            <div class="card-subtitle">${p.type}</div>
+
+            <div class="specs-list">
+              <div class="spec-row">
+                <span class="spec-key">${p.cat.includes('cooler') || p.cat === 'audio' ? 'Socket / Interface' : 'Motherboard'}</span>
+                <span class="spec-val highlight">${p.mb}</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">${p.cat.includes('cooler') ? 'Heat Pipes / Radiator' : (p.cat === 'audio' ? 'Driver Unit' : 'Material')}</span>
+                <span class="spec-val">${p.material}</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">${p.cat.includes('cooler') ? 'Fans / Airflow' : (p.cat === 'audio' ? 'Microphone' : 'Drive Bays')}</span>
+                <span class="spec-val">${p.bays}</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">${p.cat.includes('cooler') ? 'Power / Sync' : (p.cat === 'audio' ? 'Impedance / Sens.' : 'Front I/O')}</span>
+                <span class="spec-val">${p.io}</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">${p.cat.includes('cooler') ? 'Pump / Noise' : (p.cat === 'audio' ? 'Frequency' : 'Expansion')}</span>
+                <span class="spec-val">${p.pci}</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Dimensions</span>
+                <span class="spec-val">${p.dims}</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">${p.cat.includes('cooler') ? 'Rated TDP' : (p.cat === 'audio' ? 'Price' : 'Weight')}</span>
+                <span class="spec-val highlight">${p.weight}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn btn-secondary" onclick="viewPhoto('${p.name}', '${p.boxPhoto}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              View Box Photo
+            </button>
+            <button class="btn btn-primary" onclick="copySpecs('${p.id}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy Specs
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById("specsTableBody");
+      const filtered = products.filter(p => {
+        const matchesCat = currentCategory === "all" || p.cat === currentCategory;
+        const matchesQuery = !searchQuery || 
+          p.name.toLowerCase().includes(searchQuery) ||
+          p.type.toLowerCase().includes(searchQuery) ||
+          p.mb.toLowerCase().includes(searchQuery) ||
+          p.material.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesQuery;
+      });
+
+      tbody.innerHTML = filtered.map(p => `
+        <tr>
+          <td>
+            <div class="model-name">${p.name}</div>
+            <div style="font-size:0.75rem; color:var(--text-dim);">${formatCat(p.cat)}</div>
+          </td>
+          <td>${p.type}</td>
+          <td style="color:var(--accent-cyan); font-weight:600;">${p.mb}</td>
+          <td>${p.bays}</td>
+          <td>${p.io}</td>
+          <td style="font-family:var(--font-mono); font-size:0.8rem;">${p.dims}</td>
+          <td>${p.weight}</td>
+          <td>
+            <button class="btn btn-secondary" style="padding:5px 10px; font-size:0.72rem;" onclick="viewPhoto('${p.name}', '${p.boxPhoto}')">
+              Box Photo
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function formatCat(cat) {
+      if (cat === "cases") return "Cabinet";
+      if (cat === "liquid_coolers") return "AIO Liquid";
+      if (cat === "air_coolers") return "Air Cooler";
+      if (cat === "audio") return "Gaming Headset";
+      return "Product";
+    }
+
+    function switchView(view) {
+      currentView = view;
+      const grid = document.getElementById("specsGrid");
+      const table = document.getElementById("specsTableWrap");
+      const btnGrid = document.getElementById("btnViewGrid");
+      const btnTable = document.getElementById("btnViewTable");
+
+      if (view === "grid") {
+        grid.style.display = "grid";
+        table.style.display = "none";
+        btnGrid.classList.add("active");
+        btnTable.classList.remove("active");
+        renderCards();
+      } else {
+        grid.style.display = "none";
+        table.style.display = "block";
+        btnTable.classList.add("active");
+        btnGrid.classList.remove("active");
+        renderTable();
+      }
+    }
+
+    function viewPhoto(name, photoUrl) {
+      const modal = document.getElementById("photoModal");
+      const img = document.getElementById("modalImg");
+      const title = document.getElementById("modalTitle");
+
+      title.textContent = `${name} — Official Box Packaging Photo`;
+      img.src = encodeURI(photoUrl);
+      modal.classList.add("open");
+    }
+
+    function closeModal() {
+      document.getElementById("photoModal").classList.remove("open");
+    }
+
+    document.getElementById("photoModal").addEventListener("click", (e) => {
+      if (e.target.id === "photoModal") closeModal();
+    });
+
+    function copySpecs(id) {
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+
+      const text = `ICE MASTER - ${p.name}
+Category: ${p.type}
+Support: ${p.mb}
+Material / Structure: ${p.material}
+Drive Bays / Fans: ${p.bays}
+Front I/O / Connectivity: ${p.io}
+Slots / Pump: ${p.pci}
+Dimensions: ${p.dims}
+Weight / TDP: ${p.weight}
+Status: Verified from retail packaging box.`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied specs for ${p.name}!`);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toastMsg").textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    // Category Filter Buttons
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentCategory = btn.getAttribute("data-cat");
+        if (currentView === "grid") renderCards();
+        else renderTable();
+      });
+    });
+
+    // Search Input Filter
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      if (currentView === "grid") renderCards();
+      else renderTable();
+    });
+
+    // Keyboard ESC to close modal
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // Initial render
+    renderCards();
+  </script>
+</body>
+</html>
