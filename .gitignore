@@ -6,6 +6,7 @@ raw-assets/
 .DS_Store
 Thumbs.db
 *.log
+*.exe
 
 # Vercel
 .vercel
