@@ -1438,7 +1438,7 @@ function initProductDetailPage() {
 
   if (enquireLink) {
     const text = encodeURIComponent(`Hi Ice Master, I am interested in the ${prod.breadcrumbTitle}. Could you share pricing and availability?`);
-    enquireLink.href = `https://wa.me/919876543210?text=${text}`;
+    enquireLink.href = `https://wa.me/919311145247?text=${text}`;
     enquireLink.setAttribute('aria-label', `Enquire about ${prod.breadcrumbTitle} on WhatsApp`);
   }
 
