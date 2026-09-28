@@ -378,7 +378,7 @@ function setHeroSlide(index) {
   const stageCounter = document.getElementById('stage-num-text');
   if (stageCounter) {
     const slideDisplay = String(currentSlideIndex + 1).padStart(2, '0');
-    stageCounter.innerHTML = `<span>${slideDisplay}</span><span class="stage-dim-text"> / 02</span>`;
+    stageCounter.innerHTML = `<span>${slideDisplay}</span><span class="stage-dim-text"> / ${String(totalSlides).padStart(2, '0')}</span>`;
   }
 
   resetAutoPlay();
@@ -1682,10 +1682,26 @@ function initContactPageController() {
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.8';
 
+      const name = (document.getElementById('contactName')?.value || '').trim();
+      const email = (document.getElementById('contactEmail')?.value || '').trim();
+      const subject = (document.getElementById('contactSubject')?.value || '').trim();
+      const message = (messageInput?.value || '').trim();
+
+      const whatsappText = `*New Website Inquiry - Ice Master Technologies*\n\n` +
+        `*Name:* ${name}\n` +
+        `*Email:* ${email}\n` +
+        `*Subject:* ${subject}\n\n` +
+        `*Message:*\n${message}`;
+
+      const waUrl = `https://wa.me/919311145247?text=${encodeURIComponent(whatsappText)}`;
+
       setTimeout(() => {
+        // Direct inquiry message to +91 9311145247
+        window.open(waUrl, '_blank');
+
         if (toastEl) {
           toastEl.className = 'contact-feedback-toast success';
-          toastEl.textContent = '✓ Thank you! Your message has been sent successfully. We will reply within 24 hours.';
+          toastEl.textContent = '✓ Opening WhatsApp to send your message to +91 9311145247...';
           toastEl.style.display = 'block';
         }
 
@@ -1701,10 +1717,10 @@ function initContactPageController() {
           if (toastEl) {
             setTimeout(() => {
               toastEl.style.display = 'none';
-            }, 4000);
+            }, 5000);
           }
         }, 2000);
-      }, 900);
+      }, 600);
     });
   }
 }
