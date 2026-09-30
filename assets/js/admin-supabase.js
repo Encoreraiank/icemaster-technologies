@@ -155,16 +155,31 @@ async function loadAdminDataFromSupabase() {
     // 4. Products
     const { data: prodRows, error: e4 } = await sb.from('products').select('*').order('sort_order');
     if (!e4 && prodRows && prodRows.length > 0) {
-      window.products = prodRows.map(p => ({
-        id: p.prod_id,
-        name: p.name,
-        cat: p.cat,
-        catName: p.cat_name,
-        img: p.img,
-        desc: p.desc_text,
-        colors: p.colors || ['black'],
-        specs: p.specs || []
-      }));
+      window.products = prodRows.map(p => {
+        let imagesObj = null;
+        let cleanSpecs = p.specs;
+        if (Array.isArray(p.specs)) {
+          const imgEntry = p.specs.find(s => s && s.__imagesMap);
+          if (imgEntry && imgEntry.images) {
+            imagesObj = imgEntry.images;
+          }
+          cleanSpecs = p.specs.filter(s => s && !s.__imagesMap);
+        }
+        if (!imagesObj && typeof DEFAULT_PRODUCT_IMAGES !== 'undefined' && DEFAULT_PRODUCT_IMAGES[p.prod_id]) {
+          imagesObj = DEFAULT_PRODUCT_IMAGES[p.prod_id];
+        }
+        return {
+          id: p.prod_id,
+          name: p.name,
+          cat: p.cat,
+          catName: p.cat_name,
+          img: p.img,
+          desc: p.desc_text,
+          colors: p.colors || ['black'],
+          specs: cleanSpecs || [],
+          images: imagesObj || { black: [p.img || 'assets/images/homepage/im_official_emblem.png'] }
+        };
+      });
       if (typeof renderProducts === 'function') renderProducts();
     }
 
@@ -248,6 +263,13 @@ async function dbSaveProduct(prod) {
   const sb = getSupabase();
   if (!sb) return;
   try {
+    // Embed __imagesMap inside specs JSONB array
+    const userSpecs = Array.isArray(prod.specs) ? prod.specs.filter(s => s && !s.__imagesMap) : [];
+    const finalSpecs = [...userSpecs];
+    if (prod.images && typeof prod.images === 'object') {
+      finalSpecs.push({ __imagesMap: true, images: prod.images });
+    }
+
     await sb.from('products').upsert({
       prod_id: prod.id,
       name: prod.name,
@@ -256,7 +278,7 @@ async function dbSaveProduct(prod) {
       img: prod.img,
       desc_text: prod.desc,
       colors: prod.colors || ['black'],
-      specs: prod.specs || [],
+      specs: finalSpecs,
       is_active: true,
       updated_at: new Date().toISOString()
     }, { onConflict: 'prod_id' });

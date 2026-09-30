@@ -229,16 +229,28 @@ async function syncLiveSiteWithAdminData() {
       // 4. Products
       const { data: prodRows } = await sb.from('products').select('*').order('sort_order');
       if (prodRows && prodRows.length > 0) {
-        const mappedProds = prodRows.map(p => ({
-          id: p.prod_id,
-          name: p.name,
-          cat: p.cat,
-          catName: p.cat_name,
-          img: p.img,
-          desc: p.desc_text,
-          colors: p.colors || ['black'],
-          specs: p.specs || []
-        }));
+        const mappedProds = prodRows.map(p => {
+          let customImages = null;
+          let cleanSpecs = p.specs;
+          if (Array.isArray(p.specs)) {
+            const imgEntry = p.specs.find(s => s && s.__imagesMap);
+            if (imgEntry && imgEntry.images) {
+              customImages = imgEntry.images;
+            }
+            cleanSpecs = p.specs.filter(s => s && !s.__imagesMap);
+          }
+          return {
+            id: p.prod_id,
+            name: p.name,
+            cat: p.cat,
+            catName: p.cat_name,
+            img: p.img,
+            desc: p.desc_text,
+            colors: p.colors || ['black'],
+            specs: cleanSpecs || [],
+            images: customImages
+          };
+        });
         localStorage.setItem('im_wm_products', JSON.stringify(mappedProds));
       }
 
@@ -1482,23 +1494,61 @@ function initProductDetailPage() {
     const storedProds = JSON.parse(localStorage.getItem('im_wm_products'));
     if (Array.isArray(storedProds)) {
       storedProds.forEach(p => {
-        const pColors = (p.colors && p.colors.length) ? p.colors : ['black'];
-        const pImages = {};
-        pColors.forEach(c => {
-          pImages[c] = [p.img || 'assets/images/homepage/im_official_emblem.png'];
-        });
-        catalog[p.id] = {
-          title: p.name,
-          subtitle: p.desc || p.name,
-          eyebrow: (p.catName || p.cat || 'PC HARDWARE').toUpperCase(),
-          categoryName: p.catName || p.cat || 'Products',
-          categoryUrl: `all-products.html?category=${p.cat}`,
-          breadcrumbTitle: p.name,
-          colors: pColors,
-          defaultColor: pColors[0],
-          customSpecs: p.specs || '',
-          images: pImages
-        };
+        const existingCat = catalog[p.id];
+        const pColors = (p.colors && p.colors.length) ? p.colors : (existingCat ? existingCat.colors : ['black']);
+
+        // Check if custom uploaded images are attached to p
+        let customImages = null;
+        if (p.images && typeof p.images === 'object' && Object.keys(p.images).length > 0) {
+          customImages = p.images;
+        } else if (Array.isArray(p.specs)) {
+          const imgEntry = p.specs.find(s => s && s.__imagesMap);
+          if (imgEntry && imgEntry.images) {
+            customImages = imgEntry.images;
+          }
+        }
+
+        let cleanSpecs = p.specs;
+        if (Array.isArray(cleanSpecs)) {
+          cleanSpecs = cleanSpecs.filter(s => s && !s.__imagesMap);
+        }
+
+        if (existingCat) {
+          // Update properties from admin/cloud, but PRESERVE existing multi-angle gallery unless new custom images were provided!
+          existingCat.title = p.name || existingCat.title;
+          existingCat.subtitle = p.desc || existingCat.subtitle;
+          existingCat.eyebrow = (p.catName || p.cat || existingCat.categoryName || 'PC HARDWARE').toUpperCase();
+          existingCat.categoryName = p.catName || p.cat || existingCat.categoryName;
+          existingCat.breadcrumbTitle = p.name || existingCat.breadcrumbTitle;
+          existingCat.colors = pColors;
+          existingCat.defaultColor = pColors[0] || existingCat.defaultColor;
+          if (customImages && Object.keys(customImages).length > 0) {
+            existingCat.images = customImages;
+          }
+          if (cleanSpecs && cleanSpecs.length > 0) {
+            existingCat.customSpecs = cleanSpecs;
+          }
+        } else {
+          // New product created via admin
+          const pImages = customImages || {};
+          if (!customImages || Object.keys(customImages).length === 0) {
+            pColors.forEach(c => {
+              pImages[c] = [p.img || 'assets/images/homepage/im_official_emblem.png'];
+            });
+          }
+          catalog[p.id] = {
+            title: p.name,
+            subtitle: p.desc || p.name,
+            eyebrow: (p.catName || p.cat || 'PC HARDWARE').toUpperCase(),
+            categoryName: p.catName || p.cat || 'Products',
+            categoryUrl: `all-products.html?category=${p.cat}`,
+            breadcrumbTitle: p.name,
+            colors: pColors,
+            defaultColor: pColors[0],
+            customSpecs: cleanSpecs || '',
+            images: pImages
+          };
+        }
       });
     }
   } catch(e) {}
@@ -1594,7 +1644,16 @@ function initProductDetailPage() {
 
   // Function to render gallery thumbnails for current color
   function renderGallery(color) {
-    const viewList = (prod.images && prod.images[color]) ? prod.images[color] : [];
+    let viewList = (prod.images && prod.images[color] && prod.images[color].length) ? prod.images[color] : [];
+    // If empty for this color, try another available color in prod.images
+    if (!viewList.length && prod.images) {
+      const fallbackKey = Object.keys(prod.images).find(k => prod.images[k] && prod.images[k].length);
+      if (fallbackKey) viewList = prod.images[fallbackKey];
+    }
+    // If still empty, use main product img
+    if (!viewList.length && prod.img) {
+      viewList = [prod.img];
+    }
     if (!viewList.length) return;
 
     if (thumbContainer) {

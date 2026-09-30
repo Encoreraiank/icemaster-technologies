@@ -915,6 +915,289 @@
       resize: vertical;
     }
 
+    /* ==========================================================================
+       PRODUCT GALLERY SLOTS (5 SLOTS PER COLOR: BLACK / WHITE)
+       ========================================================================== */
+    .im-gallery-manager {
+      background: #0B0F19;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .im-gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .im-gallery-title {
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      color: #FFFFFF !important;
+      letter-spacing: 0.3px;
+    }
+
+    .im-gallery-subtitle {
+      display: block;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .im-color-tabs {
+      display: inline-flex;
+      gap: 6px;
+      background: #141A29;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .im-color-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .im-color-tab-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .im-color-tab-btn.active {
+      color: #FFFFFF;
+      background: #1F283D;
+      border-color: var(--im-red);
+      box-shadow: 0 0 10px rgba(255, 51, 75, 0.2);
+    }
+
+    .tab-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .slot-count-badge {
+      font-size: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1px 6px;
+      border-radius: 10px;
+      color: var(--text-dim);
+    }
+
+    .im-color-tab-btn.active .slot-count-badge {
+      background: var(--im-red);
+      color: #FFFFFF;
+    }
+
+    .im-slots-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .im-slots-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .im-slot-card {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      min-height: 96px;
+      background: #0E131F;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 6px;
+    }
+
+    .im-slot-card:hover {
+      border-color: var(--im-red);
+      background: #141A29;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(255, 51, 75, 0.15);
+    }
+
+    .im-slot-card.filled {
+      border-style: solid;
+      border-color: var(--border-color);
+      background: radial-gradient(circle at center, #161D2C 0%, #0E131F 100%);
+    }
+
+    .im-slot-card.filled:hover {
+      border-color: var(--im-red);
+    }
+
+    .im-slot-card.is-main-slot {
+      border-color: rgba(255, 51, 75, 0.5);
+    }
+
+    .im-slot-img-wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .im-slot-img-wrap img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+      transition: transform 0.2s ease;
+    }
+
+    .im-slot-card:hover .im-slot-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .im-slot-badge {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: rgba(14, 19, 31, 0.85);
+      backdrop-filter: blur(4px);
+      color: var(--text-dim);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .im-slot-card.is-main-slot .im-slot-badge {
+      background: var(--im-red);
+      color: #FFFFFF;
+      border: none;
+    }
+
+    .im-slot-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 14, 23, 0.82);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 3;
+    }
+
+    .im-slot-card.filled:hover .im-slot-hover-overlay {
+      opacity: 1;
+    }
+
+    .btn-slot-replace {
+      font-size: 11px;
+      font-weight: 600;
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-slot-remove {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.85);
+      color: #FFFFFF;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-slot-remove:hover {
+      background: #EF4444;
+      transform: scale(1.1);
+    }
+
+    .im-slot-empty-icon {
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      transition: color 0.2s;
+    }
+
+    .im-slot-card.empty:hover .im-slot-empty-icon {
+      color: var(--im-red);
+    }
+
+    .im-slot-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .im-slot-hint {
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    .im-slot-card.uploading {
+      border-color: var(--im-red);
+      background: #141A29;
+      pointer-events: none;
+    }
+
+    .im-slot-spinner {
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(255, 51, 75, 0.2);
+      border-top-color: var(--im-red);
+      border-radius: 50%;
+      animation: slotSpin 0.7s linear infinite;
+      margin-bottom: 4px;
+    }
+
+    @keyframes slotSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .im-slot-upload-text {
+      font-size: 10px;
+      color: var(--im-red);
+      font-weight: 600;
+    }
+
     .im-modal-footer {
       padding: 16px 24px;
       border-top: 1px solid var(--border-color);
@@ -1295,33 +1578,39 @@
             <input type="text" id="pName" class="im-input" placeholder="e.g. Dynamite XL Pro" required>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-            <div class="im-form-group">
-              <label>Category</label>
-              <select id="pCategory" class="im-select" required></select>
-            </div>
-            <div class="im-form-group">
-              <label>Status</label>
-              <select id="pStatus" class="im-select">
-                <option value="active">Active (Visible)</option>
-                <option value="draft">Draft (Hidden)</option>
-              </select>
-            </div>
+          <div class="im-form-group">
+            <label>Category</label>
+            <select id="pCategory" class="im-select" required></select>
           </div>
 
-          <div class="im-form-group">
-            <label>Product Image</label>
-            <div style="display: flex; gap: 10px;">
-              <input type="text" id="pImgUrl" class="im-input" style="flex: 1;" placeholder="assets/images/products/..." oninput="updateModalImgPreview(this.value)">
-              <label class="btn-secondary" style="margin: 0; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span>Upload to Cloud</span>
-                <input type="file" id="pImgFile" accept="image/*" style="display: none;" onchange="handleProductImgUpload(this)">
-              </label>
+          <!-- 5 Color-Specific Image Slots (Black & White) -->
+          <div class="im-form-group im-gallery-manager">
+            <div class="im-gallery-header">
+              <div>
+                <label class="im-gallery-title">Product Image Gallery</label>
+                <span class="im-gallery-subtitle">Click any slot to upload or replace. Exactly 5 visual slots per color.</span>
+              </div>
+              <!-- Color Selector Tabs: Black & White -->
+              <div class="im-color-tabs" id="galleryColorTabs">
+                <button type="button" class="im-color-tab-btn active" data-color="black" onclick="switchGalleryColorTab('black')">
+                  <span class="tab-color-dot" style="background: #111; border: 1px solid #666;"></span>
+                  <span>Black</span>
+                  <span class="slot-count-badge" id="badgeCountBlack">0/5</span>
+                </button>
+                <button type="button" class="im-color-tab-btn" data-color="white" onclick="switchGalleryColorTab('white')">
+                  <span class="tab-color-dot" style="background: #ffffff; border: 1px solid #ccc;"></span>
+                  <span>White</span>
+                  <span class="slot-count-badge" id="badgeCountWhite">0/5</span>
+                </button>
+              </div>
             </div>
-            <div style="margin-top: 8px; text-align: center; background: #0E121B; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-              <img id="pImgModalPreview" src="" alt="Preview" style="max-height: 120px; max-width: 100%; object-fit: contain;">
+
+            <!-- 5 Image Slots Container -->
+            <div class="im-slots-grid" id="gallerySlotsContainer">
+              <!-- Dynamically populated by renderGalleryManager() -->
             </div>
+            <!-- Hidden file input triggered when clicking any slot -->
+            <input type="file" id="slotFileInput" accept="image/*" style="display: none;" onchange="handleSlotFileChosen(this)">
           </div>
 
           <div class="im-form-group">
@@ -1491,8 +1780,42 @@
 
   <script>
     // ==========================================================================
-    // 1. DATA STATE & OFFICIAL 31 PRODUCTS CATALOG
+    // 1. DATA STATE & OFFICIAL 31 PRODUCTS CATALOG (WITH MULTI-IMAGE GALLERIES)
     // ==========================================================================
+    const DEFAULT_PRODUCT_IMAGES = {
+      'fusion': {"black":["assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png","assets/images/products/air-coolers/fusion/fusion_aircooler_view_2.png","assets/images/products/air-coolers/fusion/fusion_aircooler_view_3.png","assets/images/products/air-coolers/fusion/fusion_aircooler_view_4.png","assets/images/products/air-coolers/fusion/fusion_aircooler_view_5.png"]},
+      'turbo': {"black":["assets/images/products/air-coolers/turbo/turbo_aircooler_view_1.png","assets/images/products/air-coolers/turbo/turbo_aircooler_view_2.png","assets/images/products/air-coolers/turbo/turbo_aircooler_view_3.png","assets/images/products/air-coolers/turbo/turbo_aircooler_view_4.png","assets/images/products/air-coolers/turbo/turbo_aircooler_view_5.png","assets/images/products/air-coolers/turbo/turbo_aircooler_view_6.png"]},
+      'cool-240-argb': {"black":["assets/images/products/liquid-coolers/cool-240-argb/Black/cool_240_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-240-argb/White/cool_240_argb_white.png"]},
+      'cool-360-argb': {"black":["assets/images/products/liquid-coolers/cool-360-argb/Black/cool_360_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-360-argb/White/cool_360_argb_white.png"]},
+      'cool-240-digital-argb': {"black":["assets/images/products/liquid-coolers/cool-240-digital-argb/Black/cool_240_digital_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-240-digital-argb/White/cool_240_digital_argb_white.png"]},
+      'cool-360-digital-argb': {"black":["assets/images/products/liquid-coolers/cool-360-digital-argb/Black/cool_360_digital_argb_black.png"],"white":["assets/images/products/liquid-coolers/cool-360-digital-argb/White/cool_360_digital_argb_white.png"]},
+      'hurricane-240-argb': {"black":["assets/images/products/liquid-coolers/hurricane-240-argb/Black/hurricane_240_argb_black.png"],"white":["assets/images/products/liquid-coolers/hurricane-240-argb/White/hurricane_240_argb_white.png"]},
+      'hurricane-360-argb': {"black":["assets/images/products/liquid-coolers/hurricane-360-argb/Black/hurricane_360_argb_black.png"],"white":["assets/images/products/liquid-coolers/hurricane-360-argb/White/hurricane_360_argb_white.png"]},
+      'dynamite-xl-pro': {"black":["assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png","assets/images/products/cases/dynamite-xl-pro/Black/2001-b-5.png","assets/images/products/cases/dynamite-xl-pro/Black/3c8a8cb83dc7aabfe00de8eaf8382e5.png","assets/images/products/cases/dynamite-xl-pro/Black/ecae38b2e98f976ec42ad6997ac08de.png","assets/images/products/cases/dynamite-xl-pro/Black/fd8e7cc46e9237e4a77a46972c8a2d9.png"],"white":["assets/images/products/cases/dynamite-xl-pro/White/2001-w-4.png","assets/images/products/cases/dynamite-xl-pro/White/2001-w-5.png","assets/images/products/cases/dynamite-xl-pro/White/6d5b254c74b7574e69e3b6f0bbd84a7.png","assets/images/products/cases/dynamite-xl-pro/White/b4292f6039abee2018bff785e7ca063.png","assets/images/products/cases/dynamite-xl-pro/White/d5174cabf6c433c391c146064ce2080.png"]},
+      'frosty': {"black":["assets/images/products/cases/frosty/Black/02_frosty_view_1.png","assets/images/products/cases/frosty/Black/02_frosty_view_2.png","assets/images/products/cases/frosty/Black/02_frosty_view_3.png","assets/images/products/cases/frosty/Black/02_frosty_view_4.png"],"white":["assets/images/products/cases/frosty/White/02_frosty_view_5.png","assets/images/products/cases/frosty/White/02_frosty_view_6.png"]},
+      'spark': {"black":["assets/images/products/cases/spark/Black/8001-B-1.png","assets/images/products/cases/spark/Black/8001-B-2.png","assets/images/products/cases/spark/Black/8001-B-3.png","assets/images/products/cases/spark/Black/8001-B-4.png","assets/images/products/cases/spark/Black/8001-B-5.png"],"white":["assets/images/products/cases/spark/White/8001-W-1.png","assets/images/products/cases/spark/White/8001-W-2.png","assets/images/products/cases/spark/White/8001-W-3.png","assets/images/products/cases/spark/White/8001-W-4.png","assets/images/products/cases/spark/White/8001-W-5.png"]},
+      'star': {"black":["assets/images/products/cases/star/Black/99fccebc7f97ab7b9fd0bc30385bfbd.png","assets/images/products/cases/star/Black/T34-02.png","assets/images/products/cases/star/Black/T34-05.png","assets/images/products/cases/star/Black/T34-1.png","assets/images/products/cases/star/Black/T34-3.png","assets/images/products/cases/star/Black/T34-4.png","assets/images/products/cases/star/Black/d47814733135cc9b5cc7c1dfca5ebe3.png"]},
+      'torrent': {"black":["assets/images/products/cases/torrent/Black/05_torrent_black_view_1.png","assets/images/products/cases/torrent/Black/05_torrent_black_view_2.png","assets/images/products/cases/torrent/Black/05_torrent_black_view_3.png","assets/images/products/cases/torrent/Black/05_torrent_black_view_4.png"],"white":["assets/images/products/cases/torrent/White/05_torrent_white_view_1.png","assets/images/products/cases/torrent/White/05_torrent_white_view_2.png"]},
+      'dynamite-x5': {"black":["assets/images/products/cases/dynamite-x5/Black/dynamite_x5_black_view_1.png","assets/images/products/cases/dynamite-x5/Black/dynamite_x5_black_view_2.png","assets/images/products/cases/dynamite-x5/Black/dynamite_x5_black_view_3.png"],"white":["assets/images/products/cases/dynamite-x5/White/dynamite_x5_white_view_1.png","assets/images/products/cases/dynamite-x5/White/dynamite_x5_white_view_2.png"]},
+      'dynamite-x6': {"black":["assets/images/products/cases/dynamite-x6/Black/dynamite_x6_black_view_1.png","assets/images/products/cases/dynamite-x6/Black/dynamite_x6_black_view_2.png","assets/images/products/cases/dynamite-x6/Black/dynamite_x6_black_view_3.png"],"white":["assets/images/products/cases/dynamite-x6/White/dynamite_x6_white_view_1.png","assets/images/products/cases/dynamite-x6/White/dynamite_x6_white_view_2.png","assets/images/products/cases/dynamite-x6/White/dynamite_x6_white_view_3.png"]},
+      'dynamite-x7': {"black":["assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_1.png","assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_3.png","assets/images/products/cases/dynamite-x7/Black/08_dynamite_x7_view_4.png"],"white":["assets/images/products/cases/dynamite-x7/White/08_dynamite_x7_view_2.png"]},
+      'dynamite-base': {"black":["assets/images/products/cases/dynamite-base/Black/dynamite_black_view_1.png","assets/images/products/cases/dynamite-base/Black/dynamite_black_view_2.png","assets/images/products/cases/dynamite-base/Black/dynamite_black_view_3.png","assets/images/products/cases/dynamite-base/Black/dynamite_black_view_4.png","assets/images/products/cases/dynamite-base/Black/dynamite_black_view_5.png"],"white":["assets/images/products/cases/dynamite-base/White/dynamite_white_view_1.png","assets/images/products/cases/dynamite-base/White/dynamite_white_view_2.png","assets/images/products/cases/dynamite-base/White/dynamite_white_view_3.png","assets/images/products/cases/dynamite-base/White/dynamite_white_view_4.png","assets/images/products/cases/dynamite-base/White/dynamite_white_view_5.png"]},
+      'glacier': {"black":["assets/images/products/cases/glacier/Black/glacier_black_view_1.png","assets/images/products/cases/glacier/Black/glacier_black_view_2.png","assets/images/products/cases/glacier/Black/glacier_black_view_3.png"],"white":["assets/images/products/cases/glacier/White/glacier_white_view_1.png","assets/images/products/cases/glacier/White/glacier_white_view_2.png","assets/images/products/cases/glacier/White/glacier_white_view_3.png"]},
+      'axle': {"black":["assets/images/products/cases/axle/Black/axle_black_front.png","assets/images/products/cases/axle/Black/axle_black_perspective.png"],"white":["assets/images/products/cases/axle/White/axle_white_front.png","assets/images/products/cases/axle/White/axle_white_perspective.png"]},
+      'shadow': {"black":["assets/images/products/cases/shadow/Black/L10-B-01.png","assets/images/products/cases/shadow/Black/L10-B-02.png","assets/images/products/cases/shadow/Black/L10-B-03.png","assets/images/products/cases/shadow/Black/L10-B-04.png","assets/images/products/cases/shadow/Black/L10-B-05.png"]},
+      'roar': {"black":["assets/images/products/cases/roar/Black/roar_black_1.png","assets/images/products/cases/roar/Black/roar_black_2.png","assets/images/products/cases/roar/Black/roar_black_3.png"],"white":["assets/images/products/cases/roar/White/roar_white_1.png","assets/images/products/cases/roar/White/roar_white_2.png","assets/images/products/cases/roar/White/roar_white_3.png"]},
+      'nexus-360': {"black":["assets/images/products/cases/nexus-360/Black/nexus_360_black.png","assets/images/products/cases/nexus-360/Black/nexus_360_black_front.png","assets/images/products/cases/nexus-360/Black/nexus_360_black_perspective.png"],"white":["assets/images/products/cases/nexus-360/White/nexus_360_white.png","assets/images/products/cases/nexus-360/White/nexus_360_white_front.png","assets/images/products/cases/nexus-360/White/nexus_360_white_perspective.png"]},
+      'thunder': {"black":["assets/images/products/cases/thunder/Black/i50-1.png","assets/images/products/cases/thunder/Black/i50-2.png","assets/images/products/cases/thunder/Black/i50-3.png","assets/images/products/cases/thunder/Black/i50-4.png","assets/images/products/cases/thunder/Black/i50-5.png"]},
+      'box-infinity': {"black":["assets/images/products/cases/box-infinity/box_infinity_view_1.png","assets/images/products/cases/box-infinity/box_infinity_view_2.png","assets/images/products/cases/box-infinity/box_infinity_view_3.png","assets/images/products/cases/box-infinity/box_infinity_view_4.png","assets/images/products/cases/box-infinity/box_infinity_view_5.png","assets/images/products/cases/box-infinity/box_infinity_view_6.png"],"white":["assets/images/products/cases/box-infinity/box_infinity_view_1.png","assets/images/products/cases/box-infinity/box_infinity_view_2.png","assets/images/products/cases/box-infinity/box_infinity_view_3.png","assets/images/products/cases/box-infinity/box_infinity_view_4.png","assets/images/products/cases/box-infinity/box_infinity_view_5.png","assets/images/products/cases/box-infinity/box_infinity_view_6.png"],"yellow":["assets/images/products/cases/box-infinity/box_infinity_view_1.png","assets/images/products/cases/box-infinity/box_infinity_view_2.png","assets/images/products/cases/box-infinity/box_infinity_view_3.png","assets/images/products/cases/box-infinity/box_infinity_view_4.png","assets/images/products/cases/box-infinity/box_infinity_view_5.png","assets/images/products/cases/box-infinity/box_infinity_view_6.png"]},
+      'trendy': {"black":["assets/images/products/cases/trendy/Black/trendy_m10_view_1.png","assets/images/products/cases/trendy/Black/trendy_m10_view_2.png","assets/images/products/cases/trendy/Black/trendy_m10_view_3.png","assets/images/products/cases/trendy/Black/trendy_m10_view_4.png","assets/images/products/cases/trendy/Black/trendy_m10_view_5.png"]},
+      'gh-01': {"black":["assets/images/products/gaming-headphones/gh-01/Black/gh01_black_view_1.png","assets/images/products/gaming-headphones/gh-01/Black/gh01_box_front.png","assets/images/products/gaming-headphones/gh-01/Black/gh01_box_side.png"],"white":["assets/images/products/gaming-headphones/gh-01/White/gh01_box_front.png","assets/images/products/gaming-headphones/gh-01/White/gh01_box_side.png","assets/images/products/gaming-headphones/gh-01/White/gh01_white_view_1.png"]},
+      'high-current-450w': {"black":["assets/images/products/power-supply-units/450w/450w_box_view_1.png","assets/images/products/power-supply-units/450w/450w_box_view_2.png","assets/images/products/power-supply-units/450w/high_current_psu_unit.png"]},
+      'high-current-550w': {"black":["assets/images/products/power-supply-units/550w/550w_box_view_1.png","assets/images/products/power-supply-units/550w/550w_box_view_2.png","assets/images/products/power-supply-units/550w/high_current_psu_unit.png"]},
+      'high-current-650w': {"black":["assets/images/products/power-supply-units/650w/650w_box_view_1.png","assets/images/products/power-supply-units/650w/650w_box_view_2.png","assets/images/products/power-supply-units/650w/high_current_psu_unit.png"]},
+      'high-current-750w': {"black":["assets/images/products/power-supply-units/750w/750w_box_view_1.png","assets/images/products/power-supply-units/750w/750w_box_view_2.png","assets/images/products/power-supply-units/750w/high_current_psu_unit.png"]},
+      'high-current-850w': {"black":["assets/images/products/power-supply-units/850w/850w_box_view_1.png","assets/images/products/power-supply-units/850w/850w_box_view_2.png","assets/images/products/power-supply-units/850w/high_current_psu_unit.png"]}
+    };
+
     const DEFAULT_PRODUCTS = [
       { id: "dynamite-xl-pro", name: "Dynamite XL Pro", cat: "gaming-cabinets", catName: "Cabinets", img: "assets/images/products/cases/dynamite-xl-pro/Black/2001-b-4.png", desc: "Dual-chamber panoramic showcase chassis with 270-degree tempered glass and vertical GPU mount ready.", status: "active", colors: ["black", "white"], specs: [{ label: "Motherboard Support", value: "E-ATX / ATX / M-ATX / ITX" }, { label: "Dimensions", value: "416.5 x 300 x 385 mm" }, { label: "Material", value: "SPCC 0.90mm Steel" }] },
       { id: "frosty", name: "Frosty", cat: "gaming-cabinets", catName: "Cabinets", img: "assets/images/products/cases/frosty/Black/02_frosty_view_1.png", desc: "High airflow gaming chassis with full-mesh front ventilation and tempered glass side window.", status: "active", colors: ["black", "white"], specs: [{ label: "Motherboard Support", value: "E-ATX / ATX / M-ATX / ITX" }, { label: "Dimensions", value: "395 x 210 x 475 mm" }] },
@@ -1510,7 +1833,7 @@
       { id: "nexus-360", name: "Nexus 360", cat: "gaming-cabinets", catName: "Cabinets", img: "assets/images/products/cases/nexus-360/Black/nexus_360_black.png", desc: "Panoramic showcase case featuring dual tempered glass panels and full 360mm top radiator support.", status: "active", colors: ["black", "white"], specs: [{ label: "Dimensions", value: "455 x 210 x 485 mm" }] },
       { id: "thunder", name: "Thunder", cat: "gaming-cabinets", catName: "Cabinets", img: "assets/images/products/cases/thunder/Black/i50-1.png", desc: "Rugged industrial gaming tower with high-density mesh and multiple internal storage drive mounting options.", status: "active", colors: ["black"], specs: [{ label: "Dimensions", value: "326 x 190 x 433 mm" }] },
       { id: "box-infinity", name: "Box Infinity", cat: "gaming-cabinets", catName: "Cabinets", img: "assets/images/products/cases/box-infinity/box_infinity_view_1.png", desc: "Heavy-duty 1.0mm SPCC compact tower chassis with front Type-C port and versatile modular drive brackets.", status: "active", colors: ["black", "white", "yellow"], specs: [{ label: "Dimensions", value: "398 x 211 x 324 mm" }] },
-      { id: "trendy", name: "Trendy", cat: "gaming-cabinets", catName: "Cabinets", img: "assets/images/products/cases/trendy/Black/trendy_m10_view_1.png", desc: "Modern aesthetic E-ATX gaming cabinet with vertical GPU expansion slots and dual glass showcase design.", status: "draft", colors: ["black"], specs: [{ label: "Dimensions", value: "395 x 210 x 475 mm" }] },
+      { id: "trendy", name: "Trendy", cat: "gaming-cabinets", catName: "Cabinets", img: "assets/images/products/cases/trendy/Black/trendy_m10_view_1.png", desc: "Modern aesthetic E-ATX gaming cabinet with vertical GPU expansion slots and dual glass showcase design.", status: "active", colors: ["black"], specs: [{ label: "Dimensions", value: "395 x 210 x 475 mm" }] },
       // Air Coolers (2)
       { id: "fusion", name: "Fusion CPU Air Cooler", cat: "air-coolers", catName: "Air Coolers", img: "assets/images/products/air-coolers/fusion/fusion_aircooler_view_1.png", desc: "High-performance CPU air cooler with 4 direct-touch copper heatpipes and dynamic hydraulic RGB fan.", status: "active", colors: ["black"], specs: [{ label: "TDP Rating", value: "120W TDP" }, { label: "Heatpipe", value: "4x 6mm Direct Touch Copper" }] },
       { id: "turbo", name: "Turbo CPU Air Cooler", cat: "air-coolers", catName: "Air Coolers", img: "assets/images/products/air-coolers/turbo/turbo_aircooler_view_1.png", desc: "Compact tower CPU cooler with 2 copper heatpipes and ultra-quiet 24 dBA auto RGB fan.", status: "active", colors: ["black"], specs: [{ label: "TDP Rating", value: "95W - 105W TDP" }] },
@@ -1572,6 +1895,21 @@
 
     // Active Global State
     var products = getStoredData("im_wm_products", DEFAULT_PRODUCTS);
+    // Ensure every product in memory has its 5-slot images properly initialized
+    products = products.map(p => {
+      let imagesObj = p.images;
+      if (!imagesObj && Array.isArray(p.specs)) {
+        const imgEntry = p.specs.find(s => s && s.__imagesMap);
+        if (imgEntry && imgEntry.images) imagesObj = imgEntry.images;
+      }
+      if (!imagesObj && DEFAULT_PRODUCT_IMAGES[p.id]) {
+        imagesObj = DEFAULT_PRODUCT_IMAGES[p.id];
+      }
+      if (!imagesObj) {
+        imagesObj = { black: [p.img || "assets/images/homepage/im_official_emblem.png"] };
+      }
+      return { ...p, images: imagesObj };
+    });
     var categories = getStoredData("im_wm_categories", DEFAULT_CATEGORIES);
     var heroSlides = getStoredData("im_wm_hero_banners_data", DEFAULT_HERO_SLIDES);
     var subHeroData = getStoredData("im_wm_sub_hero_data", DEFAULT_SUB_HERO);
@@ -1786,6 +2124,144 @@
       container.appendChild(row);
     }
 
+    // ==========================================================================
+    // 5. PRODUCT GALLERY 5-SLOTS MANAGER (BLACK & WHITE)
+    // ==========================================================================
+    var modalImagesState = { black: [], white: [] };
+    var activeGalleryColor = "black";
+    var activeUploadSlotIndex = null;
+
+    function renderGalleryManager() {
+      // 1. Update Tabs
+      const tabs = document.querySelectorAll(".im-color-tab-btn");
+      tabs.forEach(tab => {
+        const col = tab.getAttribute("data-color");
+        tab.classList.toggle("active", col === activeGalleryColor);
+      });
+
+      // 2. Update Count Badges
+      const countB = (modalImagesState.black || []).filter(Boolean).length;
+      const countW = (modalImagesState.white || []).filter(Boolean).length;
+      const bBadge = document.getElementById("badgeCountBlack");
+      const wBadge = document.getElementById("badgeCountWhite");
+      if (bBadge) bBadge.textContent = `${countB}/5`;
+      if (wBadge) wBadge.textContent = `${countW}/5`;
+
+      // 3. Render 5 Slots for active color
+      const container = document.getElementById("gallerySlotsContainer");
+      if (!container) return;
+
+      const currentList = modalImagesState[activeGalleryColor] || [];
+      let slotsHTML = "";
+
+      for (let i = 0; i < 5; i++) {
+        const imgUrl = currentList[i];
+        const isMain = (i === 0);
+        if (imgUrl) {
+          slotsHTML += `
+            <div class="im-slot-card filled ${isMain ? 'is-main-slot' : ''}" onclick="triggerSlotUpload(${i})">
+              <div class="im-slot-badge">${isMain ? '★ Cover' : 'View ' + (i + 1)}</div>
+              <div class="im-slot-img-wrap">
+                <img src="${imgUrl}" alt="Slot ${i + 1}">
+              </div>
+              <div class="im-slot-hover-overlay">
+                <span class="btn-slot-replace">Change</span>
+                <button type="button" class="btn-slot-remove" onclick="removeSlotImage(event, ${i})" title="Remove image">&times;</button>
+              </div>
+            </div>
+          `;
+        } else {
+          slotsHTML += `
+            <div class="im-slot-card empty ${isMain ? 'is-main-slot' : ''}" onclick="triggerSlotUpload(${i})">
+              <div class="im-slot-badge">${isMain ? '★ Cover' : 'Slot ' + (i + 1)}</div>
+              <div class="im-slot-empty-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </div>
+              <div class="im-slot-label">${isMain ? 'Main View' : 'Add View'}</div>
+              <span class="im-slot-hint">Slot ${i + 1}</span>
+            </div>
+          `;
+        }
+      }
+
+      container.innerHTML = slotsHTML;
+    }
+
+    function switchGalleryColorTab(color) {
+      activeGalleryColor = color;
+      renderGalleryManager();
+    }
+
+    function triggerSlotUpload(slotIdx) {
+      activeUploadSlotIndex = slotIdx;
+      const fileInput = document.getElementById("slotFileInput");
+      if (fileInput) {
+        fileInput.value = "";
+        fileInput.click();
+      }
+    }
+
+    async function handleSlotFileChosen(input) {
+      if (!input.files || !input.files[0] || activeUploadSlotIndex === null) return;
+      const file = input.files[0];
+      const targetIdx = activeUploadSlotIndex;
+      const targetColor = activeGalleryColor;
+
+      // Show upload spinner on that slot card
+      const container = document.getElementById("gallerySlotsContainer");
+      if (container && container.children[targetIdx]) {
+        container.children[targetIdx].className = "im-slot-card uploading";
+        container.children[targetIdx].innerHTML = `
+          <div class="im-slot-spinner"></div>
+          <span class="im-slot-upload-text">Uploading...</span>
+        `;
+      }
+
+      let finalUrl = null;
+      try {
+        if (typeof uploadFileToSupabaseStorage === "function" && getSupabase()) {
+          finalUrl = await uploadFileToSupabaseStorage(file, "products");
+        }
+      } catch (err) {
+        console.warn("Storage upload error, fallback to local:", err);
+      }
+
+      if (!finalUrl) {
+        // Local reader fallback
+        finalUrl = await new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result);
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (finalUrl) {
+        if (!modalImagesState[targetColor]) modalImagesState[targetColor] = [];
+        modalImagesState[targetColor][targetIdx] = finalUrl;
+
+        // Auto-check color checkbox
+        const cb = document.querySelector(`input[name='pColors'][value='${targetColor}']`);
+        if (cb && !cb.checked) cb.checked = true;
+
+        showToast(`✓ Image uploaded to ${targetColor.toUpperCase()} Slot ${targetIdx + 1}!`);
+      }
+
+      renderGalleryManager();
+    }
+
+    function removeSlotImage(e, slotIdx) {
+      e.stopPropagation();
+      const targetColor = activeGalleryColor;
+      if (modalImagesState[targetColor]) {
+        modalImagesState[targetColor].splice(slotIdx, 1);
+      }
+      renderGalleryManager();
+      showToast(`Image removed from Slot ${slotIdx + 1}`);
+    }
+
+    // ==========================================================================
+    // 6. OPEN PRODUCT MODAL & CLOUD SAVE
+    // ==========================================================================
     function openProductModal(mode, id) {
       populateCategoryDropdown();
       const container = document.getElementById("specsBuilderContainer");
@@ -1798,20 +2274,45 @@
         document.getElementById("pEditId").value = p.id;
         document.getElementById("pName").value = p.name;
         document.getElementById("pCategory").value = p.cat;
-        document.getElementById("pStatus").value = p.status || "active";
-        document.getElementById("pImgUrl").value = p.img || "";
-        document.getElementById("pImgModalPreview").src = p.img || "";
         document.getElementById("pDesc").value = p.desc || "";
 
-        // Checkboxes
+        // Hydrate 5 Slots Image State
+        let blackImgs = [];
+        let whiteImgs = [];
+
+        if (p.images && typeof p.images === "object") {
+          if (Array.isArray(p.images.black)) blackImgs = [...p.images.black];
+          if (Array.isArray(p.images.white)) whiteImgs = [...p.images.white];
+        } else if (DEFAULT_PRODUCT_IMAGES[p.id]) {
+          const def = DEFAULT_PRODUCT_IMAGES[p.id];
+          if (Array.isArray(def.black)) blackImgs = [...def.black];
+          if (Array.isArray(def.white)) whiteImgs = [...def.white];
+        } else if (p.img) {
+          blackImgs = [p.img];
+        }
+
+        modalImagesState = {
+          black: blackImgs.slice(0, 5),
+          white: whiteImgs.slice(0, 5)
+        };
+
+        // Active tab default
         const colors = p.colors || ["black"];
+        if (colors.includes("white") && !colors.includes("black")) {
+          activeGalleryColor = "white";
+        } else {
+          activeGalleryColor = "black";
+        }
+
+        // Color Checkboxes
         document.querySelectorAll("input[name='pColors']").forEach(cb => {
           cb.checked = colors.includes(cb.value);
         });
 
-        // Specs
-        if (Array.isArray(p.specs) && p.specs.length > 0) {
-          p.specs.forEach(s => addSpecRow(s.label, s.value));
+        // Specs (strip internal __imagesMap)
+        const cleanSpecs = Array.isArray(p.specs) ? p.specs.filter(s => s && !s.__imagesMap) : [];
+        if (cleanSpecs.length > 0) {
+          cleanSpecs.forEach(s => addSpecRow(s.label, s.value));
         } else {
           addSpecRow("Dimensions", "");
           addSpecRow("Material", "");
@@ -1821,50 +2322,18 @@
         document.getElementById("pEditId").value = "";
         document.getElementById("pName").value = "";
         document.getElementById("pCategory").selectedIndex = 0;
-        document.getElementById("pStatus").value = "active";
-        document.getElementById("pImgUrl").value = "";
-        document.getElementById("pImgModalPreview").src = "assets/images/homepage/im_official_emblem.png";
         document.getElementById("pDesc").value = "";
+
+        modalImagesState = { black: [], white: [] };
+        activeGalleryColor = "black";
+
         document.querySelectorAll("input[name='pColors']").forEach(cb => cb.checked = (cb.value === "black"));
         addSpecRow("Dimensions", "");
         addSpecRow("Cooling Support", "");
       }
 
+      renderGalleryManager();
       openModal("modalProduct");
-    }
-
-    function updateModalImgPreview(val) {
-      const prev = document.getElementById("pImgModalPreview");
-      if (prev) prev.src = val || "assets/images/homepage/im_official_emblem.png";
-    }
-
-    async function handleProductImgUpload(input) {
-      if (!input.files || !input.files[0]) return;
-      const file = input.files[0];
-      showToast("Uploading image to cloud storage...");
-
-      try {
-        if (typeof uploadFileToSupabaseStorage === "function" && getSupabase()) {
-          const url = await uploadFileToSupabaseStorage(file, "products");
-          if (url) {
-            document.getElementById("pImgUrl").value = url;
-            updateModalImgPreview(url);
-            showToast("✓ Image uploaded to cloud!");
-            return;
-          }
-        }
-      } catch (err) {
-        console.warn("Storage upload note:", err);
-      }
-
-      // Local reader fallback
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById("pImgUrl").value = e.target.result;
-        updateModalImgPreview(e.target.result);
-        showToast("Image ready!");
-      };
-      reader.readAsDataURL(file);
     }
 
     async function handleProductSave(e) {
@@ -1874,15 +2343,24 @@
       const cat = document.getElementById("pCategory").value;
       const catObj = categories.find(c => c.key === cat);
       const catName = catObj ? catObj.name : cat;
-      const status = document.getElementById("pStatus").value;
-      const img = document.getElementById("pImgUrl").value.trim() || "assets/images/homepage/im_official_emblem.png";
       const desc = document.getElementById("pDesc").value.trim();
 
+      // Collect 5 slots per color
+      const cleanImages = {
+        black: (modalImagesState.black || []).filter(Boolean),
+        white: (modalImagesState.white || []).filter(Boolean)
+      };
+
+      const primaryImg = cleanImages.black[0] || cleanImages.white[0] || "assets/images/homepage/im_official_emblem.png";
+
+      // Selected colors
       const selectedColors = [];
       document.querySelectorAll("input[name='pColors']:checked").forEach(cb => selectedColors.push(cb.value));
+      if (cleanImages.black.length > 0 && !selectedColors.includes("black")) selectedColors.push("black");
+      if (cleanImages.white.length > 0 && !selectedColors.includes("white")) selectedColors.push("white");
       if (!selectedColors.length) selectedColors.push("black");
 
-      // Collect specs
+      // Collect specs from builder
       const specs = [];
       document.querySelectorAll("#specsBuilderContainer .im-spec-row").forEach(row => {
         const k = row.querySelector(".spec-key").value.trim();
@@ -1890,17 +2368,45 @@
         if (k && v) specs.push({ label: k, value: v });
       });
 
+      // Embed __imagesMap into specs for cloud persistence
+      const specsWithImgMap = [
+        ...specs.filter(s => s && !s.__imagesMap),
+        { __imagesMap: true, images: cleanImages }
+      ];
+
       let saved;
       if (id) {
         const idx = products.findIndex(x => String(x.id) === String(id));
         if (idx !== -1) {
-          products[idx] = { ...products[idx], name, cat, catName, status, img, desc, colors: selectedColors, specs };
+          products[idx] = {
+            ...products[idx],
+            name,
+            cat,
+            catName,
+            status: "active",
+            img: primaryImg,
+            images: cleanImages,
+            desc,
+            colors: selectedColors,
+            specs: specsWithImgMap
+          };
           saved = products[idx];
           showToast("✓ Product updated!");
         }
       } else {
         const newId = name.toLowerCase().replace(/[^a-z0-9_-]/g, '-') + '-' + Date.now().toString().slice(-4);
-        saved = { id: newId, name, cat, catName, status, img, desc, colors: selectedColors, specs };
+        saved = {
+          id: newId,
+          name,
+          cat,
+          catName,
+          status: "active",
+          img: primaryImg,
+          images: cleanImages,
+          desc,
+          colors: selectedColors,
+          specs: specsWithImgMap
+        };
         products.unshift(saved);
         showToast("✓ New product added!");
       }
