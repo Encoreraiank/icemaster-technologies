@@ -7,8 +7,8 @@ const ADMIN_PIN = "9311"; // Master PIN for Admin Panel (changeable)
 
 // Verify admin authentication
 function checkAdminAuth() {
-  const isAuth = sessionStorage.getItem("im_admin_auth");
-  const lockScreen = document.getElementById("adminLockScreen");
+  const isAuth = sessionStorage.getItem("im_admin_auth") || localStorage.getItem("im_admin_auth");
+  const lockScreen = document.getElementById("adminPinModal") || document.getElementById("adminLockScreen");
   if (isAuth === "true") {
     if (lockScreen) lockScreen.style.display = "none";
     return true;
@@ -20,15 +20,16 @@ function checkAdminAuth() {
 
 function verifyAdminPin(e) {
   if (e) e.preventDefault();
-  const pinInput = document.getElementById("adminPinInput");
-  const errEl = document.getElementById("adminPinError");
+  const pinInput = document.getElementById("pinField") || document.getElementById("adminPinInput");
+  const errEl = document.getElementById("pinErrMsg") || document.getElementById("adminPinError");
   if (!pinInput) return;
 
   if (pinInput.value.trim() === ADMIN_PIN) {
     sessionStorage.setItem("im_admin_auth", "true");
-    const lockScreen = document.getElementById("adminLockScreen");
+    localStorage.setItem("im_admin_auth", "true");
+    const lockScreen = document.getElementById("adminPinModal") || document.getElementById("adminLockScreen");
     if (lockScreen) lockScreen.style.display = "none";
-    showToast("✓ Welcome to Ice Master Admin!");
+    if (typeof showToast === 'function') showToast("✓ Welcome to Ice Master Admin!");
   } else {
     if (errEl) {
       errEl.textContent = "Incorrect PIN. Please try again.";
@@ -122,6 +123,7 @@ async function loadAdminDataFromSupabase() {
         btnLink: s.btn_link
       }));
       if (typeof renderHero === 'function') renderHero();
+      if (typeof renderSettings === 'function') renderSettings();
     }
 
     // 2. Sub Hero
@@ -136,6 +138,7 @@ async function loadAdminDataFromSupabase() {
         btnLink: sh.btn_link
       };
       if (typeof renderSubHero === 'function') renderSubHero();
+      if (typeof renderSettings === 'function') renderSettings();
     }
 
     // 3. Categories
