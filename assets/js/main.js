@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   00a. LIVE SITE SYNC WITH ADMIN PANEL DATA (localStorage / Supabase cache)
+   00a. LIVE SITE SYNC WITH ADMIN PANEL DATA (Supabase Cloud + Local Cache)
    ========================================================================== */
-function syncLiveSiteWithAdminData() {
+function applyStoredDataToDOM() {
   try {
     // 1. Sync Hero Section (index.html)
     const storedHero = JSON.parse(localStorage.getItem('im_wm_hero_banners_data'));
@@ -155,7 +155,6 @@ function syncLiveSiteWithAdminData() {
                 <img src="${p.img || 'assets/images/homepage/im_official_emblem.png'}" alt="${p.name}" class="im-prod-img" loading="lazy">
               </div>
               <h3 class="im-prod-title">${p.name}</h3>
-              
               <div class="im-prod-btn-hitarea" aria-hidden="true"></div>
             </a>
           `;
@@ -168,13 +167,105 @@ function syncLiveSiteWithAdminData() {
             if (img && p.img) img.src = p.img;
             const title = card.querySelector('.im-prod-title');
             if (title && p.name) title.textContent = p.name;
-            
           }
         }
       });
     }
   } catch (err) {
     console.warn('Ice Master Live Sync Note:', err);
+  }
+}
+
+async function syncLiveSiteWithAdminData() {
+  // 1. Instant local render (0ms delay, no layout shift)
+  applyStoredDataToDOM();
+
+  // 2. Asynchronous Cloud Sync from Supabase
+  try {
+    if (typeof getSupabase === 'function') {
+      const sb = getSupabase();
+      if (!sb) return;
+
+      // 1. Hero slides
+      const { data: slides } = await sb.from('hero_slides').select('*').order('slide_idx');
+      if (slides && slides.length > 0) {
+        const mappedHero = slides.map(s => ({
+          bg: s.bg,
+          eyebrow: s.eyebrow,
+          title: s.title,
+          tagline: s.tagline,
+          desc: s.desc_text,
+          btnText: s.btn_text,
+          btnLink: s.btn_link
+        }));
+        localStorage.setItem('im_wm_hero_banners_data', JSON.stringify(mappedHero));
+      }
+
+      // 2. Sub hero
+      const { data: subHeroRows } = await sb.from('sub_hero').select('*').limit(1);
+      if (subHeroRows && subHeroRows.length > 0) {
+        const sh = subHeroRows[0];
+        const mappedSub = {
+          bg: sh.bg,
+          eyebrow: sh.eyebrow,
+          title: sh.title,
+          desc: sh.desc_text,
+          btnLink: sh.btn_link
+        };
+        localStorage.setItem('im_wm_sub_hero_data', JSON.stringify(mappedSub));
+      }
+
+      // 3. Categories
+      const { data: catRows } = await sb.from('categories').select('*').order('sort_order');
+      if (catRows && catRows.length > 0) {
+        const mappedCats = catRows.map(c => ({
+          key: c.key,
+          name: c.name,
+          thumb: c.thumb
+        }));
+        localStorage.setItem('im_wm_categories', JSON.stringify(mappedCats));
+      }
+
+      // 4. Products
+      const { data: prodRows } = await sb.from('products').select('*').order('sort_order');
+      if (prodRows && prodRows.length > 0) {
+        const mappedProds = prodRows.map(p => ({
+          id: p.prod_id,
+          name: p.name,
+          cat: p.cat,
+          catName: p.cat_name,
+          img: p.img,
+          desc: p.desc_text,
+          colors: p.colors || ['black'],
+          specs: p.specs || []
+        }));
+        localStorage.setItem('im_wm_products', JSON.stringify(mappedProds));
+      }
+
+      // 5. Software
+      const { data: softRows } = await sb.from('software').select('*').order('sort_order');
+      if (softRows && softRows.length > 0) {
+        const mappedSoft = softRows.map(s => ({
+          id: s.soft_id,
+          title: s.title,
+          size: s.size,
+          fileName: s.file_name,
+          url: s.file_url,
+          content: ""
+        }));
+        localStorage.setItem('im_wm_software', JSON.stringify(mappedSoft));
+      }
+
+      // Re-apply updated cloud data to DOM
+      applyStoredDataToDOM();
+
+      // If on product detail page, re-run product detail renderer with fresh data
+      if (document.getElementById('pd-main-img')) {
+        initProductDetailPage();
+      }
+    }
+  } catch (cloudErr) {
+    console.warn('Supabase cloud fetch fallback:', cloudErr);
   }
 }
 

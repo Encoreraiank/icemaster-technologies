@@ -1077,6 +1077,105 @@
       flex-shrink: 0;
     }
 
+    /* Cloud Sync Badge */
+    .im-cloud-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      letter-spacing: 0.02em;
+    }
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .badge-dot.green { background: #10B981; box-shadow: 0 0 8px #10B981; }
+    .badge-dot.yellow { background: #F59E0B; box-shadow: 0 0 8px #F59E0B; }
+
+    /* Admin PIN Lock Screen */
+    .im-pin-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 22, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .im-pin-card {
+      background: #181F2E;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+    .im-pin-logo {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+    .im-pin-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 8px 0;
+    }
+    .im-pin-sub {
+      font-size: 13px;
+      color: #94A3B8;
+      margin: 0 0 24px 0;
+      line-height: 1.5;
+    }
+    .im-pin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .im-pin-input {
+      background: #0E121B;
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-size: 22px;
+      font-family: inherit;
+      text-align: center;
+      letter-spacing: 0.4em;
+      padding: 12px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .im-pin-input:focus {
+      border-color: #E42F38;
+      box-shadow: 0 0 12px rgba(228, 47, 56, 0.25);
+    }
+    .im-pin-err {
+      color: #EF4444;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .im-pin-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
@@ -1132,9 +1231,8 @@
       </div>
 
       <div class="im-top-actions">
-        <div class="im-status-pill">
-          <span class="im-status-dot"></span>
-          <span>Live Site Connected</span>
+        <div id="cloudStatusBadge" class="im-cloud-badge">
+          <span class="badge-dot green"></span> Live Cloud Sync Active
         </div>
         <a href="all-products.html" target="_blank" class="btn-white">
           Preview Site &nearr;
@@ -1545,8 +1643,27 @@
     </div>
   </div>
 
+  <!-- Master Admin Security PIN Screen -->
+  <div id="adminLockScreen" class="im-pin-overlay">
+    <div class="im-pin-card">
+      <img src="assets/site frame stuff/Official Logos/Icemaster Horizontal Red Text and White logo.png" alt="Ice Master" class="im-pin-logo" style="height:48px; width:auto; margin-bottom:12px;">
+      <h2 class="im-pin-title">Ice Master Admin</h2>
+      <p class="im-pin-sub">Enter master security PIN to access the website management dashboard.</p>
+      <form class="im-pin-form" onsubmit="verifyAdminPin(event)">
+        <input type="password" id="adminPinInput" class="im-pin-input" placeholder="••••" maxlength="8" autofocus autocomplete="current-password">
+        <div id="adminPinError" class="im-pin-err" style="display: none;"></div>
+        <button type="submit" class="btn-red im-pin-btn">Unlock Admin Dashboard</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div class="im-admin-toast" id="toast">Changes saved successfully!</div>
+
+  <!-- Supabase Cloud SDK & Configuration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/admin-supabase.js"></script>
 
   <script>
     // ==========================================================================
@@ -1586,8 +1703,26 @@
         title: "COOL DIGITAL",
         tagline: "PRECISION COOLING. REAL-TIME CONTROL",
         desc: "Advanced liquid cooling with real-time digital monitoring. Lower temperatures. Higher stability. A cleaner, quieter build.",
-        btnText: "Explore Cool Series",
+        btnText: "Explore More",
         btnLink: "all-products.html?category=liquid-coolers"
+      },
+      {
+        bg: "assets/images/homepage/hero_bg_slide_3.png",
+        eyebrow: "BOX INFINITY SERIES",
+        title: "BOX INFINITY",
+        tagline: "HEAVY-DUTY INDUSTRIAL COMPACT CHASSIS",
+        desc: "Engineered with 1.0mm heavy-duty SPCC steel, front Type-C connectivity, and modular brackets for maximum airflow and compact efficiency.",
+        btnText: "Explore More",
+        btnLink: "all-products.html?category=gaming-cabinets"
+      },
+      {
+        bg: "assets/images/homepage/hero_bg_slide_4.png",
+        eyebrow: "TRENDY EDITION",
+        title: "TRENDY",
+        tagline: "SHOWCASE YOUR ULTIMATE BUILD",
+        desc: "Showcase your high-performance build with panoramic dual tempered glass, vertical GPU mount support, and superior cooling aesthetics.",
+        btnText: "Explore More",
+        btnLink: "all-products.html?category=gaming-cabinets"
       }
     ];
 
@@ -2913,11 +3048,11 @@
       }
     }
 
-    let heroSlides = getStored("im_wm_hero_banners_data", liveSiteHeroSlides);
-    let subHeroData = getStored("im_wm_sub_hero_data", liveSiteSubHero);
-    let categories = getStored("im_wm_categories", liveSiteCategories);
-    let products = getStored("im_wm_products", liveSiteProducts);
-    let softwareList = getStored("im_wm_software", liveSiteSoftware);
+    var heroSlides = getStored("im_wm_hero_banners_data", liveSiteHeroSlides);
+    var subHeroData = getStored("im_wm_sub_hero_data", liveSiteSubHero);
+    var categories = getStored("im_wm_categories", liveSiteCategories);
+    var products = getStored("im_wm_products", liveSiteProducts);
+    var softwareList = getStored("im_wm_software", liveSiteSoftware);
 
     let activeHeroIdx = 0;
     let currentAdminCatFilter = 'all';
@@ -2975,7 +3110,26 @@
     async function handleFileUpload(input, targetUrlInputId, previewImgId) {
       if (input.files && input.files[0]) {
         const file = input.files[0];
-        showToast("Optimizing image...");
+        showToast("Uploading image...");
+
+        try {
+          // Attempt direct cloud upload to Supabase Storage
+          if (typeof uploadFileToSupabaseStorage === 'function' && typeof getSupabase === 'function' && getSupabase()) {
+            const cloudUrl = await uploadFileToSupabaseStorage(file, "media");
+            if (cloudUrl) {
+              document.getElementById(targetUrlInputId).value = cloudUrl;
+              if (previewImgId) {
+                document.getElementById(previewImgId).src = cloudUrl;
+              }
+              showToast("✓ Image uploaded to cloud storage!");
+              return;
+            }
+          }
+        } catch (uploadErr) {
+          console.warn("Cloud storage upload fallback to local compression:", uploadErr);
+        }
+
+        // Fallback: Canvas image compression
         const compressedBase64 = await compressImageFile(file, 800, 800, 0.82);
         if (compressedBase64) {
           document.getElementById(targetUrlInputId).value = compressedBase64;
@@ -2991,12 +3145,28 @@
     let pendingSoftwareFileName = "";
     let pendingSoftwareSize = "";
 
-    function handleSimpleSoftwarePick(input) {
+    async function handleSimpleSoftwarePick(input) {
       if (!input.files || !input.files[0]) return;
       const file = input.files[0];
       pendingSoftwareFileName = file.name;
       const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
       pendingSoftwareSize = sizeMB > 0.1 ? (sizeMB + " MB") : (Math.round(file.size / 1024) + " KB");
+
+      document.getElementById("softFileBadge").innerHTML = "Selected: <strong>" + file.name + "</strong> (" + pendingSoftwareSize + ") — Uploading...";
+
+      try {
+        if (typeof uploadFileToSupabaseStorage === 'function' && typeof getSupabase === 'function' && getSupabase()) {
+          const cloudUrl = await uploadFileToSupabaseStorage(file, "software");
+          if (cloudUrl) {
+            pendingSoftwareContent = cloudUrl;
+            document.getElementById("softFileBadge").innerHTML = "✓ Cloud Uploaded: <strong>" + file.name + "</strong> (" + pendingSoftwareSize + ")";
+            showToast("✓ Software file uploaded to cloud storage!");
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn("Software upload fallback:", err);
+      }
 
       document.getElementById("softFileBadge").innerHTML = "Selected: <strong>" + file.name + "</strong> (" + pendingSoftwareSize + ")";
 
@@ -3040,12 +3210,45 @@
     // ==========================================================================
     function renderHero() {
       const slide = heroSlides[activeHeroIdx] || heroSlides[0];
-      document.getElementById("heroActiveImg").src = slide.bg || "assets/images/homepage/hero_bg_slide_1.png";
-      document.getElementById("prevHeroEyebrow").textContent = slide.eyebrow || "";
-      document.getElementById("prevHeroTitle").textContent = slide.title || "";
-      document.getElementById("prevHeroTagline").textContent = slide.tagline || "";
-      document.getElementById("prevHeroDesc").textContent = slide.desc || "";
-      document.getElementById("prevHeroBtn").textContent = (slide.btnText || "Explore More") + " →";
+      if (!slide) return;
+
+      const heroImg = document.getElementById("mainHeroActiveImg") || document.getElementById("heroActiveImg");
+      if (heroImg) heroImg.src = slide.bg || "assets/images/homepage/hero_bg_slide_1.png";
+
+      const elEyebrow = document.getElementById("prevHeroEyebrow");
+      if (elEyebrow) elEyebrow.textContent = slide.eyebrow || "";
+
+      const elTitle = document.getElementById("prevHeroTitle");
+      if (elTitle) elTitle.textContent = slide.title || "";
+
+      const elTagline = document.getElementById("prevHeroTagline");
+      if (elTagline) elTagline.textContent = slide.tagline || "";
+
+      const elDesc = document.getElementById("prevHeroDesc");
+      if (elDesc) elDesc.textContent = slide.desc || "";
+
+      const elBtn = document.getElementById("prevHeroBtn");
+      if (elBtn) elBtn.textContent = (slide.btnText || "Explore More") + " →";
+
+      // Render thumbnail strip chips dynamically
+      const thumbContainer = document.getElementById("mainHeroThumbs");
+      if (thumbContainer) {
+        thumbContainer.innerHTML = heroSlides.map((s, idx) => `
+          <div class="im-thumb-card ${idx === activeHeroIdx ? 'active' : ''}" onclick="switchHeroSlide(${idx})">
+            <img src="${s.bg || 'assets/images/homepage/hero_bg_slide_1.png'}" alt="Slide ${idx + 1}" onerror="this.src='assets/images/homepage/hero_bg_slide_1.png'">
+            <div style="position: absolute; bottom: 4px; left: 6px; font-size: 10px; font-weight: 700; color: #fff; background: rgba(0,0,0,0.7); padding: 2px 6px; border-radius: 4px; pointer-events: none;">Slide 0${idx + 1}: ${s.title || ''}</div>
+            ${heroSlides.length > 1 ? `
+            <button style="position: absolute; top: 4px; right: 4px; background: rgba(228,47,56,0.85); border: none; color: #fff; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;" title="Delete slide" onclick="event.stopPropagation(); deleteHeroSlide(${idx})">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>` : ''}
+          </div>
+        `).join("") + `
+          <div class="im-thumb-card-add" onclick="openHeroModal('main', 'add')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Add Slide</span>
+          </div>
+        `;
+      }
 
       document.querySelectorAll(".im-slide-chip").forEach((btn, idx) => {
         btn.classList.toggle("active", idx === activeHeroIdx);
@@ -3058,18 +3261,31 @@
     }
 
     function openHeroModal(target, mode) {
-      if (target === 'hero') {
-        const slide = heroSlides[activeHeroIdx] || heroSlides[0];
-        document.getElementById("heroSlideIdx").value = activeHeroIdx;
-        document.getElementById("heroModalHeading").textContent = "Edit Main Hero Slide " + (activeHeroIdx + 1);
-        document.getElementById("heroBgUrl").value = slide.bg || "";
-        document.getElementById("heroImgPreview").src = slide.bg || "";
-        document.getElementById("heroEyebrow").value = slide.eyebrow || "";
-        document.getElementById("heroTitle").value = slide.title || "";
-        document.getElementById("heroTagline").value = slide.tagline || "";
-        document.getElementById("heroDesc").value = slide.desc || "";
-        document.getElementById("heroBtnText").value = slide.btnText || "Explore More";
-        document.getElementById("heroBtnLink").value = slide.btnLink || "all-products.html?category=gaming-cabinets";
+      if (target === 'hero' || target === 'main') {
+        if (mode === 'add') {
+          document.getElementById("heroSlideIdx").value = heroSlides.length;
+          document.getElementById("heroModalHeading").textContent = "Add New Main Hero Slide";
+          document.getElementById("heroBgUrl").value = "";
+          document.getElementById("heroImgPreview").src = "";
+          document.getElementById("heroEyebrow").value = "PREMIUM SERIES";
+          document.getElementById("heroTitle").value = "";
+          document.getElementById("heroTagline").value = "";
+          document.getElementById("heroDesc").value = "";
+          document.getElementById("heroBtnText").value = "Explore More";
+          document.getElementById("heroBtnLink").value = "all-products.html";
+        } else {
+          const slide = heroSlides[activeHeroIdx] || heroSlides[0];
+          document.getElementById("heroSlideIdx").value = activeHeroIdx;
+          document.getElementById("heroModalHeading").textContent = "Edit Main Hero Slide " + (activeHeroIdx + 1);
+          document.getElementById("heroBgUrl").value = slide.bg || "";
+          document.getElementById("heroImgPreview").src = slide.bg || "";
+          document.getElementById("heroEyebrow").value = slide.eyebrow || "";
+          document.getElementById("heroTitle").value = slide.title || "";
+          document.getElementById("heroTagline").value = slide.tagline || "";
+          document.getElementById("heroDesc").value = slide.desc || "";
+          document.getElementById("heroBtnText").value = slide.btnText || "Explore More";
+          document.getElementById("heroBtnLink").value = slide.btnLink || "all-products.html?category=gaming-cabinets";
+        }
       } else {
         document.getElementById("heroSlideIdx").value = "sub";
         document.getElementById("heroModalHeading").textContent = "Edit Sub Hero (Headset) Content";
@@ -3089,7 +3305,7 @@
       document.getElementById("heroImgPreview").src = val;
     }
 
-    function saveHero(e) {
+    async function saveHero(e) {
       e.preventDefault();
       const target = document.getElementById("heroSlideIdx").value;
       const bg = document.getElementById("heroBgUrl").value.trim();
@@ -3103,24 +3319,65 @@
       if (target === "sub") {
         subHeroData = { bg, eyebrow, title, tagline, desc, btnText, btnLink };
         renderSubHero();
+        saveAll();
+        if (typeof dbSaveSubHero === 'function') {
+          await dbSaveSubHero(subHeroData);
+        }
         showToast("Sub hero banner updated!");
       } else {
         const idx = parseInt(target, 10);
-        heroSlides[idx] = { bg, eyebrow, title, tagline, desc, btnText, btnLink };
+        if (isNaN(idx) || idx >= heroSlides.length) {
+          heroSlides.push({ bg, eyebrow, title, tagline, desc, btnText, btnLink });
+          activeHeroIdx = heroSlides.length - 1;
+        } else {
+          heroSlides[idx] = { bg, eyebrow, title, tagline, desc, btnText, btnLink };
+        }
         renderHero();
-        showToast("Main hero slide " + (idx + 1) + " updated!");
+        saveAll();
+        if (typeof dbSaveHeroSlide === 'function') {
+          await dbSaveHeroSlide(activeHeroIdx, heroSlides[activeHeroIdx]);
+        }
+        showToast("Main hero slide " + (activeHeroIdx + 1) + " updated!");
       }
 
-      saveAll();
       closeModal('modalHero');
     }
 
+    async function deleteHeroSlide(idx) {
+      if (heroSlides.length <= 1) {
+        showToast("At least one hero slide must remain.");
+        return;
+      }
+      if (!confirm("Are you sure you want to delete Slide " + (idx + 1) + "?")) return;
+      heroSlides.splice(idx, 1);
+      if (activeHeroIdx >= heroSlides.length) activeHeroIdx = heroSlides.length - 1;
+      renderHero();
+      saveAll();
+      const sb = getSupabase();
+      if (sb) {
+        try {
+          await sb.from('hero_slides').delete().neq('slide_idx', 0);
+          for (let i = 0; i < heroSlides.length; i++) {
+            await dbSaveHeroSlide(i, heroSlides[i]);
+          }
+        } catch(e) {
+          console.warn("Delete hero slide sync:", e);
+        }
+      }
+      showToast("Hero slide deleted.");
+    }
+
     function renderSubHero() {
-      document.getElementById("subHeroActiveImg").src = subHeroData.bg || "assets/images/homepage/headset_bg.png";
-      document.getElementById("prevSubEyebrow").textContent = subHeroData.eyebrow || "";
-      document.getElementById("prevSubTitle").textContent = subHeroData.title || "";
-      document.getElementById("prevSubDesc").textContent = subHeroData.desc || "";
-      document.getElementById("prevSubBtn").textContent = (subHeroData.btnText || "Explore Accessories") + " →";
+      const subImg = document.getElementById("subHeroActiveImg");
+      if (subImg) subImg.src = subHeroData.bg || "assets/images/homepage/headset_bg.png";
+      const elEyebrow = document.getElementById("prevSubEyebrow");
+      if (elEyebrow) elEyebrow.textContent = subHeroData.eyebrow || "";
+      const elTitle = document.getElementById("prevSubTitle");
+      if (elTitle) elTitle.textContent = subHeroData.title || "";
+      const elDesc = document.getElementById("prevSubDesc");
+      if (elDesc) elDesc.textContent = subHeroData.desc || "";
+      const elBtn = document.getElementById("prevSubBtn");
+      if (elBtn) elBtn.textContent = (subHeroData.btnText || "Explore Accessories") + " →";
     }
 
     // ==========================================================================
@@ -3181,24 +3438,27 @@
       openModal('modalCategory');
     }
 
-    function saveCategory(e) {
+    async function saveCategory(e) {
       e.preventDefault();
       const editKey = document.getElementById("catEditKey").value;
       const name = document.getElementById("catName").value.trim();
       let key = document.getElementById("catKey").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
       if (!key) key = name.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
 
+      let savedCat = null;
       if (editKey) {
         const idx = categories.findIndex(c => c.key === editKey);
         if (idx !== -1) {
           categories[idx] = { ...categories[idx], name };
+          savedCat = categories[idx];
           showToast("Category updated!");
         }
       } else {
         if (categories.some(c => c.key === key)) {
           key = key + '-' + Date.now().toString().slice(-4);
         }
-        categories.push({ key, name });
+        savedCat = { key, name, thumb: '' };
+        categories.push(savedCat);
         showToast("Category added!");
       }
 
@@ -3206,18 +3466,28 @@
       renderCategories();
       updateFilterTabCounts();
       closeModal('modalCategory');
+
+      if (savedCat && typeof dbSaveCategory === 'function') {
+        const sOrder = categories.findIndex(c => c.key === savedCat.key);
+        await dbSaveCategory(savedCat, sOrder >= 0 ? sOrder + 1 : 1);
+      }
     }
 
-    function deleteCategory(key) {
+    async function deleteCategory(key) {
       if (categories.length <= 1) {
         alert("At least one category must remain.");
         return;
       }
+      if (!confirm(`Are you sure you want to delete category "${key}"?`)) return;
       categories = categories.filter(c => c.key !== key);
       saveAll();
       renderCategories();
       updateFilterTabCounts();
       showToast("Category removed.");
+
+      if (typeof dbDeleteCategory === 'function') {
+        await dbDeleteCategory(key);
+      }
     }
 
     // ==========================================================================
@@ -3433,7 +3703,7 @@
       document.getElementById("pImgPreview").src = val;
     }
 
-    function saveProduct(e) {
+    async function saveProduct(e) {
       e.preventDefault();
       const id = document.getElementById("pEditId").value;
       const name = document.getElementById("pName").value.trim();
@@ -3448,28 +3718,40 @@
       document.querySelectorAll("input[name='pColors']:checked").forEach(cb => selectedColors.push(cb.value));
       if (!selectedColors.length) selectedColors.push("black");
 
+      let savedProduct = null;
       if (id) {
         const idx = products.findIndex(x => String(x.id) === String(id));
         if (idx !== -1) {
           products[idx] = { ...products[idx], name, cat, catName, img, desc, colors: selectedColors, specs };
+          savedProduct = products[idx];
         }
         showToast("Product updated!");
       } else {
         const newId = 'prod_' + Date.now();
-        products.unshift({ id: newId, name, cat, catName, img, desc, colors: selectedColors, specs });
+        savedProduct = { id: newId, name, cat, catName, img, desc, colors: selectedColors, specs };
+        products.unshift(savedProduct);
         showToast("New product added!");
       }
 
       saveAll();
       renderProducts();
       closeModal('modalProduct');
+
+      if (savedProduct && typeof dbSaveProduct === 'function') {
+        await dbSaveProduct(savedProduct);
+      }
     }
 
-    function deleteProduct(id) {
+    async function deleteProduct(id) {
+      if (!confirm("Are you sure you want to delete this product?")) return;
       products = products.filter(x => String(x.id) !== String(id));
       saveAll();
       renderProducts();
       showToast("Product deleted.");
+
+      if (typeof dbDeleteProduct === 'function') {
+        await dbDeleteProduct(id);
+      }
     }
 
     // ==========================================================================
@@ -3511,28 +3793,39 @@
       openModal('modalSoftware');
     }
 
-    function saveSoftware(e) {
+    async function saveSoftware(e) {
       e.preventDefault();
       const title = document.getElementById("softTitle").value.trim();
       const newId = 'soft_' + Date.now();
-      softwareList.push({
+      const newSoft = {
         id: newId,
         title: title,
         size: pendingSoftwareSize || "45 MB",
         fileName: pendingSoftwareFileName || (title.toLowerCase().replace(/\s+/g, '-') + '.zip'),
+        url: pendingSoftwareContent || "",
         content: pendingSoftwareContent || ""
-      });
+      };
+      softwareList.push(newSoft);
       saveAll();
       renderSoftware();
       closeModal('modalSoftware');
       showToast("Software package added!");
+
+      if (typeof dbSaveSoftware === 'function') {
+        await dbSaveSoftware(newSoft);
+      }
     }
 
-    function deleteSoftware(id) {
+    async function deleteSoftware(id) {
+      if (!confirm("Are you sure you want to delete this software download?")) return;
       softwareList = softwareList.filter(s => s.id !== id);
       saveAll();
       renderSoftware();
       showToast("Software removed.");
+
+      if (typeof dbDeleteSoftware === 'function') {
+        await dbDeleteSoftware(id);
+      }
     }
 
     function downloadSoftwareFile(id) {
@@ -3562,12 +3855,23 @@
     // ==========================================================================
     // INITIALIZATION
     // ==========================================================================
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      // 1. Check Master Admin Authentication
+      if (typeof checkAdminAuth === 'function') {
+        checkAdminAuth();
+      }
+
+      // 2. Initial render with local/default data instantly (zero wait)
       renderHero();
       renderSubHero();
       renderCategories();
       renderProducts();
       renderSoftware();
+
+      // 3. Load latest real-time data from Supabase Cloud
+      if (typeof loadAdminDataFromSupabase === 'function') {
+        await loadAdminDataFromSupabase();
+      }
     });
 </script>
 </body>
