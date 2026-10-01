@@ -31,10 +31,37 @@ function applyStoredDataToDOM() {
   try {
     // 1. Sync Hero Section (index.html)
     const storedHero = JSON.parse(localStorage.getItem('im_wm_hero_banners_data'));
-    if (Array.isArray(storedHero) && storedHero.length > 0) {
-      const slides = document.querySelectorAll('.im-hero-slide');
+    const heroStage = document.querySelector('.im-hero-stage');
+    if (heroStage && Array.isArray(storedHero) && storedHero.length > 0) {
+      let existingSlides = Array.from(heroStage.querySelectorAll('.im-hero-slide'));
+      const heroControls = heroStage.querySelector('.im-hero-controls');
+
+      // Expand slide elements if stored count exceeds existing count
+      if (storedHero.length > existingSlides.length) {
+        const templateSlide = existingSlides[0] || heroStage.querySelector('.im-hero-slide');
+        for (let i = existingSlides.length; i < storedHero.length; i++) {
+          if (templateSlide) {
+            const newSlide = templateSlide.cloneNode(true);
+            newSlide.classList.remove('active');
+            newSlide.setAttribute('data-slide', String(i + 1));
+            if (heroControls) {
+              heroStage.insertBefore(newSlide, heroControls);
+            } else {
+              heroStage.appendChild(newSlide);
+            }
+          }
+        }
+      } else if (storedHero.length < existingSlides.length) {
+        // Trim extra slides if stored count is less
+        for (let i = storedHero.length; i < existingSlides.length; i++) {
+          existingSlides[i].remove();
+        }
+      }
+
+      // Re-query slides and populate with stored content
+      const currentSlides = heroStage.querySelectorAll('.im-hero-slide');
       storedHero.forEach((slide, idx) => {
-        let slideEl = slides[idx];
+        let slideEl = currentSlides[idx];
         if (slideEl) {
           const bg = slideEl.querySelector('.im-hero-bg-img');
           if (bg && slide.bg) bg.src = slide.bg;
@@ -59,6 +86,21 @@ function applyStoredDataToDOM() {
           }
         }
       });
+
+      // Synchronize Hero Dots
+      const dotsContainer = heroStage.querySelector('.im-hero-dots');
+      if (dotsContainer) {
+        dotsContainer.innerHTML = storedHero.map((_, i) => `
+          <span class="im-hero-dot ${i === 0 ? 'active' : ''}" data-slide="${i + 1}" role="button" tabindex="0" aria-label="Slide ${i + 1}"></span>
+        `).join('');
+        // Re-attach listeners to dots
+        const dots = dotsContainer.querySelectorAll('.im-hero-dot');
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            if (typeof setHeroSlide === 'function') setHeroSlide(i);
+          });
+        });
+      }
     }
 
     // 2. Sync Sub-Hero Headset Section (index.html)

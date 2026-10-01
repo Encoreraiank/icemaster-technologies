@@ -240,6 +240,42 @@ async function dbSaveHeroSlide(idx, slideData) {
   }
 }
 
+async function dbSyncAllHeroSlides(slides) {
+  const sb = getSupabase();
+  if (!sb) return;
+  try {
+    // Delete any slides whose slide_idx is beyond current length
+    await sb.from('hero_slides').delete().gt('slide_idx', slides.length);
+
+    // Upsert all current slides in order
+    const rows = slides.map((s, idx) => ({
+      slide_idx: idx + 1,
+      bg: s.bg,
+      eyebrow: s.eyebrow,
+      title: s.title,
+      tagline: s.tagline,
+      desc_text: s.desc,
+      btn_text: s.btnText,
+      btn_link: s.btnLink,
+      updated_at: new Date().toISOString()
+    }));
+    await sb.from('hero_slides').upsert(rows, { onConflict: 'slide_idx' });
+    showToast("✓ Hero slides synced to cloud!");
+  } catch (err) {
+    console.error("dbSyncAllHeroSlides error:", err);
+  }
+}
+
+async function dbDeleteHeroSlide(idx) {
+  const sb = getSupabase();
+  if (!sb) return;
+  try {
+    await sb.from('hero_slides').delete().eq('slide_idx', idx + 1);
+  } catch (err) {
+    console.error("dbDeleteHeroSlide error:", err);
+  }
+}
+
 async function dbSaveSubHero(subData) {
   const sb = getSupabase();
   if (!sb) return;
