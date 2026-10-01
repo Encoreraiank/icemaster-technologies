@@ -1452,6 +1452,362 @@
       border-color: var(--im-red);
       box-shadow: 0 0 12px var(--im-red-glow);
     }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVE SYSTEM (TABLET & SMARTPHONE OPTIMIZATION)
+       ========================================================================== */
+
+    /* Mobile Menu Toggle Button (Hidden on Desktop) */
+    .im-mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #FFFFFF;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .im-mobile-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-hover);
+    }
+
+    .im-mobile-topbar-brand {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .im-mobile-topbar-brand span {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+    }
+
+    .im-sidebar-close-btn {
+      display: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .im-sidebar-close-btn:hover {
+      background: var(--im-red);
+      color: #FFFFFF;
+    }
+
+    .im-sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .im-sidebar-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Tablet & Mobile Screens <= 992px */
+    @media (max-width: 992px) {
+      body {
+        display: block;
+        position: relative;
+        min-height: 100vh;
+      }
+
+      /* Sidebar turns into smooth off-canvas drawer */
+      .im-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        max-width: 85vw;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: none;
+      }
+
+      .im-sidebar.mobile-open {
+        transform: translateX(0);
+        box-shadow: 15px 0 45px rgba(0, 0, 0, 0.85);
+      }
+
+      .im-sidebar-close-btn {
+        display: flex;
+      }
+
+      .im-sidebar-brand {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 16px;
+      }
+
+      .im-sidebar-brand-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .im-sidebar-logo-img {
+        height: 32px;
+        margin-bottom: 0;
+      }
+
+      .im-main {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: visible;
+        width: 100%;
+      }
+
+      .im-mobile-menu-btn {
+        display: flex;
+      }
+
+      .im-mobile-topbar-brand {
+        display: flex;
+      }
+
+      /* Topbar adjustments */
+      .im-topbar {
+        padding: 12px 18px;
+        height: auto;
+        min-height: 60px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .im-topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .im-search-box {
+        order: 3;
+        width: 100%;
+        margin-top: 2px;
+        padding: 8px 14px;
+      }
+
+      .im-content-wrap {
+        padding: 20px 18px 48px;
+      }
+    }
+
+    /* Small Mobile Phones <= 640px */
+    @media (max-width: 640px) {
+      .im-content-wrap {
+        padding: 16px 14px 40px;
+      }
+
+      /* Page headers stack vertically */
+      .im-page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .im-page-title {
+        font-size: 22px;
+        letter-spacing: -0.3px;
+      }
+
+      .im-page-sub {
+        font-size: 12px;
+      }
+
+      .btn-red-add {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 16px;
+        font-size: 13px;
+      }
+
+      /* Cloud status badge compact */
+      .cloud-badge-text {
+        display: none;
+      }
+
+      .im-cloud-badge {
+        padding: 6px 10px;
+        gap: 6px;
+      }
+      .im-cloud-badge::after {
+        content: 'Sync';
+      }
+
+      /* Filter pills horizontal touch swipe */
+      .im-filter-row {
+        gap: 8px;
+        margin-bottom: 20px;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .im-filter-row::-webkit-scrollbar {
+        display: none;
+      }
+
+      .im-filter-pill {
+        padding: 7px 13px;
+        font-size: 11.5px;
+      }
+
+      /* Categories Grid */
+      .im-cat-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .im-cat-card {
+        padding: 14px;
+      }
+
+      /* Software Control List */
+      .im-soft-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px;
+      }
+
+      .im-soft-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 10px;
+      }
+
+      /* Hero Banners Grid */
+      .im-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .im-hero-preview {
+        height: 155px;
+      }
+
+      .im-hero-card-body {
+        padding: 14px;
+      }
+
+      /* Modals Responsive */
+      .im-modal-backdrop {
+        padding: 12px;
+      }
+
+      .im-modal-box {
+        max-height: 92vh;
+        border-radius: 14px;
+      }
+
+      .im-modal-header {
+        padding: 14px 16px;
+      }
+
+      .im-modal-header h3 {
+        font-size: 16px;
+      }
+
+      .im-modal-body {
+        padding: 14px 16px;
+        gap: 14px;
+      }
+
+      .im-modal-footer {
+        padding: 12px 16px;
+        gap: 8px;
+      }
+
+      .im-modal-footer button {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* 2-Column form blocks inside modals collapse to single column */
+      div[style*="grid-template-columns: 1fr 1fr"],
+      div[style*="grid-template-columns: 1fr 1fr;"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+
+      /* 5-slot image gallery */
+      .im-slots-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+      }
+
+      .im-slot-card {
+        min-height: 80px;
+      }
+
+      .im-banner-upload-card {
+        height: 145px;
+      }
+
+      .im-gallery-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .im-color-tabs {
+        width: 100%;
+        display: flex;
+      }
+
+      .im-color-tab-btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      /* PIN Modal Mobile */
+      .im-pin-box {
+        padding: 24px 18px;
+        border-radius: 14px;
+      }
+
+      .im-pin-input {
+        font-size: 20px;
+        letter-spacing: 0.3em;
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .im-slots-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1472,13 +1828,21 @@
     </div>
   </div>
 
+  <!-- Mobile Off-Canvas Sidebar Backdrop -->
+  <div id="sidebarBackdrop" class="im-sidebar-backdrop" onclick="closeMobileSidebar()"></div>
+
   <!-- ==========================================================================
-       LEFT SIDEBAR (Matching Mockup 1:1)
+       LEFT SIDEBAR (Matching Mockup 1:1, Drawer on Mobile)
        ========================================================================== -->
-  <aside class="im-sidebar">
+  <aside class="im-sidebar" id="adminSidebar">
     <div class="im-sidebar-brand">
-      <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master" class="im-sidebar-logo-img">
-      <span class="im-sidebar-brand-name">ICE MASTER</span>
+      <div class="im-sidebar-brand-content">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master" class="im-sidebar-logo-img">
+        <span class="im-sidebar-brand-name">ICE MASTER</span>
+      </div>
+      <button type="button" class="im-sidebar-close-btn" onclick="closeMobileSidebar()" aria-label="Close Navigation">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
 
     <nav class="im-sidebar-nav">
@@ -1529,6 +1893,16 @@
   <main class="im-main">
     <!-- Top Search & Status Bar -->
     <header class="im-topbar">
+      <div class="im-topbar-left">
+        <button type="button" class="im-mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="Open Navigation">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="im-mobile-topbar-brand">
+          <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master" style="height: 22px; width: auto;">
+          <span>ICE MASTER</span>
+        </div>
+      </div>
+
       <div class="im-search-box">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="adminSearchInput" class="im-search-input" placeholder="Search products..." oninput="handleSearch(this.value)">
@@ -1537,7 +1911,7 @@
       <div class="im-topbar-right">
         <div id="cloudStatusBadge" class="im-cloud-badge" title="Supabase Real-Time Cloud Sync">
           <span class="badge-dot"></span>
-          <span>Live Cloud Sync Active</span>
+          <span class="cloud-badge-text">Live Cloud Sync Active</span>
         </div>
         <button class="im-icon-btn" title="Notifications">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
@@ -2074,6 +2448,20 @@
     // ==========================================================================
     // 3. TAB SWITCHING (Products, Categories, Software, Website Settings)
     // ==========================================================================
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById("adminSidebar");
+      const backdrop = document.getElementById("sidebarBackdrop");
+      if (sidebar) sidebar.classList.toggle("mobile-open");
+      if (backdrop) backdrop.classList.toggle("active");
+    }
+
+    function closeMobileSidebar() {
+      const sidebar = document.getElementById("adminSidebar");
+      const backdrop = document.getElementById("sidebarBackdrop");
+      if (sidebar) sidebar.classList.remove("mobile-open");
+      if (backdrop) backdrop.classList.remove("active");
+    }
+
     function switchMainTab(tabKey) {
       document.querySelectorAll(".im-nav-item").forEach(item => {
         item.classList.toggle("active", item.getAttribute("data-tab") === tabKey);
@@ -2086,6 +2474,9 @@
       if (activePanel) {
         activePanel.classList.add("active");
       }
+
+      // Close mobile drawer on navigation
+      closeMobileSidebar();
 
       // Refresh corresponding content
       if (tabKey === "products") renderProducts();
