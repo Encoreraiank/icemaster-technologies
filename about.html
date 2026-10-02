@@ -36,11 +36,11 @@
       <!-- Center Navigation Links -->
       <nav class="im-pill-nav" aria-label="Primary Navigation">
         <a href="index.html" class="im-nav-item">HOME</a>
+        <a href="all-products.html" class="im-nav-item">ALL PRODUCTS</a>
         <a href="about.html" class="im-nav-item active" aria-current="page">
           <span>ABOUT US</span>
           <span class="im-nav-indicator"></span>
         </a>
-        <a href="all-products.html" class="im-nav-item">ALL PRODUCTS</a>
         <a href="faqs.html" class="im-nav-item">FAQS</a>
         <a href="download.html" class="im-nav-item">DOWNLOAD</a>
         <a href="contact.html" class="im-nav-item">CONTACT</a>
@@ -90,8 +90,8 @@
 
       <nav class="im-mobile-nav-links">
         <a href="index.html" class="im-mobile-nav-link">HOME</a>
-        <a href="about.html" class="im-mobile-nav-link active">ABOUT US</a>
         <a href="all-products.html" class="im-mobile-nav-link">ALL PRODUCTS</a>
+        <a href="about.html" class="im-mobile-nav-link active">ABOUT US</a>
         <a href="faqs.html" class="im-mobile-nav-link">FAQS</a>
         <a href="download.html" class="im-mobile-nav-link">DOWNLOAD</a>
         <a href="contact.html" class="im-mobile-nav-link">CONTACT</a>
@@ -112,13 +112,16 @@
   </header>
 
   <!-- ==========================================================================
-       MAIN ABOUT US HERO SECTION (1:1 Exact Match to Figma Mockup)
+       MAIN ABOUT US HERO SECTION (Matching Figma Mockup 1:1)
        ========================================================================== -->
   <main>
     <section class="about-hero-section">
+      <!-- Solid Blur Layer over Background -->
+      <div class="about-hero-blur-layer" aria-hidden="true"></div>
+
       <div class="about-hero-container">
 
-        <!-- Left Column: Story Content, CTAs, 3 Key Badges -->
+        <!-- Left Column: Story Content & 3 Key Badges -->
         <div class="about-hero-content">
 
           <!-- Eyebrow -->
@@ -148,25 +151,6 @@
             <p>
               Our focus is our Channel. Due to our background in the channel and retail business, we understand the pain of no and negligible margin in the IT industry. With the vision to solve this problem we founded this brand — ICE MASTER.
             </p>
-          </div>
-
-          <!-- Call to Action Buttons -->
-          <div class="about-cta-wrap">
-            <a href="#our-values" class="about-btn-pill">
-              <span>Learn More About Us</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
-            <a href="all-products.html" class="about-btn-pill-secondary">
-              <span>Explore Products</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-            </a>
           </div>
 
           <!-- 3 Horizontal Badges (Exact Mockup Match) -->
@@ -223,103 +207,6 @@
         <div class="about-hero-media">
           <div class="about-hero-img-wrap">
             <img src="assets/images/about/im_about_emblem_3d.png" alt="Ice Master 3D Crystal Emblem" class="about-hero-emblem-img">
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         CORE VALUES & BRAND PILLARS SECTION
-         ========================================================================== -->
-    <section class="about-values-section" id="our-values">
-      <div class="about-values-container">
-
-        <!-- Section Header -->
-        <div class="about-section-header">
-          <div class="about-eyebrow" style="justify-content: center;">
-            <span class="about-eyebrow-dash"></span>
-            <span class="about-eyebrow-text">OUR COMMITMENT</span>
-          </div>
-          <h2 class="about-section-title">
-            Engineering Excellence for <span class="im-highlight-red">Indian PC Builds</span>
-          </h2>
-          <p class="about-section-sub">
-            From high-airflow chassis to whisper-quiet liquid cooling loops, every product is engineered to deliver unmatched thermal efficiency, clean aesthetics, and real channel profitability.
-          </p>
-        </div>
-
-        <!-- 4 Pillars Grid -->
-        <div class="about-pillars-grid">
-
-          <!-- Pillar 1: Thermal Engineering -->
-          <div class="about-pillar-card">
-            <div class="about-pillar-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2v20"></path>
-                <path d="m4.93 4.93 14.14 14.14"></path>
-                <path d="M2 12h20"></path>
-                <path d="m19.07 4.93-14.14 14.14"></path>
-              </svg>
-            </div>
-            <h3 class="about-pillar-title">Extreme Thermal Performance</h3>
-            <p class="about-pillar-desc">
-              High-CFM static pressure fans, dense copper radiator fins, and dual-chamber case designs engineered specifically to tame modern high-wattage CPUs and GPUs in tropical climates.
-            </p>
-          </div>
-
-          <!-- Pillar 2: Panoramic Showcase Aesthetics -->
-          <div class="about-pillar-card">
-            <div class="about-pillar-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-            </div>
-            <h3 class="about-pillar-title">Panoramic Showcase Craft</h3>
-            <p class="about-pillar-desc">
-              Seamless curved and 270° tempered glass enclosures with integrated cable routing channels and vibrant addressable RGB illumination for show-stopping desktop setups.
-            </p>
-          </div>
-
-          <!-- Pillar 3: Channel-First Margin Protection -->
-          <div class="about-pillar-card">
-            <div class="about-pillar-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                <polyline points="17 6 23 6 23 12"></polyline>
-              </svg>
-            </div>
-            <h3 class="about-pillar-title">Channel-First Margins</h3>
-            <p class="about-pillar-desc">
-              We eliminate the pain of negligible IT margins. Our business model protects retail partners and distributors with sustainable pricing, fair trade margins, and direct channel support.
-            </p>
-          </div>
-
-          <!-- Pillar 4: Certified Durability & Local Warranty -->
-          <div class="about-pillar-card">
-            <div class="about-pillar-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-            </div>
-            <h3 class="about-pillar-title">Certified Reliability & Warranty</h3>
-            <p class="about-pillar-desc">
-              Backed by Perfect Computer Systems with prompt warranty handling, localized RMA assistance, and rigorous quality testing on all materials and components.
-            </p>
-          </div>
-
-        </div>
-
-        <!-- Story / Mission Quote Box -->
-        <div class="about-mission-quote-box">
-          <p>
-            &ldquo;Our focus is our Channel. Due to our background in the channel and retail business, we understand the pain of negligible margin in the IT industry. With the vision to solve this problem, we founded this brand — ICE MASTER.&rdquo;
-          </p>
-          <div class="about-mission-quote-author">
-            — ICE MASTER TECHNOLOGIES LEADERSHIP
           </div>
         </div>
 

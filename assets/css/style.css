@@ -5493,10 +5493,23 @@ html, body,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 85% 35%, rgba(255, 51, 75, 0.12) 0%, transparent 55%),
-              radial-gradient(circle at 15% 80%, rgba(255, 51, 75, 0.06) 0%, transparent 45%),
-              #06080D;
+  background-color: #06080D;
+  background-image: url('../images/about/about_page_bg.png');
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
   overflow: hidden;
+}
+
+/* Solid Blur Layer over Background Image */
+.about-hero-blur-layer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 50%, rgba(6, 8, 14, 0.45) 0%, rgba(6, 8, 14, 0.72) 50%, rgba(6, 8, 14, 0.88) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .about-hero-section::before {
@@ -5508,6 +5521,7 @@ html, body,
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(255, 51, 75, 0.3) 50%, transparent 100%);
   pointer-events: none;
+  z-index: 3;
 }
 
 .about-hero-container {
@@ -6283,7 +6297,14 @@ html.light-mode .faq-page-body {
   color: #0F172A;
 }
 
-html.light-mode .about-hero-section,
+html.light-mode .about-hero-section {
+  background-color: #F8FAFC;
+}
+
+html.light-mode .about-hero-blur-layer {
+  background: radial-gradient(circle at 80% 50%, rgba(248, 250, 252, 0.6) 0%, rgba(248, 250, 252, 0.85) 60%, rgba(248, 250, 252, 0.95) 100%);
+}
+
 html.light-mode .faq-hero-section {
   background: #F8FAFC;
 }
