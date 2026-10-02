@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Ice Master Technologies</title>
+  <meta name="description" content="Founded in 2023 by Perfect Computer Systems, Ice Master Technologies delivers high-quality PC components, gaming cabinets, and cooling solutions with a channel-first commitment.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/homepage/im_official_emblem.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="about-page-body">
+
+  <!-- ==========================================================================
+       FLOATING GLASS PILL NAVBAR (Standard Unified Brand Navbar)
+       ========================================================================== -->
+  <header class="im-floating-header" id="main-floating-header">
+    <div class="im-pill-navbar">
+      <!-- Left: Logo & Brand -->
+      <a href="index.html" class="im-pill-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-pill-logo-icon">
+        <span class="im-pill-brand-name">ICE MASTER</span>
+      </a>
+
+      <!-- Vertical Divider 1 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Center Navigation Links -->
+      <nav class="im-pill-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="im-nav-item">HOME</a>
+        <a href="about.html" class="im-nav-item active" aria-current="page">
+          <span>ABOUT US</span>
+          <span class="im-nav-indicator"></span>
+        </a>
+        <a href="all-products.html" class="im-nav-item">ALL PRODUCTS</a>
+        <a href="faqs.html" class="im-nav-item">FAQS</a>
+        <a href="download.html" class="im-nav-item">DOWNLOAD</a>
+        <a href="contact.html" class="im-nav-item">CONTACT</a>
+      </nav>
+
+      <!-- Vertical Divider 2 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Right Action Cluster (Search, Theme Toggle, Hamburger) -->
+      <div class="im-pill-actions">
+        <div class="im-pill-search-wrap">
+          <button type="button" class="im-pill-search-btn" id="im-search-toggle" aria-label="Search Products">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <!-- Expandable Quick Search Input -->
+          <div class="im-pill-search-dropdown" id="im-search-dropdown">
+            <input type="text" id="im-quick-search-input" placeholder="Search coolers, cabinets..." aria-label="Search Ice Master">
+          </div>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button id="im-theme-toggle" class="im-theme-toggle-btn" aria-label="Switch to Light Mode" title="Switch to Light Mode">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <!-- Mobile Hamburger -->
+        <button class="im-mobile-menu-toggle" id="im-hamburger-btn" aria-label="Open Navigation">
+          <span class="im-hamburger-bar"></span>
+          <span class="im-hamburger-bar"></span>
+          <span class="im-hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="im-mobile-nav-drawer" id="im-mobile-nav-drawer">
+      <div class="im-mobile-drawer-header">
+        <div class="im-mobile-drawer-brand">
+          <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-mobile-drawer-logo">
+          <span class="im-mobile-drawer-brand-name">ICE MASTER</span>
+        </div>
+        <button class="im-mobile-drawer-close" id="im-drawer-close" aria-label="Close Menu">&#10005;</button>
+      </div>
+
+      <nav class="im-mobile-nav-links">
+        <a href="index.html" class="im-mobile-nav-link">HOME</a>
+        <a href="about.html" class="im-mobile-nav-link active">ABOUT US</a>
+        <a href="all-products.html" class="im-mobile-nav-link">ALL PRODUCTS</a>
+        <a href="faqs.html" class="im-mobile-nav-link">FAQS</a>
+        <a href="download.html" class="im-mobile-nav-link">DOWNLOAD</a>
+        <a href="contact.html" class="im-mobile-nav-link">CONTACT</a>
+      </nav>
+
+      <div class="im-mobile-drawer-footer">
+        <div class="im-mobile-drawer-socials">
+          <a href="https://www.instagram.com/icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-mobile-drawer-soc-btn" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://www.youtube.com/@icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-mobile-drawer-soc-btn" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+          </a>
+        </div>
+        <div class="im-mobile-drawer-motto">COOLER BETTER FURTHER</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN ABOUT US HERO SECTION (1:1 Exact Match to Figma Mockup)
+       ========================================================================== -->
+  <main>
+    <section class="about-hero-section">
+      <div class="about-hero-container">
+
+        <!-- Left Column: Story Content, CTAs, 3 Key Badges -->
+        <div class="about-hero-content">
+
+          <!-- Eyebrow -->
+          <div class="about-eyebrow">
+            <span class="about-eyebrow-dash"></span>
+            <span class="about-eyebrow-text">ABOUT US</span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="about-hero-title">
+            Welcome to<br>IceMaster <span class="im-highlight-red">Technologies</span>
+          </h1>
+
+          <!-- Tagline -->
+          <div class="about-hero-tagline">
+            BUILT FOR PERFORMANCE. DRIVEN BY PASSION.
+          </div>
+
+          <!-- 3 Story Paragraphs (Exact Wording) -->
+          <div class="about-hero-desc">
+            <p>
+              Founded in 2023 by Perfect Computer Systems, Ice Master Technologies is dedicated to delivering high-quality PC components, including gaming cabinets and cooling solutions.
+            </p>
+            <p>
+              With a strong background in the IT channel and retail business, we understand the challenges faced by partners and aim to provide products that offer both performance and value.
+            </p>
+            <p>
+              Our focus is our Channel. Due to our background in the channel and retail business, we understand the pain of no and negligible margin in the IT industry. With the vision to solve this problem we founded this brand — ICE MASTER.
+            </p>
+          </div>
+
+          <!-- Call to Action Buttons -->
+          <div class="about-cta-wrap">
+            <a href="#our-values" class="about-btn-pill">
+              <span>Learn More About Us</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="all-products.html" class="about-btn-pill-secondary">
+              <span>Explore Products</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- 3 Horizontal Badges (Exact Mockup Match) -->
+          <div class="about-badges-row">
+            <!-- Badge 1: 2023 / Year Founded -->
+            <div class="about-badge-card">
+              <div class="about-badge-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <div class="about-badge-info">
+                <h4>2023</h4>
+                <p>Year Founded</p>
+              </div>
+            </div>
+
+            <!-- Badge 2: Channel Focus / Partners & Retailers -->
+            <div class="about-badge-card">
+              <div class="about-badge-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="about-badge-info">
+                <h4>Channel Focus</h4>
+                <p>Partners & Retailers</p>
+              </div>
+            </div>
+
+            <!-- Badge 3: High-Quality / PC Components -->
+            <div class="about-badge-card">
+              <div class="about-badge-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+              <div class="about-badge-info">
+                <h4>High-Quality</h4>
+                <p>PC Components</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: 3D Crystal Ice Master Emblem on Ice Rocks -->
+        <div class="about-hero-media">
+          <div class="about-hero-img-wrap">
+            <img src="assets/images/about/im_about_emblem_3d.png" alt="Ice Master 3D Crystal Emblem" class="about-hero-emblem-img">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CORE VALUES & BRAND PILLARS SECTION
+         ========================================================================== -->
+    <section class="about-values-section" id="our-values">
+      <div class="about-values-container">
+
+        <!-- Section Header -->
+        <div class="about-section-header">
+          <div class="about-eyebrow" style="justify-content: center;">
+            <span class="about-eyebrow-dash"></span>
+            <span class="about-eyebrow-text">OUR COMMITMENT</span>
+          </div>
+          <h2 class="about-section-title">
+            Engineering Excellence for <span class="im-highlight-red">Indian PC Builds</span>
+          </h2>
+          <p class="about-section-sub">
+            From high-airflow chassis to whisper-quiet liquid cooling loops, every product is engineered to deliver unmatched thermal efficiency, clean aesthetics, and real channel profitability.
+          </p>
+        </div>
+
+        <!-- 4 Pillars Grid -->
+        <div class="about-pillars-grid">
+
+          <!-- Pillar 1: Thermal Engineering -->
+          <div class="about-pillar-card">
+            <div class="about-pillar-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20"></path>
+                <path d="m4.93 4.93 14.14 14.14"></path>
+                <path d="M2 12h20"></path>
+                <path d="m19.07 4.93-14.14 14.14"></path>
+              </svg>
+            </div>
+            <h3 class="about-pillar-title">Extreme Thermal Performance</h3>
+            <p class="about-pillar-desc">
+              High-CFM static pressure fans, dense copper radiator fins, and dual-chamber case designs engineered specifically to tame modern high-wattage CPUs and GPUs in tropical climates.
+            </p>
+          </div>
+
+          <!-- Pillar 2: Panoramic Showcase Aesthetics -->
+          <div class="about-pillar-card">
+            <div class="about-pillar-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="about-pillar-title">Panoramic Showcase Craft</h3>
+            <p class="about-pillar-desc">
+              Seamless curved and 270° tempered glass enclosures with integrated cable routing channels and vibrant addressable RGB illumination for show-stopping desktop setups.
+            </p>
+          </div>
+
+          <!-- Pillar 3: Channel-First Margin Protection -->
+          <div class="about-pillar-card">
+            <div class="about-pillar-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="about-pillar-title">Channel-First Margins</h3>
+            <p class="about-pillar-desc">
+              We eliminate the pain of negligible IT margins. Our business model protects retail partners and distributors with sustainable pricing, fair trade margins, and direct channel support.
+            </p>
+          </div>
+
+          <!-- Pillar 4: Certified Durability & Local Warranty -->
+          <div class="about-pillar-card">
+            <div class="about-pillar-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="about-pillar-title">Certified Reliability & Warranty</h3>
+            <p class="about-pillar-desc">
+              Backed by Perfect Computer Systems with prompt warranty handling, localized RMA assistance, and rigorous quality testing on all materials and components.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Story / Mission Quote Box -->
+        <div class="about-mission-quote-box">
+          <p>
+            &ldquo;Our focus is our Channel. Due to our background in the channel and retail business, we understand the pain of negligible margin in the IT industry. With the vision to solve this problem, we founded this brand — ICE MASTER.&rdquo;
+          </p>
+          <div class="about-mission-quote-author">
+            — ICE MASTER TECHNOLOGIES LEADERSHIP
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MINIMAL CINEMATIC FOOTER (Unified Across Site)
+       ========================================================================== -->
+  <footer class="im-site-footer" id="site-footer">
+    <div class="im-footer-inner">
+
+      <!-- Left: Logo & Brand Lockup -->
+      <a href="index.html" class="im-footer-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-footer-logo-img">
+        <div class="im-footer-brand-text">
+          <span class="im-footer-brand-title">ICE MASTER</span>
+          <span class="im-footer-brand-sub">COOLER BETTER FURTHER</span>
+        </div>
+      </a>
+
+      <!-- Center Divider 1 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Center: Social Links -->
+      <div class="im-footer-social-links" aria-label="Social Media Links">
+        <a href="https://www.instagram.com/icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <a href="https://www.youtube.com/@icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Center Divider 2 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Right: Location Lockup -->
+      <div class="im-footer-location-wrap">
+        <svg class="im-footer-loc-pin" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+        </svg>
+        <span class="im-footer-loc-text">NEW DELHI, NEHRU PLACE</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Unified Site Scripts (Theme Toggle, Navbar Sticky, Quick Search, Mobile Drawer) -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

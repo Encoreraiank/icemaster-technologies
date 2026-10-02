@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions | Ice Master Technologies</title>
+  <meta name="description" content="Find answers to common questions regarding Ice Master Technologies PC cases, liquid coolers, compatibility, warranty, and channel inquiries.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/homepage/im_official_emblem.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="faq-page-body">
+
+  <!-- ==========================================================================
+       FLOATING GLASS PILL NAVBAR (Standard Unified Brand Navbar)
+       ========================================================================== -->
+  <header class="im-floating-header" id="main-floating-header">
+    <div class="im-pill-navbar">
+      <!-- Left: Logo & Brand -->
+      <a href="index.html" class="im-pill-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-pill-logo-icon">
+        <span class="im-pill-brand-name">ICE MASTER</span>
+      </a>
+
+      <!-- Vertical Divider 1 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Center Navigation Links -->
+      <nav class="im-pill-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="im-nav-item">HOME</a>
+        <a href="about.html" class="im-nav-item">ABOUT US</a>
+        <a href="all-products.html" class="im-nav-item">ALL PRODUCTS</a>
+        <a href="faqs.html" class="im-nav-item active" aria-current="page">
+          <span>FAQS</span>
+          <span class="im-nav-indicator"></span>
+        </a>
+        <a href="download.html" class="im-nav-item">DOWNLOAD</a>
+        <a href="contact.html" class="im-nav-item">CONTACT</a>
+      </nav>
+
+      <!-- Vertical Divider 2 -->
+      <div class="im-pill-divider" aria-hidden="true"></div>
+
+      <!-- Right Action Cluster (Search, Theme Toggle, Hamburger) -->
+      <div class="im-pill-actions">
+        <div class="im-pill-search-wrap">
+          <button type="button" class="im-pill-search-btn" id="im-search-toggle" aria-label="Search Products">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <!-- Expandable Quick Search Input -->
+          <div class="im-pill-search-dropdown" id="im-search-dropdown">
+            <input type="text" id="im-quick-search-input" placeholder="Search coolers, cabinets..." aria-label="Search Ice Master">
+          </div>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button id="im-theme-toggle" class="im-theme-toggle-btn" aria-label="Switch to Light Mode" title="Switch to Light Mode">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <!-- Mobile Hamburger -->
+        <button class="im-mobile-menu-toggle" id="im-hamburger-btn" aria-label="Open Navigation">
+          <span class="im-hamburger-bar"></span>
+          <span class="im-hamburger-bar"></span>
+          <span class="im-hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="im-mobile-nav-drawer" id="im-mobile-nav-drawer">
+      <div class="im-mobile-drawer-header">
+        <div class="im-mobile-drawer-brand">
+          <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-mobile-drawer-logo">
+          <span class="im-mobile-drawer-brand-name">ICE MASTER</span>
+        </div>
+        <button class="im-mobile-drawer-close" id="im-drawer-close" aria-label="Close Menu">&#10005;</button>
+      </div>
+
+      <nav class="im-mobile-nav-links">
+        <a href="index.html" class="im-mobile-nav-link">HOME</a>
+        <a href="about.html" class="im-mobile-nav-link">ABOUT US</a>
+        <a href="all-products.html" class="im-mobile-nav-link">ALL PRODUCTS</a>
+        <a href="faqs.html" class="im-mobile-nav-link active">FAQS</a>
+        <a href="download.html" class="im-mobile-nav-link">DOWNLOAD</a>
+        <a href="contact.html" class="im-mobile-nav-link">CONTACT</a>
+      </nav>
+
+      <div class="im-mobile-drawer-footer">
+        <div class="im-mobile-drawer-socials">
+          <a href="https://www.instagram.com/icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-mobile-drawer-soc-btn" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://www.youtube.com/@icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-mobile-drawer-soc-btn" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+          </a>
+        </div>
+        <div class="im-mobile-drawer-motto">COOLER BETTER FURTHER</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN FAQS HERO STAGE (1:1 Exact Match to Figma Mockup)
+       ========================================================================== -->
+  <main>
+    <section class="faq-hero-section">
+      <div class="faq-stage-container">
+
+        <!-- Top Header Block: Eyebrow, Title, Subtitle -->
+        <div class="faq-header-block">
+          <div class="faq-eyebrow">
+            <span class="faq-eyebrow-dash"></span>
+            <span class="faq-eyebrow-text">SUPPORT</span>
+          </div>
+          <h1 class="faq-main-title">
+            Frequently Asked <span class="im-highlight-red">Questions</span>
+          </h1>
+          <p class="faq-main-desc">
+            Find quick answers to common questions about our products, compatibility, purchasing process and support.
+          </p>
+        </div>
+
+        <!-- Interactive Search Bar with Ctrl+K shortcut -->
+        <div class="faq-search-wrap">
+          <div class="faq-search-box">
+            <svg class="faq-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="faqSearchInput" class="faq-search-input" placeholder="Search questions, keywords (e.g. warranty, cooling, compatibility)..." autocomplete="off" aria-label="Search FAQs">
+            <span class="faq-search-shortcut">CTRL K</span>
+          </div>
+        </div>
+
+        <!-- No Results Fallback State -->
+        <div class="faq-no-results" id="faqNoResults">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:12px;">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+          <h4 style="font-family: var(--im-font); font-size: 17px; color: #FFFFFF; margin-bottom: 6px;">No matching questions found</h4>
+          <p style="font-family: var(--font-body); font-size: 14px; color: #94A3B8; margin: 0;">Try searching with a different term, or reach out to our team directly below.</p>
+        </div>
+
+        <!-- Accordion Cards List (The 6 exact questions) -->
+        <div class="faq-accordion-list" id="faqAccordionList">
+
+          <!-- Q1: Products Offered -->
+          <div class="faq-card active" data-keywords="pc components cases cooling cabinets fans liquid coolers air coolers products">
+            <div class="faq-card-header" role="button" tabindex="0" aria-expanded="true">
+              <div class="faq-card-left">
+                <div class="faq-icon-box">
+                  <!-- Component / Case Box SVG -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                </div>
+                <h3 class="faq-card-question">What types of PC components does Ice Master Technologies offer?</h3>
+              </div>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="faq-card-body">
+              <p class="faq-card-answer">
+                Ice Master Technologies provides a range of PC components, including high-quality PC cases and cooling solutions designed to enhance system performance and aesthetics.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q2: Motherboard Compatibility -->
+          <div class="faq-card" data-keywords="cases compatibility motherboard atx micro atx mini itx sizes chassis support">
+            <div class="faq-card-header" role="button" tabindex="0" aria-expanded="false">
+              <div class="faq-card-left">
+                <div class="faq-icon-box">
+                  <!-- Motherboard / Chip SVG -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                  </svg>
+                </div>
+                <h3 class="faq-card-question">Are your PC cases compatible with all motherboard sizes?</h3>
+              </div>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="faq-card-body">
+              <p class="faq-card-answer">
+                Our PC cases are designed to accommodate various motherboard sizes, including ATX, Micro-ATX, and Mini-ITX. Please refer to the specifications of each case model for detailed compatibility information.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q3: Cooling Solutions Available -->
+          <div class="faq-card" data-keywords="cooling air cooler liquid cooling aio thermal performance radiators fans heat sink">
+            <div class="faq-card-header" role="button" tabindex="0" aria-expanded="false">
+              <div class="faq-card-left">
+                <div class="faq-icon-box">
+                  <!-- Fan / Cooling SVG -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 12c-2-2-2-5 0-7 2 2 2 5 0 7z"></path>
+                    <path d="M12 12c2-2 5-2 7 0-2 2-5 2-7 0z"></path>
+                    <path d="M12 12c2 2 2 5 0 7-2-2-2-5 0-7z"></path>
+                    <path d="M12 12c-2 2-5 2-7 0 2-2 5-2 7 0z"></path>
+                  </svg>
+                </div>
+                <h3 class="faq-card-question">What cooling solutions are available?</h3>
+              </div>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="faq-card-body">
+              <p class="faq-card-answer">
+                We offer a variety of cooling solutions, including air coolers and liquid cooling systems, to ensure optimal thermal performance for your PC builds.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q4: How to Purchase -->
+          <div class="faq-card" data-keywords="purchase buy order bulk retail online price shop website store">
+            <div class="faq-card-header" role="button" tabindex="0" aria-expanded="false">
+              <div class="faq-card-left">
+                <div class="faq-icon-box">
+                  <!-- Shopping Cart SVG -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                </div>
+                <h3 class="faq-card-question">How can I purchase products from Ice Master Technologies?</h3>
+              </div>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="faq-card-body">
+              <p class="faq-card-answer">
+                You can browse and purchase our products directly through our website's <a href="all-products.html" class="im-link-red">'Products'</a> section. For bulk orders or specific inquiries, please contact us via the <a href="contact.html" class="im-link-red">'Contact'</a> page.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q5: Support & Warranty -->
+          <div class="faq-card" data-keywords="customer support warranty rma replacement guarantee repair assistance">
+            <div class="faq-card-header" role="button" tabindex="0" aria-expanded="false">
+              <div class="faq-card-left">
+                <div class="faq-icon-box">
+                  <!-- Shield Check SVG -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                  </svg>
+                </div>
+                <h3 class="faq-card-question">Do you provide customer support and warranty services?</h3>
+              </div>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="faq-card-body">
+              <p class="faq-card-answer">
+                Yes, we offer customer support for all our products. Warranty details are provided with each product, and you can reach out to our support team for any assistance.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q6: Get In Touch -->
+          <div class="faq-card" data-keywords="contact email phone instagram assistance call query help address">
+            <div class="faq-card-header" role="button" tabindex="0" aria-expanded="false">
+              <div class="faq-card-left">
+                <div class="faq-icon-box">
+                  <!-- Headset / Phone SVG -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <h3 class="faq-card-question">How can I get in touch for further assistance?</h3>
+              </div>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="faq-card-body">
+              <div class="faq-card-answer">
+                <p style="margin: 0 0 12px 0;">For any queries or support, you can contact us at:</p>
+                <div class="faq-contact-list">
+                  <a href="mailto:support@icemastertechnologies.in" class="faq-contact-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span><strong>Email:</strong> support@icemastertechnologies.in</span>
+                  </a>
+                  <a href="tel:+919311145247" class="faq-contact-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span><strong>Phone:</strong> +91 9311145247</span>
+                  </a>
+                  <a href="https://www.instagram.com/icemastertechnologies/" target="_blank" rel="noopener noreferrer" class="faq-contact-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span><strong>Instagram:</strong> @icemastertechnologies</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom CTA: Still Have Questions Box -->
+        <div class="faq-support-box">
+          <div class="faq-support-info">
+            <h3>Still have questions?</h3>
+            <p>Our dedicated team in Nehru Place, New Delhi is ready to assist with retail pricing, bulk supply, or compatibility.</p>
+          </div>
+          <div class="faq-support-actions">
+            <a href="contact.html" class="about-btn-pill">
+              <span>Contact Us</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="tel:+919311145247" class="about-btn-pill-secondary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>+91 9311145247</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MINIMAL CINEMATIC FOOTER (Unified Across Site)
+       ========================================================================== -->
+  <footer class="im-site-footer" id="site-footer">
+    <div class="im-footer-inner">
+
+      <!-- Left: Logo & Brand Lockup -->
+      <a href="index.html" class="im-footer-brand" aria-label="Ice Master Home">
+        <img src="assets/images/homepage/im_official_emblem.png" alt="Ice Master Logo" class="im-footer-logo-img">
+        <div class="im-footer-brand-text">
+          <span class="im-footer-brand-title">ICE MASTER</span>
+          <span class="im-footer-brand-sub">COOLER BETTER FURTHER</span>
+        </div>
+      </a>
+
+      <!-- Center Divider 1 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Center: Social Links -->
+      <div class="im-footer-social-links" aria-label="Social Media Links">
+        <a href="https://www.instagram.com/icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <a href="https://www.youtube.com/@icemastertechnologies" target="_blank" rel="noopener noreferrer" class="im-footer-social-btn" aria-label="Ice Master on YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Center Divider 2 -->
+      <div class="im-footer-divider" aria-hidden="true"></div>
+
+      <!-- Right: Location Lockup -->
+      <div class="im-footer-location-wrap">
+        <svg class="im-footer-loc-pin" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+        </svg>
+        <span class="im-footer-loc-text">NEW DELHI, NEHRU PLACE</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Unified Site Scripts -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Interactive Accordion & Live Filter Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const searchInput = document.getElementById('faqSearchInput');
+      const cards = document.querySelectorAll('.faq-card');
+      const noResults = document.getElementById('faqNoResults');
+
+      // Accordion Toggle
+      cards.forEach(card => {
+        const header = card.querySelector('.faq-card-header');
+        header.addEventListener('click', function () {
+          const isActive = card.classList.contains('active');
+          
+          // Close others for clean single-expanded view
+          cards.forEach(c => {
+            if (c !== card) {
+              c.classList.remove('active');
+              const h = c.querySelector('.faq-card-header');
+              if (h) h.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Toggle current
+          if (isActive) {
+            card.classList.remove('active');
+            header.setAttribute('aria-expanded', 'false');
+          } else {
+            card.classList.add('active');
+            header.setAttribute('aria-expanded', 'true');
+          }
+        });
+
+        // Accessible Keyboard (Enter / Space)
+        header.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            header.click();
+          }
+        });
+      });
+
+      // Live Search Filter
+      if (searchInput) {
+        searchInput.addEventListener('input', function () {
+          const query = this.value.trim().toLowerCase();
+          let visibleCount = 0;
+
+          cards.forEach(card => {
+            const question = card.querySelector('.faq-card-question')?.textContent.toLowerCase() || '';
+            const answer = card.querySelector('.faq-card-answer')?.textContent.toLowerCase() || '';
+            const keywords = card.getAttribute('data-keywords') || '';
+
+            if (!query || question.includes(query) || answer.includes(query) || keywords.includes(query)) {
+              card.style.display = 'block';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          if (visibleCount === 0) {
+            noResults.classList.add('visible');
+          } else {
+            noResults.classList.remove('visible');
+          }
+        });
+
+        // Keyboard Shortcut: Ctrl + K (or Cmd + K)
+        window.addEventListener('keydown', function (e) {
+          if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.select();
+          }
+          if (e.key === 'Escape' && document.activeElement === searchInput) {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+            searchInput.blur();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
