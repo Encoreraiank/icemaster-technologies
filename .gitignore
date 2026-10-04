@@ -11,3 +11,7 @@ Thumbs.db
 # Vercel
 .vercel
 node_modules/
+
+# Vendor Packages & Archives
+IceMaster_Vendor_Catalog_Package/
+*.zip
