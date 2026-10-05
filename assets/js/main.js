@@ -213,6 +213,46 @@ function applyStoredDataToDOM() {
         }
       });
     }
+
+    // 5. Sync Download Page (download.html)
+    const storedSoft = JSON.parse(localStorage.getItem('im_wm_software'));
+    const dlPrimaryCTA = document.getElementById('dl-primary-cta');
+    const dlTrustBadge = document.querySelector('.dl-trust-badge');
+    const dlTrustText = document.querySelector('.dl-trust-text');
+    const dlHeroSubLead = document.querySelector('.dl-hero-sub-lead');
+
+    if (dlPrimaryCTA) {
+      const hasSoftware = Array.isArray(storedSoft) && storedSoft.length > 0 && storedSoft[0].url && storedSoft[0].url !== '#';
+      if (hasSoftware) {
+        const currentSoft = storedSoft[0];
+        dlPrimaryCTA.classList.remove('disabled');
+        dlPrimaryCTA.style.pointerEvents = 'auto';
+        dlPrimaryCTA.style.opacity = '1';
+        dlPrimaryCTA.style.filter = 'none';
+        dlPrimaryCTA.setAttribute('href', currentSoft.url);
+        dlPrimaryCTA.setAttribute('target', '_blank');
+        dlPrimaryCTA.setAttribute('rel', 'noopener noreferrer');
+        
+        const btnText = dlPrimaryCTA.querySelector('.dl-btn-text');
+        if (btnText) btnText.textContent = `Download Now (${currentSoft.size || 'ZIP'})`;
+
+        if (dlTrustText) dlTrustText.textContent = `Safe & Official Download • ${currentSoft.fileName || currentSoft.title}`;
+        if (dlHeroSubLead) dlHeroSubLead.textContent = currentSoft.title || "Get the official software for your Ice Master Liquid Coolers.";
+      } else {
+        // No software available in cloud
+        dlPrimaryCTA.classList.add('disabled');
+        dlPrimaryCTA.removeAttribute('href');
+        dlPrimaryCTA.style.pointerEvents = 'auto';
+        dlPrimaryCTA.style.opacity = '0.7';
+        dlPrimaryCTA.style.filter = 'grayscale(0.5)';
+
+        const btnText = dlPrimaryCTA.querySelector('.dl-btn-text');
+        if (btnText) btnText.textContent = 'Software Coming Soon';
+
+        if (dlTrustText) dlTrustText.textContent = 'Package Under Maintenance';
+        if (dlHeroSubLead) dlHeroSubLead.textContent = 'Official Control Software — Update in Progress';
+      }
+    }
   } catch (err) {
     console.warn('Ice Master Live Sync Note:', err);
   }
@@ -296,10 +336,10 @@ async function syncLiveSiteWithAdminData() {
         localStorage.setItem('im_wm_products', JSON.stringify(mappedProds));
       }
 
-      // 5. Software
-      const { data: softRows } = await sb.from('software').select('*').order('sort_order');
-      if (softRows && softRows.length > 0) {
-        const mappedSoft = softRows.map(s => ({
+      // 5. Software (Sync accurately from cloud database, clearing local cache if empty)
+      const { data: softRows, error: softErr } = await sb.from('software').select('*').order('sort_order');
+      if (!softErr && Array.isArray(softRows)) {
+        const mappedSoft = softRows.filter(s => s.is_active !== false).map(s => ({
           id: s.soft_id,
           title: s.title,
           size: s.size,
@@ -308,6 +348,28 @@ async function syncLiveSiteWithAdminData() {
           content: ""
         }));
         localStorage.setItem('im_wm_software', JSON.stringify(mappedSoft));
+      }
+
+      // Realtime listener for download page live updates
+      if (document.getElementById('dl-primary-cta') && !window._dlRealtimeSubscribed) {
+        window._dlRealtimeSubscribed = true;
+        sb.channel('im-download-realtime')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'software' }, async () => {
+            const { data: latestRows } = await sb.from('software').select('*').order('sort_order');
+            if (Array.isArray(latestRows)) {
+              const mapped = latestRows.filter(s => s.is_active !== false).map(s => ({
+                id: s.soft_id,
+                title: s.title,
+                size: s.size,
+                fileName: s.file_name,
+                url: s.file_url,
+                content: ""
+              }));
+              localStorage.setItem('im_wm_software', JSON.stringify(mapped));
+              applyStoredDataToDOM();
+            }
+          })
+          .subscribe();
       }
 
       // Re-apply updated cloud data to DOM
@@ -1787,56 +1849,63 @@ function initDownloadsPageController() {
     });
   });
 
-  downloadBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      triggerSoftwareDownload(btn);
-    });
-  });
-
   const primaryCTA = document.getElementById('dl-primary-cta');
   if (primaryCTA) {
     primaryCTA.addEventListener('click', (e) => {
-      e.preventDefault();
-      triggerSoftwareDownload(primaryCTA);
+      let storedSoft = [];
+      try {
+        storedSoft = JSON.parse(localStorage.getItem('im_wm_software')) || [];
+      } catch(err) {}
+
+      const hasSoftware = Array.isArray(storedSoft) && storedSoft.length > 0 && storedSoft[0].url && storedSoft[0].url !== '#';
+      
+      if (!hasSoftware) {
+        e.preventDefault();
+        showSiteToast("⚠ Official software package is currently being updated. Please check back shortly!");
+        return;
+      }
+
+      const item = storedSoft[0];
+      if (item.content) {
+        e.preventDefault();
+        const a = document.createElement('a');
+        a.href = item.content;
+        a.download = item.fileName || `${item.title}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else if (item.url && item.url !== '#') {
+        // Direct browser open / download from URL
+      } else {
+        e.preventDefault();
+        showSiteToast("⚠ Download link is currently unavailable.");
+      }
     });
   }
 
-  function triggerSoftwareDownload(buttonEl) {
-    try {
-      const storedSoft = JSON.parse(localStorage.getItem('im_wm_software'));
-      if (Array.isArray(storedSoft) && storedSoft.length > 0) {
-        const item = storedSoft[0];
-        if (item.content) {
-          const a = document.createElement('a');
-          a.href = item.content;
-          a.download = item.url || `${item.title}.zip`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          return;
-        } else if (item.url && item.url !== '#') {
-          window.open(item.url, '_blank');
-          return;
-        }
-      }
-    } catch(err) {}
+  downloadBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (primaryCTA) primaryCTA.click();
+    });
+  });
+}
 
-    const textSpan = buttonEl.querySelector('.dl-btn-text, span');
-    if (!textSpan) return;
-
-    const originalText = textSpan.textContent;
-    textSpan.textContent = 'Downloading...';
-    buttonEl.style.opacity = '0.85';
-    
-    setTimeout(() => {
-      textSpan.textContent = 'Download Started!';
-      setTimeout(() => {
-        textSpan.textContent = originalText;
-        buttonEl.style.opacity = '1';
-      }, 2200);
-    }, 700);
+function showSiteToast(msg) {
+  let toast = document.getElementById('im-site-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'im-site-toast';
+    toast.style.cssText = "position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(0, 229, 255, 0.4); color: #F1F5F9; padding: 12px 24px; border-radius: 999px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; z-index: 999999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;";
+    document.body.appendChild(toast);
   }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(20px)';
+  }, 3500);
 }
 
 /* ==========================================================================

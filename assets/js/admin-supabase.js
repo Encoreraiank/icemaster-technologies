@@ -185,8 +185,8 @@ async function loadAdminDataFromSupabase() {
 
     // 5. Software Downloads
     const { data: softRows, error: e5 } = await sb.from('software').select('*').order('sort_order');
-    if (!e5 && softRows && softRows.length > 0) {
-      window.softwareList = softRows.map(s => ({
+    if (!e5 && Array.isArray(softRows)) {
+      window.softwareList = softRows.filter(s => s.is_active !== false).map(s => ({
         id: s.soft_id,
         title: s.title,
         size: s.size,
@@ -194,6 +194,12 @@ async function loadAdminDataFromSupabase() {
         url: s.file_url,
         content: ""
       }));
+      if (typeof softwareList !== 'undefined') {
+        softwareList = window.softwareList;
+      }
+      try {
+        localStorage.setItem("im_wm_software", JSON.stringify(window.softwareList));
+      } catch (e) {}
       if (typeof renderSoftware === 'function') renderSoftware();
     }
 
@@ -205,6 +211,9 @@ async function loadAdminDataFromSupabase() {
       if (window.products) localStorage.setItem("im_wm_products", JSON.stringify(window.products));
       if (window.softwareList) localStorage.setItem("im_wm_software", JSON.stringify(window.softwareList));
     } catch (e) {}
+
+    // Initialize real-time listeners across all open admin panels
+    initAdminRealtimeSync();
 
     updateCloudStatusBadge(true);
     return true;
@@ -385,11 +394,108 @@ async function dbSaveSoftware(soft) {
 
 async function dbDeleteSoftware(softId) {
   const sb = getSupabase();
-  if (!sb) return;
+  if (!sb) return false;
   try {
-    await sb.from('software').delete().eq('soft_id', softId);
-    showToast("✓ Software removed from cloud!");
+    const { error } = await sb.from('software').delete().eq('soft_id', softId);
+    if (error) {
+      console.error("dbDeleteSoftware error:", error);
+      showToast("⚠ Could not delete from cloud: " + error.message);
+      return false;
+    }
+    // Re-query software to guarantee memory & localStorage match cloud perfectly
+    const { data: refreshedRows } = await sb.from('software').select('*').order('sort_order');
+    if (Array.isArray(refreshedRows)) {
+      window.softwareList = refreshedRows.filter(s => s.is_active !== false).map(s => ({
+        id: s.soft_id,
+        title: s.title,
+        size: s.size,
+        fileName: s.file_name,
+        url: s.file_url,
+        content: ""
+      }));
+      if (typeof softwareList !== 'undefined') softwareList = window.softwareList;
+      try { localStorage.setItem("im_wm_software", JSON.stringify(window.softwareList)); } catch(e){}
+      if (typeof renderSoftware === 'function') renderSoftware();
+    }
+    showToast("✓ Software removed from cloud & website!");
+    return true;
   } catch (err) {
     console.error("dbDeleteSoftware error:", err);
+    return false;
   }
 }
+
+// Real-Time Multi-Admin Synchronization
+let _adminRealtimeSubscribed = false;
+function initAdminRealtimeSync() {
+  if (_adminRealtimeSubscribed) return;
+  const sb = getSupabase();
+  if (!sb) return;
+
+  try {
+    _adminRealtimeSubscribed = true;
+    sb.channel('im-admin-realtime-channel')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'software' }, async (payload) => {
+        console.log('[Realtime Admin] Software changed in cloud:', payload);
+        const { data: softRows } = await sb.from('software').select('*').order('sort_order');
+        if (Array.isArray(softRows)) {
+          window.softwareList = softRows.filter(s => s.is_active !== false).map(s => ({
+            id: s.soft_id,
+            title: s.title,
+            size: s.size,
+            fileName: s.file_name,
+            url: s.file_url,
+            content: ""
+          }));
+          if (typeof softwareList !== 'undefined') softwareList = window.softwareList;
+          try { localStorage.setItem("im_wm_software", JSON.stringify(window.softwareList)); } catch(e){}
+          if (typeof renderSoftware === 'function') renderSoftware();
+          if (typeof showToast === 'function') showToast("⚡ Cloud updated: Software list synchronized live!");
+        }
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, async () => {
+        const { data: prodRows } = await sb.from('products').select('*').order('sort_order');
+        if (Array.isArray(prodRows)) {
+          window.products = prodRows.map(p => {
+            let imagesObj = null;
+            let cleanSpecs = p.specs;
+            if (Array.isArray(p.specs)) {
+              const imgEntry = p.specs.find(s => s && s.__imagesMap);
+              if (imgEntry && imgEntry.images) imagesObj = imgEntry.images;
+              cleanSpecs = p.specs.filter(s => s && !s.__imagesMap);
+            }
+            if (!imagesObj && typeof DEFAULT_PRODUCT_IMAGES !== 'undefined' && DEFAULT_PRODUCT_IMAGES[p.prod_id]) {
+              imagesObj = DEFAULT_PRODUCT_IMAGES[p.prod_id];
+            }
+            return {
+              id: p.prod_id,
+              name: p.name,
+              cat: p.cat,
+              catName: p.cat_name,
+              img: p.img,
+              desc: p.desc_text,
+              colors: p.colors || ['black'],
+              specs: cleanSpecs || [],
+              images: imagesObj || { black: [p.img || 'assets/images/homepage/im_official_emblem.png'] }
+            };
+          });
+          if (typeof products !== 'undefined') products = window.products;
+          try { localStorage.setItem("im_wm_products", JSON.stringify(window.products)); } catch(e){}
+          if (typeof renderProducts === 'function') renderProducts();
+        }
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'categories' }, async () => {
+        const { data: catRows } = await sb.from('categories').select('*').order('sort_order');
+        if (Array.isArray(catRows)) {
+          window.categories = catRows.map(c => ({ key: c.key, name: c.name, thumb: c.thumb }));
+          if (typeof categories !== 'undefined') categories = window.categories;
+          try { localStorage.setItem("im_wm_categories", JSON.stringify(window.categories)); } catch(e){}
+          if (typeof renderCategories === 'function') renderCategories();
+        }
+      })
+      .subscribe();
+  } catch (err) {
+    console.warn("Realtime sync initialization:", err);
+  }
+}
+
